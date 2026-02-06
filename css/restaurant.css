@@ -1,0 +1,236 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+body{
+  background:#fff7ed;
+  color:#1f2937;
+  line-height:1.6;
+}
+
+/* NAV */
+header{
+  background:#fff;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-size:24px;
+  font-weight:800;
+  color:#c2410c;
+}
+.nav-links a{
+  margin-left:22px;
+  text-decoration:none;
+  color:#374151;
+  font-weight:500;
+}
+
+/* PAGE */
+.page{
+  text-align:center;
+  padding:80px 20px 50px;
+}
+.page h1{
+  font-size:36px;
+  font-weight:800;
+}
+.page p{
+  color:#6b7280;
+}
+
+/* GRID */
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px 80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+.card{
+  background:#fff;
+  padding:28px;
+  border-radius:20px;
+  box-shadow:0 16px 35px rgba(0,0,0,.08);
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+}
+.card h3{
+  margin-bottom:6px;
+}
+.card p{
+  color:#6b7280;
+  margin-bottom:16px;
+}
+.card a{
+  color:#f97316;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* CONTACT */
+.contact-section{
+  background:#fff7ed;
+  padding:80px 20px;
+  text-align:center;
+}
+.contact-title{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:40px;
+}
+.contact-card{
+  background:#fff;
+  max-width:900px;
+  margin:auto;
+  padding:32px;
+  border-radius:22px;
+  box-shadow:0 25px 55px rgba(0,0,0,.1);
+}
+.contact-row{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.contact-box{
+  flex:1;
+  display:flex;
+  gap:12px;
+}
+.contact-box p{
+  color:#6b7280;
+  font-size:14px;
+}
+
+/* SOCIAL */
+.social-section{
+  padding:70px 20px;
+  text-align:center;
+}
+.social-links{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  flex-wrap:wrap;
+}
+.social-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 26px;
+  border-radius:14px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+}
+.social-card img{
+  width:22px;
+}
+.social-card.instagram{
+  background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);
+}
+.social-card.linkedin{
+  background:linear-gradient(45deg,#0077b5,#004182);
+}
+
+/* FOOTER */
+footer{
+  background:#1f2937;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+
+/* ================= FOOTER ================= */
+.main-footer{
+  background:#1f2937;
+  color:#ffffff;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+/* ================= DESIGNER STRIP ================= */
+.designer-strip{
+  background:#fff7ed;
+  color:#6b7280;          /* light grey text */
+  text-align:center;
+  padding:14px 10px;
+  font-size:13px;
+}
+
+.designer-strip strong{
+  color:#4b5563;          /* slightly darker grey (NOT black) */
+  font-weight:600;
+}
+
+/* ===== PREMIUM RESTAURANT CARD BACKGROUND ===== */
+
+.card{
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fffaf3 100%
+  ); /* soft cream gradient */
+  
+  border-radius: 20px;
+  padding: 26px;
+  
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* hover = premium lift */
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.75);
+}
+
+.grid{
+  background: radial-gradient(
+    circle at top,
+    rgba(255,237,213,0.45),
+    transparent 65%
+  );
+}
+
+/* ===== CONTACT ALIGNMENT FIX (RIGHT / LEFT LIKE 2nd PIC) ===== */
+
+.contact-card{
+  text-align: left;              /* override center */
+}
+
+.contact-row{
+  justify-content: space-between;
+}
+
+.contact-box{
+  align-items: flex-start;
+}
+
+/* address block */
+.contact-card > .contact-box{
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+

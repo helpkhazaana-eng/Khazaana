@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Khazaana | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon-180x180.png">
+
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="css/home.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5NWHC8HNG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X5NWHC8HNG');
+  </script>
+
+  <!-- REVIEW SLIDER CSS -->
+  <style>
+    .review-slider {
+      overflow: hidden;
+      max-width: 360px;
+      margin: 0 auto;
+      touch-action: pan-y;
+    }
+    .review-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .review-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+    .review-slide img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
+    .review-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+      gap: 8px;
+    }
+    .review-dots .dot {
+      width: 8px;
+      height: 8px;
+      background: #d1d5db;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .review-dots .dot.active {
+      background: #ff7a00;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- BACKGROUND BLOBS -->
+<div class="bg-blobs">
+  <span class="blob blob-1"></span>
+  <span class="blob blob-2"></span>
+  <span class="blob blob-3"></span>
+</div>
+
+<!-- NAVBAR -->
+<header class="glass-navbar">
+  <div class="nav-container">
+    <div class="logo">Khazaana</div>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="restaurants.html">Restaurants</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="badge">📍 Serving Aurangabad</span>
+  <h2>Delicious Food, Delivered Fast</h2>
+  <p>Fresh, hot & hygienic food delivered to your doorstep.</p>
+  <a href="restaurants.html" class="btn">Order Now</a>
+
+  <span class="food food1">🍕</span>
+  <span class="food food2">🍔</span>
+  <span class="food food3">🍜</span>
+</section>
+
+<!-- TODAY'S OFFERS -->
+<section class="offers">
+  <h2>🔥 Today’s Offers</h2>
+
+  <div class="offer-grid">
+    <a href="snacks-corner-menu.html" class="offer-card">
+      <h3>Khazaana Snacks Corner</h3>
+      <p>Order above ₹250 & get <strong>FREE Delivery</strong></p>
+    </a>
+
+    <a href="rasoi-menu.html" class="offer-card">
+      <h3>Khazaana Rasoi</h3>
+      <p>Order above ₹300 & get <strong>FREE Delivery</strong></p>
+    </a>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why">
+  <h2>Why Choose Khazaana</h2>
+  <p>Trusted local restaurants • WhatsApp ordering • Fast & reliable delivery</p>
+  <p class="phone">📞 86959 02696 / 86498 51034</p>
+</section>
+
+<!-- CUSTOMER REVIEWS -->
+<section class="reviews">
+  <h2 class="reviews-title">Customer Reviews</h2>
+
+  <div class="review-slider">
+    <div class="review-track">
+      <div class="review-slide">
+        <img src="images/review1.png" alt="Customer Review 1">
+      </div>
+      <div class="review-slide">
+        <img src="images/review2.png" alt="Customer Review 2">
+      </div>
+      <div class="review-slide">
+        <img src="images/review3.png" alt="Customer Review 3">
+      </div>
+    </div>
+  </div>
+
+  <div class="review-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <h2 class="contact-title">Contact Us</h2>
+
+  <div class="contact-card">
+    <div class="contact-row">
+      <div class="contact-box">
+        <div>📞</div>
+        <div>
+          <strong>+91 86959 02696</strong>
+          <p>Delivery & Restaurant Registration</p>
+        </div>
+      </div>
+
+      <div class="contact-box">
+        <div>✉️</div>
+        <div>
+          <strong>helpkhazaana@gmail.com</strong>
+          <p>Support & Queries</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-box">
+      <div>📍</div>
+      <p>
+        College More, near DNC College,<br>
+        Aurangabad, Suti,<br>
+        West Bengal – 742201
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section class="social-section">
+  <h2 class="social-title">Connect With Us</h2>
+
+  <div class="social-links">
+    <a href="https://www.instagram.com/cups_n_crumbs_cafe" target="_blank" class="social-card instagram">
+      <img src="images/instagram.png" alt="Instagram" class="social-icon">
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204" target="_blank" class="social-card linkedin">
+      <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
+      <span>LinkedIn</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  © 2026 Khazaana. All rights reserved.
+</footer>
+
+<!-- REVIEW SLIDER JS -->
+<script>
+  const slider = document.querySelector('.review-slider');
+  const track = document.querySelector('.review-track');
+  const dots = document.querySelectorAll('.dot');
+
+  let index = 0;
+  let startX = 0;
+
+  function showSlide(i) {
+    index = i;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(i));
+  });
+
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener('touchend', e => {
+    let diff = startX - e.changedTouches[0].clientX;
+    if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
+    if (diff < -50 && index > 0) showSlide(index - 1);
+  });
+</script>
+
+<div class="designer-credit">
+  Designed & Developed by <span>MD ASKIN ALI</span>
+</div>
+
+</body>
+</html>
