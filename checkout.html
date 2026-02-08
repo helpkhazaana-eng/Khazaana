@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkout | Khazaana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{background:#fff7ed;color:#1f2937;padding:20px}
+
+.card{
+  max-width:600px;margin:auto;
+  background:#fff;border-radius:18px;
+  padding:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12)
+}
+h2{text-align:center;color:#ff7a00;margin-bottom:10px}
+.item{display:flex;justify-content:space-between;margin-bottom:6px}
+hr{margin:10px 0}
+
+input,textarea{
+  width:100%;padding:12px;
+  margin-top:10px;border-radius:10px;
+  border:1px solid #ddd
+}
+
+.btn{
+  width:100%;padding:14px;
+  margin-top:16px;
+  background:#25D366;color:#fff;
+  border:none;border-radius:12px;
+  font-size:16px;font-weight:800;
+  cursor:pointer
+}
+.note{text-align:center;font-size:12px;color:#6b7280;margin-top:6px}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Confirm Your Order</h2>
+  <div id="orderSummary"></div>
+
+  <input id="name" placeholder="Your Name *">
+  <textarea id="address" rows="3" placeholder="Delivery Address *"></textarea>
+
+  <button class="btn" onclick="finalOrder()">Final Order on WhatsApp</button>
+  <div class="note">Please verify your details before ordering</div>
+</div>
+
+<script>
+const PHONE = "918695902696";
+const order = JSON.parse(localStorage.getItem("khazaanaOrder"));
+
+if(!order){
+  alert("No order found");
+  window.location.href = "index.html";
+}
+
+const box = document.getElementById("orderSummary");
+
+order.items.forEach(i=>{
+  box.innerHTML += `
+    <div class="item">
+      <span>${i.name} x${i.qty}</span>
+      <span>₹${i.total}</span>
+    </div>`;
+});
+
+box.innerHTML += `
+<hr>
+<div class="item"><b>Subtotal</b><b>₹${order.subtotal}</b></div>
+<div class="item"><b>Delivery</b><b>₹${order.delivery}</b></div>
+<div class="item"><b>Total</b><b>₹${order.total}</b></div>
+`;
+
+function finalOrder(){
+  const name = document.getElementById("name").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !address){
+    alert("Please enter name and address");
+    return;
+  }
+
+  let msg =
+`Hello 👋
+Order from *${order.restaurant}*
+
+Name: ${name}
+Address: ${address}
+
+`;
+
+  order.items.forEach(i=>{
+    msg += `${i.name} x${i.qty} = ₹${i.total}\n`;
+  });
+
+  msg += `
+Subtotal: ₹${order.subtotal}
+Delivery: ₹${order.delivery}
+Total: ₹${order.total}
+`;
+
+  // ✅ Direct user click → WhatsApp opens
+  window.location.href =
+    "https://api.whatsapp.com/send?phone=" +
+    PHONE + "&text=" + encodeURIComponent(msg);
+}
+</script>
+
+</body>
+</html>

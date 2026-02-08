@@ -105,7 +105,7 @@ header{
     Delivery: <span id="delivery">₹0</span> |
     <b>Total: ₹<span id="total">0</span></b>
   </div>
-  <button class="order-btn" onclick="orderWhatsApp()">Order on WhatsApp</button>
+  <button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
   <div class="note">Minimum order ₹100 (excluding delivery)</div>
 </div>
 
@@ -113,7 +113,11 @@ header{
 const DELIVERY_FEE = 30;
 const FREE_DELIVERY_LIMIT = 350;
 const MIN_ORDER = 100;
-const PHONE = "918695902696";
+
+/* 🔔 VIBRATION */
+function vibrate(ms=30){
+  if(navigator.vibrate) navigator.vibrate(ms);
+}
 
 const menuData = {
   "🍛 Thali": [
@@ -150,14 +154,14 @@ function renderMenu(){
   for(const section in menuData){
     let html = `<div class="section"><h2>${section}</h2>`;
     menuData[section].forEach(([name,price])=>{
-      cart[name] = cart[name] || {price,qty:0};
+      cart[name] = {price,qty:0};
       html += `
         <div class="item">
           <span>${name} ₹${price}</span>
           <div class="controls">
-            <button class="btn" onclick="updateQty('${name}',-1)">−</button>
+            <button class="btn" onclick="vibrate(20);updateQty('${name}',-1)">−</button>
             <span class="qty" id="q-${name}">0</span>
-            <button class="btn" onclick="updateQty('${name}',1)">+</button>
+            <button class="btn" onclick="vibrate(30);updateQty('${name}',1)">+</button>
           </div>
         </div>`;
     });
@@ -192,15 +196,21 @@ function updateTotals(){
   document.getElementById("total").innerText = subtotal + delivery;
 }
 
-function orderWhatsApp(){
+/* CHECKOUT */
+function goToCheckout(){
   let subtotal = 0;
-  let text = "";
+  let items = [];
 
   for(const i in cart){
     if(cart[i].qty > 0){
-      const itemTotal = cart[i].qty * cart[i].price;
-      subtotal += itemTotal;
-      text += `${i} x${cart[i].qty} = ₹${itemTotal}\n`;
+      const t = cart[i].qty * cart[i].price;
+      subtotal += t;
+      items.push({
+        name: i,
+        qty: cart[i].qty,
+        price: cart[i].price,
+        total: t
+      });
     }
   }
 
@@ -210,17 +220,17 @@ function orderWhatsApp(){
   }
 
   const delivery = subtotal >= FREE_DELIVERY_LIMIT ? 0 : DELIVERY_FEE;
-  const total = subtotal + delivery;
 
-  text += `\nSubtotal: ₹${subtotal}`;
-  text += `\nDelivery: ${delivery === 0 ? "FREE" : "₹"+delivery}`;
-  text += `\nTotal: ₹${total}`;
+  const orderData = {
+    restaurant: "Khazaana Rasoi",
+    items,
+    subtotal,
+    delivery,
+    total: subtotal + delivery
+  };
 
-  window.location.href =
-    "https://api.whatsapp.com/send?phone="+PHONE+"&text="+
-    encodeURIComponent(
-      "Hello 👋\nOrder from *Khazaana Rasoi*\n\n"+text
-    );
+  localStorage.setItem("khazaanaOrder", JSON.stringify(orderData));
+  window.location.href = "checkout.html";
 }
 </script>
 

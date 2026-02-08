@@ -97,14 +97,18 @@ header{
     Delivery: ₹30 |
     <b>Total: ₹<span id="total">0</span></b>
   </div>
-  <button class="order-btn" onclick="orderWhatsApp()">Order on WhatsApp</button>
+  <button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
   <div class="note">Minimum order ₹100 (excluding delivery)</div>
 </div>
 
 <script>
 const DELIVERY = 30;
 const MIN_ORDER = 100;
-const PHONE = "918695902696";
+
+/* 🔔 VIBRATION */
+function vibrate(ms=30){
+  if(navigator.vibrate) navigator.vibrate(ms);
+}
 
 const menuData = {
   "☕ Beverages": [["Tea",15],["Coffee",30],["Lassi",50],["Cold Coffee",70],["Mineral Water",20]],
@@ -122,20 +126,21 @@ const menuData = {
 
 const cart = {};
 
+/* RENDER MENU */
 function renderMenu(){
   const menu = document.getElementById("menu");
   for(const section in menuData){
     let html = `<div class="section"><h2>${section}</h2>`;
     menuData[section].forEach(([name,price],i)=>{
       const id = section.replace(/\W/g,'')+i;
-      cart[id] = cart[id] || {name,price,qty:0};
+      cart[id] = {name,price,qty:0};
       html += `
         <div class="item">
           <span>${name} ₹${price}</span>
           <div class="controls">
-            <button class="btn" onclick="updateQty('${id}',-1)">−</button>
+            <button class="btn" onclick="vibrate(20);updateQty('${id}',-1)">−</button>
             <span class="qty" id="q-${id}">0</span>
-            <button class="btn" onclick="updateQty('${id}',1)">+</button>
+            <button class="btn" onclick="vibrate(30);updateQty('${id}',1)">+</button>
           </div>
         </div>`;
     });
@@ -145,6 +150,7 @@ function renderMenu(){
 }
 renderMenu();
 
+/* CART LOGIC */
 function updateQty(id,change){
   cart[id].qty = Math.max(0, cart[id].qty + change);
   document.getElementById("q-"+id).innerText = cart[id].qty;
@@ -157,26 +163,43 @@ function updateTotals(){
     subtotal += cart[i].qty * cart[i].price;
   }
   document.getElementById("subtotal").innerText = subtotal;
-  document.getElementById("total").innerText = subtotal + (subtotal>0?DELIVERY:0);
+  document.getElementById("total").innerText =
+    subtotal > 0 ? subtotal + DELIVERY : 0;
 }
 
-function orderWhatsApp(){
-  let subtotal = 0, text = "";
+/* CHECKOUT */
+function goToCheckout(){
+  let subtotal = 0;
+  let items = [];
+
   for(const i in cart){
-    if(cart[i].qty>0){
+    if(cart[i].qty > 0){
       const t = cart[i].qty * cart[i].price;
       subtotal += t;
-      text += `${cart[i].name} x${cart[i].qty} = ₹${t}\n`;
+      items.push({
+        name: cart[i].name,
+        qty: cart[i].qty,
+        price: cart[i].price,
+        total: t
+      });
     }
   }
+
   if(subtotal < MIN_ORDER){
     alert("Minimum order ₹100 required");
     return;
   }
-  text += `\nSubtotal: ₹${subtotal}\nDelivery: ₹30\nTotal: ₹${subtotal+30}`;
-  window.location.href =
-    "https://api.whatsapp.com/send?phone="+PHONE+"&text="+
-    encodeURIComponent("Hello 👋\nOrder from *Bondhu Hotel & Restaurant*\n\n"+text);
+
+  const orderData = {
+    restaurant: "Bondhu Hotel & Restaurant",
+    items,
+    subtotal,
+    delivery: DELIVERY,
+    total: subtotal + DELIVERY
+  };
+
+  localStorage.setItem("khazaanaOrder", JSON.stringify(orderData));
+  window.location.href = "checkout.html";
 }
 </script>
 
