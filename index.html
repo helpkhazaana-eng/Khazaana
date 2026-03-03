@@ -9,8 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon-180x180.png">
 
-  <!-- MAIN CSS (version added to avoid cache issue) -->
-  <link rel="stylesheet" href="css/home.css?v=2">
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="css/home.css">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5NWHC8HNG"></script>
@@ -66,6 +66,91 @@
   <span class="food food3">🍜</span>
 </section>
 
+<!-- TODAY'S OFFERS -->
+<section class="offers">
+  <h2>🔥 Today’s Offers</h2>
+  <div class="offer-grid">
+    <a href="snacks-corner-menu.html" class="offer-card">
+      <h3>Khazaana Snacks Corner</h3>
+      <p>Order above ₹250 & get <strong>FREE Delivery</strong></p>
+    </a>
+    <a href="rasoi-menu.html" class="offer-card">
+      <h3>Khazaana Rasoi</h3>
+      <p>Order above ₹300 & get <strong>FREE Delivery</strong></p>
+    </a>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why">
+  <h2>Why Choose Khazaana</h2>
+  <p>Trusted local restaurants • WhatsApp ordering • Fast & reliable delivery</p>
+  <p class="phone">📞 86959 02696 / 86498 51034</p>
+</section>
+
+<!-- CUSTOMER REVIEWS -->
+<section class="reviews">
+  <h2 class="reviews-title">Customer Reviews</h2>
+  <div class="review-slider">
+    <div class="review-track">
+      <div class="review-slide"><img src="images/review1.png" alt="Customer Review 1"></div>
+      <div class="review-slide"><img src="images/review2.png" alt="Customer Review 2"></div>
+      <div class="review-slide"><img src="images/review3.png" alt="Customer Review 3"></div>
+    </div>
+  </div>
+  <div class="review-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <h2 class="contact-title">Contact Us</h2>
+  <div class="contact-card">
+    <div class="contact-row">
+      <div class="contact-box">
+        <div>📞</div>
+        <div>
+          <strong>+91 86959 02696</strong>
+          <p>Delivery & Restaurant Registration</p>
+        </div>
+      </div>
+      <div class="contact-box">
+        <div>✉️</div>
+        <div>
+          <strong>helpkhazaana@gmail.com</strong>
+          <p>Support & Queries</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-box">
+      <div>📍</div>
+      <p>
+        College More, near DNC College,<br>
+        Aurangabad, Suti,<br>
+        West Bengal – 742201
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section class="social-section">
+  <h2 class="social-title">Connect With Us</h2>
+  <div class="social-links">
+    <a href="https://www.instagram.com/cups_n_crumbs_cafe" target="_blank" class="social-card instagram">
+      <img src="images/instagram.png" alt="Instagram" class="social-icon">
+      <span>Instagram</span>
+    </a>
+    <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204" target="_blank" class="social-card linkedin">
+      <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
+      <span>LinkedIn</span>
+    </a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   © 2026 Khazaana. All rights reserved.
@@ -88,14 +173,40 @@
   </div>
 </div>
 
+<!-- REVIEW SLIDER JS -->
 <script>
-  // Safer popup trigger
-  document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("popupModal");
-    if (popup) {
-      popup.style.display = "flex";
-    }
+  const slider = document.querySelector('.review-slider');
+  const track = document.querySelector('.review-track');
+  const dots = document.querySelectorAll('.dot');
+
+  let index = 0;
+  let startX = 0;
+
+  function showSlide(i) {
+    index = i;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(i));
   });
+
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener('touchend', e => {
+    let diff = startX - e.changedTouches[0].clientX;
+    if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
+    if (diff < -50 && index > 0) showSlide(index - 1);
+  });
+
+  // POPUP SCRIPT
+  window.onload = function () {
+    document.getElementById("popupModal").style.display = "flex";
+  };
 
   function closePopup() {
     document.getElementById("popupModal").style.display = "none";
