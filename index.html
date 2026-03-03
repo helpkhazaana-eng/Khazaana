@@ -9,8 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon-180x180.png">
 
-  <!-- MAIN CSS -->
-  <link rel="stylesheet" href="css/home.css">
+  <!-- MAIN CSS (version added to avoid caching issues) -->
+  <link rel="stylesheet" href="css/home.css?v=3">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5NWHC8HNG"></script>
@@ -173,43 +173,53 @@
   </div>
 </div>
 
-<!-- REVIEW SLIDER JS -->
+<!-- REVIEW + POPUP SCRIPT -->
 <script>
-  const slider = document.querySelector('.review-slider');
-  const track = document.querySelector('.review-track');
-  const dots = document.querySelectorAll('.dot');
+  document.addEventListener("DOMContentLoaded", function () {
 
-  let index = 0;
-  let startX = 0;
+    // SHOW POPUP
+    const popup = document.getElementById("popupModal");
+    if (popup) {
+      popup.classList.add("show");
+    }
 
-  function showSlide(i) {
-    index = i;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(d => d.classList.remove('active'));
-    dots[index].classList.add('active');
-  }
+    // REVIEW SLIDER
+    const slider = document.querySelector('.review-slider');
+    const track = document.querySelector('.review-track');
+    const dots = document.querySelectorAll('.dot');
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => showSlide(i));
+    if (slider && track && dots.length) {
+      let index = 0;
+      let startX = 0;
+
+      function showSlide(i) {
+        index = i;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach(d => d.classList.remove('active'));
+        dots[index].classList.add('active');
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+      });
+
+      slider.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+      });
+
+      slider.addEventListener('touchend', e => {
+        let diff = startX - e.changedTouches[0].clientX;
+        if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
+        if (diff < -50 && index > 0) showSlide(index - 1);
+      });
+    }
   });
-
-  slider.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  });
-
-  slider.addEventListener('touchend', e => {
-    let diff = startX - e.changedTouches[0].clientX;
-    if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
-    if (diff < -50 && index > 0) showSlide(index - 1);
-  });
-
-  // POPUP SCRIPT
-  window.onload = function () {
-    document.getElementById("popupModal").style.display = "flex";
-  };
 
   function closePopup() {
-    document.getElementById("popupModal").style.display = "none";
+    const popup = document.getElementById("popupModal");
+    if (popup) {
+      popup.classList.remove("show");
+    }
   }
 </script>
 
