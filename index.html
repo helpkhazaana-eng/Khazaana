@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +63,12 @@
 </head>
 
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  ⚠️ Kolkata Arsalan Biryani is currently unavailable. We apologise for the inconvenience.
+  <span class="close-announcement" onclick="closeAnnouncement()">✕</span>
+</div>
 
 <!-- BACKGROUND BLOBS -->
 <div class="bg-blobs">
@@ -228,6 +235,10 @@
     if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
     if (diff < -50 && index > 0) showSlide(index - 1);
   });
+
+function closeAnnouncement(){
+  document.querySelector(".announcement-bar").style.display="none";
+}
 </script>
 
 <div class="designer-credit">
@@ -236,3 +247,4 @@
 
 </body>
 </html>
+```

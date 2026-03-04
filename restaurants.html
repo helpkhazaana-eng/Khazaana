@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,12 @@
 </head>
 
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+⚠️ Kolkata Arsalan Biryani is currently unavailable. We apologise for the inconvenience.
+<span class="close-announcement" onclick="closeAnnouncement()">✕</span>
+</div>
 
 <header>
   <div class="nav">
@@ -36,7 +43,6 @@
     <p>Café • Snacks • Beverages</p>
     <a href="cups-n-crumbs-menu.html">View Menu</a>
   </div>
-
 
   <div class="card">
     <h3>Bondhu Restaurant</h3>
@@ -114,3 +120,12 @@
   Designed &amp; Developed by <strong>MD ASKIN ALI</strong>
 </div>
 
+<script>
+function closeAnnouncement(){
+  document.querySelector(".announcement-bar").style.display="none";
+}
+</script>
+
+</body>
+</html>
+```
