@@ -23,13 +23,41 @@
 
   <!-- REVIEW SLIDER CSS -->
   <style>
-    .review-slider { overflow: hidden; max-width: 360px; margin: 0 auto; touch-action: pan-y; }
-    .review-track { display: flex; transition: transform 0.4s ease; }
-    .review-slide { min-width: 100%; padding: 10px; }
-    .review-slide img { width: 100%; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,.15); }
-    .review-dots { display: flex; justify-content: center; margin-top: 14px; gap: 8px; }
-    .review-dots .dot { width: 8px; height: 8px; background: #d1d5db; border-radius: 50%; cursor: pointer; }
-    .review-dots .dot.active { background: #ff7a00; }
+    .review-slider {
+      overflow: hidden;
+      max-width: 360px;
+      margin: 0 auto;
+      touch-action: pan-y;
+    }
+    .review-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .review-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+    .review-slide img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
+    .review-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+      gap: 8px;
+    }
+    .review-dots .dot {
+      width: 8px;
+      height: 8px;
+      background: #d1d5db;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .review-dots .dot.active {
+      background: #ff7a00;
+    }
   </style>
 </head>
 
@@ -69,11 +97,13 @@
 <!-- TODAY'S OFFERS -->
 <section class="offers">
   <h2>🔥 Today’s Offers</h2>
+
   <div class="offer-grid">
     <a href="snacks-corner-menu.html" class="offer-card">
       <h3>Khazaana Snacks Corner</h3>
       <p>Order above ₹250 & get <strong>FREE Delivery</strong></p>
     </a>
+
     <a href="rasoi-menu.html" class="offer-card">
       <h3>Khazaana Rasoi</h3>
       <p>Order above ₹300 & get <strong>FREE Delivery</strong></p>
@@ -91,13 +121,21 @@
 <!-- CUSTOMER REVIEWS -->
 <section class="reviews">
   <h2 class="reviews-title">Customer Reviews</h2>
+
   <div class="review-slider">
     <div class="review-track">
-      <div class="review-slide"><img src="images/review1.png" alt="Customer Review 1"></div>
-      <div class="review-slide"><img src="images/review2.png" alt="Customer Review 2"></div>
-      <div class="review-slide"><img src="images/review3.png" alt="Customer Review 3"></div>
+      <div class="review-slide">
+        <img src="images/review1.png" alt="Customer Review 1">
+      </div>
+      <div class="review-slide">
+        <img src="images/review2.png" alt="Customer Review 2">
+      </div>
+      <div class="review-slide">
+        <img src="images/review3.png" alt="Customer Review 3">
+      </div>
     </div>
   </div>
+
   <div class="review-dots">
     <span class="dot active"></span>
     <span class="dot"></span>
@@ -108,6 +146,7 @@
 <!-- CONTACT -->
 <section class="contact-section">
   <h2 class="contact-title">Contact Us</h2>
+
   <div class="contact-card">
     <div class="contact-row">
       <div class="contact-box">
@@ -117,6 +156,7 @@
           <p>Delivery & Restaurant Registration</p>
         </div>
       </div>
+
       <div class="contact-box">
         <div>✉️</div>
         <div>
@@ -125,6 +165,7 @@
         </div>
       </div>
     </div>
+
     <div class="contact-box">
       <div>📍</div>
       <p>
@@ -139,11 +180,13 @@
 <!-- SOCIAL MEDIA -->
 <section class="social-section">
   <h2 class="social-title">Connect With Us</h2>
+
   <div class="social-links">
     <a href="https://www.instagram.com/cups_n_crumbs_cafe" target="_blank" class="social-card instagram">
       <img src="images/instagram.png" alt="Instagram" class="social-icon">
       <span>Instagram</span>
     </a>
+
     <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204" target="_blank" class="social-card linkedin">
       <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
       <span>LinkedIn</span>
@@ -155,23 +198,6 @@
 <footer class="footer">
   © 2026 Khazaana. All rights reserved.
 </footer>
-
-<div class="designer-credit">
-  Designed & Developed by <span>MD ASKIN ALI</span>
-</div>
-
-<!-- POPUP MODAL -->
-<div id="popupModal" class="popup">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePopup()">&times;</span>
-    <h2>Important Notice</h2>
-    <p>
-      Kolkata Arsalan Biryani is currently unavailable.<br><br>
-      We sincerely apologise for the inconvenience caused.
-    </p>
-    <button class="ok-btn" onclick="closePopup()">OK</button>
-  </div>
-</div>
 
 <!-- REVIEW SLIDER JS -->
 <script>
@@ -202,27 +228,11 @@
     if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
     if (diff < -50 && index > 0) showSlide(index - 1);
   });
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("popupModal");
-    if (popup) {
-      popup.classList.add("show");
-    }
-  });
-
-  function closePopup() {
-    const popup = document.getElementById("popupModal");
-    if (popup) {
-      popup.classList.remove("show");
-    }
-  }
 </script>
 
-  function closePopup() {
-    document.getElementById("popupModal").style.display = "none";
-  }
-</script>
+<div class="designer-credit">
+  Designed & Developed by <span>MD ASKIN ALI</span>
+</div>
 
 </body>
 </html>
