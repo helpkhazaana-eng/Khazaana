@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +14,13 @@ body{background:#fff7ed;color:#1f2937;padding-bottom:140px}
 
 /* HEADER */
 header{
-  position:sticky;top:0;z-index:1000;
-  background:#ffffffdd;backdrop-filter:blur(10px);
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
+position:sticky;top:0;z-index:1000;
+background:#ffffffdd;backdrop-filter:blur(10px);
+box-shadow:0 6px 20px rgba(0,0,0,.08);
 }
 .nav{
-  max-width:1200px;margin:auto;padding:16px 24px;
-  display:flex;justify-content:space-between;align-items:center;
+max-width:1200px;margin:auto;padding:16px 24px;
+display:flex;justify-content:space-between;align-items:center;
 }
 .logo{font-size:22px;font-weight:800;color:#ff7a00}
 .nav a{text-decoration:none;margin-left:20px;color:#374151;font-weight:600}
@@ -34,35 +33,35 @@ header{
 /* MENU */
 .menu{max-width:900px;margin:auto;padding:20px}
 .section{
-  background:#fff;border-radius:18px;padding:22px;
-  margin-bottom:26px;box-shadow:0 12px 30px rgba(0,0,0,.08)
+background:#fff;border-radius:18px;padding:22px;
+margin-bottom:26px;box-shadow:0 12px 30px rgba(0,0,0,.08)
 }
 .section h2{color:#92400e;font-size:20px;margin-bottom:14px}
 .item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px dashed #e5e7eb
+display:flex;justify-content:space-between;align-items:center;
+padding:8px 0;border-bottom:1px dashed #e5e7eb
 }
 .item:last-child{border-bottom:none}
 .controls{display:flex;align-items:center;gap:6px}
 .btn{
-  width:26px;height:26px;border:none;border-radius:6px;
-  background:#92400e;color:#fff;font-weight:700;cursor:pointer
+width:26px;height:26px;border:none;border-radius:6px;
+background:#92400e;color:#fff;font-weight:700;cursor:pointer
 }
 .qty{min-width:18px;text-align:center;font-weight:600}
 
 /* CART BAR */
 .cart-bar{
-  position:fixed;bottom:0;left:0;width:100%;
-  background:#fff;border-top:1px solid #e5e7eb;
-  box-shadow:0 -8px 20px rgba(0,0,0,.1);
-  padding:14px 20px;z-index:9999
+position:fixed;bottom:0;left:0;width:100%;
+background:#fff;border-top:1px solid #e5e7eb;
+box-shadow:0 -8px 20px rgba(0,0,0,.1);
+padding:14px 20px;z-index:9999
 }
 .cart-info{font-size:14px;margin-bottom:8px}
 .cart-info b{font-size:15px}
 .order-btn{
-  width:100%;padding:14px;border:none;border-radius:10px;
-  background:#25D366;color:#fff;font-size:16px;
-  font-weight:800;cursor:pointer
+width:100%;padding:14px;border:none;border-radius:10px;
+background:#25D366;color:#fff;font-size:16px;
+font-weight:800;cursor:pointer
 }
 .note{font-size:12px;color:#6b7280;text-align:center;margin-top:6px}
 </style>
@@ -71,128 +70,171 @@ header{
 <body>
 
 <header>
-  <div class="nav">
-    <div class="logo">Khazaana</div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="restaurants.html">Restaurants</a>
-    </div>
-  </div>
+<div class="nav">
+<div class="logo">Khazaana</div>
+<div>
+<a href="index.html">Home</a>
+<a href="restaurants.html">Restaurants</a>
+</div>
+</div>
 </header>
 
 <section class="hero">
-  <h1>Kolkata Hazi Biryani</h1>
-  <p>Biryani • Kolkata Style</p>
+<h1>Kolkata Hazi Biryani</h1>
+<p>Biryani • Kolkata Style</p>
+
+<p style="
+margin-top:10px;
+font-weight:900;
+color:#dc2626;
+font-size:18px;
+letter-spacing:1px;
+text-transform:uppercase;
+">
+🔥 ORDER 2 OR MORE BIRYANI & GET FREE DELIVERY 🔥
+</p>
+
 </section>
 
 <section class="menu" id="menu"></section>
 
 <!-- CART -->
 <div class="cart-bar">
-  <div class="cart-info">
-    Subtotal: ₹<span id="subtotal">0</span> |
-    Delivery: FREE |
-    <b>Total: ₹<span id="total">0</span></b>
-  </div>
-  <button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
-  <div class="note">Minimum order ₹200 (free delivery)</div>
+<div class="cart-info" id="cartInfo">
+Subtotal: ₹0 | Delivery: ₹30 | <b>Total: ₹0</b>
+</div>
+
+<button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+
+<div class="note">
+Free delivery on orders ₹200+
+</div>
 </div>
 
 <script>
-const DELIVERY = 0;
-const MIN_ORDER = 200;
+
+const DELIVERY_FEE = 30
+const FREE_DELIVERY_THRESHOLD = 200
 
 function vibrate(ms=30){
-  if(navigator.vibrate) navigator.vibrate(ms);
+if(navigator.vibrate) navigator.vibrate(ms)
 }
 
 const menuData = {
-  "🍚 Main Course – Biryani": [
-    ["Chicken Biryani (Full)",120],
-    ["Chicken Biryani (Half)",90],
-    ["Aloo Biryani (Full)",80],
-    ["Aloo Biryani (Half)",70],
-    ["Special Chicken Biryani",170],
-    ["Chicken Extra Pieces",40],
-    ["Aloo Extra Pieces",5]
-  ]
-};
+"🍚 Main Course – Biryani":[
+["Chicken Biryani (Full)",120],
+["Chicken Biryani (Half)",90],
+["Aloo Biryani (Full)",80],
+["Aloo Biryani (Half)",70],
+["Special Chicken Biryani",170],
+["Chicken Extra Pieces",40],
+["Aloo Extra Pieces",5]
+]
+}
 
-const cart = {};
+const cart = {}
 
 function renderMenu(){
-  const menu = document.getElementById("menu");
-  for(const section in menuData){
-    let html = `<div class="section"><h2>${section}</h2>`;
-    menuData[section].forEach(([name,price],i)=>{
-      const id = section.replace(/\W/g,'') + i;
-      cart[id] = {name,price,qty:0};
-      html += `
-        <div class="item">
-          <span>${name} ₹${price}</span>
-          <div class="controls">
-            <button class="btn" onclick="vibrate(20);updateQty('${id}',-1)">−</button>
-            <span class="qty" id="q-${id}">0</span>
-            <button class="btn" onclick="vibrate(30);updateQty('${id}',1)">+</button>
-          </div>
-        </div>`;
-    });
-    html += `</div>`;
-    menu.innerHTML += html;
-  }
+const menu = document.getElementById("menu")
+
+for(const section in menuData){
+
+let html = `<div class="section"><h2>${section}</h2>`
+
+menuData[section].forEach(([name,price],i)=>{
+
+const id = section.replace(/\W/g,'') + i
+
+cart[id] = {name,price,qty:0}
+
+html += `
+<div class="item">
+<span>${name} ₹${price}</span>
+
+<div class="controls">
+
+<button class="btn" onclick="vibrate(20);updateQty('${id}',-1)">−</button>
+
+<span class="qty" id="q-${id}">0</span>
+
+<button class="btn" onclick="vibrate(30);updateQty('${id}',1)">+</button>
+
+</div>
+</div>
+`
+})
+
+html += `</div>`
+
+menu.innerHTML += html
 }
-renderMenu();
+}
+
+renderMenu()
 
 function updateQty(id,change){
-  cart[id].qty = Math.max(0, cart[id].qty + change);
-  document.getElementById("q-"+id).innerText = cart[id].qty;
-  updateTotals();
+
+cart[id].qty = Math.max(0, cart[id].qty + change)
+
+document.getElementById("q-"+id).innerText = cart[id].qty
+
+updateTotals()
 }
 
 function updateTotals(){
-  let subtotal = 0;
-  for(const i in cart){
-    subtotal += cart[i].qty * cart[i].price;
-  }
-  document.getElementById("subtotal").innerText = subtotal;
-  document.getElementById("total").innerText = subtotal;
+
+let subtotal = 0
+
+for(const i in cart){
+subtotal += cart[i].qty * cart[i].price
+}
+
+let delivery = subtotal >= FREE_DELIVERY_THRESHOLD || subtotal === 0 ? 0 : DELIVERY_FEE
+
+let total = subtotal + delivery
+
+document.getElementById("cartInfo").innerHTML =
+`Subtotal: ₹${subtotal} | Delivery: ${delivery === 0 ? "FREE" : "₹"+delivery} | <b>Total: ₹${total}</b>`
 }
 
 function goToCheckout(){
-  let subtotal = 0;
-  let items = [];
 
-  for(const i in cart){
-    if(cart[i].qty > 0){
-      const t = cart[i].qty * cart[i].price;
-      subtotal += t;
-      items.push({
-        name: cart[i].name,
-        qty: cart[i].qty,
-        price: cart[i].price,
-        total: t
-      });
-    }
-  }
+let subtotal = 0
+let items = []
 
-  if(subtotal < MIN_ORDER){
-    alert("Minimum order ₹200 required to checkout");
-    return;
-  }
+for(const i in cart){
 
-  const orderData = {
-    restaurant: "Kolkata Hazi Biryani",
-    items,
-    subtotal,
-    delivery: DELIVERY,
-    total: subtotal
-  };
+if(cart[i].qty > 0){
 
-  localStorage.setItem("khazaanaOrder", JSON.stringify(orderData));
-  window.location.href = "checkout.html";
+const t = cart[i].qty * cart[i].price
+
+subtotal += t
+
+items.push({
+name:cart[i].name,
+qty:cart[i].qty,
+price:cart[i].price,
+total:t
+})
 }
+}
+
+let delivery = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE
+
+const orderData = {
+restaurant:"Kolkata Hazi Biryani",
+items,
+subtotal,
+delivery,
+total:subtotal + delivery
+}
+
+localStorage.setItem("khazaanaOrder",JSON.stringify(orderData))
+
+window.location.href="checkout.html"
+}
+
 </script>
 
 </body>
 </html>
-
