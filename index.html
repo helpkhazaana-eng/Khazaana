@@ -58,10 +58,49 @@
     .review-dots .dot.active {
       background: #ff7a00;
     }
+
+    /* ===== POPUP POSTER ===== */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup img {
+      width: 90%;
+      max-width: 420px;
+      border-radius: 12px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- POPUP POSTER -->
+<div class="popup" id="popup">
+  <button class="close-btn" id="closeBtn">✖</button>
+  <img src="images/pizza-poster.png" alt="Offer Poster">
+</div>
 
 
 <!-- BACKGROUND BLOBS -->
@@ -230,9 +269,21 @@
     if (diff < -50 && index > 0) showSlide(index - 1);
   });
 
-function closeAnnouncement(){
-  document.querySelector(".announcement-bar").style.display="none";
-}
+  function closeAnnouncement(){
+    document.querySelector(".announcement-bar").style.display="none";
+  }
+
+  // ===== POPUP LOGIC =====
+  const popup = document.getElementById("popup");
+  const closeBtn = document.getElementById("closeBtn");
+
+  setTimeout(() => {
+    closeBtn.style.display = "block";
+  }, 5000);
+
+  closeBtn.onclick = () => {
+    popup.style.display = "none";
+  };
 </script>
 
 <div class="designer-credit">
@@ -241,4 +292,3 @@ function closeAnnouncement(){
 
 </body>
 </html>
-```
