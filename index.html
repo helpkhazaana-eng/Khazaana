@@ -12,7 +12,7 @@
   <!-- MAIN CSS -->
   <link rel="stylesheet" href="css/home.css">
 
-  <!-- Google Font (ADDED) -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
@@ -24,8 +24,62 @@
     gtag('config', 'G-X5NWHC8HNG');
   </script>
 
-  <!-- REVIEW SLIDER CSS -->
   <style>
+    /* ===== INTRO (ONLY ADDITION) ===== */
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #000, #111);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10000;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(28px, 10vw, 60px);
+      color: transparent;
+      -webkit-text-stroke: 2px #ff7a00;
+      text-shadow: 0 0 20px #ff7a00;
+      letter-spacing: 4px;
+      opacity: 0;
+      animation: reveal 2s ease forwards;
+    }
+
+    .tagline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(10px, 3.5vw, 14px);
+      color: #aaa;
+      margin-top: 8px;
+      opacity: 0;
+      animation: fadeTag 1s ease forwards 1.5s;
+    }
+
+    @keyframes reveal {
+      0% { opacity: 0; transform: scale(0.6); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeTag {
+      to { opacity: 1; }
+    }
+
+    .fade-out {
+      animation: fadeOut 0.8s forwards;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* YOUR ORIGINAL STYLES (UNCHANGED) */
     .review-slider {
       overflow: hidden;
       max-width: 360px;
@@ -62,56 +116,36 @@
       background: #ff7a00;
     }
 
-    /* ===== INTRO (ONLY ADDED) ===== */
-    #intro {
+    .popup {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, #000, #111);
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      z-index: 10000;
+      z-index: 9999;
     }
 
-    .brand {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 60px;
-      color: transparent;
-      -webkit-text-stroke: 2px #ff7a00;
-      text-shadow: 0 0 20px #ff7a00;
-      letter-spacing: 6px;
-      opacity: 0;
-      animation: reveal 2s ease forwards;
+    .popup img {
+      width: 90%;
+      max-width: 420px;
+      border-radius: 12px;
     }
 
-    .tagline {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 10px;
-      opacity: 0;
-      animation: fadeTag 1s ease forwards 1.5s;
-    }
-
-    @keyframes reveal {
-      0% { opacity: 0; transform: scale(0.3); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    @keyframes fadeTag {
-      to { opacity: 1; }
-    }
-
-    .fade-out {
-      animation: fadeOut 0.8s forwards;
-    }
-
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border: none;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
     }
   </style>
 </head>
@@ -122,6 +156,12 @@
 <div id="intro">
   <h1 class="brand">KHAZAANA</h1>
   <p class="tagline">Aurangabad Food Delivery</p>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <button class="close-btn" id="closeBtn">✖</button>
+  <img src="images/pizza-poster.png" alt="Poster">
 </div>
 
 <!-- BACKGROUND BLOBS -->
@@ -185,15 +225,9 @@
 
   <div class="review-slider">
     <div class="review-track">
-      <div class="review-slide">
-        <img src="images/review1.png" alt="Customer Review 1">
-      </div>
-      <div class="review-slide">
-        <img src="images/review2.png" alt="Customer Review 2">
-      </div>
-      <div class="review-slide">
-        <img src="images/review3.png" alt="Customer Review 3">
-      </div>
+      <div class="review-slide"><img src="images/review1.png"></div>
+      <div class="review-slide"><img src="images/review2.png"></div>
+      <div class="review-slide"><img src="images/review3.png"></div>
     </div>
   </div>
 
@@ -244,12 +278,12 @@
 
   <div class="social-links">
     <a href="https://www.instagram.com/cups_n_crumbs_cafe" target="_blank" class="social-card instagram">
-      <img src="images/instagram.png" alt="Instagram" class="social-icon">
+      <img src="images/instagram.png" class="social-icon">
       <span>Instagram</span>
     </a>
 
     <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204" target="_blank" class="social-card linkedin">
-      <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
+      <img src="images/linkedin.png" class="social-icon">
       <span>LinkedIn</span>
     </a>
   </div>
@@ -261,7 +295,7 @@
 </footer>
 
 <script>
-  // INTRO (ADDED)
+  // INTRO
   setTimeout(() => {
     document.getElementById("intro").classList.add("fade-out");
   }, 4200);
@@ -270,7 +304,19 @@
     document.getElementById("intro").remove();
   }, 5000);
 
-  // REVIEW SLIDER (ORIGINAL)
+  // POPUP
+  const closeBtn = document.getElementById("closeBtn");
+  const popup = document.getElementById("popup");
+
+  setTimeout(() => {
+    closeBtn.style.display = "block";
+  }, 5000);
+
+  closeBtn.onclick = () => {
+    popup.style.display = "none";
+  };
+
+  // REVIEW SLIDER
   const slider = document.querySelector('.review-slider');
   const track = document.querySelector('.review-track');
   const dots = document.querySelectorAll('.dot');
@@ -298,10 +344,6 @@
     if (diff > 50 && index < dots.length - 1) showSlide(index + 1);
     if (diff < -50 && index > 0) showSlide(index - 1);
   });
-
-  function closeAnnouncement(){
-    document.querySelector(".announcement-bar").style.display="none";
-  }
 </script>
 
 <div class="designer-credit">
