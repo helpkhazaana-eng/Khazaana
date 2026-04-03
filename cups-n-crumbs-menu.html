@@ -86,6 +86,7 @@ header{
 <section class="hero">
   <h1>Cups N Crumbs Café</h1>
   <p>Café • Snacks • Beverages</p>
+<p id="statusMsg" style="margin-top:6px; font-weight:600; color:#ff7a00;"></p>
 </section>
 
 <section class="menu" id="menu"></section>
@@ -118,6 +119,7 @@ const menuData = {
   "🧇 Waffles": [["Chocolate",70]],
   "🥞 Pancakes": [["Honey",60],["Chocolate",80]],
   "🍕 Pizza": [["Classic Cheese Pizza",110],["Classic onion Pizza",120],["Paneer delight Pizza",120],["Paneer loaded Pizza",160],["chicken delight Pizza",160],["Fusion Pizza",190]],
+  "🍞🧀🍕Cheesy Bread Pizza": [["Chicken ",70],["paneer",50]], 
   "🍟 Fries": [["Salted Fries",50],["Peri Peri Fries",60]],
   "🥗 Chaat": [["Samosa Chaat",40]],
   "🍹 Mocktails": [["Blue Lagoon",90],["Virgin Mojito",90],["Kala Khatta",90]],
@@ -205,3 +207,58 @@ function goToCheckout(){
 
 </body>
 </html>
+<script>
+
+function isClosed() {
+  const h = new Date().getHours();
+  return (h >= 21 || h < 10);
+}
+
+/* ===== DISABLE / ENABLE CART ===== */
+function toggleCart(disable) {
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach(btn => {
+    if (btn.innerText === "+" || btn.innerText === "-") {
+      btn.disabled = disable;
+      btn.style.opacity = disable ? "0.5" : "1";
+      btn.style.cursor = disable ? "not-allowed" : "pointer";
+    }
+  });
+}
+
+/* ===== COUNTDOWN ===== */
+function updateStatus() {
+  const msg = document.getElementById("statusMsg");
+
+  if (!isClosed()) {
+    msg.innerText = "🟢 Open Now";
+    toggleCart(false);
+    return;
+  }
+
+  let now = new Date();
+  let openTime = new Date();
+
+  if (now.getHours() >= 21) {
+    openTime.setDate(now.getDate() + 1);
+  }
+
+  openTime.setHours(10, 0, 0, 0);
+
+  let diff = openTime - now;
+
+  let h = Math.floor(diff / (1000 * 60 * 60));
+  let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  msg.innerText = `🔴 Opens in ${h}h ${m}m ${s}s`;
+
+  toggleCart(true);
+}
+
+/* RUN */
+setInterval(updateStatus, 1000);
+updateStatus();
+
+</script>

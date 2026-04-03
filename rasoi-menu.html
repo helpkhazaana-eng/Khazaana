@@ -93,9 +93,10 @@ header{
 <section class="hero">
   <h1>Khazaana Rasoi</h1>
   <p>Ghorer Moto Ranna</p>
+<p id="statusMsg" style="margin-top:6px; font-weight:600; color:#ff7a00;"></p>
   <div class="badge">🚚 Free delivery on orders above ₹350</div>
 </section>
-
+<p id="statusMsg" style="margin-top:6px; font-weight:600; color:#ff7a00;"></p>
 <section class="menu" id="menu"></section>
 
 <!-- CART -->
@@ -236,3 +237,60 @@ function goToCheckout(){
 
 </body>
 </html>
+
+<script>
+
+function isClosed() {
+  const h = new Date().getHours();
+  return (h >= 21 || h < 10);
+}
+
+/* ===== DISABLE / ENABLE CART ===== */
+function toggleCart(disable) {
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach(btn => {
+    if (btn.innerText === "+" || btn.innerText === "-") {
+      btn.disabled = disable;
+      btn.style.opacity = disable ? "0.5" : "1";
+      btn.style.cursor = disable ? "not-allowed" : "pointer";
+    }
+  });
+}
+
+/* ===== COUNTDOWN ===== */
+function updateStatus() {
+  const msg = document.getElementById("statusMsg");
+
+  if (!isClosed()) {
+    msg.innerText = "🟢 Open Now";
+    toggleCart(false);
+    return;
+  }
+
+  let now = new Date();
+  let openTime = new Date();
+
+  if (now.getHours() >= 21) {
+    openTime.setDate(now.getDate() + 1);
+  }
+
+  openTime.setHours(10, 0, 0, 0);
+
+  let diff = openTime - now;
+
+  let h = Math.floor(diff / (1000 * 60 * 60));
+  let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  msg.innerText = `🔴 Opens in ${h}h ${m}m ${s}s`;
+
+  toggleCart(true);
+}
+
+/* RUN */
+setInterval(updateStatus, 1000);
+updateStatus();
+
+</script>
+
