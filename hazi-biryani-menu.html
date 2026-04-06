@@ -92,7 +92,6 @@ font-size:18px;
 letter-spacing:1px;
 text-transform:uppercase;
 ">
-🔥 ORDER 2 OR MORE BIRYANI & GET FREE DELIVERY 🔥
 </p>
 
 </section>
@@ -107,15 +106,14 @@ Subtotal: ₹0 | Delivery: ₹30 | <b>Total: ₹0</b>
 
 <button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
 
-<div class="note">
-Free delivery on orders ₹200+
-</div>
+<!-- ❌ FREE DELIVERY TEXT REMOVED -->
+
 </div>
 
 <script>
 
 const DELIVERY_FEE = 30
-const FREE_DELIVERY_THRESHOLD = 200
+const MIN_ORDER_VALUE = 200
 
 function vibrate(ms=30){
 if(navigator.vibrate) navigator.vibrate(ms)
@@ -190,12 +188,13 @@ for(const i in cart){
 subtotal += cart[i].qty * cart[i].price
 }
 
-let delivery = subtotal >= FREE_DELIVERY_THRESHOLD || subtotal === 0 ? 0 : DELIVERY_FEE
+// ✅ ALWAYS DELIVERY
+let delivery = subtotal === 0 ? 0 : DELIVERY_FEE
 
 let total = subtotal + delivery
 
 document.getElementById("cartInfo").innerHTML =
-`Subtotal: ₹${subtotal} | Delivery: ${delivery === 0 ? "FREE" : "₹"+delivery} | <b>Total: ₹${total}</b>`
+`Subtotal: ₹${subtotal} | Delivery: ₹${delivery} | <b>Total: ₹${total}</b>`
 }
 
 function goToCheckout(){
@@ -220,7 +219,14 @@ total:t
 }
 }
 
-let delivery = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE
+// ✅ MIN ORDER ₹200
+if(subtotal < MIN_ORDER_VALUE){
+alert("Minimum order value is ₹200");
+return;
+}
+
+// ✅ ALWAYS DELIVERY
+let delivery = subtotal === 0 ? 0 : DELIVERY_FEE
 
 const orderData = {
 restaurant:"Kolkata Hazi Biryani",
@@ -239,6 +245,7 @@ window.location.href="checkout.html"
 
 </body>
 </html>
+
 <script>
 
 function isClosed() {
@@ -246,7 +253,6 @@ function isClosed() {
   return (h >= 21 || h < 10);
 }
 
-/* ===== DISABLE / ENABLE CART ===== */
 function toggleCart(disable) {
   const buttons = document.querySelectorAll("button");
 
@@ -259,7 +265,6 @@ function toggleCart(disable) {
   });
 }
 
-/* ===== COUNTDOWN ===== */
 function updateStatus() {
   const msg = document.getElementById("statusMsg");
 
@@ -289,7 +294,6 @@ function updateStatus() {
   toggleCart(true);
 }
 
-/* RUN */
 setInterval(updateStatus, 1000);
 updateStatus();
 
