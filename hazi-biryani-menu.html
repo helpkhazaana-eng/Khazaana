@@ -9,118 +9,547 @@
 <link rel="apple-touch-icon" href="/favicon-180x180.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
-body{background:#fff7ed;color:#1f2937;padding-bottom:140px}
 
-/* HEADER */
-header{
-position:sticky;top:0;z-index:1000;
-background:#ffffffdd;backdrop-filter:blur(10px);
-box-shadow:0 6px 20px rgba(0,0,0,.08);
+/* ================= RESET ================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
 }
+
+/* ================= BODY ================= */
+
+body{
+
+  background:
+
+  linear-gradient(
+  180deg,
+  #0f0b08 0%,
+  #16110d 35%,
+  #1b140f 65%,
+  #120d09 100%
+  );
+
+  color:#fff;
+
+  overflow-x:hidden;
+
+  padding-bottom:140px;
+}
+
+/* ================= NAVBAR ================= */
+
+.glass-navbar{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+  rgba(10,10,10,.45);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.06);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.18);
+}
+
 .nav{
-max-width:1200px;margin:auto;padding:16px 24px;
-display:flex;justify-content:space-between;align-items:center;
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:16px 24px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
 }
-.logo{font-size:22px;font-weight:800;color:#ff7a00}
-.nav a{text-decoration:none;margin-left:20px;color:#374151;font-weight:600}
 
-/* HERO */
-.hero{text-align:center;padding:50px 20px 30px}
-.hero h1{font-size:34px;font-weight:800;color:#ff7a00}
-.hero p{color:#6b7280;margin-top:6px}
+.logo{
 
-/* MENU */
-.menu{max-width:900px;margin:auto;padding:20px}
+  font-size:24px;
+
+  font-weight:800;
+
+  color:#fff;
+
+  text-shadow:
+  0 0 18px rgba(255,122,0,.25);
+}
+
+.nav-links{
+
+  display:flex;
+
+  gap:28px;
+}
+
+.nav-links a{
+
+  position:relative;
+
+  text-decoration:none;
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-weight:500;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+
+  color:#ff8c1a;
+}
+
+.nav-links a::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  bottom:-8px;
+
+  width:0;
+
+  height:2px;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after{
+
+  width:100%;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+  text-align:center;
+
+  padding:70px 20px 50px;
+
+  position:relative;
+}
+
+.hero::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+  radial-gradient(
+  circle at top right,
+  rgba(255,122,0,.12),
+  transparent 30%
+  );
+
+  pointer-events:none;
+}
+
+.hero h1{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:58px;
+
+  font-weight:900;
+
+  letter-spacing:-2px;
+
+  margin-bottom:14px;
+
+  color:#fff;
+}
+
+.hero p{
+
+  position:relative;
+
+  z-index:2;
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-size:17px;
+}
+
+#statusMsg{
+
+  margin-top:14px;
+
+  font-weight:700;
+
+  color:#ffb347;
+}
+
+/* ================= MENU ================= */
+
+.menu{
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:20px 24px 90px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:28px;
+}
+
+/* ================= SECTION ================= */
+
 .section{
-background:#fff;border-radius:18px;padding:22px;
-margin-bottom:26px;box-shadow:0 12px 30px rgba(0,0,0,.08)
-}
-.section h2{color:#92400e;font-size:20px;margin-bottom:14px}
-.item{
-display:flex;justify-content:space-between;align-items:center;
-padding:8px 0;border-bottom:1px dashed #e5e7eb
-}
-.item:last-child{border-bottom:none}
-.controls{display:flex;align-items:center;gap:6px}
-.btn{
-width:26px;height:26px;border:none;border-radius:6px;
-background:#92400e;color:#fff;font-weight:700;cursor:pointer
-}
-.qty{min-width:18px;text-align:center;font-weight:600}
 
-/* CART BAR */
+  background:
+  rgba(255,255,255,.06);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:28px;
+
+  padding:24px;
+
+  box-shadow:
+  0 20px 45px rgba(0,0,0,.25);
+
+  transition:.35s ease;
+}
+
+.section:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 30px 65px rgba(0,0,0,.35);
+}
+
+.section h2{
+
+  font-size:22px;
+
+  margin-bottom:18px;
+
+  color:#ffb347;
+}
+
+/* ================= ITEM ================= */
+
+.item{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:14px 0;
+
+  border-bottom:
+  1px dashed rgba(255,255,255,.08);
+}
+
+.item:last-child{
+
+  border-bottom:none;
+}
+
+.item span{
+
+  color:#fff;
+
+  font-size:15px;
+
+  line-height:1.5;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+.btn{
+
+  width:30px;
+
+  height:30px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  color:#fff;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+}
+
+.btn:hover{
+
+  transform:scale(1.08);
+}
+
+.qty{
+
+  min-width:22px;
+
+  text-align:center;
+
+  font-weight:700;
+
+  color:#fff;
+}
+
+/* ================= CART ================= */
+
 .cart-bar{
-position:fixed;bottom:0;left:0;width:100%;
-background:#fff;border-top:1px solid #e5e7eb;
-box-shadow:0 -8px 20px rgba(0,0,0,.1);
-padding:14px 20px;z-index:9999
+
+  position:fixed;
+
+  bottom:0;
+
+  left:0;
+
+  width:100%;
+
+  background:
+  rgba(10,10,10,.92);
+
+  backdrop-filter:blur(18px);
+
+  border-top:
+  1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+  0 -10px 30px rgba(0,0,0,.35);
+
+  padding:16px 20px;
+
+  z-index:1000;
 }
-.cart-info{font-size:14px;margin-bottom:8px}
-.cart-info b{font-size:15px}
+
+.cart-info{
+
+  font-size:15px;
+
+  margin-bottom:10px;
+
+  color:
+  rgba(255,255,255,.75);
+}
+
+.cart-info b{
+
+  color:#ffb347;
+}
+
 .order-btn{
-width:100%;padding:14px;border:none;border-radius:10px;
-background:#25D366;color:#fff;font-size:16px;
-font-weight:800;cursor:pointer
+
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #25D366,
+  #1faa52
+  );
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.35s ease;
 }
-.note{font-size:12px;color:#6b7280;text-align:center;margin-top:6px}
+
+.order-btn:hover{
+
+  transform:
+  translateY(-3px);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .glass-navbar{
+
+    position:fixed;
+
+    width:100%;
+  }
+
+  .nav{
+
+    padding:14px 18px;
+  }
+
+  .nav-links{
+
+    gap:16px;
+  }
+
+  .hero{
+
+    padding:120px 20px 40px;
+  }
+
+  .hero h1{
+
+    font-size:40px;
+
+    line-height:1.1;
+  }
+
+  .hero p{
+
+    font-size:15px;
+  }
+
+  .menu{
+
+    grid-template-columns:1fr;
+
+    padding:20px 18px 90px;
+
+    gap:22px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="glass-navbar">
+
 <div class="nav">
-<div class="logo">Khazaana</div>
-<div>
+
+<div class="logo">
+Khazaana
+</div>
+
+<div class="nav-links">
 <a href="index.html">Home</a>
 <a href="restaurants.html">Restaurants</a>
 </div>
+
 </div>
+
 </header>
 
 <section class="hero">
-<h1>Kolkata Hazi Biryani</h1>
-<p>Biryani • Kolkata Style</p>
-<p id="statusMsg" style="margin-top:6px; font-weight:600; color:#ff7a00;"></p>
 
-<p style="
-margin-top:10px;
-font-weight:900;
-color:#dc2626;
-font-size:18px;
-letter-spacing:1px;
-text-transform:uppercase;
-">
+<h1>
+Kolkata Hazi Biryani
+</h1>
+
+<p>
+Biryani • Kolkata Style
 </p>
+
+<p id="statusMsg"></p>
 
 </section>
 
 <section class="menu" id="menu"></section>
 
-<!-- CART -->
 <div class="cart-bar">
+
 <div class="cart-info" id="cartInfo">
-Subtotal: ₹0 | Delivery: ₹30 | <b>Total: ₹0</b>
+Subtotal: ₹0 | Delivery: ₹0 | <b>Total: ₹0</b>
 </div>
 
-<button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+<button class="order-btn"
+onclick="goToCheckout()">
 
-<!-- ❌ FREE DELIVERY TEXT REMOVED -->
+Proceed to Checkout
+
+</button>
 
 </div>
 
 <script>
 
-const DELIVERY_FEE = 30
-const MIN_ORDER_VALUE = 500
+const DELIVERY_FEE = 30;
+const MIN_ORDER_VALUE = 200;
 
 function vibrate(ms=30){
-if(navigator.vibrate) navigator.vibrate(ms)
+if(navigator.vibrate)
+navigator.vibrate(ms);
 }
 
 const menuData = {
+
 "🍚 Main Course – Biryani":[
+
 ["Chicken Biryani (Full)",120],
 ["Chicken Biryani (Half)",90],
 ["Aloo Biryani (Full)",80],
@@ -128,181 +557,272 @@ const menuData = {
 ["Special Chicken Biryani",170],
 ["Chicken Extra Pieces",50],
 ["Aloo Extra Pieces",5]
-]
-}
 
-const cart = {}
+]
+
+};
+
+const cart = {};
 
 function renderMenu(){
-const menu = document.getElementById("menu")
+
+const menu =
+document.getElementById("menu");
 
 for(const section in menuData){
 
-let html = `<div class="section"><h2>${section}</h2>`
+let html =
+`<div class="section">
+
+<h2>${section}</h2>`;
 
 menuData[section].forEach(([name,price],i)=>{
 
-const id = section.replace(/\W/g,'') + i
+const id =
+section.replace(/\W/g,'') + i;
 
-cart[id] = {name,price,qty:0}
+cart[id] = {
+name,
+price,
+qty:0
+};
 
 html += `
+
 <div class="item">
-<span>${name} ₹${price}</span>
+
+<span>
+${name} ₹${price}
+</span>
 
 <div class="controls">
 
-<button class="btn" onclick="vibrate(20);updateQty('${id}',-1)">−</button>
+<button class="btn"
+onclick="vibrate(20);updateQty('${id}',-1)">
+−
+</button>
 
-<span class="qty" id="q-${id}">0</span>
+<span class="qty"
+id="q-${id}">
+0
+</span>
 
-<button class="btn" onclick="vibrate(30);updateQty('${id}',1)">+</button>
+<button class="btn"
+onclick="vibrate(30);updateQty('${id}',1)">
++
+</button>
 
 </div>
+
 </div>
-`
-})
+`;
+});
 
-html += `</div>`
+html += `</div>`;
 
-menu.innerHTML += html
+menu.innerHTML += html;
 }
 }
 
-renderMenu()
+renderMenu();
 
 function updateQty(id,change){
 
-cart[id].qty = Math.max(0, cart[id].qty + change)
+cart[id].qty =
+Math.max(0, cart[id].qty + change);
 
-document.getElementById("q-"+id).innerText = cart[id].qty
+document.getElementById(
+"q-"+id
+).innerText = cart[id].qty;
 
-updateTotals()
+updateTotals();
 }
 
 function updateTotals(){
 
-let subtotal = 0
+let subtotal = 0;
 
 for(const i in cart){
-subtotal += cart[i].qty * cart[i].price
+
+subtotal +=
+cart[i].qty * cart[i].price;
 }
 
 let delivery =
 subtotal >= 500
 ? 0
-: (subtotal === 0 ? 0 : DELIVERY_FEE)
+: (subtotal === 0 ? 0 : DELIVERY_FEE);
 
-let total = subtotal + delivery
+let total =
+subtotal + delivery;
 
-document.getElementById("cartInfo").innerHTML =
-`Subtotal: ₹${subtotal} |
-Delivery:
-${delivery === 0 && subtotal > 0 ? "FREE" : "₹"+delivery}
-|
-<b>Total: ₹${total}</b>`
+document.getElementById(
+"cartInfo"
+).innerHTML =
+
+`Subtotal: ₹${subtotal}
+| Delivery:
+${delivery === 0 && subtotal > 0
+? "FREE"
+: "₹"+delivery}
+| <b>Total: ₹${total}</b>`;
 }
+
 function goToCheckout(){
 
-let subtotal = 0
-let items = []
+let subtotal = 0;
+let items = [];
 
 for(const i in cart){
 
 if(cart[i].qty > 0){
 
-const t = cart[i].qty * cart[i].price
+const t =
+cart[i].qty * cart[i].price;
 
-subtotal += t
+subtotal += t;
 
 items.push({
+
 name:cart[i].name,
 qty:cart[i].qty,
 price:cart[i].price,
 total:t
-})
+
+});
 }
 }
 
-// ✅ MIN ORDER ₹200
 if(subtotal < MIN_ORDER_VALUE){
+
 alert("Minimum order value is ₹200");
 return;
 }
 
-// ✅ ALWAYS DELIVERY
 let delivery =
 subtotal >= 500
 ? 0
-: (subtotal === 0 ? 0 : DELIVERY_FEE)
+: (subtotal === 0 ? 0 : DELIVERY_FEE);
 
 const orderData = {
-restaurant:"Kolkata Hazi Biryani",
+
+restaurant:
+"Kolkata Hazi Biryani",
+
 items,
+
 subtotal,
+
 delivery,
-total:subtotal + delivery
+
+total:
+subtotal + delivery
+
+};
+
+localStorage.setItem(
+"khazaanaOrder",
+JSON.stringify(orderData)
+);
+
+window.location.href =
+"checkout.html";
 }
 
-localStorage.setItem("khazaanaOrder",JSON.stringify(orderData))
+/* STATUS */
 
-window.location.href="checkout.html"
+function isClosed(){
+
+const h =
+new Date().getHours();
+
+return (h >= 21 || h < 10);
 }
+
+function toggleCart(disable){
+
+const buttons =
+document.querySelectorAll("button");
+
+buttons.forEach(btn=>{
+
+if(btn.innerText==="+" ||
+btn.innerText==="−"){
+
+btn.disabled = disable;
+
+btn.style.opacity =
+disable ? "0.5" : "1";
+
+btn.style.cursor =
+disable ? "not-allowed"
+: "pointer";
+}
+});
+}
+
+function updateStatus(){
+
+const msg =
+document.getElementById(
+"statusMsg"
+);
+
+if(!isClosed()){
+
+msg.innerText =
+"🟢 Open Now";
+
+toggleCart(false);
+
+return;
+}
+
+let now = new Date();
+
+let openTime =
+new Date();
+
+if(now.getHours() >= 21){
+
+openTime.setDate(
+now.getDate()+1
+);
+}
+
+openTime.setHours(
+10,0,0,0
+);
+
+let diff =
+openTime - now;
+
+let h =
+Math.floor(diff/(1000*60*60));
+
+let m =
+Math.floor(
+(diff%(1000*60*60))
+/(1000*60)
+);
+
+let s =
+Math.floor(
+(diff%(1000*60))
+/1000
+);
+
+msg.innerText =
+`🔴 Opens in ${h}h ${m}m ${s}s`;
+
+toggleCart(true);
+}
+
+setInterval(updateStatus,1000);
+
+updateStatus();
 
 </script>
 
 </body>
 </html>
-
-<script>
-
-function isClosed() {
-  const h = new Date().getHours();
-  return (h >= 21 || h < 10);
-}
-
-function toggleCart(disable) {
-  const buttons = document.querySelectorAll("button");
-
-  buttons.forEach(btn => {
-    if (btn.innerText === "+" || btn.innerText === "-") {
-      btn.disabled = disable;
-      btn.style.opacity = disable ? "0.5" : "1";
-      btn.style.cursor = disable ? "not-allowed" : "pointer";
-    }
-  });
-}
-
-function updateStatus() {
-  const msg = document.getElementById("statusMsg");
-
-  if (!isClosed()) {
-    msg.innerText = "🟢 Open Now";
-    toggleCart(false);
-    return;
-  }
-
-  let now = new Date();
-  let openTime = new Date();
-
-  if (now.getHours() >= 21) {
-    openTime.setDate(now.getDate() + 1);
-  }
-
-  openTime.setHours(10, 0, 0, 0);
-
-  let diff = openTime - now;
-
-  let h = Math.floor(diff / (1000 * 60 * 60));
-  let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  let s = Math.floor((diff % (1000 * 60)) / 1000);
-
-  msg.innerText = `🔴 Opens in ${h}h ${m}m ${s}s`;
-
-  toggleCart(true);
-}
-
-setInterval(updateStatus, 1000);
-updateStatus();
-
-</script>
