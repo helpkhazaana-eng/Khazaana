@@ -1,3 +1,5 @@
+/* ================= RESET ================= */
+
 *{
   margin:0;
   padding:0;
@@ -5,232 +7,767 @@
   font-family:"Segoe UI",sans-serif;
 }
 
+/* ================= BODY ================= */
+
 body{
-  background:#fff7ed;
-  color:#1f2937;
+
+  background:
+
+  linear-gradient(
+  180deg,
+  #0f0b08 0%,
+  #16110d 40%,
+  #1c1510 100%
+  );
+
+  color:#ffffff;
+
   line-height:1.6;
+
+  overflow-x:hidden;
 }
 
-/* NAV */
-header{
-  background:#fff;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
+/* ================= PREMIUM NAVBAR ================= */
+
+.glass-navbar{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+  rgba(18,12,9,.72);
+
+  backdrop-filter:blur(20px);
+
+  -webkit-backdrop-filter:blur(20px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.06);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.28);
+
+  overflow:hidden;
 }
+
+.glass-navbar::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+  radial-gradient(
+  circle at top right,
+  rgba(255,122,0,.12),
+  transparent 32%
+  );
+
+  pointer-events:none;
+}
+
 .nav{
+
   max-width:1200px;
+
   margin:auto;
+
   padding:18px 24px;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
+  position:relative;
+
+  z-index:2;
 }
+
+/* ================= LOGO ================= */
+
 .logo{
+
   font-size:24px;
+
   font-weight:800;
-  color:#c2410c;
-}
-.nav-links a{
-  margin-left:22px;
-  text-decoration:none;
-  color:#374151;
-  font-weight:500;
+
+  color:#ffffff;
+
+  text-shadow:
+  0 0 22px rgba(255,122,0,.28);
 }
 
-/* PAGE */
-.page{
-  text-align:center;
-  padding:80px 20px 50px;
-}
-.page h1{
-  font-size:36px;
-  font-weight:800;
-}
-.page p{
-  color:#6b7280;
-}
+/* ================= NAV LINKS ================= */
 
-/* GRID */
-.grid{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px 80px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
-.card{
-  background:#fff;
-  padding:28px;
-  border-radius:20px;
-  box-shadow:0 16px 35px rgba(0,0,0,.08);
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-6px);
-}
-.card h3{
-  margin-bottom:6px;
-}
-.card p{
-  color:#6b7280;
-  margin-bottom:16px;
-}
-.card a{
-  color:#f97316;
-  text-decoration:none;
-  font-weight:700;
-}
+.nav-links{
 
-/* CONTACT */
-.contact-section{
-  background:#fff7ed;
-  padding:80px 20px;
-  text-align:center;
-}
-.contact-title{
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:40px;
-}
-.contact-card{
-  background:#fff;
-  max-width:900px;
-  margin:auto;
-  padding:32px;
-  border-radius:22px;
-  box-shadow:0 25px 55px rgba(0,0,0,.1);
-}
-.contact-row{
   display:flex;
+
+  align-items:center;
+
+  gap:28px;
+}
+
+.nav-links a{
+
+  position:relative;
+
+  text-decoration:none;
+
+  color:
+  rgba(255,255,255,.74);
+
+  font-weight:500;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+
+  color:#ffffff;
+}
+
+.nav-links a::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  bottom:-8px;
+
+  width:0;
+
+  height:2px;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+
+  width:100%;
+}
+
+.nav-links a.active{
+
+  color:#ff8c1a;
+
+  font-weight:600;
+}
+
+/* ================= PAGE HERO ================= */
+
+.page{
+
+  text-align:center;
+
+  padding:120px 20px 60px;
+
+  background:
+
+  radial-gradient(
+  circle at top right,
+  rgba(255,122,0,.10),
+  transparent 30%
+  ),
+
+  radial-gradient(
+  circle at bottom left,
+  rgba(255,180,80,.08),
+  transparent 30%
+  ),
+
+  linear-gradient(
+  180deg,
+  #1a120d 0%,
+  #201712 45%,
+  #18110d 100%
+  );
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.page::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+  linear-gradient(
+  to bottom,
+  rgba(255,255,255,.02),
+  transparent
+  );
+
+  pointer-events:none;
+}
+
+.page h1{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:64px;
+
+  font-weight:900;
+
+  margin-bottom:14px;
+
+  letter-spacing:-2px;
+
+  color:#ffffff;
+
+  text-shadow:
+  0 8px 30px rgba(0,0,0,.35);
+}
+
+.page p{
+
+  position:relative;
+
+  z-index:2;
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-size:18px;
+
+  letter-spacing:.2px;
+}
+
+/* ================= RESTAURANT GRID ================= */
+
+.grid{
+
+  max-width:1300px;
+
+  margin:60px auto;
+
+  padding:0 24px 90px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(340px,1fr));
+
+  gap:34px;
+}
+
+/* ================= RESTAURANT CARD ================= */
+
+.restaurant-card{
+
+  background:
+  rgba(255,255,255,.08);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  text-decoration:none;
+
+  transition:.35s ease;
+
+  box-shadow:
+  0 20px 45px rgba(0,0,0,.22);
+
+  display:flex;
+
+  flex-direction:column;
+}
+
+.restaurant-card:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,.28);
+}
+
+/* ================= IMAGE ================= */
+
+.restaurant-image{
+
+  width:100%;
+
+  height:250px;
+
+  overflow:hidden;
+}
+
+.restaurant-image img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.5s ease;
+}
+
+.restaurant-card:hover img{
+
+  transform:scale(1.05);
+}
+
+/* ================= INFO ================= */
+
+.restaurant-info{
+
+  padding:22px;
+}
+
+.restaurant-info h3{
+
+  font-size:24px;
+
+  color:#fff;
+
+  margin-bottom:10px;
+
+  font-weight:800;
+}
+
+.meta{
+
+  color:#ffb347;
+
+  margin-bottom:10px;
+
+  font-size:15px;
+
+  font-weight:600;
+}
+
+.cuisine{
+
+  color:
+  rgba(255,255,255,.72);
+
+  margin-bottom:18px;
+
+  font-size:15px;
+}
+
+.delivery{
+
+  display:inline-block;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  background:
+  rgba(255,122,0,.12);
+
+  border:
+  1px solid rgba(255,122,0,.18);
+
+  color:#ffb347;
+
+  font-size:13px;
+
+  font-weight:600;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-section{
+
+  background:
+
+  linear-gradient(
+  to bottom,
+  #1c1510,
+  #120d09
+  );
+
+  padding:80px 20px;
+
+  text-align:center;
+}
+
+.contact-title{
+
+  font-size:32px;
+
+  font-weight:900;
+
+  margin-bottom:40px;
+
+  color:#ffffff;
+}
+
+.contact-card{
+
+  background:
+  rgba(255,255,255,.08);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  max-width:900px;
+
+  margin:auto;
+
+  padding:34px;
+
+  border-radius:28px;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.25);
+
+  text-align:left;
+
+  color:#ffffff;
+}
+
+.contact-row{
+
+  display:flex;
+
   gap:30px;
+
   flex-wrap:wrap;
+
+  justify-content:space-between;
+
   margin-bottom:24px;
 }
+
 .contact-box{
+
   flex:1;
+
   display:flex;
-  gap:12px;
+
+  gap:14px;
+
+  align-items:flex-start;
 }
+
+.contact-box strong{
+
+  color:#ffffff;
+}
+
 .contact-box p{
-  color:#6b7280;
+
+  color:
+  rgba(255,255,255,.72);
+
   font-size:14px;
 }
 
-/* SOCIAL */
+/* ================= SOCIAL ================= */
+
 .social-section{
+
   padding:70px 20px;
+
   text-align:center;
-}
-.social-links{
-  display:flex;
-  justify-content:center;
-  gap:28px;
-  flex-wrap:wrap;
-}
-.social-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 26px;
-  border-radius:14px;
-  text-decoration:none;
-  color:#fff;
-  font-weight:700;
-}
-.social-card img{
-  width:22px;
-}
-.social-card.instagram{
-  background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);
-}
-.social-card.linkedin{
-  background:linear-gradient(45deg,#0077b5,#004182);
+
+  background:#120d09;
 }
 
-/* FOOTER */
-footer{
-  background:#1f2937;
+.social-title{
+
+  font-size:30px;
+
+  font-weight:900;
+
+  margin-bottom:35px;
+
+  color:#ffffff;
+}
+
+.social-links{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:28px;
+
+  flex-wrap:wrap;
+}
+
+.social-card{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  padding:16px 30px;
+
+  border-radius:18px;
+
+  text-decoration:none;
+
   color:#fff;
-  text-align:center;
-  padding:20px;
+
+  font-weight:700;
+
+  transition:.3s ease;
+
+  box-shadow:
+  0 15px 35px rgba(0,0,0,.22);
+}
+
+.social-card:hover{
+
+  transform:translateY(-5px);
+}
+
+.social-card img{
+
+  width:22px;
+
+  height:22px;
+
+  object-fit:contain;
+}
+
+.social-card.instagram{
+
+  background:
+  linear-gradient(
+  45deg,
+  #f58529,
+  #dd2a7b,
+  #8134af
+  );
+}
+
+.social-card.linkedin{
+
+  background:
+  linear-gradient(
+  45deg,
+  #0077b5,
+  #004182
+  );
 }
 
 /* ================= FOOTER ================= */
+
 .main-footer{
-  background:#1f2937;
+
+  background:#0d0907;
+
   color:#ffffff;
+
   text-align:center;
+
   padding:20px;
+
   font-size:14px;
+
+  border-top:
+  1px solid rgba(255,255,255,.05);
 }
 
-/* ================= DESIGNER STRIP ================= */
+/* ================= DESIGNER ================= */
+
 .designer-strip{
-  background:#fff7ed;
-  color:#6b7280;          /* light grey text */
+
+  background:#120d09;
+
+  color:
+  rgba(255,255,255,.55);
+
   text-align:center;
+
   padding:14px 10px;
+
   font-size:13px;
 }
 
 .designer-strip strong{
-  color:#4b5563;          /* slightly darker grey (NOT black) */
+
+  color:#ffffff;
+
   font-weight:600;
 }
 
-/* ===== PREMIUM RESTAURANT CARD BACKGROUND ===== */
+/* ================= ANNOUNCEMENT ================= */
 
-.card{
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #fffaf3 100%
-  ); /* soft cream gradient */
-  
-  border-radius: 20px;
-  padding: 26px;
-  
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.7);
+.announcement-bar{
 
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background:#ff7a00;
+
+  color:#fff;
+
+  text-align:center;
+
+  padding:10px 40px;
+
+  font-size:14px;
+
+  font-weight:500;
+
+  position:relative;
 }
 
-/* hover = premium lift */
-.card:hover{
-  transform: translateY(-6px);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.75);
+.close-announcement{
+
+  position:absolute;
+
+  right:15px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  cursor:pointer;
+
+  font-size:18px;
 }
 
-.grid{
-  background: radial-gradient(
-    circle at top,
-    rgba(255,237,213,0.45),
-    transparent 65%
-  );
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .glass-navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+  }
+
+  .nav{
+
+    flex-direction:row;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 18px;
+  }
+
+  .nav-links{
+
+    gap:16px;
+
+    flex-wrap:nowrap;
+  }
+
+  .nav-links a{
+
+    font-size:14px;
+  }
+
+  .logo{
+
+    font-size:22px;
+  }
+
+  .page{
+
+    padding:120px 20px 40px;
+  }
+
+  .page h1{
+
+    font-size:40px;
+
+    line-height:1.1;
+  }
+
+  .page p{
+
+    font-size:15px;
+  }
+
+  .grid{
+
+    grid-template-columns:1fr;
+
+    padding:0 18px 70px;
+
+    gap:24px;
+  }
+
+  .restaurant-image{
+
+    height:220px;
+  }
+
+  .restaurant-info h3{
+
+    font-size:24px;
+  }
+
+  .contact-card{
+
+    padding:24px;
+  }
+
+  .contact-row{
+
+    flex-direction:column;
+
+    gap:24px;
+  }
+
+  .social-links{
+
+    gap:18px;
+  }
+
+  .social-card{
+
+    width:100%;
+
+    max-width:260px;
+
+    margin:auto;
+  }
+
 }
-
-/* ===== CONTACT ALIGNMENT FIX (RIGHT / LEFT LIKE 2nd PIC) ===== */
-
-.contact-card{
-  text-align: left;              /* override center */
-}
-
-.contact-row{
-  justify-content: space-between;
-}
-
-.contact-box{
-  align-items: flex-start;
-}
-
-/* address block */
-.contact-card > .contact-box{
-  justify-content: flex-start;
-  margin-top: 10px;
-}
-
-
