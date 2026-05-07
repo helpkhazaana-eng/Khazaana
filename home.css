@@ -918,16 +918,7 @@ body{
 
   position:relative;
 
-    min-height:72vh;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:120px 20px 80px;
-}
+  min-height:72vh;
 
   display:flex;
 
@@ -1432,10 +1423,4 @@ body{
 
 }
 
-.restaurants{
-
-  margin-top:0;
-
-  padding-top:40px;
-}
 
