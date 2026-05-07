@@ -179,22 +179,33 @@ function updateQty(item,change){
 }
 
 function updateTotals(){
+
   let subtotal = 0;
+
   for(const i in cart){
     subtotal += cart[i].qty * cart[i].price;
   }
 
-  let delivery = 0;
-  if(subtotal > 0 && subtotal < FREE_DELIVERY_LIMIT){
-    delivery = DELIVERY_FEE;
-  }
+  const deliveryCharge =
+    subtotal >= FREE_DELIVERY_LIMIT
+    ? 0
+    : DELIVERY_FEE;
 
-  document.getElementById("subtotal").innerText = subtotal;
-  document.getElementById("delivery").innerHTML =
-    delivery === 0 && subtotal >= FREE_DELIVERY_LIMIT
-    ? "<span class='free'>FREE</span>"
-    : "₹"+delivery;
-  document.getElementById("total").innerText = subtotal + delivery;
+  const total =
+    subtotal > 0
+    ? subtotal + deliveryCharge
+    : 0;
+
+  document.querySelector(".cart-info")
+    .innerHTML = `
+      Subtotal: ₹${subtotal} |
+      Delivery:
+      ${deliveryCharge === 0
+        ? "FREE"
+        : "₹" + DELIVERY_FEE}
+      |
+      <b>Total: ₹${total}</b>
+    `;
 }
 
 /* CHECKOUT */

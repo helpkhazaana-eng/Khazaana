@@ -103,7 +103,9 @@ header{
 </div>
 
 <script>
+
 const DELIVERY = 30;
+const FREE_DELIVERY_ABOVE = 250;
 
 /* FULL MENU DATA (INCLUDING PASTRIES) */
 const menuData = {
@@ -157,15 +159,31 @@ function updateQty(id,change){
   document.getElementById("q-"+id).innerText = cart[id].qty;
   updateTotals();
 }
-
 function updateTotals(){
+
   let subtotal = 0;
+
   for(const i in cart){
     subtotal += cart[i].qty * cart[i].price;
   }
-  document.getElementById("subtotal").innerText = subtotal;
-  document.getElementById("total").innerText =
-    subtotal > 0 ? subtotal + DELIVERY : 0;
+
+  let delivery =
+    subtotal >= FREE_DELIVERY_ABOVE
+    ? 0
+    : (subtotal === 0 ? 0 : DELIVERY);
+
+  let total = subtotal + delivery;
+
+  document.querySelector(".cart-info")
+    .innerHTML = `
+      Subtotal: ₹${subtotal} |
+      Delivery:
+      ${delivery === 0 && subtotal > 0
+        ? "FREE"
+        : "₹" + delivery}
+      |
+      <b>Total: ₹${total}</b>
+    `;
 }
 
 /* GO TO CHECKOUT */

@@ -104,6 +104,7 @@ header{
 
 <script>
 const DELIVERY = 30;
+const FREE_DELIVERY_ABOVE = 350;
 const MIN_ORDER = 100;
 
 /* 🔔 VIBRATION */
@@ -157,76 +158,35 @@ function updateQty(id,change){
   document.getElementById("q-"+id).innerText = cart[id].qty;
   updateTotals();
 }
-
 function updateTotals(){
+
   let subtotal = 0;
+
   for(const i in cart){
     subtotal += cart[i].qty * cart[i].price;
   }
-  document.getElementById("subtotal").innerText = subtotal;
-  document.getElementById("total").innerText =
-    subtotal > 0 ? subtotal + DELIVERY : 0;
+
+  const deliveryCharge =
+    subtotal >= FREE_DELIVERY_ABOVE
+    ? 0
+    : DELIVERY;
+
+  const total =
+    subtotal > 0
+    ? subtotal + deliveryCharge
+    : 0;
+
+  document.querySelector(".cart-info")
+    .innerHTML = `
+      Subtotal: ₹${subtotal} |
+      Delivery:
+      ${deliveryCharge === 0
+        ? "FREE"
+        : "₹" + DELIVERY}
+      |
+      <b>Total: ₹${total}</b>
+    `;
 }
-
-/* CHECKOUT */
-function goToCheckout(){
-  let subtotal = 0;
-  let items = [];
-
-  for(const i in cart){
-    if(cart[i].qty > 0){
-      const t = cart[i].qty * cart[i].price;
-      subtotal += t;
-      items.push({
-        name: cart[i].name,
-        qty: cart[i].qty,
-        price: cart[i].price,
-        total: t
-      });
-    }
-  }
-
-  if(subtotal < MIN_ORDER){
-    alert("Minimum order ₹100 required");
-    return;
-  }
-
-  const orderData = {
-    restaurant: "Bondhu Hotel & Restaurant",
-    items,
-    subtotal,
-    delivery: DELIVERY,
-    total: subtotal + DELIVERY
-  };
-
-  localStorage.setItem("khazaanaOrder", JSON.stringify(orderData));
-  window.location.href = "checkout.html";
-}
-</script>
-
-</body>
-</html>
-
-<script>
-
-function isClosed() {
-  const h = new Date().getHours();
-  return (h >= 21 || h < 10);
-}
-
-/* ===== DISABLE / ENABLE CART ===== */
-function toggleCart(disable) {
-  const buttons = document.querySelectorAll("button");
-
-  buttons.forEach(btn => {
-    if (btn.innerText === "+" || btn.innerText === "-") {
-      btn.disabled = disable;
-      btn.style.opacity = disable ? "0.5" : "1";
-      btn.style.cursor = disable ? "not-allowed" : "pointer";
-    }
-  });
-}
-
 /* ===== COUNTDOWN ===== */
 function updateStatus() {
   const msg = document.getElementById("statusMsg");
