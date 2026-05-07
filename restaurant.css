@@ -854,3 +854,219 @@ body{
   }
 
 }
+
+body{
+
+  background:
+
+  linear-gradient(
+  180deg,
+  #0f0b08 0%,
+  #16110d 40%,
+  #1c1510 100%
+  );
+
+  color:#fff;
+
+  overflow-x:hidden;
+}
+
+/* ================= RESTAURANT GRID FIX ================= */
+
+.grid{
+
+  max-width:1300px;
+
+  margin:60px auto;
+
+  padding:0 24px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(340px,1fr));
+
+  gap:34px;
+}
+
+/* CARD */
+
+.restaurant-card{
+
+  background:
+  rgba(255,255,255,.08);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  text-decoration:none;
+
+  transition:.35s ease;
+
+  box-shadow:
+  0 20px 45px rgba(0,0,0,.22);
+
+  display:flex;
+
+  flex-direction:column;
+}
+
+.restaurant-card:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,.28);
+}
+
+/* IMAGE */
+
+.restaurant-image{
+
+  width:100%;
+
+  height:250px;
+
+  overflow:hidden;
+}
+
+.restaurant-image img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:.5s ease;
+}
+
+.restaurant-card:hover img{
+
+  transform:scale(1.05);
+}
+
+/* INFO */
+
+.restaurant-info{
+
+  padding:22px;
+}
+
+.restaurant-info h3{
+
+  font-size:24px;
+
+  color:#fff;
+
+  margin-bottom:10px;
+}
+
+.meta{
+
+  color:#ffb347;
+
+  margin-bottom:10px;
+
+  font-size:15px;
+}
+
+.cuisine{
+
+  color:
+  rgba(255,255,255,.72);
+
+  margin-bottom:18px;
+
+  font-size:15px;
+}
+
+.delivery{
+
+  display:inline-block;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  background:
+  rgba(255,122,0,.12);
+
+  border:
+  1px solid rgba(255,122,0,.18);
+
+  color:#ffb347;
+
+  font-size:13px;
+
+  font-weight:600;
+}
+
+/* PAGE HEADER */
+
+.page{
+
+  padding:120px 20px 40px;
+
+  text-align:center;
+}
+
+.page h1{
+
+  font-size:64px;
+
+  color:#fff;
+
+  margin-bottom:12px;
+
+  letter-spacing:-2px;
+}
+
+.page p{
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-size:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .grid{
+
+    grid-template-columns:1fr;
+
+    padding:0 18px;
+
+    gap:24px;
+  }
+
+  .page{
+
+    padding-top:110px;
+  }
+
+  .page h1{
+
+    font-size:38px;
+
+    line-height:1.1;
+  }
+
+  .restaurant-image{
+
+    height:220px;
+  }
+
+}
