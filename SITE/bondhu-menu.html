@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bondhu Hotel & Restaurant | Khazaana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon-180x180.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{background:#fff7ed;color:#1f2937;padding-bottom:140px}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:1000;
+  background:#ffffffdd;backdrop-filter:blur(10px);
+  box-shadow:0 6px 20px rgba(0,0,0,.08)
+}
+.nav{
+  max-width:1200px;margin:auto;padding:16px 24px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.logo{font-size:22px;font-weight:800;color:#ff7a00}
+.nav a{text-decoration:none;margin-left:20px;color:#374151}
+
+/* HERO */
+.hero{text-align:center;padding:50px 20px 30px}
+.hero h1{font-size:36px;color:#ff7a00}
+.hero p{color:#6b7280}
+
+/* MENU */
+.menu{
+  max-width:1200px;margin:auto;padding:20px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px
+}
+.section{
+  background:#fff;border-radius:20px;padding:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08)
+}
+.section h2{color:#c2410c;font-size:18px;margin-bottom:12px}
+.item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-bottom:1px dashed #e5e7eb
+}
+.item:last-child{border-bottom:none}
+.controls{display:flex;align-items:center;gap:6px}
+.btn{
+  width:26px;height:26px;border:none;border-radius:6px;
+  background:#c2410c;color:#fff;font-weight:700;cursor:pointer
+}
+.qty{min-width:18px;text-align:center;font-weight:600}
+
+/* CART BAR */
+.cart-bar{
+  position:fixed;bottom:0;left:0;width:100%;
+  background:#fff;border-top:1px solid #e5e7eb;
+  box-shadow:0 -8px 20px rgba(0,0,0,.1);
+  padding:14px 20px;z-index:9999
+}
+.cart-info{font-size:14px;margin-bottom:8px}
+.cart-info b{font-size:15px}
+.order-btn{
+  width:100%;padding:14px;border:none;border-radius:10px;
+  background:#25D366;color:#fff;font-size:16px;font-weight:800;
+  cursor:pointer
+}
+.note{font-size:12px;color:#6b7280;text-align:center;margin-top:6px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Khazaana</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="restaurants.html">Restaurants</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Bondhu Hotel & Restaurant</h1>
+  <p>Hotel • Restaurant • Meals</p>
+<p id="statusMsg" style="margin-top:6px; font-weight:600; color:#ff7a00;"></p>
+</section>
+
+<section class="menu" id="menu"></section>
+
+<!-- CART -->
+<div class="cart-bar">
+  <div class="cart-info">
+    Subtotal: ₹<span id="subtotal">0</span> |
+    Delivery: ₹30 |
+    <b>Total: ₹<span id="total">0</span></b>
+  </div>
+  <button class="order-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+  <div class="note">Minimum order ₹100 (excluding delivery)</div>
+</div>
+
+<script>
+const DELIVERY = 30;
+const FREE_DELIVERY_ABOVE = 350;
+const MIN_ORDER = 100;
+
+/* 🔔 VIBRATION */
+function vibrate(ms=30){
+  if(navigator.vibrate) navigator.vibrate(ms);
+}
+
+const menuData = {
+  "☕ Beverages": [["Tea",15],["Coffee",30],["Lassi",50],["Cold Coffee",70],["Mineral Water",20]],
+  "🍜 Easy Bites": [["Chicken Chowmein",100],["Egg Chowmein",90],["Veg Chowmein",80],["Veg Pakora",130],["Onion Pakora",130],["Egg Omelet",40],["Egg Bhurji",40],["Egg Roll",40],["Chicken Roll",100]],
+  "🥘 Parathas & Soups": [["Aloo Paratha",60],["Mix Veg Paratha",130],["Paneer Paratha",90],["Plain Paratha",20],["Mix Soup",140],["Chicken Soup",120],["Veg Soup",100]],
+  "🍗 Non-Veg Appetizers": [["Fish Finger",220],["Tandoori Chicken (Full)",460],["Tandoori Chicken (Half)",250],["Chicken Tikka",250],["Chicken Lollipop",210],["Chicken Stick",220]],
+  "🍞 Breads": [["Tawa Roti",6],["Ghee Tawa Roti",15],["Tandoori Roti",15],["Butter Tandoori Roti",30],["Butter Naan",50],["Garlic Naan",70],["Rumali Roti",40],["Masala Kuleba",90]],
+  "🍛 Non-Veg Main Course": [["Chicken Curry",160],["Chicken Dopiaza",200],["Chicken Kolhapuri",200],["Chicken Masala",200],["Chicken Handi",220],["Chicken Tikka Masala",270],["Chili Chicken",170],["Chicken Varta",170]],
+  "🍽 Thali": [["Veg Thali",60],["Veg Thali (Basmati)",110],["Fish Thali",80],["Chicken Thali",150],["Egg Thali",70],["Mutton Thali",220]],
+  "🥗 Veg Side Dish": [["Green Salad",60],["Chana Masala",100],["Chana Paneer",180],["Paneer Butter Masala",170],["Chili Paneer",170],["Mix Veg",100],["Daal Fry",100],["Aloo Dum",100],["Kadhai Paneer",170]],
+  "🍳 Tadka": [["Plain Tadka",60],["Egg Butter Tadka",70],["Egg Tadka",65],["Mutton Butter Tadka",200],["Chicken Butter Tadka",130]],
+  "🍟 Snacks": [["Chicken Fry",90],["Boiled Chana",80],["Rice Chicken",220],["Chicken Kurkure",220],["Chicken Tandoori Masala (2 Pc)",360],["Chicken Tandoori Masala (4 Pc)",720],["Chicken Butter Masala",180]],
+  "🍚 Biryani & Rice": [["Chicken Biryani",100],["Chicken Biryani (Special)",130],["Mutton Biryani",170],["Chicken Fried Rice",140],["Veg Fried Rice",120],["Mix Fried Rice",170],["Egg Fried Rice",130],["Egg Biryani",90],["Veg Biryani",100]]
+};
+
+const cart = {};
+
+/* RENDER MENU */
+function renderMenu(){
+  const menu = document.getElementById("menu");
+  for(const section in menuData){
+    let html = `<div class="section"><h2>${section}</h2>`;
+    menuData[section].forEach(([name,price],i)=>{
+      const id = section.replace(/\W/g,'')+i;
+      cart[id] = {name,price,qty:0};
+      html += `
+        <div class="item">
+          <span>${name} ₹${price}</span>
+          <div class="controls">
+            <button class="btn" onclick="vibrate(20);updateQty('${id}',-1)">−</button>
+            <span class="qty" id="q-${id}">0</span>
+            <button class="btn" onclick="vibrate(30);updateQty('${id}',1)">+</button>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+    menu.innerHTML += html;
+  }
+}
+renderMenu();
+
+/* CART LOGIC */
+function updateQty(id,change){
+  cart[id].qty = Math.max(0, cart[id].qty + change);
+  document.getElementById("q-"+id).innerText = cart[id].qty;
+  updateTotals();
+}
+function updateTotals(){
+
+  let subtotal = 0;
+
+  for(const i in cart){
+    subtotal += cart[i].qty * cart[i].price;
+  }
+
+  const deliveryCharge =
+    subtotal >= FREE_DELIVERY_ABOVE
+    ? 0
+    : DELIVERY;
+
+  const total =
+    subtotal > 0
+    ? subtotal + deliveryCharge
+    : 0;
+
+  document.querySelector(".cart-info")
+    .innerHTML = `
+      Subtotal: ₹${subtotal} |
+      Delivery:
+      ${deliveryCharge === 0
+        ? "FREE"
+        : "₹" + DELIVERY}
+      |
+      <b>Total: ₹${total}</b>
+    `;
+}
+/* ===== COUNTDOWN ===== */
+function updateStatus() {
+  const msg = document.getElementById("statusMsg");
+
+  if (!isClosed()) {
+    msg.innerText = "🟢 Open Now";
+    toggleCart(false);
+    return;
+  }
+
+  let now = new Date();
+  let openTime = new Date();
+
+  if (now.getHours() >= 21) {
+    openTime.setDate(now.getDate() + 1);
+  }
+
+  openTime.setHours(10, 0, 0, 0);
+
+  let diff = openTime - now;
+
+  let h = Math.floor(diff / (1000 * 60 * 60));
+  let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  msg.innerText = `🔴 Opens in ${h}h ${m}m ${s}s`;
+
+  toggleCart(true);
+}
+
+/* RUN */
+setInterval(updateStatus, 1000);
+updateStatus();
+
+</script>

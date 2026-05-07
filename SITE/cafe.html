@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Khazaana | Premium Food Delivery</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#f6f1eb;
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  padding:18px 6%;
+  backdrop-filter:blur(20px);
+  background:rgba(0,0,0,.35);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  color:white;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+}
+
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  font-size:15px;
+  font-weight:500;
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+  color:#ff7a00;
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:120px 6%;
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+  rgba(0,0,0,.55),
+  rgba(0,0,0,.7)
+  ),
+
+  url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop');
+
+  background-size:cover;
+  background-position:center;
+}
+
+.hero-content{
+  max-width:650px;
+  color:white;
+}
+
+.location{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
+  margin-bottom:28px;
+  font-size:14px;
+}
+
+.hero h1{
+  font-size:clamp(48px,8vw,80px);
+  line-height:1.05;
+  font-weight:800;
+  margin-bottom:24px;
+  letter-spacing:-2px;
+}
+
+.hero p{
+  font-size:18px;
+  line-height:1.8;
+  color:rgba(255,255,255,.82);
+  margin-bottom:36px;
+  max-width:520px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+
+.primary-btn{
+  text-decoration:none;
+  background:#ff7a00;
+  color:white;
+  padding:16px 34px;
+  border-radius:999px;
+  font-weight:600;
+  transition:.3s ease;
+  box-shadow:0 10px 30px rgba(255,122,0,.25);
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+}
+
+.secondary-btn{
+  text-decoration:none;
+  background:white;
+  color:#111;
+  padding:16px 34px;
+  border-radius:999px;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.secondary-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* CATEGORY PILLS */
+
+.categories{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.categories span{
+  flex:none;
+  padding:12px 22px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
+  color:white;
+  font-size:14px;
+}
+
+/* OFFERS */
+
+.offers{
+  padding:90px 6%;
+}
+
+.section-title{
+  font-size:42px;
+  margin-bottom:40px;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+
+.offer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:26px;
+}
+
+.offer-card{
+  position:relative;
+  height:320px;
+  border-radius:28px;
+  overflow:hidden;
+  padding:30px;
+  display:flex;
+  align-items:flex-end;
+  text-decoration:none;
+  color:white;
+  transition:.4s ease;
+}
+
+.offer-card:hover{
+  transform:translateY(-6px);
+}
+
+.offer-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:
+  linear-gradient(
+  rgba(0,0,0,.2),
+  rgba(0,0,0,.8)
+  );
+}
+
+.offer-content{
+  position:relative;
+  z-index:2;
+}
+
+.offer-content h3{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.offer-content p{
+  color:rgba(255,255,255,.8);
+  line-height:1.7;
+}
+
+.offer1{
+  background:
+  url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop');
+
+  background-size:cover;
+  background-position:center;
+}
+
+.offer2{
+  background:
+  url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop');
+
+  background-size:cover;
+  background-position:center;
+}
+
+/* RESTAURANTS */
+
+.restaurants{
+  padding:0 6% 90px;
+}
+
+.restaurant-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+.restaurant-card{
+  background:white;
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 10px 35px rgba(0,0,0,.06);
+  transition:.4s ease;
+}
+
+.restaurant-card:hover{
+  transform:translateY(-6px);
+}
+
+.restaurant-card img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+}
+
+.restaurant-info{
+  padding:24px;
+}
+
+.restaurant-info h3{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.restaurant-info p{
+  color:#777;
+  margin-bottom:12px;
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:#555;
+}
+
+/* REVIEWS */
+
+.reviews{
+  padding:90px 6%;
+  background:#121212;
+  color:white;
+}
+
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:26px;
+}
+
+.review-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:30px;
+}
+
+.review-card h4{
+  margin-bottom:14px;
+  font-size:20px;
+}
+
+.review-card p{
+  color:rgba(255,255,255,.75);
+  line-height:1.8;
+}
+
+/* CONTACT */
+
+.contact{
+  padding:90px 6%;
+}
+
+.contact-box{
+  background:white;
+  padding:40px;
+  border-radius:30px;
+  box-shadow:0 10px 35px rgba(0,0,0,.05);
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.contact-item h3{
+  margin-bottom:12px;
+}
+
+.contact-item p{
+  color:#666;
+  line-height:1.8;
+}
+
+/* FOOTER */
+
+.footer{
+  background:#111;
+  color:rgba(255,255,255,.7);
+  text-align:center;
+  padding:26px;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    padding-top:150px;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .section-title{
+    font-size:34px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+  <div class="nav-container">
+
+    <div class="logo">
+      Khazaana
+    </div>
+
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Restaurants</a>
+      <a href="#">Offers</a>
+      <a href="#">Contact</a>
+    </nav>
+
+  </div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="location">
+      Serving Aurangabad
+    </span>
+
+    <h1>
+      Delivered Fresh.<br>
+      Crafted With Love.
+    </h1>
+
+    <p>
+      Premium comfort food delivered hot, fresh and fast to your doorstep.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="#" class="primary-btn">
+        Order Now
+      </a>
+
+      <a href="#offers" class="secondary-btn">
+        Explore Menu
+      </a>
+
+    </div>
+
+    <div class="categories">
+
+      <span>Pizza</span>
+      <span>Burger</span>
+      <span>Biryani</span>
+      <span>Rolls</span>
+      <span>Chinese</span>
+      <span>Momos</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OFFERS -->
+
+<section class="offers" id="offers">
+
+  <h2 class="section-title">
+    Today’s Offers
+  </h2>
+
+  <div class="offer-grid">
+
+    <a href="#" class="offer-card offer1">
+
+      <div class="offer-content">
+
+        <h3>
+          Free Delivery
+        </h3>
+
+        <p>
+          Order above ₹250 and enjoy free delivery on your favorite meals.
+        </p>
+
+      </div>
+
+    </a>
+
+    <a href="#" class="offer-card offer2">
+
+      <div class="offer-content">
+
+        <h3>
+          Flat ₹100 OFF
+        </h3>
+
+        <p>
+          Special combo meals available for a limited time only.
+        </p>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+<!-- RESTAURANTS -->
+
+<section class="restaurants">
+
+  <h2 class="section-title">
+    Popular Restaurants
+  </h2>
+
+  <div class="restaurant-grid">
+
+    <div class="restaurant-card">
+
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="restaurant-info">
+
+        <h3>
+          Khazaana Burgers
+        </h3>
+
+        <p>
+          Burgers • Fries • Drinks
+        </p>
+
+        <div class="meta">
+          <span>⭐ 4.8</span>
+          <span>20 mins</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="restaurant-card">
+
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="restaurant-info">
+
+        <h3>
+          Khazaana Pizza
+        </h3>
+
+        <p>
+          Pizza • Pasta • Garlic Bread
+        </p>
+
+        <div class="meta">
+          <span>⭐ 4.7</span>
+          <span>25 mins</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="restaurant-card">
+
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="restaurant-info">
+
+        <h3>
+          Khazaana Biryani
+        </h3>
+
+        <p>
+          Biryani • Kebabs • Rolls
+        </p>
+
+        <div class="meta">
+          <span>⭐ 4.9</span>
+          <span>30 mins</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- REVIEWS -->
+
+<section class="reviews">
+
+  <h2 class="section-title">
+    Loved By Customers
+  </h2>
+
+  <div class="review-grid">
+
+    <div class="review-card">
+
+      <h4>
+        Ayesha Khan
+      </h4>
+
+      <p>
+        The food quality is amazing and delivery was super fast. The app feels premium and easy to use.
+      </p>
+
+    </div>
+
+    <div class="review-card">
+
+      <h4>
+        Rahul Sharma
+      </h4>
+
+      <p>
+        Probably one of the best local food delivery experiences I’ve had. Packaging and taste were top notch.
+      </p>
+
+    </div>
+
+    <div class="review-card">
+
+      <h4>
+        Imran Ali
+      </h4>
+
+      <p>
+        Beautiful interface, smooth ordering and very fresh food. Khazaana really feels different.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact">
+
+  <h2 class="section-title">
+    Contact Us
+  </h2>
+
+  <div class="contact-box">
+
+    <div class="contact-grid">
+
+      <div class="contact-item">
+
+        <h3>
+          Phone
+        </h3>
+
+        <p>
+          +91 86959 02696
+        </p>
+
+      </div>
+
+      <div class="contact-item">
+
+        <h3>
+          Email
+        </h3>
+
+        <p>
+          helpkhazaana@gmail.com
+        </p>
+
+      </div>
+
+      <div class="contact-item">
+
+        <h3>
+          Address
+        </h3>
+
+        <p>
+          Aurangabad, West Bengal
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  © 2026 Khazaana. All Rights Reserved.
+</footer>
+
+</body>
+
+</html>

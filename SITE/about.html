@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>About Us | Khazaana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon-180x180.png">
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+/* ================= BODY ================= */
+
+body{
+
+  background:
+
+  linear-gradient(
+  180deg,
+  #0f0b08 0%,
+  #16110d 40%,
+  #1c1510 100%
+  );
+
+  color:#ffffff;
+
+  line-height:1.8;
+
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:90px 20px;
+}
+
+/* ================= PREMIUM NAVBAR ================= */
+
+.glass-navbar{
+
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  background:
+  rgba(18,12,9,.72);
+
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.06);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.28);
+
+  overflow:hidden;
+}
+
+.glass-navbar::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+  radial-gradient(
+  circle at top right,
+  rgba(255,122,0,.12),
+  transparent 32%
+  );
+
+  pointer-events:none;
+}
+
+.nav-container{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:18px 24px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  position:relative;
+
+  z-index:2;
+}
+
+.logo{
+
+  font-size:24px;
+
+  font-weight:800;
+
+  color:#ffffff;
+
+  letter-spacing:.5px;
+
+  text-shadow:
+  0 0 22px rgba(255,122,0,.28);
+}
+
+.nav-links{
+
+  display:flex;
+
+  gap:28px;
+}
+
+.nav-links a{
+
+  position:relative;
+
+  text-decoration:none;
+
+  color:
+  rgba(255,255,255,.74);
+
+  font-weight:500;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+
+  color:#ffffff;
+}
+
+.nav-links a::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  bottom:-8px;
+
+  width:0;
+
+  height:2px;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+
+  width:100%;
+}
+
+.nav-links a.active{
+
+  color:#ff8c1a;
+
+  font-weight:600;
+}
+
+/* ================= HERO ================= */
+
+.badge{
+
+  display:inline-block;
+
+  padding:12px 20px;
+
+  background:
+  rgba(255,255,255,.08);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(14px);
+
+  border-radius:999px;
+
+  color:#ffb37a;
+
+  font-size:14px;
+
+  margin-bottom:30px;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.18);
+}
+
+h1{
+
+  font-size:52px;
+
+  text-align:center;
+
+  margin-bottom:24px;
+
+  line-height:1.1;
+
+  letter-spacing:-2px;
+
+  color:#ffffff;
+
+  text-shadow:
+  0 10px 35px rgba(0,0,0,.35);
+}
+
+h1 span{
+
+  color:#ff8c1a;
+}
+
+.hero-text{
+
+  max-width:780px;
+
+  margin:0 auto 70px;
+
+  text-align:center;
+
+  font-size:18px;
+
+  color:
+  rgba(255,255,255,.72);
+
+  line-height:1.9;
+}
+
+/* ================= FOUNDER ================= */
+
+.founder-image{
+
+  text-align:center;
+
+  margin-bottom:90px;
+}
+
+.founder-image img{
+
+  width:360px;
+
+  height:360px;
+
+  object-fit:contain;
+
+  background:
+  rgba(255,255,255,.06);
+
+  border-radius:24px;
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.35);
+}
+
+.founder-name{
+
+  margin-top:20px;
+
+  font-size:24px;
+
+  font-weight:700;
+
+  color:#ffffff;
+}
+
+.designation{
+
+  font-size:14px;
+
+  color:
+  rgba(255,255,255,.6);
+}
+
+/* ================= TRUST CARDS ================= */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(260px,1fr));
+
+  gap:28px;
+
+  margin-bottom:100px;
+}
+
+.card{
+
+  background:
+  rgba(255,255,255,.08);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  padding:32px;
+
+  border-radius:24px;
+
+  box-shadow:
+  0 18px 40px rgba(0,0,0,.22);
+
+  transition:.35s ease;
+}
+
+.card:hover{
+
+  transform:
+  translateY(-6px);
+}
+
+.card h3{
+
+  margin-bottom:14px;
+
+  color:#ff8c1a;
+
+  font-size:20px;
+}
+
+.card p{
+
+  color:
+  rgba(255,255,255,.72);
+}
+
+/* ================= PROMISE ================= */
+
+.promise{
+
+  background:
+
+  linear-gradient(
+  to bottom,
+  #1c1510,
+  #120d09
+  );
+
+  padding:90px 20px;
+}
+
+.promise h2{
+
+  text-align:center;
+
+  margin-bottom:40px;
+
+  letter-spacing:2px;
+
+  color:#ffffff;
+}
+
+.promise ul{
+
+  max-width:720px;
+
+  margin:auto;
+
+  list-style:square;
+
+  font-size:16px;
+
+  color:
+  rgba(255,255,255,.72);
+}
+
+.promise li{
+
+  margin-bottom:16px;
+}
+
+/* ================= ACCORDION ================= */
+
+.know-more h2{
+
+  margin-bottom:50px;
+
+  color:#ffffff;
+}
+
+.accordion-item{
+
+  border-top:
+  1px solid rgba(255,255,255,.08);
+}
+
+.accordion-header{
+
+  padding:24px 0;
+
+  font-size:19px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  color:#ffffff;
+}
+
+.accordion-content{
+
+  max-height:0;
+
+  overflow:hidden;
+
+  transition:max-height .4s ease;
+
+  color:
+  rgba(255,255,255,.72);
+}
+
+.accordion-item.active .accordion-content{
+
+  max-height:2000px;
+
+  padding-bottom:30px;
+}
+
+/* ================= SOCIAL ================= */
+
+.social-section{
+
+  padding:80px 20px;
+
+  text-align:center;
+
+  background:#120d09;
+}
+
+.social-section h2{
+
+  font-size:30px;
+
+  margin-bottom:30px;
+
+  color:#ffffff;
+}
+
+.social-links{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:26px;
+
+  flex-wrap:wrap;
+}
+
+.social-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:16px 28px;
+
+  border-radius:18px;
+
+  font-weight:600;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  box-shadow:
+  0 18px 40px rgba(0,0,0,.15);
+
+  transition:.35s ease;
+}
+
+.social-card:hover{
+
+  transform:
+  translateY(-5px);
+}
+
+.social-card img{
+
+  width:22px;
+
+  height:22px;
+}
+
+.instagram{
+
+  background:
+  linear-gradient(
+  45deg,
+  #f58529,
+  #dd2a7b,
+  #8134af,
+  #515bd4
+  );
+}
+
+.linkedin{
+
+  background:
+  linear-gradient(
+  45deg,
+  #0a66c2,
+  #004182
+  );
+}
+
+/* ================= FOOTER ================= */
+
+.main-footer{
+
+  background:#0d0907;
+
+  color:#ffffff;
+
+  text-align:center;
+
+  padding:22px 10px;
+
+  font-size:14px;
+
+  margin-top:100px;
+
+  border-top:
+  1px solid rgba(255,255,255,.05);
+}
+
+.designer-strip{
+
+  background:#120d09;
+
+  color:
+  rgba(255,255,255,.55);
+
+  text-align:center;
+
+  padding:14px 10px;
+
+  font-size:13px;
+}
+
+.designer-strip strong{
+
+  color:#ffffff;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .nav-container{
+
+    flex-direction:column;
+
+    gap:12px;
+  }
+
+  .nav-links{
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+  }
+
+  h1{
+
+    font-size:34px;
+  }
+
+  .hero-text{
+
+    font-size:16px;
+  }
+
+  .founder-image img{
+
+    width:260px;
+
+    height:260px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="glass-navbar">
+  <div class="nav-container">
+
+    <div class="logo">Khazaana</div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="restaurants.html">Restaurants</a>
+    </div>
+
+  </div>
+</header>
+
+<section class="container">
+
+  <div style="text-align:center">
+
+    <div class="badge">
+      ❤️ From Our Founder
+    </div>
+
+    <h1>
+      Built on Trust,<br>
+      <span>Rooted in Our Community</span>
+    </h1>
+
+    <p class="hero-text">
+      Khazaana is a community-first food delivery initiative built on trust, care,
+      and meaningful relationships. We partner with selected kitchens and local food
+      makers to deliver meals that feel familiar, comforting, and honest — just like home.
+    </p>
+
+  </div>
+
+  <div class="founder-image">
+
+    <img src="images/founder.JPG" alt="Founder">
+
+    <div class="founder-name">
+      Askin Ali
+    </div>
+
+    <p class="designation">
+      Founder, Cups N Crumbs Café & Khazaana
+    </p>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Local Kitchens</h3>
+      <p>
+        Supporting trusted local restaurants while preserving authentic taste and quality.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Trust-First Partnerships</h3>
+      <p>
+        Every partner is handpicked to ensure reliability, hygiene, and consistency.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Comfort Food, Made with Care</h3>
+      <p>
+        Food that feels like home — prepared responsibly and delivered with heart.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="promise">
+
+  <h2>OUR PROMISE TO YOU</h2>
+
+  <ul>
+    <li>Only the best local restaurants make it to Khazaana</li>
+    <li>Every order is handled with care and personal attention</li>
+    <li>Your satisfaction is our responsibility</li>
+    <li>We’re always here to help — just reach out anytime</li>
+  </ul>
+
+</section>
+
+<section class="container know-more">
+
+  <h2>KNOW MORE</h2>
+
+  <div class="accordion-item">
+
+    <div class="accordion-header">
+      Education & Academic Journey
+      <span>⌄</span>
+    </div>
+
+    <div class="accordion-content">
+
+      <p>
+        Askin's journey began at
+        <strong>Father LeBlond School, Siliguri</strong>,
+        where discipline and strong values shaped his foundation.
+      </p>
+
+      <p>
+        He pursued <strong>BBA in Human Resources</strong>
+        from Presidency College, Bangalore.
+      </p>
+
+      <p>
+        He completed <strong>MBA in Human Resources</strong>
+        from Jain University, Bangalore.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="accordion-item">
+
+    <div class="accordion-header">
+      Professional Journey
+      <span>⌄</span>
+    </div>
+
+    <div class="accordion-content">
+
+      <p>
+        Askin began his career at <strong>Reliance</strong>
+        as a Fulfilment Executive.
+      </p>
+
+      <p>
+        He later transitioned into
+        <strong>Human Resources</strong>.
+      </p>
+
+      <p>
+        Spending <strong>2.5 years at Reliance</strong>
+        shaped his leadership mindset.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="accordion-item">
+
+    <div class="accordion-header">
+      Business Journey
+      <span>⌄</span>
+    </div>
+
+    <div class="accordion-content">
+
+      <p>
+        Askin stepped away from corporate life
+        and returned to Murshidabad to build something meaningful.
+      </p>
+
+      <p>
+        This led to the birth of
+        <strong>Cups N Crumbs Café</strong>.
+      </p>
+
+      <p>
+        That vision eventually evolved into
+        <strong>Khazaana</strong>.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="social-section">
+
+  <h2>Connect With Us</h2>
+
+  <div class="social-links">
+
+    <a href="https://www.instagram.com/cups_n_crumbs_cafe"
+       target="_blank"
+       class="social-card instagram">
+
+      <img src="images/instagram.png" alt="Instagram">
+      Instagram
+
+    </a>
+
+    <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204"
+       target="_blank"
+       class="social-card linkedin">
+
+      <img src="images/linkedin.png" alt="LinkedIn">
+      LinkedIn
+
+    </a>
+
+  </div>
+
+</section>
+
+<footer class="main-footer">
+  © 2026 Khazaana. All rights reserved.
+</footer>
+
+<div class="designer-strip">
+  Designed & Developed by <strong>MD ASKIN ALI</strong>
+</div>
+
+<script>
+
+document.querySelectorAll(".accordion-header").forEach(h=>{
+
+  h.onclick=()=>h.parentElement.classList.toggle("active");
+
+});
+
+</script>
+
+</body>
+</html>
