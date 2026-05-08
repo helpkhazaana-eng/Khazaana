@@ -137,7 +137,7 @@ textarea:focus{
 
 <div class="card">
 
-  <div class="logo">
+  <div class="logo" id="restaurantName">
     KHAZAANA
   </div>
 
@@ -191,6 +191,13 @@ if(!order){
 
   window.location.href = "index.html";
 }
+
+/* RESTAURANT NAME */
+
+document.getElementById(
+  "restaurantName"
+).innerText =
+order.restaurant;
 
 const box =
   document.getElementById("orderSummary");
@@ -256,12 +263,54 @@ function finalOrder(){
     return;
   }
 
-  if(phone.length !== 10){
+  if(!/^[6-9]\d{9}$/.test(phone)){
 
-    alert("Enter valid phone number");
+  alert(
+"Please enter a valid 10 digit Indian mobile number"
+  );
+
+  return;
+}
+
+  /* MONDAY & WEDNESDAY CLOSED */
+
+  const day =
+  new Date().getDay();
+
+  if(day === 1 || day === 3){
+
+    alert(
+"🚫 Delivery is closed on Monday & Wednesday.\n\nSomobar o Budhbar delivery bondho thake."
+    );
 
     return;
   }
+
+  /* BEFORE 6 PM NOTICE */
+
+  let timingNote = "";
+
+  if(new Date().getHours() < 18){
+
+    timingNote = `
+🚚 Orders placed before 6 PM will be delivered after 6 PM.
+
+Sondha 6 tar age kora order 6 tar por delivery hobe.
+`;
+  }
+
+  /* ITEMS */
+
+  let items = "";
+
+  order.items.forEach(i=>{
+
+    items +=
+`${i.name} x${i.qty} = ₹${i.total}\n`;
+
+  });
+
+  /* FINAL MESSAGE */
 
   let msg =
 `Hello 👋
@@ -272,21 +321,19 @@ Name: ${name}
 Phone: ${phone}
 Address: ${address}
 
-`;
-
-  order.items.forEach(i=>{
-
-    msg +=
-`${i.name} x${i.qty} = ₹${i.total}\n`;
-
-  });
-
-  msg += `
+${items}
 
 Subtotal: ₹${order.subtotal}
 Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
 Total: ₹${order.total}
 
+${timingNote}
+
+⚠️ No response within 5 minutes? Please call us immediately.
+
+⚠️ 5 minute er moddhe response na pele doya kore call korun.
+
+📞 8695902696 / 8649851034
 `;
 
   window.location.href =
