@@ -778,38 +778,70 @@ function goToCheckout(){
     if(cart[id].qty > 0){
 
       selectedItems.push({
+
         name: cart[id].name,
-        price: cart[id].price,
-        qty: cart[id].qty
+
+        qty: cart[id].qty,
+
+        total:
+        cart[id].price * cart[id].qty
+
       });
 
-      subtotal += cart[id].price * cart[id].qty;
+      subtotal +=
+      cart[id].price * cart[id].qty;
     }
   }
 
   if(selectedItems.length === 0){
 
     alert("Please add items first");
+
     return;
   }
 
-  localStorage.setItem(
-    "checkoutCart",
-    JSON.stringify(selectedItems)
+  const delivery =
+  subtotal >= FREE_DELIVERY_ABOVE
+  ? 0
+  : DELIVERY;
+
+  const total =
+  subtotal + delivery;
+
+  const order = {
+
+    restaurant:
+    "Cups N Crumbs Café",
+
+    items:selectedItems,
+
+    subtotal:subtotal,
+
+    delivery:delivery,
+
+    total:total
+  };
+
+  /* REMOVE OLD ORDER */
+
+  localStorage.removeItem(
+    "khazaanaOrder"
   );
 
+  /* SAVE NEW ORDER */
+
   localStorage.setItem(
-    "checkoutSubtotal",
-    subtotal
+
+    "khazaanaOrder",
+
+    JSON.stringify(order)
+
   );
 
-  window.location.href = "checkout.html";
-}
+  window.location.href =
+  "checkout.html";
 
-
-/* STATUS */
-
-function isClosed(){
+}function isClosed(){
 
   const h =
     new Date().getHours();

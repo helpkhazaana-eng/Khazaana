@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -14,82 +15,131 @@
 }
 
 body{
-  background:#fff7ed;
-  color:#1f2937;
-  padding:20px
+  background:
+    radial-gradient(circle at top,#2d1606 0%,#120904 45%,#050303 100%);
+  color:#fff;
+  padding:20px;
+  min-height:100vh;
 }
 
 .card{
-  max-width:600px;
+  max-width:620px;
   margin:auto;
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12)
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:28px;
+  padding:26px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 h2{
   text-align:center;
-  color:#ff7a00;
-  margin-bottom:10px
+  color:#ff9a1f;
+  margin-bottom:24px;
+  font-size:34px;
+  font-weight:800;
+  letter-spacing:.5px;
 }
 
 .item{
   display:flex;
   justify-content:space-between;
-  margin-bottom:6px
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px dashed rgba(255,255,255,.08);
+  font-size:15px;
+  color:#f5f5f5;
+}
+
+.item:last-child{
+  border-bottom:none;
 }
 
 hr{
-  margin:10px 0
+  border:none;
+  height:1px;
+  background:rgba(255,255,255,.08);
+  margin:18px 0;
 }
 
 input,
 textarea{
   width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
-  border:1px solid #ddd;
+  padding:15px;
+  margin-top:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
   outline:none;
-  font-size:15px
+  font-size:15px;
+  resize:none;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  transition:.25s;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#b8b8b8;
 }
 
 input:focus,
 textarea:focus{
-  border-color:#ff7a00
+  border-color:#ff9a1f;
+  box-shadow:0 0 0 4px rgba(255,154,31,.12);
 }
 
 .btn{
   width:100%;
-  padding:14px;
-  margin-top:16px;
-  background:#25D366;
+  padding:16px;
+  margin-top:22px;
+  background:linear-gradient(135deg,#25D366,#1faa52);
   color:#fff;
   border:none;
-  border-radius:12px;
-  font-size:16px;
+  border-radius:16px;
+  font-size:17px;
   font-weight:800;
   cursor:pointer;
-  transition:.3s
+  transition:.3s;
+  box-shadow:0 8px 22px rgba(37,211,102,.25);
 }
 
 .btn:hover{
-  transform:translateY(-2px)
+  transform:translateY(-3px) scale(1.01);
 }
 
 .note{
   text-align:center;
   font-size:12px;
-  color:#6b7280;
-  margin-top:6px
+  color:#bdbdbd;
+  margin-top:12px;
 }
+
+.total{
+  color:#ffb347;
+  font-size:18px;
+}
+
+.logo{
+  text-align:center;
+  font-size:14px;
+  color:#ffb347;
+  margin-bottom:10px;
+  letter-spacing:3px;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="card">
+
+  <div class="logo">
+    KHAZAANA
+  </div>
 
   <h2>
     Confirm Your Order
@@ -109,9 +159,8 @@ textarea:focus{
 
   <textarea
     id="address"
-    rows="3"
-    placeholder="Delivery Address *">
-  </textarea>
+    rows="4"
+    placeholder="Enter Full Delivery Address *"></textarea>
 
   <button
     class="btn"
@@ -146,7 +195,7 @@ if(!order){
 const box =
   document.getElementById("orderSummary");
 
-/* ORDER SUMMARY */
+/* ORDER ITEMS */
 
 order.items.forEach(i=>{
 
@@ -156,9 +205,13 @@ order.items.forEach(i=>{
       <span>₹${i.total}</span>
     </div>
   `;
+
 });
 
+/* TOTALS */
+
 box.innerHTML += `
+
 <hr>
 
 <div class="item">
@@ -168,13 +221,16 @@ box.innerHTML += `
 
 <div class="item">
   <b>Delivery</b>
-  <b>₹${order.delivery}</b>
+  <b>
+    ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
+  </b>
 </div>
 
-<div class="item">
+<div class="item total">
   <b>Total</b>
   <b>₹${order.total}</b>
 </div>
+
 `;
 
 /* FINAL ORDER */
@@ -228,8 +284,9 @@ Address: ${address}
   msg += `
 
 Subtotal: ₹${order.subtotal}
-Delivery: ₹${order.delivery}
+Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
 Total: ₹${order.total}
+
 `;
 
   window.location.href =

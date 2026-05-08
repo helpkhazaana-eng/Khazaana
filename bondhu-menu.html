@@ -481,7 +481,7 @@ Minimum order ₹100 (excluding delivery)
 <script>
 
 const DELIVERY = 30;
-const FREE_DELIVERY_ABOVE = 350;
+const FREE_DELIVERY_ABOVE = 450;
 const MIN_ORDER = 100;
 
 const menuData = {
@@ -719,12 +719,28 @@ alert(
 return;
 }
 
+const selectedItems = [];
+
 let subtotal = 0;
 
-for(const i in cart){
+for(const id in cart){
+
+if(cart[id].qty > 0){
+
+selectedItems.push({
+
+name: cart[id].name,
+
+qty: cart[id].qty,
+
+total:
+cart[id].price * cart[id].qty
+
+});
 
 subtotal +=
-cart[i].qty * cart[i].price;
+cart[id].price * cart[id].qty;
+}
 }
 
 if(subtotal < MIN_ORDER){
@@ -735,6 +751,46 @@ alert(
 
 return;
 }
+
+const delivery =
+subtotal >= FREE_DELIVERY_ABOVE
+? 0
+: DELIVERY;
+
+const total =
+subtotal + delivery;
+
+const order = {
+
+restaurant:
+"Bondhu Hotel & Restaurant",
+
+items:selectedItems,
+
+subtotal:subtotal,
+
+delivery:delivery,
+
+total:total
+};
+
+/* REMOVE OLD ORDER */
+
+localStorage.removeItem(
+"khazaanaOrder"
+);
+
+/* SAVE NEW ORDER */
+
+localStorage.setItem(
+
+"khazaanaOrder",
+
+JSON.stringify(order)
+
+);
+
+/* GO TO CHECKOUT */
 
 window.location.href =
 "checkout.html";
