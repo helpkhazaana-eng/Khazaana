@@ -1139,3 +1139,92 @@ body{
   line-height:1.5;
   word-break:break-word;
 }
+
+/* FIX LINK COLORS */
+
+.arrival-card a,
+.arrival-card a:visited,
+.arrival-card a:hover{
+
+  text-decoration:none !important;
+
+  color:inherit !important;
+}
+
+/* FIX TITLE */
+
+.arrival-content h3{
+
+  color:#111 !important;
+
+  text-decoration:none !important;
+}
+
+/* FIX DESCRIPTION */
+
+.arrival-content p{
+
+  color:#666 !important;
+
+  text-decoration:none !important;
+}
+
+/* FIX PRICE */
+
+.price{
+
+  color:#3e9500 !important;
+
+  text-decoration:none !important;
+}
+
+/* VIEW BUTTON */
+
+.view-btn{
+
+  text-decoration:none !important;
+
+  color:#ff8c1a !important;
+
+  font-weight:700;
+}
+
+/* VIEW BUTTON FIX */
+
+.view-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:12px 22px;
+
+  border-radius:14px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #ff9800,
+  #ff6f00
+  );
+
+  color:#fff !important;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  text-decoration:none !important;
+
+  box-shadow:
+  0 10px 25px rgba(255,122,0,.28);
+
+  transition:.3s ease;
+}
+
+.view-btn:hover{
+
+  transform:scale(1.05);
+}
