@@ -389,31 +389,17 @@ ${timingNote}
 📞 8695902696 / 8649851034
 `;
 
-/* SAVE CUSTOMER DATA */
+const whatsappURL =
+  "https://wa.me/" +
+  PHONE +
+  "?text=" +
+  encodeURIComponent(msg);
 
-localStorage.setItem(
-  "kh_name",
-  name
+window.open(
+  whatsappURL,
+  "_blank"
 );
 
-localStorage.setItem(
-  "kh_phone",
-  phone
-);
-
-localStorage.setItem(
-  "kh_address",
-  address
-);
-
-window.location.href =
-  "https://api.whatsapp.com/send?phone=" +
-
-  window.location.href =
-    "https://api.whatsapp.com/send?phone=" +
-    PHONE +
-    "&text=" +
-    encodeURIComponent(msg);
 }
 
 </script>
