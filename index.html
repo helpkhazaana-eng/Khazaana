@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
 <script>
@@ -10,15 +12,21 @@ OneSignalDeferred.push(async function(OneSignal) {
 
   await OneSignal.init({
     appId: "ad150f45-99ca-48ef-a29a-8b9d337990ff",
+
     notifyButton: {
       enable: true,
     },
+
+    promptOptions: {
+      slidedown: {
+        enabled: true,
+      },
+    },
+
   });
 
 });
 </script>
-
-<head>
   <meta charset="UTF-8">
   <title>Khazaana | Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
