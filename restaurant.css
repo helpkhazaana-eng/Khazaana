@@ -669,6 +669,29 @@ body{
 
 @media(max-width:768px){
 
+  .saved-location{
+
+    margin-top:140px;
+
+    position:relative;
+
+    z-index:1;
+  }
+
+  .nav-container{
+
+    flex-direction:column;
+
+    gap:12px;
+  }
+
+  .nav-container{
+
+    flex-direction:column;
+
+    gap:12px;
+  }fz
+
   .glass-navbar{
 
     position:fixed;
