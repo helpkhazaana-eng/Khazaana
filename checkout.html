@@ -130,6 +130,14 @@ textarea:focus{
   letter-spacing:3px;
 }
 
+.welcome{
+  text-align:center;
+  color:#25D366;
+  font-size:14px;
+  margin-bottom:18px;
+  font-weight:600;
+}
+
 </style>
 </head>
 
@@ -140,6 +148,8 @@ textarea:focus{
   <div class="logo" id="restaurantName">
     KHAZAANA
   </div>
+
+  <div class="welcome" id="welcomeText"></div>
 
   <h2>
     Confirm Your Order
@@ -199,10 +209,38 @@ document.getElementById(
 ).innerText =
 order.restaurant;
 
+/* AUTOFILL CUSTOMER DATA */
+
+const savedName =
+  localStorage.getItem("kh_name");
+
+const savedPhone =
+  localStorage.getItem("kh_phone");
+
+const savedAddress =
+  localStorage.getItem("kh_address");
+
+if(savedName){
+
+  document.getElementById("welcomeText")
+  .innerText =
+  "Welcome back 👋 " + savedName;
+
+}
+
+document.getElementById("name").value =
+savedName || "";
+
+document.getElementById("phone").value =
+savedPhone || "";
+
+document.getElementById("address").value =
+savedAddress || "";
+
+/* ORDER SUMMARY */
+
 const box =
   document.getElementById("orderSummary");
-
-/* ORDER ITEMS */
 
 order.items.forEach(i=>{
 
@@ -214,8 +252,6 @@ order.items.forEach(i=>{
   `;
 
 });
-
-/* TOTALS */
 
 box.innerHTML += `
 
@@ -271,6 +307,23 @@ function finalOrder(){
 
   return;
 }
+
+  /* SAVE CUSTOMER DATA */
+
+  localStorage.setItem(
+    "kh_name",
+    name
+  );
+
+  localStorage.setItem(
+    "kh_phone",
+    phone
+  );
+
+  localStorage.setItem(
+    "kh_address",
+    address
+  );
 
   /* MONDAY & WEDNESDAY CLOSED */
 
@@ -335,6 +388,26 @@ ${timingNote}
 
 📞 8695902696 / 8649851034
 `;
+
+/* SAVE CUSTOMER DATA */
+
+localStorage.setItem(
+  "kh_name",
+  name
+);
+
+localStorage.setItem(
+  "kh_phone",
+  phone
+);
+
+localStorage.setItem(
+  "kh_address",
+  address
+);
+
+window.location.href =
+  "https://api.whatsapp.com/send?phone=" +
 
   window.location.href =
     "https://api.whatsapp.com/send?phone=" +

@@ -233,6 +233,32 @@
 
   </div>
 
+<!-- SAVED LOCATION -->
+
+<div class="saved-location-bar" id="savedLocationBar">
+
+  <div class="saved-location-left">
+
+    <div class="location-icon">
+      📍
+    </div>
+
+    <div>
+
+      <div class="saved-city">
+        Aurangabad
+      </div>
+
+      <div class="saved-address-home"
+           id="savedAddressHome">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 </header>
 <section class="hero">
 
@@ -679,7 +705,22 @@
       btn.classList.add("glow");
     }
   }
+/* SAVED LOCATION */
 
+const savedAddress =
+  localStorage.getItem("kh_address");
+
+if(savedAddress){
+
+  document.getElementById(
+    "savedLocationBar"
+  ).style.display = "block";
+
+  document.getElementById(
+    "savedAddressHome"
+  ).innerText = savedAddress;
+
+}
   window.addEventListener("load", function(){
 
     controlButtonGlow();
