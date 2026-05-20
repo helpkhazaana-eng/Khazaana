@@ -138,6 +138,101 @@ textarea:focus{
   font-weight:600;
 }
 
+.party{
+  animation:pop .8s ease;
+}
+
+@keyframes pop{
+
+  0%{
+    transform:scale(.7);
+    opacity:0;
+  }
+
+  60%{
+    transform:scale(1.15);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+.confetti{
+
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:60px;
+  z-index:9999;
+  animation:blast 1.2s ease forwards;
+  pointer-events:none;
+}
+
+@keyframes blast{
+
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.3) rotate(0deg);
+  }
+
+  30%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.2) rotate(10deg);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-200%) scale(1.8) rotate(25deg);
+  }
+}
+
+.coupon-card{
+
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.coupon-card:hover{
+
+  transform:translateY(-2px);
+  border-color:#ff9a1f;
+}
+
+.coupon-top{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.coupon-code{
+
+  font-size:16px;
+  font-weight:800;
+  color:#ffb347;
+}
+
+.coupon-desc{
+
+  margin-top:5px;
+  font-size:13px;
+  color:#cfcfcf;
+}
+
+.disabled-coupon{
+
+  opacity:.45;
+  cursor:not-allowed;
+}
+
 </style>
 </head>
 
@@ -171,6 +266,26 @@ textarea:focus{
     id="address"
     rows="4"
     placeholder="Enter Full Delivery Address *"></textarea>
+
+  <div id="couponList"></div>
+
+  <input
+    id="coupon"
+    placeholder="Tap a coupon below or enter manually">
+
+  <button
+    class="btn"
+    style="margin-top:12px;background:linear-gradient(135deg,#ff9a1f,#ff6b00)"
+    onclick="applyCoupon()">
+
+    Apply Coupon
+
+  </button>
+
+  <div
+    id="couponMessage"
+    style="margin-top:12px;font-size:14px;color:#25D366;text-align:center;font-weight:700;">
+  </div>
 
   <button
     class="btn"
@@ -237,44 +352,306 @@ savedPhone || "";
 document.getElementById("address").value =
 savedAddress || "";
 
+/* COUPON VARIABLES */
+
+let discount = 0;
+let appliedCoupon = "";
+let originalDelivery = order.delivery;
+
 /* ORDER SUMMARY */
 
 const box =
   document.getElementById("orderSummary");
 
-order.items.forEach(i=>{
+function renderOrder(){
+
+  box.innerHTML = "";
+
+  order.items.forEach(i=>{
+
+    box.innerHTML += `
+      <div class="item">
+        <span>${i.name} x${i.qty}</span>
+        <span>₹${i.total}</span>
+      </div>
+    `;
+
+  });
 
   box.innerHTML += `
-    <div class="item">
-      <span>${i.name} x${i.qty}</span>
-      <span>₹${i.total}</span>
+
+  <hr>
+
+  <div class="item">
+    <b>Subtotal</b>
+    <b>₹${order.subtotal}</b>
+  </div>
+
+  <div class="item">
+    <b>Delivery</b>
+    <b>
+      ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
+    </b>
+  </div>
+
+  ${discount > 0 ? `
+  <div class="item" style="color:#25D366">
+    <b>Discount (${discount}%)</b>
+    <b>- ₹${Math.round((order.subtotal * discount)/100)}</b>
+  </div>
+  ` : ""}
+
+  <div class="item total">
+    <b>Total</b>
+    <b>₹${order.total}</b>
+  </div>
+
+  `;
+}
+
+renderOrder();
+
+/* SHOW COUPONS */
+
+const couponList =
+document.getElementById("couponList");
+
+function loadCoupons(){
+
+  let html = "";
+
+  html += `
+  <div
+    class="coupon-card"
+    onclick="selectCoupon('KHAZAANA5')">
+
+    <div class="coupon-top">
+
+      <div class="coupon-code">
+        KHAZAANA5
+      </div>
+
+      <div>
+        🎉
+      </div>
+
     </div>
+
+    <div class="coupon-desc">
+      5% OFF on orders above ₹350
+    </div>
+
+  </div>
   `;
 
-});
+  if(
+    order.restaurant
+    .toUpperCase()
+    .includes("CUPS N CRUMBS")
+  ){
 
-box.innerHTML += `
+    html += `
+    <div
+      class="coupon-card"
+      onclick="selectCoupon('CUPSNCRUMBSCAFE10')">
 
-<hr>
+      <div class="coupon-top">
 
-<div class="item">
-  <b>Subtotal</b>
-  <b>₹${order.subtotal}</b>
+        <div class="coupon-code">
+          CUPSNCRUMBSCAFE10
+        </div>
+
+        <div>
+          ☕
+        </div>
+
+      </div>
+
+      <div class="coupon-desc">
+        10% OFF above ₹400
+      </div>
+
+    </div>
+    `;
+
+  }else{
+
+    html += `
+    <div
+      class="coupon-card disabled-coupon">
+
+      <div class="coupon-top">
+
+        <div class="coupon-code">
+          CUPSNCRUMBSCAFE10
+        </div>
+
+        <div>
+          🔒
+        </div>
+
+      </div>
+
+     <div class="coupon-desc">
+  10% OFF on orders above ₹400<br>
+  Applicable only in Cups N Crumbs Cafe
 </div>
 
-<div class="item">
-  <b>Delivery</b>
-  <b>
-    ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
-  </b>
-</div>
+    </div>
+    `;
+  }
 
-<div class="item total">
-  <b>Total</b>
-  <b>₹${order.total}</b>
-</div>
+  couponList.innerHTML = html;
+}
 
-`;
+loadCoupons();
+
+function selectCoupon(code){
+
+  document.getElementById("coupon")
+  .value = code;
+
+  applyCoupon();
+}
+
+/* CELEBRATION */
+
+function showCelebration(){
+
+  const pop =
+  document.createElement("div");
+
+  pop.className = "confetti";
+
+  pop.innerHTML = "🎉✨🎊";
+
+  document.body.appendChild(pop);
+
+  setTimeout(()=>{
+
+    pop.remove();
+
+  },1200);
+
+  const msgBox =
+  document.getElementById("couponMessage");
+
+  msgBox.classList.add("party");
+
+  setTimeout(()=>{
+
+    msgBox.classList.remove("party");
+
+  },800);
+}
+
+/* COUPON SYSTEM */
+
+function applyCoupon(){
+
+  const code =
+    document.getElementById("coupon")
+    .value
+    .trim()
+    .toUpperCase();
+
+  const msgBox =
+    document.getElementById("couponMessage");
+
+  discount = 0;
+  appliedCoupon = "";
+  order.delivery = originalDelivery;
+
+  if(code === "KHAZAANA5"){
+
+    if(order.subtotal >= 350){
+
+      discount = 5;
+      appliedCoupon = code;
+
+      msgBox.innerText =
+      "✅ KHAZAANA5 Applied — 5% OFF";
+
+      showCelebration();
+
+    }else{
+
+      msgBox.innerText =
+      "❌ Minimum order ₹350 required";
+
+      updateTotal();
+      return;
+    }
+  }
+
+  else if(code === "CUPSNCRUMBSCAFE10"){
+
+    if(
+      order.restaurant
+      .toUpperCase()
+      .includes("CUPS N CRUMBS")
+    ){
+
+      if(order.subtotal >= 400){
+
+        discount = 10;
+        appliedCoupon = code;
+
+        msgBox.innerText =
+        "✅ CUPS N CRUMBS CAFE10 Applied — 10% OFF";
+
+        showCelebration();
+
+      }else{
+
+        msgBox.innerText =
+        "❌ Minimum order ₹400 required";
+
+        updateTotal();
+        return;
+      }
+
+    }else{
+
+      msgBox.innerText =
+      "❌ This coupon only works for Cups N Crumbs Cafe";
+
+      updateTotal();
+      return;
+    }
+  }
+
+  else{
+
+    msgBox.innerText =
+    "❌ Invalid Coupon Code";
+
+    updateTotal();
+    return;
+  }
+
+  updateTotal();
+}
+
+/* UPDATE TOTAL */
+
+function updateTotal(){
+
+  let finalSubtotal =
+  order.subtotal;
+
+  if(discount > 0){
+
+    finalSubtotal =
+    order.subtotal -
+    ((order.subtotal * discount) / 100);
+  }
+
+  order.total =
+  Math.round(finalSubtotal + order.delivery);
+
+  renderOrder();
+}
 
 /* FINAL ORDER */
 
@@ -301,14 +678,12 @@ function finalOrder(){
 
   if(!/^[6-9]\d{9}$/.test(phone)){
 
-  alert(
+    alert(
 "Please enter a valid 10 digit Indian mobile number"
-  );
+    );
 
-  return;
-}
-
-  /* SAVE CUSTOMER DATA */
+    return;
+  }
 
   localStorage.setItem(
     "kh_name",
@@ -325,8 +700,6 @@ function finalOrder(){
     address
   );
 
-  /* MONDAY & WEDNESDAY CLOSED */
-
   const day =
   new Date().getDay();
 
@@ -339,8 +712,6 @@ function finalOrder(){
     return;
   }
 
-  /* BEFORE 6 PM NOTICE */
-
   let timingNote = "";
 
   if(new Date().getHours() < 18){
@@ -352,8 +723,6 @@ Sondha 6 tar age kora order 6 tar por delivery hobe.
 `;
   }
 
-  /* ITEMS */
-
   let items = "";
 
   order.items.forEach(i=>{
@@ -362,8 +731,6 @@ Sondha 6 tar age kora order 6 tar por delivery hobe.
 `${i.name} x${i.qty} = ₹${i.total}\n`;
 
   });
-
-  /* FINAL MESSAGE */
 
   let msg =
 `Hello 👋
@@ -378,6 +745,7 @@ ${items}
 
 Subtotal: ₹${order.subtotal}
 Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
+Coupon: ${appliedCoupon || "None"}
 Total: ₹${order.total}
 
 ${timingNote}
