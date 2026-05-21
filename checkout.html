@@ -8,145 +8,229 @@
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif
 }
 
 body{
-  background:
-    radial-gradient(circle at top,#2d1606 0%,#120904 45%,#050303 100%);
-  color:#fff;
-  padding:20px;
-  min-height:100vh;
+background:
+radial-gradient(circle at top,#2d1606 0%,#120904 45%,#050303 100%);
+color:#fff;
+padding:20px;
+min-height:100vh;
 }
 
 .card{
-  max-width:620px;
-  margin:auto;
-  background:rgba(255,255,255,.06);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:28px;
-  padding:26px;
-  box-shadow:
-    0 10px 40px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.06);
+max-width:620px;
+margin:auto;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:28px;
+padding:26px;
+box-shadow:
+0 10px 40px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 h2{
-  text-align:center;
-  color:#ff9a1f;
-  margin-bottom:24px;
-  font-size:34px;
-  font-weight:800;
-  letter-spacing:.5px;
+text-align:center;
+color:#ff9a1f;
+margin-bottom:24px;
+font-size:34px;
+font-weight:800;
+letter-spacing:.5px;
 }
 
 .item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px dashed rgba(255,255,255,.08);
-  font-size:15px;
-  color:#f5f5f5;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px dashed rgba(255,255,255,.08);
+font-size:15px;
+color:#f5f5f5;
 }
 
 .item:last-child{
-  border-bottom:none;
+border-bottom:none;
 }
 
 hr{
-  border:none;
-  height:1px;
-  background:rgba(255,255,255,.08);
-  margin:18px 0;
+border:none;
+height:1px;
+background:rgba(255,255,255,.08);
+margin:18px 0;
 }
 
 input,
 textarea{
-  width:100%;
-  padding:15px;
-  margin-top:14px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.08);
-  outline:none;
-  font-size:15px;
-  resize:none;
-  background:rgba(255,255,255,.04);
-  color:#fff;
+width:100%;
+padding:15px;
+margin-top:14px;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.08);
+outline:none;
+font-size:15px;
+resize:none;
+background:rgba(255,255,255,.04);
+color:#fff;
+transition:.25s;
 }
 
 input::placeholder,
 textarea::placeholder{
-  color:#b8b8b8;
+color:#b8b8b8;
+}
+
+input:focus,
+textarea:focus{
+border-color:#ff9a1f;
+box-shadow:0 0 0 4px rgba(255,154,31,.12);
 }
 
 .btn{
-  width:100%;
-  padding:16px;
-  margin-top:22px;
-  background:linear-gradient(135deg,#25D366,#1faa52);
-  color:#fff;
-  border:none;
-  border-radius:16px;
-  font-size:17px;
-  font-weight:800;
-  cursor:pointer;
+width:100%;
+padding:16px;
+margin-top:22px;
+background:linear-gradient(135deg,#25D366,#1faa52);
+color:#fff;
+border:none;
+border-radius:16px;
+font-size:17px;
+font-weight:800;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 8px 22px rgba(37,211,102,.25);
+}
+
+.btn:hover{
+transform:translateY(-3px) scale(1.01);
 }
 
 .note{
-  text-align:center;
-  font-size:12px;
-  color:#bdbdbd;
-  margin-top:12px;
+text-align:center;
+font-size:12px;
+color:#bdbdbd;
+margin-top:12px;
 }
 
 .total{
-  color:#ffb347;
-  font-size:18px;
+color:#ffb347;
+font-size:18px;
 }
 
 .logo{
-  text-align:center;
-  font-size:14px;
-  color:#ffb347;
-  margin-bottom:10px;
-  letter-spacing:3px;
+text-align:center;
+font-size:14px;
+color:#ffb347;
+margin-bottom:10px;
+letter-spacing:3px;
 }
 
 .welcome{
-  text-align:center;
-  color:#25D366;
-  font-size:14px;
-  margin-bottom:18px;
-  font-weight:600;
+text-align:center;
+color:#25D366;
+font-size:14px;
+margin-bottom:18px;
+font-weight:600;
+}
+
+.party{
+animation:pop .8s ease;
+}
+
+@keyframes pop{
+
+0%{
+transform:scale(.7);
+opacity:0;
+}
+
+60%{
+transform:scale(1.15);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+}
+}
+
+.confetti{
+
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:60px;
+z-index:9999;
+animation:blast 1.2s ease forwards;
+pointer-events:none;
+}
+
+@keyframes blast{
+
+0%{
+opacity:0;
+transform:translate(-50%,-50%) scale(.3);
+}
+
+30%{
+opacity:1;
+transform:translate(-50%,-50%) scale(1.2);
+}
+
+100%{
+opacity:0;
+transform:translate(-50%,-200%) scale(1.8);
+}
 }
 
 .coupon-card{
 
-  margin-top:14px;
-  padding:14px 16px;
-  border-radius:16px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  cursor:pointer;
+margin-top:14px;
+padding:14px 16px;
+border-radius:16px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+cursor:pointer;
+transition:.25s;
+}
+
+.coupon-card:hover{
+
+transform:translateY(-2px);
+border-color:#ff9a1f;
+}
+
+.coupon-top{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .coupon-code{
 
-  font-size:16px;
-  font-weight:800;
-  color:#ffb347;
+font-size:16px;
+font-weight:800;
+color:#ffb347;
 }
 
 .coupon-desc{
 
-  margin-top:5px;
-  font-size:13px;
-  color:#cfcfcf;
+margin-top:5px;
+font-size:13px;
+color:#cfcfcf;
+}
+
+.disabled-coupon{
+
+opacity:.45;
+cursor:not-allowed;
 }
 
 </style>
@@ -156,64 +240,64 @@ textarea::placeholder{
 
 <div class="card">
 
-  <div class="logo" id="restaurantName">
-    KHAZAANA
-  </div>
+<div class="logo" id="restaurantName">
+KHAZAANA
+</div>
 
-  <div class="welcome" id="welcomeText"></div>
+<div class="welcome" id="welcomeText"></div>
 
-  <h2>
-    Confirm Your Order
-  </h2>
+<h2>
+Confirm Your Order
+</h2>
 
-  <div id="orderSummary"></div>
+<div id="orderSummary"></div>
 
-  <input
-    id="name"
-    placeholder="Your Name *">
+<input
+id="name"
+placeholder="Your Name *">
 
-  <input
-    id="phone"
-    type="tel"
-    maxlength="10"
-    placeholder="Phone Number *">
+<input
+id="phone"
+type="tel"
+maxlength="10"
+placeholder="Phone Number *">
 
-  <textarea
-    id="address"
-    rows="4"
-    placeholder="Enter Full Delivery Address *"></textarea>
+<textarea
+id="address"
+rows="4"
+placeholder="Enter Full Delivery Address *"></textarea>
 
-  <div id="couponList"></div>
+<div id="couponList"></div>
 
-  <input
-    id="coupon"
-    placeholder="Tap coupon or enter manually">
+<input
+id="coupon"
+placeholder="Tap a coupon below or enter manually">
 
-  <button
-    class="btn"
-    style="margin-top:12px;background:linear-gradient(135deg,#ff9a1f,#ff6b00)"
-    onclick="applyCoupon()">
+<button
+class="btn"
+style="margin-top:12px;background:linear-gradient(135deg,#ff9a1f,#ff6b00)"
+onclick="applyCoupon()">
 
-    Apply Coupon
+Apply Coupon
 
-  </button>
+</button>
 
-  <div
-    id="couponMessage"
-    style="margin-top:12px;font-size:14px;color:#25D366;text-align:center;font-weight:700;">
-  </div>
+<div
+id="couponMessage"
+style="margin-top:12px;font-size:14px;color:#25D366;text-align:center;font-weight:700;">
+</div>
 
-  <button
-    class="btn"
-    onclick="finalOrder()">
+<button
+class="btn"
+onclick="finalOrder()">
 
-    Final Order on WhatsApp
+Final Order on WhatsApp
 
-  </button>
+</button>
 
-  <div class="note">
-    Please verify your details before ordering
-  </div>
+<div class="note">
+Please verify your details before ordering
+</div>
 
 </div>
 
@@ -228,9 +312,9 @@ localStorage.getItem("khazaanaOrder")
 
 if(!order){
 
-  alert("No order found");
+alert("No order found");
 
-  window.location.href = "index.html";
+window.location.href = "index.html";
 }
 
 document.getElementById(
@@ -249,9 +333,9 @@ localStorage.getItem("kh_address");
 
 if(savedName){
 
-  document.getElementById("welcomeText")
-  .innerText =
-  "Welcome back 👋 " + savedName;
+document.getElementById("welcomeText")
+.innerText =
+"Welcome back 👋 " + savedName;
 }
 
 document.getElementById("name").value =
@@ -272,48 +356,48 @@ document.getElementById("orderSummary");
 
 function renderOrder(){
 
-  box.innerHTML = "";
+box.innerHTML = "";
 
-  order.items.forEach(i=>{
+order.items.forEach(i=>{
 
-    box.innerHTML += `
-    <div class="item">
-      <span>${i.name} x${i.qty}</span>
-      <span>₹${i.total}</span>
-    </div>
-    `;
+box.innerHTML += `
+<div class="item">
+<span>${i.name} x${i.qty}</span>
+<span>₹${i.total}</span>
+</div>
+`;
 
-  });
+});
 
-  box.innerHTML += `
+box.innerHTML += `
 
-  <hr>
+<hr>
 
-  <div class="item">
-    <b>Subtotal</b>
-    <b>₹${order.subtotal}</b>
-  </div>
+<div class="item">
+<b>Subtotal</b>
+<b>₹${order.subtotal}</b>
+</div>
 
-  <div class="item">
-    <b>Delivery</b>
-    <b>
-    ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
-    </b>
-  </div>
+<div class="item">
+<b>Delivery</b>
+<b>
+${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
+</b>
+</div>
 
-  ${discount > 0 ? `
-  <div class="item" style="color:#25D366">
-    <b>Discount (${discount}%)</b>
-    <b>- ₹${Math.round((order.subtotal * discount)/100)}</b>
-  </div>
-  ` : ""}
+${discount > 0 ? `
+<div class="item" style="color:#25D366">
+<b>Discount (${discount}%)</b>
+<b>- ₹${Math.round((order.subtotal * discount)/100)}</b>
+</div>
+` : ""}
 
-  <div class="item total">
-    <b>Total</b>
-    <b>₹${order.total}</b>
-  </div>
+<div class="item total">
+<b>Total</b>
+<b>₹${order.total}</b>
+</div>
 
-  `;
+`;
 }
 
 renderOrder();
@@ -321,14 +405,25 @@ renderOrder();
 const couponList =
 document.getElementById("couponList");
 
-couponList.innerHTML = `
+function loadCoupons(){
 
+let html = "";
+
+html += `
 <div
 class="coupon-card"
 onclick="selectCoupon('KHAZAANA5')">
 
+<div class="coupon-top">
+
 <div class="coupon-code">
 KHAZAANA5
+</div>
+
+<div>
+🎉
+</div>
+
 </div>
 
 <div class="coupon-desc">
@@ -336,138 +431,264 @@ KHAZAANA5
 </div>
 
 </div>
-
 `;
+
+if(
+order.restaurant
+.toUpperCase()
+.includes("CUPS N CRUMBS")
+){
+
+html += `
+<div
+class="coupon-card"
+onclick="selectCoupon('CUPSNCRUMBSCAFE10')">
+
+<div class="coupon-top">
+
+<div class="coupon-code">
+CUPSNCRUMBSCAFE10
+</div>
+
+<div>
+☕
+</div>
+
+</div>
+
+<div class="coupon-desc">
+10% OFF above ₹400
+</div>
+
+</div>
+`;
+
+}else{
+
+html += `
+<div
+class="coupon-card disabled-coupon">
+
+<div class="coupon-top">
+
+<div class="coupon-code">
+CUPSNCRUMBSCAFE10
+</div>
+
+<div>
+🔒
+</div>
+
+</div>
+
+<div class="coupon-desc">
+10% OFF only for Cups N Crumbs Cafe
+</div>
+
+</div>
+`;
+}
+
+couponList.innerHTML = html;
+}
+
+loadCoupons();
 
 function selectCoupon(code){
 
-  document.getElementById("coupon")
-  .value = code;
+document.getElementById("coupon")
+.value = code;
 
-  applyCoupon();
+applyCoupon();
+}
+
+function showCelebration(){
+
+const pop =
+document.createElement("div");
+
+pop.className = "confetti";
+
+pop.innerHTML = "🎉✨🎊";
+
+document.body.appendChild(pop);
+
+setTimeout(()=>{
+
+pop.remove();
+
+},1200);
+
+const msgBox =
+document.getElementById("couponMessage");
+
+msgBox.classList.add("party");
+
+setTimeout(()=>{
+
+msgBox.classList.remove("party");
+
+},800);
+
 }
 
 function applyCoupon(){
 
-  const code =
-  document.getElementById("coupon")
-  .value
-  .trim()
-  .toUpperCase();
+const code =
+document.getElementById("coupon")
+.value
+.trim()
+.toUpperCase();
 
-  const msgBox =
-  document.getElementById("couponMessage");
+const msgBox =
+document.getElementById("couponMessage");
 
-  discount = 0;
-  appliedCoupon = "";
-  order.delivery = originalDelivery;
+discount = 0;
+appliedCoupon = "";
+order.delivery = originalDelivery;
 
-  if(code === "KHAZAANA5"){
+if(code === "KHAZAANA5"){
 
-    if(order.subtotal >= 350){
+if(order.subtotal >= 350){
 
-      discount = 5;
-      appliedCoupon = code;
+discount = 5;
+appliedCoupon = code;
 
-      msgBox.innerText =
-      "✅ KHAZAANA5 Applied";
+msgBox.innerText =
+"✅ KHAZAANA5 Applied — 5% OFF";
 
-    }else{
+showCelebration();
 
-      msgBox.innerText =
-      "❌ Minimum order ₹350 required";
+}else{
 
-      updateTotal();
+msgBox.innerText =
+"❌ Minimum order ₹350 required";
 
-      return;
-    }
+updateTotal();
+return;
+}
+}
 
-  }else{
+else if(code === "CUPSNCRUMBSCAFE10"){
 
-    msgBox.innerText =
-    "❌ Invalid Coupon";
+if(
+order.restaurant
+.toUpperCase()
+.includes("CUPS N CRUMBS")
+){
 
-    updateTotal();
+if(order.subtotal >= 400){
 
-    return;
-  }
+discount = 10;
+appliedCoupon = code;
 
-  updateTotal();
+msgBox.innerText =
+"✅ CUPSNCRUMBSCAFE10 Applied — 10% OFF";
+
+showCelebration();
+
+}else{
+
+msgBox.innerText =
+"❌ Minimum order ₹400 required";
+
+updateTotal();
+return;
+}
+
+}else{
+
+msgBox.innerText =
+"❌ Only for Cups N Crumbs Cafe";
+
+updateTotal();
+return;
+}
+}
+
+else{
+
+msgBox.innerText =
+"❌ Invalid Coupon";
+
+updateTotal();
+return;
+}
+
+updateTotal();
 }
 
 function updateTotal(){
 
-  let finalSubtotal =
-  order.subtotal;
+let finalSubtotal =
+order.subtotal;
 
-  if(discount > 0){
+if(discount > 0){
 
-    finalSubtotal =
-    order.subtotal -
-    ((order.subtotal * discount)/100);
-  }
+finalSubtotal =
+order.subtotal -
+((order.subtotal * discount)/100);
+}
 
-  order.total =
-  Math.round(finalSubtotal + order.delivery);
+order.total =
+Math.round(finalSubtotal + order.delivery);
 
-  renderOrder();
+renderOrder();
 }
 
 function finalOrder(){
 
-  const name =
-  document.getElementById("name")
-  .value.trim();
+const name =
+document.getElementById("name")
+.value.trim();
 
-  const phone =
-  document.getElementById("phone")
-  .value.trim();
+const phone =
+document.getElementById("phone")
+.value.trim();
 
-  const address =
-  document.getElementById("address")
-  .value.trim();
+const address =
+document.getElementById("address")
+.value.trim();
 
-  if(!name || !phone || !address){
+if(!name || !phone || !address){
 
-    alert("Please enter all details");
+alert("Please enter all details");
 
-    return;
-  }
+return;
+}
 
-  if(!/^[6-9]\d{9}$/.test(phone)){
+if(phone.length !== 10){
 
-    alert(
-    "Please enter valid mobile number"
-    );
+alert("Please enter valid mobile number");
 
-    return;
-  }
+return;
+}
 
-  localStorage.setItem(
-    "kh_name",
-    name
-  );
+localStorage.setItem(
+"kh_name",
+name
+);
 
-  localStorage.setItem(
-    "kh_phone",
-    phone
-  );
+localStorage.setItem(
+"kh_phone",
+phone
+);
 
-  localStorage.setItem(
-    "kh_address",
-    address
-  );
+localStorage.setItem(
+"kh_address",
+address
+);
 
-  let items = "";
+let items = "";
 
-  order.items.forEach(i=>{
+order.items.forEach(i=>{
 
-    items +=
+items +=
 `${i.name} x${i.qty} = ₹${i.total}\n`;
 
-  });
+});
 
-  let msg =
+let msg =
 `Hello 👋
 
 Order from *${order.restaurant}*
@@ -486,14 +707,14 @@ Total: ₹${order.total}
 📞 8695902696 / 8649851034
 `;
 
-  const whatsappURL =
-  "https://wa.me/" +
-  PHONE +
-  "?text=" +
-  encodeURIComponent(msg);
+const whatsappURL =
+"https://wa.me/" +
+PHONE +
+"?text=" +
+encodeURIComponent(msg);
 
-  window.location.href =
-  whatsappURL;
+window.location.href =
+whatsappURL;
 
 }
 
