@@ -77,18 +77,11 @@ textarea{
   resize:none;
   background:rgba(255,255,255,.04);
   color:#fff;
-  transition:.25s;
 }
 
 input::placeholder,
 textarea::placeholder{
   color:#b8b8b8;
-}
-
-input:focus,
-textarea:focus{
-  border-color:#ff9a1f;
-  box-shadow:0 0 0 4px rgba(255,154,31,.12);
 }
 
 .btn{
@@ -102,12 +95,6 @@ textarea:focus{
   font-size:17px;
   font-weight:800;
   cursor:pointer;
-  transition:.3s;
-  box-shadow:0 8px 22px rgba(37,211,102,.25);
-}
-
-.btn:hover{
-  transform:translateY(-3px) scale(1.01);
 }
 
 .note{
@@ -138,57 +125,6 @@ textarea:focus{
   font-weight:600;
 }
 
-.party{
-  animation:pop .8s ease;
-}
-
-@keyframes pop{
-
-  0%{
-    transform:scale(.7);
-    opacity:0;
-  }
-
-  60%{
-    transform:scale(1.15);
-    opacity:1;
-  }
-
-  100%{
-    transform:scale(1);
-  }
-}
-
-.confetti{
-
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:60px;
-  z-index:9999;
-  animation:blast 1.2s ease forwards;
-  pointer-events:none;
-}
-
-@keyframes blast{
-
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.3) rotate(0deg);
-  }
-
-  30%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1.2) rotate(10deg);
-  }
-
-  100%{
-    opacity:0;
-    transform:translate(-50%,-200%) scale(1.8) rotate(25deg);
-  }
-}
-
 .coupon-card{
 
   margin-top:14px;
@@ -197,20 +133,6 @@ textarea:focus{
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.08);
   cursor:pointer;
-  transition:.25s;
-}
-
-.coupon-card:hover{
-
-  transform:translateY(-2px);
-  border-color:#ff9a1f;
-}
-
-.coupon-top{
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
 }
 
 .coupon-code{
@@ -225,12 +147,6 @@ textarea:focus{
   margin-top:5px;
   font-size:13px;
   color:#cfcfcf;
-}
-
-.disabled-coupon{
-
-  opacity:.45;
-  cursor:not-allowed;
 }
 
 </style>
@@ -271,7 +187,7 @@ textarea:focus{
 
   <input
     id="coupon"
-    placeholder="Tap a coupon below or enter manually">
+    placeholder="Tap coupon or enter manually">
 
   <button
     class="btn"
@@ -306,9 +222,9 @@ textarea:focus{
 const PHONE = "918695902696";
 
 const order =
-  JSON.parse(
-    localStorage.getItem("khazaanaOrder")
-  );
+JSON.parse(
+localStorage.getItem("khazaanaOrder")
+);
 
 if(!order){
 
@@ -318,25 +234,24 @@ if(!order){
 }
 
 document.getElementById(
-  "restaurantName"
+"restaurantName"
 ).innerText =
 order.restaurant;
 
 const savedName =
-  localStorage.getItem("kh_name");
+localStorage.getItem("kh_name");
 
 const savedPhone =
-  localStorage.getItem("kh_phone");
+localStorage.getItem("kh_phone");
 
 const savedAddress =
-  localStorage.getItem("kh_address");
+localStorage.getItem("kh_address");
 
 if(savedName){
 
   document.getElementById("welcomeText")
   .innerText =
   "Welcome back 👋 " + savedName;
-
 }
 
 document.getElementById("name").value =
@@ -362,10 +277,10 @@ function renderOrder(){
   order.items.forEach(i=>{
 
     box.innerHTML += `
-      <div class="item">
-        <span>${i.name} x${i.qty}</span>
-        <span>₹${i.total}</span>
-      </div>
+    <div class="item">
+      <span>${i.name} x${i.qty}</span>
+      <span>₹${i.total}</span>
+    </div>
     `;
 
   });
@@ -382,7 +297,7 @@ function renderOrder(){
   <div class="item">
     <b>Delivery</b>
     <b>
-      ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
+    ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
     </b>
   </div>
 
@@ -406,38 +321,23 @@ renderOrder();
 const couponList =
 document.getElementById("couponList");
 
-function loadCoupons(){
+couponList.innerHTML = `
 
-  let html = "";
+<div
+class="coupon-card"
+onclick="selectCoupon('KHAZAANA5')">
 
-  html += `
-  <div
-    class="coupon-card"
-    onclick="selectCoupon('KHAZAANA5')">
+<div class="coupon-code">
+KHAZAANA5
+</div>
 
-    <div class="coupon-top">
+<div class="coupon-desc">
+5% OFF on orders above ₹350
+</div>
 
-      <div class="coupon-code">
-        KHAZAANA5
-      </div>
+</div>
 
-      <div>
-        🎉
-      </div>
-
-    </div>
-
-    <div class="coupon-desc">
-      5% OFF on orders above ₹350
-    </div>
-
-  </div>
-  `;
-
-  couponList.innerHTML = html;
-}
-
-loadCoupons();
+`;
 
 function selectCoupon(code){
 
@@ -447,34 +347,16 @@ function selectCoupon(code){
   applyCoupon();
 }
 
-function showCelebration(){
-
-  const pop =
-  document.createElement("div");
-
-  pop.className = "confetti";
-
-  pop.innerHTML = "🎉✨🎊";
-
-  document.body.appendChild(pop);
-
-  setTimeout(()=>{
-
-    pop.remove();
-
-  },1200);
-}
-
 function applyCoupon(){
 
   const code =
-    document.getElementById("coupon")
-    .value
-    .trim()
-    .toUpperCase();
+  document.getElementById("coupon")
+  .value
+  .trim()
+  .toUpperCase();
 
   const msgBox =
-    document.getElementById("couponMessage");
+  document.getElementById("couponMessage");
 
   discount = 0;
   appliedCoupon = "";
@@ -488,9 +370,7 @@ function applyCoupon(){
       appliedCoupon = code;
 
       msgBox.innerText =
-      "✅ KHAZAANA5 Applied — 5% OFF";
-
-      showCelebration();
+      "✅ KHAZAANA5 Applied";
 
     }else{
 
@@ -498,16 +378,17 @@ function applyCoupon(){
       "❌ Minimum order ₹350 required";
 
       updateTotal();
+
       return;
     }
-  }
 
-  else{
+  }else{
 
     msgBox.innerText =
-    "❌ Invalid Coupon Code";
+    "❌ Invalid Coupon";
 
     updateTotal();
+
     return;
   }
 
@@ -523,7 +404,7 @@ function updateTotal(){
 
     finalSubtotal =
     order.subtotal -
-    ((order.subtotal * discount) / 100);
+    ((order.subtotal * discount)/100);
   }
 
   order.total =
@@ -535,16 +416,16 @@ function updateTotal(){
 function finalOrder(){
 
   const name =
-    document.getElementById("name")
-    .value.trim();
+  document.getElementById("name")
+  .value.trim();
 
   const phone =
-    document.getElementById("phone")
-    .value.trim();
+  document.getElementById("phone")
+  .value.trim();
 
   const address =
-    document.getElementById("address")
-    .value.trim();
+  document.getElementById("address")
+  .value.trim();
 
   if(!name || !phone || !address){
 
@@ -553,10 +434,10 @@ function finalOrder(){
     return;
   }
 
-  if(!/^[6-9]\d{9}$/.test(phone)){
+  if(!/^[6-9]\\d{9}$/.test(phone)){
 
     alert(
-"Please enter valid mobile number"
+    "Please enter valid mobile number"
     );
 
     return;
@@ -606,66 +487,13 @@ Total: ₹${order.total}
 `;
 
   const whatsappURL =
-    "https://wa.me/" +
-    PHONE +
-    "?text=" +
-    encodeURIComponent(msg);
+  "https://wa.me/" +
+  PHONE +
+  "?text=" +
+  encodeURIComponent(msg);
 
-  window.open(
-    whatsappURL,
-    "_blank"
-  );
-
-  fetch("https://khazaana-bozo.onrender.com/place-order", {
-
-    method: "POST",
-
-    headers: {
-      "Content-Type": "application/json"
-    },
-
-    body: JSON.stringify({
-
-      customer: name,
-
-      phone: phone,
-
-      address: address,
-
-      items: order.items,
-
-      subtotal: order.subtotal,
-
-      delivery: order.delivery,
-
-      total: order.total,
-
-      coupon: appliedCoupon || "None",
-
-      payment: "COD",
-
-      restaurant: order.restaurant
-
-    })
-
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    console.log(
-      "Backend Saved:",
-      data
-    );
-
-  })
-  .catch(err => {
-
-    console.log(
-      "Backend Error:",
-      err
-    );
-
-  });
+  window.location.href =
+  whatsappURL;
 
 }
 
