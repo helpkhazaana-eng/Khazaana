@@ -353,7 +353,7 @@ let appliedCoupon = "";
 let originalDelivery = order.delivery;
 
 const box =
-  document.getElementById("orderSummary");
+document.getElementById("orderSummary");
 
 function renderOrder(){
 
@@ -434,63 +434,6 @@ function loadCoupons(){
   </div>
   `;
 
-  if(
-    order.restaurant
-    .toUpperCase()
-    .includes("CUPS N CRUMBS")
-  ){
-
-    html += `
-    <div
-      class="coupon-card"
-      onclick="selectCoupon('CUPSNCRUMBSCAFE10')">
-
-      <div class="coupon-top">
-
-        <div class="coupon-code">
-          CUPSNCRUMBSCAFE10
-        </div>
-
-        <div>
-          ☕
-        </div>
-
-      </div>
-
-      <div class="coupon-desc">
-        10% OFF above ₹400
-      </div>
-
-    </div>
-    `;
-
-  }else{
-
-    html += `
-    <div
-      class="coupon-card disabled-coupon">
-
-      <div class="coupon-top">
-
-        <div class="coupon-code">
-          CUPSNCRUMBSCAFE10
-        </div>
-
-        <div>
-          🔒
-        </div>
-
-      </div>
-
-     <div class="coupon-desc">
-  10% OFF on orders above ₹400<br>
-  Applicable only in Cups N Crumbs Cafe
-</div>
-
-    </div>
-    `;
-  }
-
   couponList.innerHTML = html;
 }
 
@@ -520,17 +463,6 @@ function showCelebration(){
     pop.remove();
 
   },1200);
-
-  const msgBox =
-  document.getElementById("couponMessage");
-
-  msgBox.classList.add("party");
-
-  setTimeout(()=>{
-
-    msgBox.classList.remove("party");
-
-  },800);
 }
 
 function applyCoupon(){
@@ -564,43 +496,6 @@ function applyCoupon(){
 
       msgBox.innerText =
       "❌ Minimum order ₹350 required";
-
-      updateTotal();
-      return;
-    }
-  }
-
-  else if(code === "CUPSNCRUMBSCAFE10"){
-
-    if(
-      order.restaurant
-      .toUpperCase()
-      .includes("CUPS N CRUMBS")
-    ){
-
-      if(order.subtotal >= 400){
-
-        discount = 10;
-        appliedCoupon = code;
-
-        msgBox.innerText =
-        "✅ CUPS N CRUMBS CAFE10 Applied — 10% OFF";
-
-        showCelebration();
-
-      }else{
-
-        msgBox.innerText =
-        "❌ Minimum order ₹400 required";
-
-        updateTotal();
-        return;
-      }
-
-    }else{
-
-      msgBox.innerText =
-      "❌ This coupon only works for Cups N Crumbs Cafe";
 
       updateTotal();
       return;
@@ -661,7 +556,7 @@ function finalOrder(){
   if(!/^[6-9]\d{9}$/.test(phone)){
 
     alert(
-"Please enter a valid 10 digit Indian mobile number"
+"Please enter valid mobile number"
     );
 
     return;
@@ -681,18 +576,6 @@ function finalOrder(){
     "kh_address",
     address
   );
-
-  const day =
-  new Date().getDay();
-
-  if(day === 1 || day === 3){
-
-    alert(
-"🚫 Delivery is closed on Monday & Wednesday."
-    );
-
-    return;
-  }
 
   let items = "";
 
@@ -722,44 +605,6 @@ Total: ₹${order.total}
 📞 8695902696 / 8649851034
 `;
 
-fetch("https://khazaana-bozo.onrender.com/place-order", {
-
-  method: "POST",
-
-  headers: {
-    "Content-Type": "application/json"
-  },
-
-  body: JSON.stringify({
-
-    customer: name,
-
-    phone: phone,
-
-    address: address,
-
-    items: order.items,
-
-    subtotal: order.subtotal,
-
-    delivery: order.delivery,
-
-    total: order.total,
-
-    coupon: appliedCoupon || "None",
-
-    payment: "COD",
-
-    restaurant: order.restaurant
-
-  })
-
-})
-.then(res => res.json())
-.then(data => {
-
-  console.log("Backend Saved:", data);
-
   const whatsappURL =
     "https://wa.me/" +
     PHONE +
@@ -771,14 +616,56 @@ fetch("https://khazaana-bozo.onrender.com/place-order", {
     "_blank"
   );
 
-})
-.catch(err => {
+  fetch("https://khazaana-bozo.onrender.com/place-order", {
 
-  console.log("Backend Error:", err);
+    method: "POST",
 
-  alert("Backend server not running");
+    headers: {
+      "Content-Type": "application/json"
+    },
 
-});
+    body: JSON.stringify({
+
+      customer: name,
+
+      phone: phone,
+
+      address: address,
+
+      items: order.items,
+
+      subtotal: order.subtotal,
+
+      delivery: order.delivery,
+
+      total: order.total,
+
+      coupon: appliedCoupon || "None",
+
+      payment: "COD",
+
+      restaurant: order.restaurant
+
+    })
+
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    console.log(
+      "Backend Saved:",
+      data
+    );
+
+  })
+  .catch(err => {
+
+    console.log(
+      "Backend Error:",
+      err
+    );
+
+  });
 
 }
 
