@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Khazaana Cake Zone</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif
+}
+
+body{
+
+background:
+
+linear-gradient(
+180deg,
+#0f0b08 0%,
+#16110d 35%,
+#1b140f 65%,
+#120d09 100%
+);
+
+color:#fff;
+
+overflow-x:hidden;
+
+padding-bottom:140px
+}
+
+/* ================= NAVBAR ================= */
+
+header{
+
+position:sticky;
+top:0;
+z-index:1000;
+
+background:
+rgba(10,10,10,.45);
+
+backdrop-filter:blur(18px);
+
+border-bottom:
+1px solid rgba(255,255,255,.06);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.18)
+}
+
+.nav{
+
+max-width:1200px;
+margin:auto;
+padding:16px 24px;
+
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.logo{
+
+font-size:24px;
+font-weight:800;
+color:#fff
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+text-align:center;
+padding:70px 20px 50px;
+position:relative
+}
+
+.hero::before{
+
+content:'';
+
+position:absolute;
+inset:0;
+
+background:
+
+radial-gradient(
+circle at top right,
+rgba(255,122,0,.12),
+transparent 30%
+);
+
+pointer-events:none
+}
+
+.hero h1{
+
+position:relative;
+z-index:2;
+
+font-size:58px;
+font-weight:900;
+letter-spacing:-2px;
+
+margin-bottom:14px;
+
+color:#fff
+}
+
+.hero p{
+
+position:relative;
+z-index:2;
+
+color:
+rgba(255,255,255,.72);
+
+font-size:17px
+}
+
+/* ================= MENU ================= */
+
+.menu{
+
+max-width:900px;
+margin:auto;
+padding:20px
+}
+
+.section{
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border-radius:28px;
+
+padding:24px;
+
+margin-bottom:26px;
+
+box-shadow:
+0 20px 45px rgba(0,0,0,.25);
+
+transition:.35s ease
+}
+
+.section:hover{
+
+transform:
+translateY(-8px)
+}
+
+.section h2{
+
+font-size:22px;
+
+margin-bottom:18px;
+
+color:#ffb347
+}
+
+/* ================= ITEM ================= */
+
+.item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:
+1px dashed rgba(255,255,255,.08)
+}
+
+.item:last-child{
+
+border-bottom:none
+}
+
+.item span{
+
+color:#fff;
+
+font-size:15px;
+
+line-height:1.5
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.btn{
+
+width:30px;
+height:30px;
+
+border:none;
+border-radius:10px;
+
+background:
+linear-gradient(
+135deg,
+#ff7a00,
+#ff5400
+);
+
+color:#fff;
+
+font-size:18px;
+font-weight:700;
+
+cursor:pointer
+}
+
+.qty{
+
+min-width:22px;
+
+text-align:center;
+
+font-weight:700;
+
+color:#fff
+}
+
+/* ================= CART ================= */
+
+.cart-bar{
+
+position:fixed;
+bottom:0;
+left:0;
+
+width:100%;
+
+background:
+rgba(10,10,10,.92);
+
+backdrop-filter:blur(18px);
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+padding:16px 20px;
+
+z-index:1000
+}
+
+#cartInfo{
+
+font-size:15px;
+
+margin-bottom:10px;
+
+color:
+rgba(255,255,255,.75)
+}
+
+#cartInfo b{
+
+color:#ffb347
+}
+
+.order-btn{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#25D366,
+#1faa52
+);
+
+color:#fff;
+
+font-size:16px;
+
+font-weight:800;
+
+cursor:pointer
+}
+
+.note{
+
+font-size:12px;
+
+color:
+rgba(255,255,255,.5);
+
+text-align:center;
+
+margin-top:6px
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+
+position:fixed;
+width:100%
+}
+
+.nav{
+
+padding:14px 18px
+}
+
+.hero{
+
+padding:120px 20px 40px
+}
+
+.hero h1{
+
+font-size:40px;
+line-height:1.1
+}
+
+.hero p{
+
+font-size:15px
+}
+
+.menu{
+
+padding:20px 18px 90px
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav">
+
+<div class="logo">
+Khazaana
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>
+Khazaana Cake Zone
+</h1>
+
+<p>
+Cakes • Pastry • Snacks • Pizza
+</p>
+
+</section>
+
+<section class="menu" id="menu"></section>
+
+<div class="cart-bar">
+
+<div id="cartInfo">
+Subtotal ₹0 | Delivery ₹30 | <b>Total ₹0</b>
+</div>
+
+<button class="order-btn"
+onclick="goToCheckout()">
+
+Checkout
+
+</button>
+
+<div class="note">
+Minimum order ₹100
+</div>
+
+</div>
+
+<script>
+
+const DELIVERY = 30;
+
+const menuData = {
+
+"🎂 Cakes (1 Pound)":[
+["Ganache",650],["Red Velvet",650],["Choco Vancho",650],
+["Saffron",650],["Rasmalai",650],
+["Choco Truffle",520],["Black Forest",520],["White Forest",520],
+["Oreo Choco",520],["Butter Scotch",520],
+["Kiwi",455],["Blueberry",455],["Strawberry",455],
+["Mango",455],["Pineapple",455],["Orange",455],
+["Litchi",455],["Vanilla",455]
+],
+
+"🎂 Cakes (1/2 Pound)":[
+["Ganache",390],["Red Velvet",390],["Choco Vancho",390],
+["Saffron",390],["Rasmalai",390],
+["Choco Truffle",325],["Black Forest",325],["White Forest",325],
+["Oreo Choco",325],["Butter Scotch",325],
+["Kiwi",260],["Blueberry",260],["Strawberry",260],
+["Mango",260],["Pineapple",260],["Orange",260],
+["Litchi",260],["Vanilla",260]
+]
+
+};
+
+const cart = {};
+
+function renderMenu(){
+
+const menu =
+document.getElementById("menu");
+
+for(const section in menuData){
+
+let html =
+`<div class="section">
+
+<h2>${section}</h2>`;
+
+menuData[section].forEach(([name,price],i)=>{
+
+const id = section+i;
+
+cart[id] = {
+name,
+price,
+qty:0
+};
+
+html += `
+
+<div class="item">
+
+<span>
+${name} ₹${price}
+</span>
+
+<div class="controls">
+
+<button class="btn"
+onclick="updateQty('${id}',-1)">
+−
+</button>
+
+<span class="qty"
+id="q-${id}">
+0
+</span>
+
+<button class="btn"
+onclick="updateQty('${id}',1)">
++
+</button>
+
+</div>
+
+</div>
+`;
+});
+
+html += `</div>`;
+
+menu.innerHTML += html;
+}
+}
+
+renderMenu();
+
+function updateQty(id,change){
+
+cart[id].qty =
+Math.max(0, cart[id].qty + change);
+
+document.getElementById(
+"q-"+id
+).innerText = cart[id].qty;
+
+updateTotals();
+}
+
+function updateTotals(){
+
+let subtotal = 0;
+
+for(const i in cart){
+
+subtotal +=
+cart[i].qty * cart[i].price;
+}
+
+let total =
+subtotal > 0
+? subtotal + DELIVERY
+: 0;
+
+document.getElementById(
+"cartInfo"
+).innerHTML =
+
+`Subtotal ₹${subtotal}
+| Delivery ₹${subtotal>0?DELIVERY:0}
+| <b>Total ₹${total}</b>`;
+}
+
+function goToCheckout(){
+
+let subtotal = 0;
+
+let items = [];
+
+for(const i in cart){
+
+if(cart[i].qty > 0){
+
+let t =
+cart[i].qty * cart[i].price;
+
+subtotal += t;
+
+items.push({
+...cart[i],
+total:t
+});
+}
+}
+
+if(subtotal < 100){
+
+alert(
+"Minimum order ₹100 required"
+);
+
+return;
+}
+
+localStorage.setItem(
+"khazaanaOrder",
+
+JSON.stringify({
+
+restaurant:
+"Khazaana Cake Zone",
+
+items,
+
+subtotal,
+
+delivery:DELIVERY,
+
+total:
+subtotal + DELIVERY
+
+})
+);
+
+window.location.href =
+"checkout.html";
+}
+
+</script>
+
+</body>
+</html>
