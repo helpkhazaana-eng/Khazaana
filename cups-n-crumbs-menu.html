@@ -856,7 +856,7 @@ function goToCheckout(){
   const h =
     new Date().getHours();
 
-  return(h>=21 || h<10);
+  return(h>=21 || h<18);
 }
 
 
@@ -922,7 +922,7 @@ function updateStatus(){
     open.setDate(now.getDate()+1);
   }
 
-  open.setHours(10,0,0,0);
+  open.setHours(18,0,0,0);
 
   let diff = open-now;
 

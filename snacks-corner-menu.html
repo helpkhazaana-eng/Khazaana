@@ -775,7 +775,7 @@ function isClosed(){
   const h =
   new Date().getHours();
 
-  return (h >= 21 || h < 10);
+  return (h >= 21 || h < 18);
 }
 
 function toggleCart(disable){
@@ -833,7 +833,7 @@ function updateStatus(){
   }
 
   openTime.setHours(
-  10,0,0,0
+  18,0,0,0
   );
 
   let diff =

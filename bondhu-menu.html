@@ -10,16 +10,12 @@
 
 <style>
 
-/* ================= RESET ================= */
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
   font-family:"Segoe UI",sans-serif;
 }
-
-/* ================= BODY ================= */
 
 body{
 
@@ -39,8 +35,6 @@ body{
 
   padding-bottom:140px;
 }
-
-/* ================= NAVBAR ================= */
 
 header{
 
@@ -97,8 +91,6 @@ header{
 
   font-weight:500;
 }
-
-/* ================= HERO ================= */
 
 .hero{
 
@@ -166,8 +158,6 @@ header{
   color:#ffb347;
 }
 
-/* ================= MENU ================= */
-
 .menu{
 
   max-width:1400px;
@@ -183,8 +173,6 @@ header{
 
   gap:28px;
 }
-
-/* ================= SECTION ================= */
 
 .section{
 
@@ -221,8 +209,6 @@ header{
   color:#ffb347;
 }
 
-/* ================= ITEM ================= */
-
 .item{
 
   display:flex;
@@ -250,8 +236,6 @@ header{
 
   line-height:1.5;
 }
-
-/* ================= CONTROLS ================= */
 
 .controls{
 
@@ -298,8 +282,6 @@ header{
 
   color:#fff;
 }
-
-/* ================= CART ================= */
 
 .cart-bar{
 
@@ -376,8 +358,6 @@ header{
 
   margin-top:6px;
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:768px){
 
@@ -487,115 +467,115 @@ const MIN_ORDER = 100;
 const menuData = {
 
   "☕ Beverages": [
-    ["Tea",15],
-    ["Coffee",30],
-    ["Lassi",50],
-    ["Cold Coffee",70],
-    ["Mineral Water",20]
+    ["Tea",20],
+    ["Coffee",40],
+    ["Lassi",65],
+    ["Cold Coffee",90],
+    ["Mineral Water",25]
   ],
 
   "🍜 Easy Bites": [
-    ["Chicken Chowmein",100],
-    ["Egg Chowmein",90],
-    ["Veg Chowmein",80],
-    ["Veg Pakora",130],
-    ["Onion Pakora",130],
-    ["Egg Omelet",40],
-    ["Egg Bhurji",40],
-    ["Egg Roll",40],
-    ["Chicken Roll",100]
+    ["Chicken Chowmein",125],
+    ["Egg Chowmein",115],
+    ["Veg Chowmein",100],
+    ["Veg Pakora",165],
+    ["Onion Pakora",165],
+    ["Egg Omelet",50],
+    ["Egg Bhurji",50],
+    ["Egg Roll",50],
+    ["Chicken Roll",125]
   ],
 
   "🥘 Parathas & Soups": [
-    ["Aloo Paratha",60],
-    ["Mix Veg Paratha",130],
-    ["Paneer Paratha",90],
-    ["Plain Paratha",20],
-    ["Mix Soup",140],
-    ["Chicken Soup",120],
-    ["Veg Soup",100]
+    ["Aloo Paratha",75],
+    ["Mix Veg Paratha",165],
+    ["Paneer Paratha",115],
+    ["Plain Paratha",25],
+    ["Mix Soup",175],
+    ["Chicken Soup",150],
+    ["Veg Soup",125]
   ],
 
   "🍗 Non-Veg Appetizers": [
-    ["Fish Finger",220],
-    ["Tandoori Chicken (Full)",460],
-    ["Tandoori Chicken (Half)",250],
-    ["Chicken Tikka",250],
-    ["Chicken Lollipop",210],
-    ["Chicken Stick",220]
+    ["Fish Finger",275],
+    ["Tandoori Chicken (Full)",575],
+    ["Tandoori Chicken (Half)",315],
+    ["Chicken Tikka",315],
+    ["Chicken Lollipop",265],
+    ["Chicken Stick",275]
   ],
 
   "🍞 Breads": [
-    ["Tawa Roti",6],
-    ["Ghee Tawa Roti",15],
-    ["Tandoori Roti",15],
-    ["Butter Tandoori Roti",30],
-    ["Butter Naan",50],
-    ["Garlic Naan",70],
-    ["Rumali Roti",40],
-    ["Masala Kuleba",90]
+    ["Tawa Roti",10],
+    ["Ghee Tawa Roti",20],
+    ["Tandoori Roti",20],
+    ["Butter Tandoori Roti",40],
+    ["Butter Naan",65],
+    ["Garlic Naan",90],
+    ["Rumali Roti",50],
+    ["Masala Kuleba",115]
   ],
 
   "🍛 Non-Veg Main Course": [
-    ["Chicken Curry",160],
-    ["Chicken Dopiaza",200],
-    ["Chicken Kolhapuri",200],
-    ["Chicken Masala",200],
-    ["Chicken Handi",220],
-    ["Chicken Tikka Masala",270],
-    ["Chili Chicken",170],
-    ["Chicken Varta",170]
+    ["Chicken Curry",200],
+    ["Chicken Dopiaza",250],
+    ["Chicken Kolhapuri",250],
+    ["Chicken Masala",250],
+    ["Chicken Handi",275],
+    ["Chicken Tikka Masala",340],
+    ["Chili Chicken",215],
+    ["Chicken Varta",215]
   ],
 
   "🍽 Thali": [
-    ["Veg Thali",60],
-    ["Veg Thali (Basmati)",110],
-    ["Fish Thali",80],
-    ["Chicken Thali",150],
-    ["Egg Thali",70],
-    ["Mutton Thali",220]
+    ["Veg Thali",75],
+    ["Veg Thali (Basmati)",140],
+    ["Fish Thali",100],
+    ["Chicken Thali",190],
+    ["Egg Thali",90],
+    ["Mutton Thali",275]
   ],
 
   "🥗 Veg Side Dish": [
-    ["Green Salad",60],
-    ["Chana Masala",100],
-    ["Chana Paneer",180],
-    ["Paneer Butter Masala",170],
-    ["Chili Paneer",170],
-    ["Mix Veg",100],
-    ["Daal Fry",100],
-    ["Aloo Dum",100],
-    ["Kadhai Paneer",170]
+    ["Green Salad",75],
+    ["Chana Masala",125],
+    ["Chana Paneer",225],
+    ["Paneer Butter Masala",215],
+    ["Chili Paneer",215],
+    ["Mix Veg",125],
+    ["Daal Fry",125],
+    ["Aloo Dum",125],
+    ["Kadhai Paneer",215]
   ],
 
   "🍳 Tadka": [
-    ["Plain Tadka",60],
-    ["Egg Butter Tadka",70],
-    ["Egg Tadka",65],
-    ["Mutton Butter Tadka",200],
-    ["Chicken Butter Tadka",130]
+    ["Plain Tadka",75],
+    ["Egg Butter Tadka",90],
+    ["Egg Tadka",80],
+    ["Mutton Butter Tadka",250],
+    ["Chicken Butter Tadka",165]
   ],
 
   "🍟 Snacks": [
-    ["Chicken Fry",90],
-    ["Boiled Chana",80],
-    ["Rice Chicken",220],
-    ["Chicken Kurkure",220],
-    ["Chicken Tandoori Masala (2 Pc)",360],
-    ["Chicken Tandoori Masala (4 Pc)",720],
-    ["Chicken Butter Masala",180]
+    ["Chicken Fry",115],
+    ["Boiled Chana",100],
+    ["Rice Chicken",275],
+    ["Chicken Kurkure",275],
+    ["Chicken Tandoori Masala (2 Pc)",450],
+    ["Chicken Tandoori Masala (4 Pc)",900],
+    ["Chicken Butter Masala",225]
   ],
 
   "🍚 Biryani & Rice": [
-    ["Chicken Biryani",100],
-    ["Chicken Biryani (Special)",130],
-    ["Mutton Biryani",170],
-    ["Chicken Fried Rice",140],
-    ["Veg Fried Rice",120],
-    ["Mix Fried Rice",170],
-    ["Egg Fried Rice",130],
-    ["Egg Biryani",90],
-    ["Veg Biryani",100]
+    ["Chicken Biryani",125],
+    ["Chicken Biryani (Special)",165],
+    ["Mutton Biryani",215],
+    ["Chicken Fried Rice",175],
+    ["Veg Fried Rice",150],
+    ["Mix Fried Rice",215],
+    ["Egg Fried Rice",165],
+    ["Egg Biryani",115],
+    ["Veg Biryani",125]
   ]
 
 };
@@ -774,13 +754,9 @@ delivery:delivery,
 total:total
 };
 
-/* REMOVE OLD ORDER */
-
 localStorage.removeItem(
 "khazaanaOrder"
 );
-
-/* SAVE NEW ORDER */
 
 localStorage.setItem(
 
@@ -790,20 +766,16 @@ JSON.stringify(order)
 
 );
 
-/* GO TO CHECKOUT */
-
 window.location.href =
 "checkout.html";
 }
-
-/* ===== STATUS ===== */
 
 function isClosed(){
 
 const h =
 new Date().getHours();
 
-return(h >= 21 || h < 10);
+return(h >= 21 || h < 18);
 }
 
 function toggleCart(disable){
@@ -875,7 +847,7 @@ now.getDate()+1
 }
 
 openTime.setHours(
-10,0,0,0
+18,0,0,0
 );
 
 let diff =

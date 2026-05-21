@@ -701,10 +701,16 @@ function goToCheckout(){
 
 function isClosed(){
 
-  const h =
-  new Date().getHours();
+  const indiaTime =
+  new Date().toLocaleString(
+    "en-US",
+    {timeZone:"Asia/Kolkata"}
+  );
 
-  return (h >= 21 || h < 10);
+  const h =
+  new Date(indiaTime).getHours();
+
+  return (h >= 21 || h < 18);
 }
 
 /* DISABLE BUTTONS */
@@ -757,7 +763,19 @@ function updateStatus(){
   "statusMsg"
   );
 
-  if(!isClosed()){
+  const indiaTime =
+  new Date().toLocaleString(
+    "en-US",
+    {timeZone:"Asia/Kolkata"}
+  );
+
+  const now =
+  new Date(indiaTime);
+
+  const currentHour =
+  now.getHours();
+
+  if(currentHour >= 18 && currentHour < 21){
 
     msg.innerText =
     "🟢 Open Now";
@@ -767,22 +785,19 @@ function updateStatus(){
     return;
   }
 
-  let now =
-  new Date();
+  toggleCart(true);
 
   let openTime =
-  new Date();
+  new Date(now);
 
-  if(now.getHours() >= 21){
+  if(currentHour >= 21){
 
     openTime.setDate(
-    now.getDate() + 1
+    openTime.getDate() + 1
     );
   }
 
-  openTime.setHours(
-  10,0,0,0
-  );
+  openTime.setHours(18,0,0,0);
 
   let diff =
   openTime - now;
@@ -807,14 +822,11 @@ function updateStatus(){
   msg.innerText =
   `🔴 Opens in ${h}h ${m}m ${s}s`;
 
-  toggleCart(true);
 }
 
 setInterval(updateStatus,1000);
 
 updateStatus();
-
-</script>
 
 </script>
 

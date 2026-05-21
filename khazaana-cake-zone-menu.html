@@ -123,6 +123,15 @@ rgba(255,255,255,.72);
 font-size:17px
 }
 
+#statusMsg{
+
+margin-top:14px;
+
+font-weight:700;
+
+color:#ffb347
+}
+
 /* ================= MENU ================= */
 
 .menu{
@@ -381,6 +390,8 @@ Khazaana Cake Zone
 Cakes • Pastry • Snacks • Pizza
 </p>
 
+<p id="statusMsg"></p>
+
 </section>
 
 <section class="menu" id="menu"></section>
@@ -409,7 +420,6 @@ Minimum order ₹100
 const DELIVERY = 30;
 
 const menuData = {
-
 
 "🧁 Pastry":[
 ["Red Velvet Pastry",75],
@@ -505,6 +515,8 @@ renderMenu();
 
 function updateQty(id,change){
 
+if(isClosed()) return;
+
 cart[id].qty =
 Math.max(0, cart[id].qty + change);
 
@@ -540,6 +552,15 @@ document.getElementById(
 }
 
 function goToCheckout(){
+
+if(isClosed()){
+
+alert(
+"Restaurant is currently closed"
+);
+
+return;
+}
 
 let subtotal = 0;
 
@@ -593,6 +614,134 @@ subtotal + DELIVERY
 window.location.href =
 "checkout.html";
 }
+
+/* STATUS */
+
+function isClosed(){
+
+const indiaTime =
+new Date().toLocaleString(
+"en-US",
+{timeZone:"Asia/Kolkata"}
+);
+
+const h =
+new Date(indiaTime).getHours();
+
+return (h >= 21 || h < 18);
+}
+
+function toggleCart(disable){
+
+const buttons =
+document.querySelectorAll("button");
+
+buttons.forEach(btn=>{
+
+if(
+btn.innerText==="+" ||
+btn.innerText==="−"
+){
+
+btn.disabled = disable;
+
+btn.style.opacity =
+disable ? "0.5" : "1";
+
+btn.style.cursor =
+disable
+? "not-allowed"
+: "pointer";
+}
+});
+
+const checkoutBtn =
+document.querySelector(".order-btn");
+
+checkoutBtn.disabled =
+disable;
+
+checkoutBtn.style.opacity =
+disable ? "0.5" : "1";
+
+checkoutBtn.style.cursor =
+disable
+? "not-allowed"
+: "pointer";
+}
+
+function updateStatus(){
+
+const msg =
+document.getElementById(
+"statusMsg"
+);
+
+const indiaTime =
+new Date().toLocaleString(
+"en-US",
+{timeZone:"Asia/Kolkata"}
+);
+
+const now =
+new Date(indiaTime);
+
+const currentHour =
+now.getHours();
+
+if(currentHour >= 18 && currentHour < 21){
+
+msg.innerText =
+"🟢 Open Now";
+
+toggleCart(false);
+
+return;
+}
+
+toggleCart(true);
+
+let openTime =
+new Date(now);
+
+if(currentHour >= 21){
+
+openTime.setDate(
+openTime.getDate()+1
+);
+}
+
+openTime.setHours(
+18,0,0,0
+);
+
+let diff =
+openTime - now;
+
+let h =
+Math.floor(
+diff/(1000*60*60)
+);
+
+let m =
+Math.floor(
+(diff%(1000*60*60))
+/(1000*60)
+);
+
+let s =
+Math.floor(
+(diff%(1000*60))
+/1000
+);
+
+msg.innerText =
+`🔴 Opens in ${h}h ${m}m ${s}s`;
+}
+
+setInterval(updateStatus,1000);
+
+updateStatus();
 
 </script>
 
