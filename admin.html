@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Khazaana Admin Panel
+</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(
+135deg,
+#050505,
+#111111
+);
+
+color:white;
+padding:30px;
+min-height:100vh;
+
+}
+
+.header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+flex-wrap:wrap;
+gap:20px;
+
+}
+
+.logo{
+
+font-size:36px;
+font-weight:700;
+color:#ff9a1f;
+
+}
+
+.stats{
+
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+.stat-card{
+
+background:#181818;
+padding:20px 25px;
+border-radius:20px;
+border:1px solid #2b2b2b;
+min-width:160px;
+
+}
+
+.stat-card h3{
+
+font-size:14px;
+color:#999;
+margin-bottom:10px;
+
+}
+
+.stat-card p{
+
+font-size:28px;
+font-weight:700;
+
+}
+
+.orders-grid{
+
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(380px,1fr));
+gap:25px;
+
+}
+
+.order-card{
+
+background:
+linear-gradient(
+145deg,
+#181818,
+#101010
+);
+
+border-radius:28px;
+padding:25px;
+border:1px solid #2a2a2a;
+
+box-shadow:
+0 0 30px rgba(0,0,0,0.35);
+
+transition:0.3s;
+
+}
+
+.order-card:hover{
+
+transform:translateY(-4px);
+
+}
+
+.top{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:22px;
+
+}
+
+.customer{
+
+font-size:30px;
+font-weight:700;
+
+}
+
+.status{
+
+padding:8px 18px;
+border-radius:30px;
+font-size:12px;
+font-weight:700;
+text-transform:capitalize;
+
+}
+
+.pending{
+
+background:#ffb020;
+color:black;
+
+}
+
+.accepted{
+
+background:#25D366;
+color:white;
+
+}
+
+.delivered{
+
+background:#3b82f6;
+color:white;
+
+}
+
+.cancelled{
+
+background:#ff4d4f;
+color:white;
+
+}
+
+.info{
+
+margin:14px 0;
+font-size:15px;
+display:flex;
+align-items:center;
+gap:10px;
+color:#ddd;
+
+}
+
+.phone{
+
+color:#25D366;
+font-weight:600;
+
+}
+
+.items-box{
+
+margin-top:20px;
+background:#0b0b0b;
+padding:20px;
+border-radius:18px;
+
+}
+
+.item{
+
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #1d1d1d;
+
+}
+
+.item:last-child{
+
+border-bottom:none;
+
+}
+
+.assign{
+
+margin-top:22px;
+
+}
+
+.assign label{
+
+font-size:14px;
+color:#999;
+
+}
+
+select{
+
+width:100%;
+padding:14px;
+margin-top:10px;
+background:#0b0b0b;
+border:none;
+border-radius:16px;
+color:white;
+font-size:15px;
+
+}
+
+.buttons{
+
+display:grid;
+grid-template-columns:
+repeat(2,1fr);
+gap:14px;
+margin-top:24px;
+
+}
+
+button{
+
+border:none;
+padding:15px;
+border-radius:18px;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+transition:0.2s;
+
+}
+
+button:hover{
+
+transform:scale(1.02);
+opacity:0.92;
+
+}
+
+.acceptBtn{
+
+background:#25D366;
+color:white;
+
+}
+
+.deliverBtn{
+
+background:#3b82f6;
+color:white;
+
+}
+
+.callBtn{
+
+background:#ff9a1f;
+color:white;
+
+}
+
+.deleteBtn{
+
+background:#ff4d4f;
+color:white;
+
+}
+
+.date{
+
+margin-top:18px;
+font-size:13px;
+color:#888;
+
+}
+
+.empty{
+
+text-align:center;
+margin-top:120px;
+font-size:30px;
+color:#777;
+
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:18px;
+
+}
+
+.logo{
+
+font-size:28px;
+
+}
+
+.customer{
+
+font-size:24px;
+
+}
+
+.orders-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">
+Khazaana Admin Panel
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h3>
+Total Orders
+</h3>
+
+<p id="totalOrders">
+0
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>
+Revenue
+</h3>
+
+<p id="revenue">
+₹0
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="orders-grid"
+id="orders">
+
+<div class="empty">
+Loading Orders...
+</div>
+
+</div>
+
+<script>
+
+const ordersBox =
+document.getElementById("orders");
+
+async function loadOrders(){
+
+  try{
+
+    const res =
+    await fetch(
+      "https://khazaana-bozo.onrender.com/orders"
+    );
+
+    const orders =
+    await res.json();
+
+    ordersBox.innerHTML = "";
+
+    let totalRevenue = 0;
+
+    document.getElementById(
+      "totalOrders"
+    ).innerText =
+    orders.length;
+
+    if(orders.length === 0){
+
+      ordersBox.innerHTML = `
+
+      <div class="empty">
+
+      No Orders Found
+
+      </div>
+
+      `;
+
+      return;
+    }
+
+    orders.forEach((data)=>{
+
+      totalRevenue +=
+      data.total || 0;
+
+      const status =
+      (data.status || "Pending")
+      .toLowerCase();
+
+      let itemsHTML = "";
+
+      if(data.items){
+
+        data.items.forEach(i=>{
+
+          itemsHTML += `
+
+          <div class="item">
+
+          <span>
+          ${i.name} x${i.qty}
+          </span>
+
+          <span>
+          ₹${i.total}
+          </span>
+
+          </div>
+
+          `;
+
+        });
+
+      }
+
+      ordersBox.innerHTML += `
+
+      <div class="order-card">
+
+      <div class="top">
+
+      <div class="customer">
+      ${data.customer}
+      </div>
+
+      <div class="status ${status}">
+      ${status}
+      </div>
+
+      </div>
+
+      <div class="info">
+      📍 ${data.address}
+      </div>
+
+      <div class="info">
+      🍴 ${data.restaurant}
+      </div>
+
+      <div class="info phone">
+      📞 ${data.phone}
+      </div>
+
+      <div class="info">
+      💰 ₹${data.total}
+      </div>
+
+      <div class="items-box">
+
+      ${itemsHTML}
+
+      </div>
+
+      <div class="assign">
+
+      <label>
+      Assign Rider
+      </label>
+
+      <select>
+
+      <option>
+      Select Rider
+      </option>
+
+      <option>
+      Mohim
+      </option>
+
+      <option>
+      Raju
+      </option>
+
+      <option>
+      Imran
+      </option>
+
+      </select>
+
+      </div>
+
+      <div class="buttons">
+
+      <button
+      class="acceptBtn"
+      onclick="acceptOrder('${data.id}')">
+
+      Accept
+
+      </button>
+
+      <button
+      class="deliverBtn"
+      onclick="deliverOrder('${data.id}')">
+
+      Delivered
+
+      </button>
+
+      <button
+      class="callBtn"
+      onclick="callCustomer('${data.phone}')">
+
+      Call Customer
+
+      </button>
+
+      <button
+      class="deleteBtn"
+      onclick="deleteOrder('${data.id}')">
+
+      Delete
+
+      </button>
+
+      </div>
+
+      <div class="date">
+
+      📅 ${data.date}
+
+      </div>
+
+      </div>
+
+      `;
+
+    });
+
+    document.getElementById(
+      "revenue"
+    ).innerText =
+    "₹" + totalRevenue;
+
+  }
+
+  catch(err){
+
+    ordersBox.innerHTML = `
+
+    <div class="empty">
+
+    Backend Not Running
+
+    </div>
+
+    `;
+
+    console.log(err);
+
+  }
+
+}
+
+/* ACCEPT */
+
+window.acceptOrder =
+async(id)=>{
+
+  await fetch(
+    "http://localhost:3000/update-status",
+    {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({
+
+        id:id,
+        status:"Accepted"
+
+      })
+
+    }
+  );
+
+  loadOrders();
+
+};
+
+/* DELIVER */
+
+window.deliverOrder =
+async(id)=>{
+
+  await fetch(
+    "http://localhost:3000/update-status",
+    {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({
+
+        id:id,
+        status:"Delivered"
+
+      })
+
+    }
+  );
+
+  loadOrders();
+
+};
+
+/* DELETE */
+
+window.deleteOrder =
+async(id)=>{
+
+  if(confirm(
+    "Delete this order?"
+  )){
+
+    await fetch(
+      "http://localhost:3000/delete-order",
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          id:id
+        })
+
+      }
+    );
+
+    loadOrders();
+
+  }
+
+};
+
+/* CALL */
+
+window.callCustomer =
+(phone)=>{
+
+  window.open(
+    `tel:${phone}`
+  );
+
+};
+
+loadOrders();
+
+setInterval(
+  loadOrders,
+  3000
+);
+
+</script>
+
+</body>
+</html>
