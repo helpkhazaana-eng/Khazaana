@@ -317,14 +317,10 @@ if(!order){
   window.location.href = "index.html";
 }
 
-/* RESTAURANT NAME */
-
 document.getElementById(
   "restaurantName"
 ).innerText =
 order.restaurant;
-
-/* AUTOFILL CUSTOMER DATA */
 
 const savedName =
   localStorage.getItem("kh_name");
@@ -352,13 +348,9 @@ savedPhone || "";
 document.getElementById("address").value =
 savedAddress || "";
 
-/* COUPON VARIABLES */
-
 let discount = 0;
 let appliedCoupon = "";
 let originalDelivery = order.delivery;
-
-/* ORDER SUMMARY */
 
 const box =
   document.getElementById("orderSummary");
@@ -410,8 +402,6 @@ function renderOrder(){
 }
 
 renderOrder();
-
-/* SHOW COUPONS */
 
 const couponList =
 document.getElementById("couponList");
@@ -514,8 +504,6 @@ function selectCoupon(code){
   applyCoupon();
 }
 
-/* CELEBRATION */
-
 function showCelebration(){
 
   const pop =
@@ -544,8 +532,6 @@ function showCelebration(){
 
   },800);
 }
-
-/* COUPON SYSTEM */
 
 function applyCoupon(){
 
@@ -633,8 +619,6 @@ function applyCoupon(){
   updateTotal();
 }
 
-/* UPDATE TOTAL */
-
 function updateTotal(){
 
   let finalSubtotal =
@@ -652,8 +636,6 @@ function updateTotal(){
 
   renderOrder();
 }
-
-/* FINAL ORDER */
 
 function finalOrder(){
 
@@ -706,21 +688,10 @@ function finalOrder(){
   if(day === 1 || day === 3){
 
     alert(
-"🚫 Delivery is closed on Monday & Wednesday.\n\nSomobar o Budhbar delivery bondho thake."
+"🚫 Delivery is closed on Monday & Wednesday."
     );
 
     return;
-  }
-
-  let timingNote = "";
-
-  if(new Date().getHours() < 18){
-
-    timingNote = `
-🚚 Orders placed before 6 PM will be delivered after 6 PM.
-
-Sondha 6 tar age kora order 6 tar por delivery hobe.
-`;
   }
 
   let items = "";
@@ -748,25 +719,66 @@ Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
 Coupon: ${appliedCoupon || "None"}
 Total: ₹${order.total}
 
-${timingNote}
-
-⚠️ No response within 5 minutes? Please call us immediately.
-
-⚠️ 5 minute er moddhe response na pele doya kore call korun.
-
 📞 8695902696 / 8649851034
 `;
 
-const whatsappURL =
-  "https://wa.me/" +
-  PHONE +
-  "?text=" +
-  encodeURIComponent(msg);
+fetch("http://localhost:3000/place-order", {
 
-window.open(
-  whatsappURL,
-  "_blank"
-);
+  method: "POST",
+
+  headers: {
+    "Content-Type": "application/json"
+  },
+
+  body: JSON.stringify({
+
+    customer: name,
+
+    phone: phone,
+
+    address: address,
+
+    items: order.items,
+
+    subtotal: order.subtotal,
+
+    delivery: order.delivery,
+
+    total: order.total,
+
+    coupon: appliedCoupon || "None",
+
+    payment: "COD",
+
+    restaurant: order.restaurant
+
+  })
+
+})
+.then(res => res.json())
+.then(data => {
+
+  console.log("Backend Saved:", data);
+
+  const whatsappURL =
+    "https://wa.me/" +
+    PHONE +
+    "?text=" +
+    encodeURIComponent(msg);
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+})
+.catch(err => {
+
+  console.log("Backend Error:", err);
+
+  alert("Backend server not running");
+
+});
 
 }
 
