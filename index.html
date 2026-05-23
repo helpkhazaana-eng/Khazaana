@@ -220,6 +220,7 @@ OneSignalDeferred.push(async function(OneSignal) {
         visibility:hidden;
       }
     }
+
   </style>
 </head>
 
@@ -731,9 +732,14 @@ OneSignalDeferred.push(async function(OneSignal) {
   }, 4200);
 
   setTimeout(() => {
-    document.getElementById("intro")
-      .remove();
-  }, 5000);
+
+  document.getElementById("intro")
+    .remove();
+
+  document.querySelector(".login-section")
+    .classList.add("show");
+
+}, 5000);
 
   setTimeout(() => {
     document.getElementById("pizzaPopup")
@@ -819,6 +825,256 @@ if(savedAddress){
     }, 3000);
 
   });
+</script>
+
+<!-- LOGIN SECTION -->
+
+<section class="login-section">
+
+  <div class="login-card">
+
+    <h2>
+      Welcome to Khazaana 🍽️
+    </h2>
+
+    <p>
+      Login for faster checkout, live tracking & exclusive offers
+    </p>
+
+    <div class="input-group">
+
+      <span class="country-code">
+        +91
+      </span>
+
+      <input
+        type="text"
+        id="phone"
+        placeholder="Enter Mobile Number"
+        maxlength="10"
+      >
+
+    </div>
+
+    <button onclick="sendMyOTP()">
+      Send OTP
+    </button>
+
+    <input
+      type="text"
+      id="otp"
+      placeholder="Enter OTP"
+      maxlength="4"
+    >
+
+    <button onclick="verifyMyOTP()">
+      Verify OTP
+    </button>
+
+  </div>
+
+</section>
+
+<style>
+
+.login-section{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+  z-index:99999;
+}
+
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-radius:28px;
+  padding:35px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+.login-card h2{
+  color:#fff;
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.login-card p{
+  color:#aaa;
+  line-height:1.6;
+  margin-bottom:30px;
+}
+
+.input-group{
+  display:flex;
+  align-items:center;
+  background:#111;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+
+.country-code{
+  color:#ff7a00;
+  padding:0 15px;
+  font-weight:600;
+}
+
+.login-card input{
+  width:100%;
+  padding:16px;
+  border:none;
+  outline:none;
+  background:#111;
+  color:#fff;
+  font-size:15px;
+  border-radius:16px;
+  margin-bottom:18px;
+}
+
+.input-group input{
+  margin-bottom:0;
+  border-radius:0;
+}
+
+.login-card button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:#ff7a00;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  margin-bottom:18px;
+}
+
+</style>
+
+<script>
+
+var configuration = {
+
+  widgetId:
+  "366577665442393232333036",
+
+  tokenAuth:
+  "519145T6OSBLarYCp6a115577P1",
+
+  exposeMethods: true,
+
+  success: function(data){
+
+    console.log(data);
+
+  },
+
+  failure: function(error){
+
+    console.log(error);
+
+    alert("OTP Failed");
+
+  }
+
+};
+
+</script>
+
+<script
+src="https://verify.msg91.com/otp-provider.js"
+onload="initSendOTP(configuration)">
+</script>
+
+<script>
+
+function sendMyOTP(){
+
+  const phone =
+    document.getElementById("phone")
+    .value
+    .trim();
+
+  if(phone.length !== 10){
+
+    alert("Enter valid mobile number");
+
+    return;
+
+  }
+
+  sendOtp(
+
+    "91" + phone,
+
+    function(data){
+
+      console.log(data);
+
+      document.getElementById("otp")
+        .focus();
+
+    },
+
+    function(error){
+
+      console.log(error);
+
+      alert("Failed To Send OTP");
+
+    }
+
+  );
+
+}
+
+function verifyMyOTP(){
+
+  const otp =
+    document.getElementById("otp")
+    .value
+    .trim();
+
+  verifyOtp(
+
+    otp,
+
+    function(data){
+
+      console.log(data);
+
+      localStorage.setItem(
+        "kh_user",
+        document.getElementById("phone").value
+      );
+
+      document.querySelector(".login-section")
+        .style.display = "none";
+
+    },
+
+    function(error){
+
+      console.log(error);
+
+      alert("Invalid OTP ❌");
+
+    }
+
+  );
+
+}
+
 </script>
 
 </body>
