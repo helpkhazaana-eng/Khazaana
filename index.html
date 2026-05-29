@@ -139,7 +139,35 @@ OneSignalDeferred.push(async function(OneSignal) {
       color:#ff7a00;
       text-shadow:0 0 10px #ff7a00;
     }
+.welcome-user{
+  margin-bottom:30px;
+  opacity:0;
+  transform:translateY(-25px);
+  animation:fadeWelcome 1.2s ease forwards;
+}
 
+.welcome-user h2{
+  color:#fff;
+  font-size:clamp(22px,5vw,34px);
+  margin-bottom:8px;
+  font-family:'Orbitron';
+  text-shadow:0 0 12px rgba(255,255,255,0.2);
+}
+
+.welcome-user p{
+  color:#aaa;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+@keyframes fadeWelcome{
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
     #pizzaPopup{
       position:fixed;
       top:0;
@@ -228,20 +256,24 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <!-- INTRO -->
 <div id="intro">
-  <h1 class="brand">KHAZAANA</h1>
+
+  <div class="welcome-user"
+       id="welcomeUser">
+  </div>
+
+  <h1 class="brand">
+    KHAZAANA
+  </h1>
 
   <p class="tagline">
     Aurangabad Food Delivery<br>
+
     <span class="powered">
       Powered by Cups N Crumbs Cafe
     </span>
-  </p>
-</div>
 
-<div class="bg-blobs">
-  <span class="blob blob-1"></span>
-  <span class="blob blob-2"></span>
-  <span class="blob blob-3"></span>
+  </p>
+
 </div>
 
 <header class="glass-navbar">
@@ -725,7 +757,21 @@ OneSignalDeferred.push(async function(OneSignal) {
   © 2026 Khazaana. All rights reserved.
 </footer>
 
+<div class="footer-credit">
+    Designed & Developed by <strong>MD ASKIN ALI</strong>
+</div>
+
 <script>
+ const introSeen =
+  sessionStorage.getItem("kh_intro_seen");
+
+if(!introSeen){
+
+  sessionStorage.setItem(
+    "kh_intro_seen",
+    "true"
+  );
+
   setTimeout(() => {
     document.getElementById("intro")
       .classList.add("fade-out");
@@ -733,13 +779,17 @@ OneSignalDeferred.push(async function(OneSignal) {
 
   setTimeout(() => {
 
+    document.getElementById("intro")
+      .remove();
+
+  }, 5000);
+
+} else {
+
   document.getElementById("intro")
     .remove();
 
-  document.querySelector(".login-section")
-    .classList.add("show");
-
-}, 5000);
+}
 
   setTimeout(() => {
     document.getElementById("pizzaPopup")
@@ -841,6 +891,16 @@ if(savedAddress){
       Login for faster checkout, live tracking & exclusive offers
     </p>
 
+    <!-- NAME -->
+
+    <input
+      type="text"
+      id="username"
+      placeholder="Enter Your Name"
+    >
+
+    <!-- PHONE -->
+
     <div class="input-group">
 
       <span class="country-code">
@@ -856,9 +916,13 @@ if(savedAddress){
 
     </div>
 
+    <!-- SEND OTP -->
+
     <button onclick="sendMyOTP()">
       Send OTP
     </button>
+
+    <!-- OTP -->
 
     <input
       type="text"
@@ -866,6 +930,8 @@ if(savedAddress){
       placeholder="Enter OTP"
       maxlength="4"
     >
+
+    <!-- VERIFY -->
 
     <button onclick="verifyMyOTP()">
       Verify OTP
@@ -959,6 +1025,7 @@ if(savedAddress){
   margin-bottom:18px;
 }
 
+
 </style>
 
 <script>
@@ -997,6 +1064,40 @@ onload="initSendOTP(configuration)">
 </script>
 
 <script>
+
+/* AUTO LOGIN */
+
+window.addEventListener("load", function(){
+
+  const savedUser =
+    localStorage.getItem("kh_name");
+
+  const savedPhone =
+    localStorage.getItem("kh_phone");
+
+  if(savedUser && savedPhone){
+
+    document.querySelector(".login-section")
+      .style.display = "none";
+
+    document.getElementById("welcomeUser")
+      .innerHTML = `
+
+      <h2>
+        Welcome back, ${savedUser} 👋
+      </h2>
+
+      <p>
+        Good to see you again
+      </p>
+
+    `;
+
+  }
+
+});
+
+/* SEND OTP */
 
 function sendMyOTP(){
 
@@ -1038,12 +1139,32 @@ function sendMyOTP(){
 
 }
 
+/* VERIFY OTP */
+
 function verifyMyOTP(){
 
   const otp =
     document.getElementById("otp")
     .value
     .trim();
+
+  const username =
+    document.getElementById("username")
+    .value
+    .trim();
+
+  const phone =
+    document.getElementById("phone")
+    .value
+    .trim();
+
+  if(username === ""){
+
+    alert("Enter your name");
+
+    return;
+
+  }
 
   verifyOtp(
 
@@ -1053,13 +1174,37 @@ function verifyMyOTP(){
 
       console.log(data);
 
+      /* SAVE USER */
+
       localStorage.setItem(
-        "kh_user",
-        document.getElementById("phone").value
+        "kh_name",
+        username
       );
+
+      localStorage.setItem(
+        "kh_phone",
+        phone
+      );
+
+      /* HIDE LOGIN */
 
       document.querySelector(".login-section")
         .style.display = "none";
+
+      /* SHOW WELCOME */
+
+document.getElementById("welcomeUser")
+  .innerHTML = `
+
+  <h2>
+    Welcome back, ${username} 👋
+  </h2>
+
+  <p>
+    Good to see you again
+  </p>
+
+`;
 
     },
 
@@ -1077,5 +1222,95 @@ function verifyMyOTP(){
 
 </script>
 
+<!-- EID NOTICE POPUP -->
+
+<div id="eidPopup">
+
+  <div class="eid-card">
+
+    <h2> Update</h2>
+
+    <p>
+      We will be resuming our services from
+      <strong>1st June</strong>.
+      <br><br>
+      Thank you for your understanding.
+    </p>
+
+    <button disabled>
+  Services Resume 1st June
+</button>
+
+  </div>
+
+</div>
+
+<style>
+
+#eidPopup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
+  padding:20px;
+  backdrop-filter:blur(8px);
+}
+
+.eid-card{
+  width:100%;
+  max-width:380px;
+  background:#111;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  padding:28px;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+.eid-card h2{
+  margin-bottom:15px;
+  color:#ff7a00;
+}
+
+.eid-card p{
+  color:#ccc;
+  line-height:1.7;
+  font-size:15px;
+}
+
+.eid-card button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:#ff7a00;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+</style>
+
+<script>
+
+/* SHOW AFTER INTRO */
+
+setTimeout(() => {
+
+  document.getElementById("eidPopup")
+    .style.display = "flex";
+
+}, 5200);
+
+</script>
+
 </body>
 </html>
+
+
+
