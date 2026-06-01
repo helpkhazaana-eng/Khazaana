@@ -762,10 +762,32 @@ OneSignalDeferred.push(async function(OneSignal) {
 </div>
 
 <script>
- const introSeen =
+
+const introSeen =
   sessionStorage.getItem("kh_intro_seen");
 
-if(!introSeen){
+const savedUser =
+  localStorage.getItem("kh_name");
+
+if(savedUser){
+
+  document.getElementById("welcomeUser").innerHTML = `
+    <h2>Welcome back, ${savedUser} 👋</h2>
+    <p>Good to see you again</p>
+  `;
+
+  setTimeout(() => {
+    document.getElementById("intro")
+      .classList.add("fade-out");
+  }, 2000);
+
+  setTimeout(() => {
+    document.getElementById("intro")
+      .remove();
+  }, 2800);
+
+}
+else if(!introSeen){
 
   sessionStorage.setItem(
     "kh_intro_seen",
@@ -782,13 +804,13 @@ if(!introSeen){
       .remove();
   }, 5000);
 
-} else {
+}
+else{
 
   document.getElementById("intro")
     .remove();
 
 }
-
  
   document.addEventListener("click", function(e){
 
