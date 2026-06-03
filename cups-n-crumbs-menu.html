@@ -781,6 +781,7 @@ function updateTotals(){
   | <b>Total: ₹${total}</b>`;
 }
 
+
 function goToCheckout(){
 
   const selectedItems = [];
@@ -813,6 +814,13 @@ function goToCheckout(){
 
     return;
   }
+
+if(subtotal < 100){
+
+  alert("Minimum order is ₹100");
+
+  return;
+}
 
   const delivery =
   subtotal >= FREE_DELIVERY_ABOVE
