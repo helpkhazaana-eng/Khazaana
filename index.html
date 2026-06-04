@@ -407,9 +407,20 @@ OneSignalDeferred.push(async function(OneSignal) {
       Fresh, hot & hygienic food delivered to your doorstep.
     </p>
 
-    <a href="restaurants.html" class="btn">
-      Order Now
-    </a>
+   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+
+  <a href="restaurants.html" class="btn">
+    Order Now
+  </a>
+
+  <a href="#"
+     id="trackOrderBtn"
+     class="btn"
+     style="display:none;">
+     📦 Track My Order
+  </a>
+
+</div>
 
   </div>
 
@@ -940,6 +951,25 @@ if(savedAddress){
     }, 3000);
 
   });
+
+const activeOrder =
+localStorage.getItem("activeOrder");
+
+if(activeOrder){
+
+  const btn =
+  document.getElementById(
+    "trackOrderBtn"
+  );
+
+  btn.style.display =
+  "inline-flex";
+
+  btn.href =
+  "track-order.html?id=" +
+  activeOrder;
+
+}
 </script>
 
 </body>

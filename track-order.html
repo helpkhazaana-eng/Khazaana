@@ -244,8 +244,13 @@ class="support-icon whatsapp">
 <div class="total">Total: ₹<span id="total">0</span></div>
 </div>
 
-<div class="card center">
-<div id="celebrate"></div>
+<div id="celebrate" class="center"></div>
+
+<div class="center" style="margin-top:20px;">
+  <a href="index.html" class="home-btn">
+🍽️ Order Again
+</a>
+</div>
 
 
 <script type="module">
@@ -382,8 +387,10 @@ ${coupon}
 
 document.getElementById("items").innerHTML = html;
 document.getElementById("total").innerText = d.total || 0;
-
 if(d.status==="Delivered"){
+
+localStorage.removeItem("activeOrder");
+
 document.getElementById("celebrate").innerHTML = `
 <div class="confetti">🎉🎊✨</div>
 
@@ -393,14 +400,9 @@ font-size:20px;
 font-weight:700;
 color:#ffb347;
 ">
-Thank you for ordering from Khazaana ❤️
+✅ Thank you for ordering from Khazaana ❤️
 </div>
-
-<a href="index.html" class="home-btn">
-🏠 Go Home
-</a>
 `;
-
 }
 
 });
