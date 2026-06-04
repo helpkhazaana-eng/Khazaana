@@ -51,7 +51,13 @@ background:rgba(255,122,0,.12);
 border-left-color:#ff7a00
 }
 .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.total{font-size:22px;color:#ffb347;margin-top:12px;font-weight:700}
+.total{
+font-size:28px;
+color:#ffb347;
+margin-top:20px;
+font-weight:800;
+text-align:right;
+}
 .btn{
 display:inline-block;padding:14px 22px;border-radius:16px;
 background:linear-gradient(135deg,#ff7a00,#ff5400);
@@ -320,11 +326,62 @@ document.getElementById("status")
 .innerText = d.status;
 
 let html="";
-(d.items||[]).forEach(i=>{
-html+=`<div class="row"><span>${i.name} x${i.qty}</span><span>₹${i.total}</span></div>`;
+
+(d.items || []).forEach(i=>{
+html += `
+<div class="row">
+<span>${i.name} ×${i.qty}</span>
+<span>₹${i.total}</span>
+</div>
+`;
 });
-document.getElementById("items").innerHTML=html;
-document.getElementById("total").innerText=d.total||0;
+
+const subtotal = d.subtotal || 0;
+const delivery = d.delivery || 0;
+const coupon = d.coupon || "None";
+
+let discountAmount = 0;
+
+if(coupon === "KHAZAANA5"){
+discountAmount = Math.round(subtotal * 0.05);
+}
+
+if(coupon === "CUPSNCRUMBSCAFE10"){
+discountAmount = Math.round(subtotal * 0.10);
+}
+
+html += `
+
+<div style="height:18px"></div>
+
+<div class="row">
+<span>Subtotal</span>
+<span>₹${subtotal}</span>
+</div>
+
+<div class="row">
+<span>Delivery Fee</span>
+<span>${delivery === 0 ? "FREE" : "₹" + delivery}</span>
+</div>
+
+<div class="row">
+<span>Coupon Applied</span>
+<span style="color:#ffb347;font-weight:700">
+${coupon}
+</span>
+</div>
+
+<div class="row">
+<span>Discount</span>
+<span style="color:#25D366;font-weight:700">
+-₹${discountAmount}
+</span>
+</div>
+
+`;
+
+document.getElementById("items").innerHTML = html;
+document.getElementById("total").innerText = d.total || 0;
 
 if(d.status==="Delivered"){
 document.getElementById("celebrate").innerHTML = `

@@ -824,22 +824,24 @@ console.log(err);
 
 try {
 
-  const response = await emailjs.send(
-    "service_0x788xa",
-    "template_utyr3rw",
-    {
-      order_id: Date.now(),
-      customer_name: name,
-      customer_phone: phone,
-      customer_address: address,
-      order_items: order.items.map(i =>
-        `${i.name} x${i.qty} - ₹${i.total}`
-      ).join("\n"),
-      order_total: order.total
-    }
-  );
+const response = await emailjs.send(
+  "service_0x788xa",
+  "template_utyr3rw",
+  {
+    order_id: Date.now(),
+    restaurant_name: order.restaurant,
+    customer_name: name,
+    customer_phone: phone,
+    customer_address: address,
+coupon_used: appliedCoupon || "None",
+    order_items: order.items.map(i =>
+      `${i.name} x${i.qty} - ₹${i.total}`
+    ).join("\n"),
+    order_total: order.total
+  }
+);
 
-  console.log("Email sent", response);
+console.log("Email sent", response);
 
 } catch(err) {
 
