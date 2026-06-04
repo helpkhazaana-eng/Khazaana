@@ -26,6 +26,7 @@ OneSignalDeferred.push(async function(OneSignal) {
   });
 
 });
+
 </script>
   <meta charset="UTF-8">
   <title>Khazaana | Home</title>
@@ -131,6 +132,74 @@ OneSignalDeferred.push(async function(OneSignal) {
       animation:fadeTag 1s ease forwards 1.5s;
       line-height:1.5;
     }
+
+
+.status-card{
+  background:#111;
+  border:1px solid rgba(255,122,0,.25);
+  border-radius:20px;
+  padding:25px;
+  color:#fff;
+}
+
+.status-step{
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  opacity:.4;
+}
+
+.status-step.active{
+  opacity:1;
+  color:#ff7a00;
+  font-weight:700;
+}
+
+.progress-line{
+  width:100%;
+  height:8px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:20px;
+}
+
+#progressBar{
+  width:0%;
+  height:100%;
+  background:#ff7a00;
+  transition:width .8s ease;
+}
+
+.status-step.active{
+  opacity:1;
+  color:#ff7a00;
+  font-weight:700;
+  animation:stepPulse .6s ease;
+}
+
+@keyframes stepPulse{
+  0%{transform:scale(0.95);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+.prep-animation{
+  width:24px;
+  height:24px;
+  border:3px solid #ff7a00;
+  border-top-color:transparent;
+  border-radius:50%;
+  margin-top:8px;
+  animation:spin 1s linear infinite;
+}
+
+.live-order-status{
+  padding:20px;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
 
     .powered{
       display:block;
@@ -346,6 +415,41 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 </section>
 
+<!-- LIVE ORDER STATUS -->
+
+<section id="liveOrderStatus" class="live-order-status" style="display:none;">
+
+  <div class="status-card">
+
+    <h2>🍽️ Your Order Status</h2>
+<div class="progress-line">
+  <div id="progressBar"></div>
+</div>
+
+    <div id="statusContent">
+
+      <div class="status-step">
+  ✅ Order Confirmed
+</div>
+
+      <div class="status-step">
+        🍳 Preparing Your Order
+        <div class="prep-animation"></div>
+      </div>
+
+      <div class="status-step">
+        🛵 Out For Delivery
+      </div>
+
+      <div class="status-step">
+        🎉 Delivered
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 <!-- NEW ARRIVALS -->
@@ -763,31 +867,10 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 <script>
 
-const introSeen =
-  sessionStorage.getItem("kh_intro_seen");
+const intro =
+document.getElementById("intro");
 
-const savedUser =
-  localStorage.getItem("kh_name");
-
-if(savedUser){
-
-  document.getElementById("welcomeUser").innerHTML = `
-    <h2>Welcome back, ${savedUser} 👋</h2>
-    <p>Good to see you again</p>
-  `;
-
-  setTimeout(() => {
-    document.getElementById("intro")
-      .classList.add("fade-out");
-  }, 2000);
-
-  setTimeout(() => {
-    document.getElementById("intro")
-      .remove();
-  }, 2800);
-
-}
-else if(!introSeen){
+if(!sessionStorage.getItem("kh_intro_seen")){
 
   sessionStorage.setItem(
     "kh_intro_seen",
@@ -795,51 +878,19 @@ else if(!introSeen){
   );
 
   setTimeout(() => {
-    document.getElementById("intro")
-      .classList.add("fade-out");
-  }, 4200);
+    intro.classList.add("fade-out");
+  }, 3000);
 
   setTimeout(() => {
-    document.getElementById("intro")
-      .remove();
-  }, 5000);
+    intro.remove();
+  }, 3800);
+
+}else{
+
+  intro.remove();
 
 }
-else{
 
-  document.getElementById("intro")
-    .remove();
-
-}
- 
-  document.addEventListener("click", function(e){
-
-    if(e.target.id === "closePopup"){
-
-      document.getElementById("pizzaPopup")
-        .classList.remove("show");
-    }
-
-  });
-
-  function controlButtonGlow(){
-
-    const btn =
-      document.querySelector(".btn");
-
-    const now = new Date();
-
-    const hours = now.getHours();
-
-    if(hours >= 21 || hours < 10){
-
-      btn.classList.remove("glow");
-
-    } else {
-
-      btn.classList.add("glow");
-    }
-  }
 /* SAVED LOCATION */
 
 const savedAddress =
@@ -857,8 +908,6 @@ if(savedAddress){
 
 }
   window.addEventListener("load", function(){
-
-    controlButtonGlow();
 
     const track =
       document.getElementById("reviewTrack");
@@ -893,350 +942,6 @@ if(savedAddress){
   });
 </script>
 
-<!-- LOGIN SECTION -->
-
-<section class="login-section">
-
-  <div class="login-card">
-
-    <h2>
-      Welcome to Khazaana 🍽️
-    </h2>
-
-    <p>
-      Login for faster checkout, live tracking & exclusive offers
-    </p>
-
-    <!-- NAME -->
-
-    <input
-      type="text"
-      id="username"
-      placeholder="Enter Your Name"
-    >
-
-    <!-- PHONE -->
-
-    <div class="input-group">
-
-      <span class="country-code">
-        +91
-      </span>
-
-      <input
-        type="text"
-        id="phone"
-        placeholder="Enter Mobile Number"
-        maxlength="10"
-      >
-
-    </div>
-
-    <!-- SEND OTP -->
-
-    <button onclick="sendMyOTP()">
-      Send OTP
-    </button>
-
-    <!-- OTP -->
-
-    <input
-      type="text"
-      id="otp"
-      placeholder="Enter OTP"
-      maxlength="4"
-    >
-
-    <!-- VERIFY -->
-
-    <button onclick="verifyMyOTP()">
-      Verify OTP
-    </button>
-
-  </div>
-
-</section>
-
-<style>
-
-.login-section{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(8px);
-  z-index:99999;
-}
-
-.login-card{
-  width:100%;
-  max-width:420px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
-  backdrop-filter:blur(18px);
-  border-radius:28px;
-  padding:35px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.5);
-}
-
-.login-card h2{
-  color:#fff;
-  font-size:32px;
-  margin-bottom:12px;
-}
-
-.login-card p{
-  color:#aaa;
-  line-height:1.6;
-  margin-bottom:30px;
-}
-
-.input-group{
-  display:flex;
-  align-items:center;
-  background:#111;
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:18px;
-}
-
-.country-code{
-  color:#ff7a00;
-  padding:0 15px;
-  font-weight:600;
-}
-
-.login-card input{
-  width:100%;
-  padding:16px;
-  border:none;
-  outline:none;
-  background:#111;
-  color:#fff;
-  font-size:15px;
-  border-radius:16px;
-  margin-bottom:18px;
-}
-
-.input-group input{
-  margin-bottom:0;
-  border-radius:0;
-}
-
-.login-card button{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:16px;
-  background:#ff7a00;
-  color:#fff;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
-  margin-bottom:18px;
-}
-
-
-</style>
-
-<script>
-
-var configuration = {
-
-  widgetId:
-  "366577665442393232333036",
-
-  tokenAuth:
-  "519145T6OSBLarYCp6a115577P1",
-
-  exposeMethods: true,
-
-  success: function(data){
-
-    console.log(data);
-
-  },
-
-  failure: function(error){
-
-    console.log(error);
-
-    alert("OTP Failed");
-
-  }
-
-};
-
-</script>
-
-<script
-src="https://verify.msg91.com/otp-provider.js"
-onload="initSendOTP(configuration)">
-</script>
-
-<script>
-
-/* AUTO LOGIN */
-
-window.addEventListener("load", function(){
-
-  const savedUser =
-    localStorage.getItem("kh_name");
-
-  const savedPhone =
-    localStorage.getItem("kh_phone");
-
-  if(savedUser && savedPhone){
-
-    document.querySelector(".login-section")
-      .style.display = "none";
-
-    document.getElementById("welcomeUser")
-      .innerHTML = `
-
-      <h2>
-        Welcome back, ${savedUser} 👋
-      </h2>
-
-      <p>
-        Good to see you again
-      </p>
-
-    `;
-
-  }
-
-});
-
-/* SEND OTP */
-
-function sendMyOTP(){
-
-  const phone =
-    document.getElementById("phone")
-    .value
-    .trim();
-
-  if(phone.length !== 10){
-
-    alert("Enter valid mobile number");
-
-    return;
-
-  }
-
-  sendOtp(
-
-    "91" + phone,
-
-    function(data){
-
-      console.log(data);
-
-      document.getElementById("otp")
-        .focus();
-
-    },
-
-    function(error){
-
-      console.log(error);
-
-      alert("Failed To Send OTP");
-
-    }
-
-  );
-
-}
-
-/* VERIFY OTP */
-
-function verifyMyOTP(){
-
-  const otp =
-    document.getElementById("otp")
-    .value
-    .trim();
-
-  const username =
-    document.getElementById("username")
-    .value
-    .trim();
-
-  const phone =
-    document.getElementById("phone")
-    .value
-    .trim();
-
-  if(username === ""){
-
-    alert("Enter your name");
-
-    return;
-
-  }
-
-  verifyOtp(
-
-    otp,
-
-    function(data){
-
-      console.log(data);
-
-      /* SAVE USER */
-
-      localStorage.setItem(
-        "kh_name",
-        username
-      );
-
-      localStorage.setItem(
-        "kh_phone",
-        phone
-      );
-
-      /* HIDE LOGIN */
-
-      document.querySelector(".login-section")
-        .style.display = "none";
-
-      /* SHOW WELCOME */
-
-document.getElementById("welcomeUser")
-  .innerHTML = `
-
-  <h2>
-    Welcome back, ${username} 👋
-  </h2>
-
-  <p>
-    Good to see you again
-  </p>
-
-`;
-
-    },
-
-    function(error){
-
-      console.log(error);
-
-      alert("Invalid OTP ❌");
-
-    }
-
-  );
-
-}
-
-</script>
 </body>
 </html>
 

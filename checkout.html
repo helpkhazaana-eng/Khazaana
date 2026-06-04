@@ -22,6 +22,56 @@ padding:20px;
 min-height:100vh;
 }
 
+.slide-order{
+    position:relative;
+    width:100%;
+    height:65px;
+    border-radius:40px;
+    margin-top:22px;
+
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+    user-select:none;
+}
+
+.slide-text{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:700;
+    color:#ffb347;
+    letter-spacing:.5px;
+}
+
+#sliderBtn{
+    position:absolute;
+    left:5px;
+    top:5px;
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#ff9a1f,#ff6b00);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+    color:white;
+    cursor:pointer;
+
+    transition:.1s;
+}
+
 .card{
 max-width:620px;
 margin:auto;
@@ -234,6 +284,13 @@ cursor:not-allowed;
 }
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("QRt9B91Mf6uBKYR5J");
+</script>
+
 </head>
 
 <body>
@@ -287,19 +344,40 @@ id="couponMessage"
 style="margin-top:12px;font-size:14px;color:#25D366;text-align:center;font-weight:700;">
 </div>
 
-<button
-class="btn"
-onclick="finalOrder()">
-
-Final Order on WhatsApp
-
-</button>
+<div class="slide-order">
+    <div class="slide-text">Slide to Place Order →</div>
+    <div id="sliderBtn">➜</div>
+</div>
 
 <div class="note">
 Please verify your details before ordering
 </div>
 
 </div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import { getFirestore, collection, addDoc }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+  authDomain: "khazaana-7088c.firebaseapp.com",
+  projectId: "khazaana-7088c",
+  storageBucket: "khazaana-7088c.firebasestorage.app",
+  messagingSenderId: "988898941531",
+  appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
+
+const app = initializeApp(firebaseConfig);
+
+window.db = getFirestore(app);
+window.collection = collection;
+window.addDoc = addDoc;
+
+</script>
 
 <script>
 
@@ -398,6 +476,7 @@ ${discount > 0 ? `
 </div>
 
 `;
+
 }
 
 renderOrder();
@@ -490,6 +569,7 @@ CUPSNCRUMBSCAFE10
 }
 
 couponList.innerHTML = html;
+
 }
 
 loadCoupons();
@@ -500,6 +580,7 @@ document.getElementById("coupon")
 .value = code;
 
 applyCoupon();
+
 }
 
 function showCelebration(){
@@ -567,6 +648,7 @@ msgBox.innerText =
 updateTotal();
 return;
 }
+
 }
 
 else if(code === "CUPSNCRUMBSCAFE10"){
@@ -594,6 +676,7 @@ msgBox.innerText =
 
 updateTotal();
 return;
+
 }
 
 }else{
@@ -603,7 +686,9 @@ msgBox.innerText =
 
 updateTotal();
 return;
+
 }
+
 }
 
 else{
@@ -613,9 +698,11 @@ msgBox.innerText =
 
 updateTotal();
 return;
+
 }
 
 updateTotal();
+
 }
 
 function updateTotal(){
@@ -628,16 +715,17 @@ if(discount > 0){
 finalSubtotal =
 order.subtotal -
 ((order.subtotal * discount)/100);
+
 }
 
 order.total =
 Math.round(finalSubtotal + order.delivery);
 
 renderOrder();
+
 }
 
-function finalOrder(){
-
+async function finalOrder(){
 const name =
 document.getElementById("name")
 .value.trim();
@@ -655,6 +743,7 @@ if(!name || !phone || !address){
 alert("Please enter all details");
 
 return;
+
 }
 
 if(phone.length !== 10){
@@ -662,7 +751,10 @@ if(phone.length !== 10){
 alert("Please enter valid mobile number");
 
 return;
+
 }
+
+/* SAVE USER */
 
 localStorage.setItem(
 "kh_name",
@@ -679,44 +771,214 @@ localStorage.setItem(
 address
 );
 
-let items = "";
+/* SEND ORDER TO BACKEND */
 
-order.items.forEach(i=>{
+fetch(
+"https://khazaana-bozo.onrender.com/place-order",
+{
 
-items +=
-`${i.name} x${i.qty} = ₹${i.total}\n`;
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+customer:name,
+
+phone:phone,
+
+address:address,
+
+items:order.items,
+
+subtotal:order.subtotal,
+
+delivery:order.delivery,
+
+total:order.total,
+
+payment:"COD",
+
+restaurant:order.restaurant,
+
+coupon:appliedCoupon || "None"
+
+})
+
+}
+
+)
+.then(res=>res.json())
+.then(data=>{
+
+console.log(data);
+
+})
+.catch(err=>{
+
+console.log(err);
 
 });
 
-let msg =
-`Hello 👋
+try {
 
-Order from *${order.restaurant}*
+  const response = await emailjs.send(
+    "service_0x788xa",
+    "template_utyr3rw",
+    {
+      order_id: Date.now(),
+      customer_name: name,
+      customer_phone: phone,
+      customer_address: address,
+      order_items: order.items.map(i =>
+        `${i.name} x${i.qty} - ₹${i.total}`
+      ).join("\n"),
+      order_total: order.total
+    }
+  );
 
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
+  console.log("Email sent", response);
 
-${items}
+} catch(err) {
 
-Subtotal: ₹${order.subtotal}
-Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
-Coupon: ${appliedCoupon || "None"}
-Total: ₹${order.total}
-
-📞 8695902696 / 8649851034
-`;
-
-const whatsappURL =
-"https://wa.me/" +
-PHONE +
-"?text=" +
-encodeURIComponent(msg);
-
-window.location.href =
-whatsappURL;
+  console.error("EMAIL ERROR:", err);
 
 }
+
+const docRef = await window.addDoc(
+  window.collection(window.db,"orders"),
+  {
+    customer:name,
+    phone:phone,
+    address:address,
+    items:order.items,
+    subtotal:order.subtotal,
+    delivery:order.delivery,
+    total:order.total,
+    restaurant:order.restaurant,
+    coupon:appliedCoupon || "None",
+    payment:"COD",
+    status:"Pending",
+    date:new Date().toISOString()
+  }
+);
+
+localStorage.removeItem(
+  "khazaanaOrder"
+);
+
+window.location.href =
+"track-order.html?id=" +
+docRef.id;
+
+}
+
+const slider =
+document.getElementById("sliderBtn");
+
+const container =
+document.querySelector(".slide-order");
+
+let dragging = false;
+
+slider.addEventListener("mousedown", () => {
+    dragging = true;
+});
+
+document.addEventListener("mousemove", (e) => {
+
+    if (!dragging) return;
+
+    const rect = container.getBoundingClientRect();
+
+    let x = e.clientX - rect.left - 27;
+
+    const max = rect.width - 60;
+
+    if (x < 0) x = 0;
+    if (x > max) x = max;
+
+    slider.style.left = x + "px";
+});
+
+document.addEventListener("mouseup", () => {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    const rect = container.getBoundingClientRect();
+
+    const max = rect.width - 60;
+
+    const current =
+    parseInt(slider.style.left || 0);
+
+    if (current > max * 0.85) {
+
+        slider.innerHTML = "✓";
+        slider.style.background = "#25D366";
+
+        finalOrder();
+
+    } else {
+
+        slider.style.left = "5px";
+
+    }
+
+});
+
+slider.addEventListener("touchstart",()=>{
+    dragging=true;
+});
+
+document.addEventListener("touchmove",(e)=>{
+
+    if(!dragging) return;
+
+    const rect = container.getBoundingClientRect();
+
+    let x =
+    e.touches[0].clientX -
+    rect.left - 27;
+
+    const max = rect.width - 60;
+
+    if(x < 0) x = 0;
+    if(x > max) x = max;
+
+    slider.style.left = x + "px";
+});
+
+document.addEventListener("touchend",()=>{
+
+    if(!dragging) return;
+
+    dragging=false;
+
+    const rect = container.getBoundingClientRect();
+
+    const max = rect.width - 60;
+
+    const current =
+    parseInt(slider.style.left || 0);
+
+    if(current > max * 0.85){
+
+        slider.innerHTML = "✓";
+        slider.style.background = "#25D366";
+
+        finalOrder();
+
+    }else{
+
+        slider.style.left = "5px";
+    }
+
+});
 
 </script>
 

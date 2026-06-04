@@ -4,10 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
 
 <title>
-Khazaana Admin Panel
+TEST123
 </title>
 
 <link
@@ -173,6 +177,13 @@ color:white;
 
 }
 
+.out{
+
+background:#ff9a1f;
+color:white;
+
+}
+
 .cancelled{
 
 background:#ff4d4f;
@@ -284,6 +295,13 @@ color:white;
 
 }
 
+.deliveryBtn{
+
+background:#ff9a1f;
+color:white;
+
+}
+
 .deliverBtn{
 
 background:#3b82f6;
@@ -293,7 +311,7 @@ color:white;
 
 .callBtn{
 
-background:#ff9a1f;
+background:#8b5cf6;
 color:white;
 
 }
@@ -402,76 +420,70 @@ Loading Orders...
 
 </div>
 
-<script>
+<script type="module">
 
-const ordersBox =
-document.getElementById("orders");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-async function loadOrders(){
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-  try{
+const firebaseConfig = {
+  apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+  authDomain: "khazaana-7088c.firebaseapp.com",
+  projectId: "khazaana-7088c",
+  storageBucket: "khazaana-7088c.firebasestorage.app",
+  messagingSenderId: "988898941531",
+  appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
 
-    const res =
-    await fetch(
-      "https://khazaana-bozo.onrender.com/orders"
-    );
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    const orders =
-    await res.json();
+const ordersBox = document.getElementById("orders");
+
+onSnapshot(
+  collection(db,"orders"),
+  (snapshot)=>{
 
     ordersBox.innerHTML = "";
 
-    let totalRevenue = 0;
+    let totalOrders = 0;
+    let revenue = 0;
 
-    document.getElementById(
-      "totalOrders"
-    ).innerText =
-    orders.length;
+    if(snapshot.empty){
 
-    if(orders.length === 0){
-
-      ordersBox.innerHTML = `
-
-      <div class="empty">
-
-      No Orders Found
-
-      </div>
-
-      `;
+      ordersBox.innerHTML =
+      '<div class="empty">No Orders Found</div>';
 
       return;
     }
 
-    orders.forEach((data)=>{
+    snapshot.forEach((orderDoc)=>{
 
-      totalRevenue +=
-      data.total || 0;
+      const data = orderDoc.data();
+      const id = orderDoc.id;
 
-      const status =
-      (data.status || "Pending")
-      .toLowerCase();
+      totalOrders++;
+      revenue += Number(data.total || 0);
 
       let itemsHTML = "";
 
-      if(data.items){
+      if(Array.isArray(data.items)){
 
-        data.items.forEach(i=>{
+        data.items.forEach(item=>{
 
           itemsHTML += `
-
           <div class="item">
-
-          <span>
-          ${i.name} x${i.qty}
-          </span>
-
-          <span>
-          ₹${i.total}
-          </span>
-
+            <span>${item.name} x${item.qty}</span>
+            <span>₹${item.total}</span>
           </div>
-
           `;
 
         });
@@ -482,109 +494,61 @@ async function loadOrders(){
 
       <div class="order-card">
 
-      <div class="top">
+        <div class="top">
 
-      <div class="customer">
-      ${data.customer}
-      </div>
+          <div class="customer">
+            ${data.customer || data.customerName || "Customer"}
+          </div>
 
-      <div class="status ${status}">
-      ${status}
-      </div>
+          <div class="status pending">
+            ${data.status || "Pending"}
+          </div>
 
-      </div>
+        </div>
 
-      <div class="info">
-      📍 ${data.address}
-      </div>
+        <div class="info">
+          📍 ${data.address || ""}
+        </div>
 
-      <div class="info">
-      🍴 ${data.restaurant}
-      </div>
+        <div class="info">
+          🍴 ${data.restaurant || ""}
+        </div>
 
-      <div class="info phone">
-      📞 ${data.phone}
-      </div>
+        <div class="info phone">
+          📞 ${data.phone || ""}
+        </div>
 
-      <div class="info">
-      💰 ₹${data.total}
-      </div>
+        <div class="info">
+          💰 ₹${data.total || 0}
+        </div>
 
-      <div class="items-box">
+        <div class="items-box">
+          ${itemsHTML}
+        </div>
 
-      ${itemsHTML}
+        <div class="buttons">
 
-      </div>
+          <button class="acceptBtn"
+          onclick="acceptOrder('${id}')">
+          Accept
+          </button>
 
-      <div class="assign">
+          <button class="deliveryBtn"
+          onclick="outForDelivery('${id}')">
+          Out For Delivery
+          </button>
 
-      <label>
-      Assign Rider
-      </label>
+          <button class="deliverBtn"
+          onclick="deliverOrder('${id}')">
+          Delivered
+          </button>
 
-      <select>
+          <button class="deleteBtn"
+          onclick="deleteOrder('${id}')">
+          Delete
+          </button>
 
-      <option>
-      Select Rider
-      </option>
-
-      <option>
-      Mohim
-      </option>
-
-      <option>
-      Raju
-      </option>
-
-      <option>
-      Imran
-      </option>
-
-      </select>
-
-      </div>
-
-      <div class="buttons">
-
-      <button
-      class="acceptBtn"
-      onclick="acceptOrder('${data.id}')">
-
-      Accept
-
-      </button>
-
-      <button
-      class="deliverBtn"
-      onclick="deliverOrder('${data.id}')">
-
-      Delivered
-
-      </button>
-
-      <button
-      class="callBtn"
-      onclick="callCustomer('${data.phone}')">
-
-      Call Customer
-
-      </button>
-
-      <button
-      class="deleteBtn"
-      onclick="deleteOrder('${data.id}')">
-
-      Delete
-
-      </button>
-
-      </div>
-
-      <div class="date">
-
-      📅 ${data.date}
-
-      </div>
+        </div>
 
       </div>
 
@@ -592,140 +556,46 @@ async function loadOrders(){
 
     });
 
-    document.getElementById(
-      "revenue"
-    ).innerText =
-    "₹" + totalRevenue;
+    document.getElementById("totalOrders").innerText =
+    totalOrders;
+
+    document.getElementById("revenue").innerText =
+    "₹" + revenue;
+
+  },
+  (error)=>{
+
+    alert(error.message);
+    console.error(error);
 
   }
-
-  catch(err){
-
-    ordersBox.innerHTML = `
-
-    <div class="empty">
-
-    Backend Not Running
-
-    </div>
-
-    `;
-
-    console.log(err);
-
-  }
-
-}
-
-/* ACCEPT */
-
-window.acceptOrder =
-async(id)=>{
-
-  await fetch(
-    "https://khazaana-bozo.onrender.com/update-status",
-    {
-
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify({
-
-        id:id,
-        status:"Accepted"
-
-      })
-
-    }
-  );
-
-  loadOrders();
-
-};
-
-/* DELIVER */
-
-window.deliverOrder =
-async(id)=>{
-
-  await fetch(
-    "https://khazaana-bozo.onrender.com/update-status",
-    {
-
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify({
-
-        id:id,
-        status:"Delivered"
-
-      })
-
-    }
-  );
-
-  loadOrders();
-
-};
-
-/* DELETE */
-
-window.deleteOrder =
-async(id)=>{
-
-  if(confirm(
-    "Delete this order?"
-  )){
-
-    await fetch(
-      "https://khazaana-bozo.onrender.com/delete-order",
-      {
-
-        method:"POST",
-
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-          id:id
-        })
-
-      }
-    );
-
-    loadOrders();
-
-  }
-
-};
-
-/* CALL */
-
-window.callCustomer =
-(phone)=>{
-
-  window.open(
-    `tel:${phone}`
-  );
-
-};
-
-loadOrders();
-
-setInterval(
-  loadOrders,
-  3000
 );
+
+window.acceptOrder = async(id)=>{
+  await updateDoc(doc(db,"orders",id),{
+    status:"Accepted"
+  });
+};
+
+window.outForDelivery = async(id)=>{
+  await updateDoc(doc(db,"orders",id),{
+    status:"Out For Delivery"
+  });
+};
+
+window.deliverOrder = async(id)=>{
+  await updateDoc(doc(db,"orders",id),{
+    status:"Delivered"
+  });
+};
+
+window.deleteOrder = async(id)=>{
+  if(!confirm("Delete order?")) return;
+  await deleteDoc(doc(db,"orders",id));
+};
 
 </script>
 
 </body>
+
 </html>
