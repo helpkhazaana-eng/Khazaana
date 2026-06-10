@@ -5,6 +5,11 @@
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 
@@ -76,6 +81,86 @@ OneSignalDeferred.push(async function(OneSignal) {
       box-shadow:0 10px 25px rgba(0,0,0,.15);
       display:block;
     }
+
+.whatsapp-float{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:65px;
+    height:65px;
+    background:#25D366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:34px;
+    z-index:99999;
+
+    box-shadow:
+    0 0 15px #25D366,
+    0 0 30px #25D366,
+    0 0 45px #25D366;
+
+    animation:
+    pulseGlow 2s infinite,
+    floatMove 3s ease-in-out infinite;
+}
+
+.whatsapp-float:hover{
+    transform:scale(1.15);
+}
+
+@keyframes pulseGlow{
+    0%{
+        box-shadow:
+        0 0 10px #25D366,
+        0 0 20px #25D366;
+    }
+    50%{
+        box-shadow:
+        0 0 25px #25D366,
+        0 0 50px #25D366,
+        0 0 75px #25D366;
+    }
+    100%{
+        box-shadow:
+        0 0 10px #25D366,
+        0 0 20px #25D366;
+    }
+}
+
+@keyframes floatMove{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* Ripple Effect */
+.whatsapp-float::before{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:2px solid #25D366;
+    animation:ripple 2s infinite;
+}
+
+@keyframes ripple{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1.8);
+        opacity:0;
+    }
+}
 
     .review-dots{
       display:flex;
@@ -893,8 +978,14 @@ if(!sessionStorage.getItem("kh_intro_seen")){
   }, 3000);
 
   setTimeout(() => {
-    intro.remove();
-  }, 3800);
+
+  intro.remove();
+
+  document.getElementById(
+    "closedOverlay"
+  ).style.display = "flex";
+
+}, 3800);
 
 }else{
 
@@ -971,6 +1062,83 @@ if(activeOrder){
 
 }
 </script>
+
+<a href="https://wa.me/918695902696"
+   class="whatsapp-float"
+   target="_blank">
+   <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<div id="closedOverlay">
+  <div class="closed-box">
+
+    <div class="closed-icon">🚫</div>
+
+    <h1>ORDERS UNAVAILABLE TODAY</h1>
+
+    <p>
+      Due to operational reasons, ordering is temporarily disabled today.
+      <br><br>
+      We will resume accepting orders from tomorrow.
+      <br><br>
+      Thank you for your patience and continued support.
+    </p>
+
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,.15);margin:20px 0;">
+
+    <p>
+      কিছু অপারেশনাল কারণে আজ অর্ডার গ্রহণ সাময়িকভাবে বন্ধ রাখা হয়েছে।
+      <br><br>
+      আগামীকাল থেকে আবার অর্ডার গ্রহণ শুরু হবে।
+      <br><br>
+      আপনাদের ধৈর্য ও সহযোগিতার জন্য ধন্যবাদ।
+    </p>
+
+    <span>— Team Khazaana</span>
+
+</div>
+
+<style>
+#closedOverlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.97);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+}
+
+.closed-box{
+    max-width:450px;
+    padding:40px 30px;
+    text-align:center;
+    color:#fff;
+}
+
+.closed-icon{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.closed-box h1{
+    color:#ff7a00;
+    font-size:32px;
+    margin-bottom:18px;
+}
+
+.closed-box p{
+    color:#d1d5db;
+    font-size:17px;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.closed-box span{
+    color:#ff7a00;
+    font-weight:600;
+}
+</style>
 
 </body>
 </html>

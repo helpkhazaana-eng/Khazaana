@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Khazaana Delivery Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#0f0f0f;
+color:#fff;
+padding:20px;
+}
+
+.logo{
+font-size:32px;
+font-weight:700;
+color:#ff9a1f;
+margin-bottom:20px;
+}
+
+.stats{
+display:flex;
+gap:15px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.card{
+background:#181818;
+padding:20px;
+border-radius:20px;
+min-width:180px;
+}
+
+.card h3{
+color:#999;
+font-size:14px;
+margin-bottom:8px;
+}
+
+.card p{
+font-size:28px;
+font-weight:700;
+}
+
+.order{
+background:#181818;
+padding:20px;
+border-radius:25px;
+margin-bottom:20px;
+border:1px solid #2c2c2c;
+}
+
+.order h2{
+margin-bottom:10px;
+}
+
+.info{
+margin:8px 0;
+color:#ddd;
+}
+
+.buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:20px;
+}
+
+button{
+border:none;
+padding:14px;
+border-radius:15px;
+font-weight:700;
+cursor:pointer;
+}
+
+.out{
+background:#ff9a1f;
+color:white;
+}
+
+.delivered{
+background:#22c55e;
+color:white;
+}
+
+.call{
+display:inline-block;
+margin-top:10px;
+color:#25D366;
+text-decoration:none;
+font-weight:600;
+}
+
+</style>
+</head>
+<body>
+
+<div class="logo">
+Khazaana Delivery
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h3>Today's Earnings</h3>
+<p id="earnings">₹0</p>
+</div>
+
+<div class="card">
+<h3>Completed</h3>
+<p id="completed">0</p>
+</div>
+
+</div>
+
+<div id="orders">
+Loading...
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+onSnapshot,
+doc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+  authDomain: "khazaana-7088c.firebaseapp.com",
+  projectId: "khazaana-7088c",
+  storageBucket: "khazaana-7088c.firebasestorage.app",
+  messagingSenderId: "988898941531",
+  appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const ordersBox =
+document.getElementById("orders");
+
+let completedToday = 0;
+let totalEarnings = 0;
+
+function updateStats(){
+
+document.getElementById("completed").innerText =
+completedToday;
+
+document.getElementById("earnings").innerText =
+"₹" + totalEarnings;
+
+}
+
+onSnapshot(
+collection(db,"orders"),
+(snapshot)=>{
+
+ordersBox.innerHTML = "";
+
+let activeFound = false;
+completedToday = 0;
+totalEarnings = 0;
+
+snapshot.forEach((orderDoc)=>{
+
+const data = orderDoc.data();
+console.log("ORDER:", data);
+const id = orderDoc.id;
+
+if(data.status === "Delivered"){
+
+completedToday++;
+
+if(
+(data.restaurant || "")
+.toUpperCase()
+.includes("CUPS N CRUMBS")
+){
+totalEarnings += 15;
+}else{
+totalEarnings += 20;
+}
+
+}
+
+if(
+data.status !== "Accepted" &&
+data.status !== "Out For Delivery"
+){
+return;
+}
+
+activeFound = true;
+
+ordersBox.innerHTML += `
+
+<div class="order">
+
+<h2>
+${data.customer || "Customer"}
+</h2>
+
+<div class="info">
+📞 ${data.phone || ""}
+</div>
+
+<div class="info">
+📍 ${data.address || ""}
+</div>
+
+<div class="info">
+💰 ₹${data.total || 0}
+</div>
+
+<a class="call"
+href="tel:${data.phone}">
+Call Customer
+</a>
+
+<div class="buttons">
+
+<button
+class="out"
+onclick="outForDelivery('${id}')">
+
+Out For Delivery
+
+</button>
+
+<button
+class="delivered"
+onclick="deliverOrder('${id}')">
+
+Delivered
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(!activeFound){
+
+ordersBox.innerHTML =
+"<h2>No Active Orders</h2>";
+
+}
+
+updateStats();
+
+});
+
+window.outForDelivery = async(id)=>{
+
+await updateDoc(
+doc(db,"orders",id),
+{
+status:"Out For Delivery"
+}
+);
+
+};
+
+window.deliverOrder = async(id)=>{
+
+await updateDoc(
+doc(db,"orders",id),
+{
+status:"Delivered"
+}
+);
+
+};
+
+</script>
+
+</body>
+</html>
