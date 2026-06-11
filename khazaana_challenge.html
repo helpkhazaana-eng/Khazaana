@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Khazaana Challenge</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(
+135deg,
+#050505,
+#121212
+);
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+color:white;
+
+}
+
+.container{
+
+width:100%;
+max-width:750px;
+
+background:
+linear-gradient(
+145deg,
+#181818,
+#101010
+);
+
+border:1px solid #2b2b2b;
+
+border-radius:30px;
+
+padding:35px;
+
+box-shadow:
+0 0 60px rgba(255,154,31,0.15);
+
+}
+
+.logo{
+
+text-align:center;
+font-size:38px;
+font-weight:700;
+color:#ff9a1f;
+
+margin-bottom:10px;
+
+}
+
+.tagline{
+
+text-align:center;
+color:#bbb;
+font-size:15px;
+
+margin-bottom:30px;
+
+}
+
+.progress{
+
+height:12px;
+background:#222;
+
+border-radius:30px;
+
+overflow:hidden;
+
+margin-bottom:30px;
+
+}
+
+.progress-fill{
+
+height:100%;
+width:0%;
+
+background:
+linear-gradient(
+90deg,
+#ff9a1f,
+#ffb347
+);
+
+transition:0.4s;
+
+}
+
+.question-number{
+
+font-size:14px;
+color:#999;
+
+margin-bottom:12px;
+
+}
+
+.question{
+
+font-size:28px;
+font-weight:700;
+
+line-height:1.4;
+
+margin-bottom:25px;
+
+}
+
+.options{
+
+display:flex;
+flex-direction:column;
+gap:14px;
+
+}
+
+.option{
+
+background:#161616;
+
+border:1px solid #2c2c2c;
+
+padding:18px;
+
+border-radius:18px;
+
+cursor:pointer;
+
+transition:0.25s;
+
+font-size:16px;
+
+}
+
+.option:hover{
+
+border-color:#ff9a1f;
+
+transform:translateY(-2px);
+
+}
+
+.option.selected{
+
+border:2px solid #ff9a1f;
+
+background:#1f1a14;
+
+}
+
+.nextBtn{
+
+margin-top:30px;
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+border-radius:18px;
+
+background:#ff9a1f;
+
+color:black;
+
+font-size:16px;
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.nextBtn:hover{
+
+opacity:.92;
+
+}
+
+.result{
+
+display:none;
+text-align:center;
+
+}
+
+.trophy{
+
+font-size:80px;
+
+margin-bottom:20px;
+
+animation:float 2s infinite ease-in-out;
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.result h2{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+color:#ff9a1f;
+
+}
+
+.score{
+
+font-size:20px;
+
+margin-bottom:20px;
+
+}
+
+.reward{
+
+font-size:42px;
+font-weight:700;
+
+color:#25D366;
+
+margin-bottom:20px;
+
+}
+
+.coupon{
+
+background:#0b0b0b;
+
+padding:22px;
+
+border-radius:20px;
+
+border:1px solid #333;
+
+font-size:28px;
+font-weight:700;
+
+letter-spacing:2px;
+
+margin-bottom:20px;
+
+}
+
+.copyBtn{
+
+background:#25D366;
+color:white;
+
+border:none;
+
+padding:16px 25px;
+
+border-radius:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.startOrder{
+
+margin-top:15px;
+
+display:block;
+
+background:#ff9a1f;
+
+color:black;
+
+text-decoration:none;
+
+padding:16px;
+
+border-radius:16px;
+
+font-weight:700;
+
+}
+
+.mov{
+
+margin-top:25px;
+
+background:#0b0b0b;
+
+padding:20px;
+
+border-radius:18px;
+
+text-align:left;
+
+}
+
+.mov h3{
+
+margin-bottom:10px;
+color:#ff9a1f;
+
+}
+
+.mov p{
+
+margin:8px 0;
+color:#ddd;
+
+}
+
+@media(max-width:768px){
+
+.logo{
+font-size:30px;
+}
+
+.question{
+font-size:22px;
+}
+
+.container{
+padding:25px;
+}
+
+}
+
+#introScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+z-index:99999;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+flex-direction:column;
+}
+
+.introText{
+font-size:42px;
+font-weight:700;
+text-align:center;
+padding:20px;
+color:#ff9a1f;
+
+animation:fadeZoom 1s ease;
+}
+
+@keyframes fadeZoom{
+from{
+opacity:0;
+transform:scale(.7);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+@media(max-width:768px){
+
+.introText{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+<div id="introScreen">
+
+<div class="introText" id="introText">
+Are You Ready For The Khazaana Challenge?
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="logo">
+🏆 Khazaana Challenge
+</div>
+
+<div class="tagline">
+Answer 5 questions and unlock up to ₹50 OFF
+</div>
+
+<div id="quizArea">
+
+<div class="progress">
+<div
+class="progress-fill"
+id="progressFill">
+</div>
+</div>
+
+<div
+class="question-number"
+id="questionNumber">
+Question 1 of 5
+</div>
+
+<div
+class="question"
+id="question">
+Loading...
+</div>
+
+<div
+class="options"
+id="options">
+</div>
+
+<button
+class="nextBtn"
+id="nextBtn">
+Next Question
+</button>
+
+</div>
+
+<div
+class="result"
+id="resultArea">
+
+<div class="trophy">
+🏆
+</div>
+
+<h2>
+KHAAZAANA INSIDER
+</h2>
+
+<div
+class="score"
+id="scoreText">
+</div>
+
+<div
+class="reward"
+id="rewardText">
+</div>
+
+<div
+class="coupon"
+id="couponCode">
+</div>
+
+<button
+class="copyBtn"
+id="copyBtn">
+📋 Copy Coupon
+</button>
+
+<a
+href="index.html"
+class="startOrder">
+🛒 Start Ordering
+</a>
+
+<div class="mov">
+
+<h3>
+Minimum Order Value
+</h3>
+
+<p>☕ Cups N Crumbs Café → ₹300</p>
+<p>🍟 Khazaana Snacks → ₹350</p>
+<p>🍛 Khazaana Rasoi → ₹350</p>
+<p>🍽️ Bondhu → ₹400</p>
+<p>🍗 Haji Biryani → ₹500</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+  authDomain: "khazaana-7088c.firebaseapp.com",
+  projectId: "khazaana-7088c",
+  storageBucket: "khazaana-7088c.firebasestorage.app",
+  messagingSenderId: "988898941531",
+  appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+function generateCoupon(discount){
+
+const random =
+Math.random()
+.toString(36)
+.substring(2,7)
+.toUpperCase();
+
+return `KHZ${discount}-${random}`;
+
+}
+
+const questionBank = [
+
+{
+question:"In which year was Khazaana established?",
+options:[
+"2023",
+"2024",
+"2025"
+],
+answer:"2025"
+},
+
+{
+question:"Who powers Khazaana?",
+options:[
+"Cups N Crumbs Café",
+"Khazaana Café",
+"Khazaana Hospitality"
+],
+answer:"Cups N Crumbs Café"
+},
+
+{
+question:"Who is the founder of Khazaana?",
+options:[
+"Askin Ali",
+"Arman Ali",
+"Ayan Ali"
+],
+answer:"Askin Ali"
+},
+
+{
+question:"What is Khazaana's official slogan?",
+options:[
+"KHANA KA KHAZANA AB GHAR TAK!",
+"KHANA KA KHAZANA GHAR TAK!",
+"KHANE KA KHAZANA AB GHAR TAK!"
+],
+answer:"KHANA KA KHAZANA AB GHAR TAK!"
+},
+
+{
+question:"Which color combination represents the Khazaana brand?",
+options:[
+"Orange & Black",
+"Orange & Brown",
+"Orange & Gold"
+],
+answer:"Orange & Black"
+}
+
+];
+
+function shuffle(array){
+
+for(
+let i=array.length-1;
+i>0;
+i--
+){
+
+const j =
+Math.floor(
+Math.random()*(i+1)
+);
+
+[array[i],array[j]] =
+[array[j],array[i]];
+
+}
+
+return array;
+
+}
+
+let questions =
+shuffle(
+JSON.parse(
+JSON.stringify(questionBank)
+)
+);
+
+questions.forEach(q=>{
+
+q.options =
+shuffle(q.options);
+
+});
+
+let currentQuestion = 0;
+let score = 0;
+let selectedAnswer = null;
+
+const questionEl =
+document.getElementById("question");
+
+const optionsEl =
+document.getElementById("options");
+
+const nextBtn =
+document.getElementById("nextBtn");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const questionNumber =
+document.getElementById("questionNumber");
+
+function loadQuestion(){
+
+selectedAnswer = null;
+
+const q =
+questions[currentQuestion];
+
+questionNumber.innerText =
+`Question ${currentQuestion+1} of ${questions.length}`;
+
+questionEl.innerText =
+q.question;
+
+progressFill.style.width =
+`${(currentQuestion/questions.length)*100}%`;
+
+optionsEl.innerHTML = "";
+
+q.options.forEach(option=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+"option";
+
+div.innerText =
+option;
+
+div.onclick = ()=>{
+
+document
+.querySelectorAll(".option")
+.forEach(opt=>{
+
+opt.classList.remove("selected");
+
+});
+
+div.classList.add("selected");
+
+selectedAnswer =
+option;
+
+};
+
+optionsEl.appendChild(div);
+
+});
+
+}
+
+async function showResults(){
+
+document.getElementById(
+"quizArea"
+).style.display="none";
+
+document.getElementById(
+"resultArea"
+).style.display="block";
+
+const discount = score * 10;
+
+const coupon =
+generateCoupon(discount);
+
+await addDoc(
+collection(
+db,
+"challengeCoupons"
+),
+{
+coupon,
+discount,
+score,
+used:false,
+createdAt:Date.now()
+}
+);
+
+document.getElementById(
+"scoreText"
+).innerText =
+`You scored ${score}/5`;
+
+document.getElementById(
+"rewardText"
+).innerText =
+`₹${discount} OFF Earned`;
+
+document.getElementById(
+"couponCode"
+).innerText =
+coupon;
+
+progressFill.style.width =
+"100%";
+
+}
+
+const introScreen =
+document.getElementById("introScreen");
+
+const introText =
+document.getElementById("introText");
+
+const sequence = [
+"ARE YOU READY FOR THE KHAAZAANA CHALLENGE?",
+"3",
+"2",
+"1",
+"🔥 ALL THE BEST 🔥"
+];
+
+let step = 0;
+
+function startIntro(){
+
+const interval = setInterval(()=>{
+
+step++;
+
+if(step < sequence.length){
+
+introText.style.opacity="0";
+
+setTimeout(()=>{
+
+introText.innerText =
+sequence[step];
+
+introText.style.opacity="1";
+
+},300);
+
+}else{
+
+clearInterval(interval);
+
+setTimeout(()=>{
+
+introScreen.style.transition =
+"opacity 1s ease";
+
+introScreen.style.opacity="0";
+
+setTimeout(()=>{
+
+introScreen.remove();
+
+},1000);
+
+},1000);
+
+}
+
+},1500);
+
+}
+
+startIntro();
+
+loadQuestion();
+
+nextBtn.onclick = ()=>{
+
+if(!selectedAnswer){
+
+alert(
+"Please select an answer."
+);
+
+return;
+
+}
+
+if(
+selectedAnswer ===
+questions[currentQuestion].answer
+){
+
+score++;
+
+}
+
+currentQuestion++;
+
+if(
+currentQuestion >=
+questions.length
+){
+
+showResults();
+
+return;
+
+}
+
+loadQuestion();
+
+};
+
+document
+.getElementById("copyBtn")
+.addEventListener(
+"click",
+()=>{
+
+navigator.clipboard.writeText(
+document.getElementById(
+"couponCode"
+).innerText
+);
+
+document.getElementById(
+"copyBtn"
+).innerText =
+"✅ Copied";
+
+}
+);
+
+</script>
+
+
+
+</body>
+</html>

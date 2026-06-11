@@ -977,13 +977,11 @@ if(!sessionStorage.getItem("kh_intro_seen")){
     intro.classList.add("fade-out");
   }, 3000);
 
-  setTimeout(() => {
+setTimeout(() => {
 
   intro.remove();
 
-  document.getElementById(
-    "closedOverlay"
-  ).style.display = "flex";
+  showChallengePopup();
 
 }, 3800);
 
@@ -992,6 +990,33 @@ if(!sessionStorage.getItem("kh_intro_seen")){
   intro.remove();
 
 }
+
+function acceptChallenge(){
+
+  localStorage.setItem(
+    "challenge_seen",
+    "true"
+  );
+
+  window.location.href =
+"khazaana_challenge.html";
+
+}
+
+function skipChallenge(){
+
+  localStorage.setItem(
+    "challenge_seen",
+    "true"
+  );
+
+  document.getElementById(
+    "challengePopup"
+  ).style.display = "none";
+
+}
+
+
 
 /* SAVED LOCATION */
 
@@ -1061,6 +1086,18 @@ if(activeOrder){
   activeOrder;
 
 }
+
+function showChallengePopup(){
+
+  if(localStorage.getItem("challenge_seen")){
+    return;
+  }
+
+  document.getElementById(
+    "challengePopup"
+  ).style.display = "flex";
+
+}
 </script>
 
 <a href="https://wa.me/918695902696"
@@ -1068,35 +1105,6 @@ if(activeOrder){
    target="_blank">
    <i class="fa-brands fa-whatsapp"></i>
 </a>
-
-<div id="closedOverlay">
-  <div class="closed-box">
-
-    <div class="closed-icon">🚫</div>
-
-    <h1>ORDERS UNAVAILABLE TODAY</h1>
-
-    <p>
-      Due to operational reasons, ordering is temporarily disabled today.
-      <br><br>
-      We will resume accepting orders from tomorrow.
-      <br><br>
-      Thank you for your patience and continued support.
-    </p>
-
-    <hr style="border:0;border-top:1px solid rgba(255,255,255,.15);margin:20px 0;">
-
-    <p>
-      কিছু অপারেশনাল কারণে আজ অর্ডার গ্রহণ সাময়িকভাবে বন্ধ রাখা হয়েছে।
-      <br><br>
-      আগামীকাল থেকে আবার অর্ডার গ্রহণ শুরু হবে।
-      <br><br>
-      আপনাদের ধৈর্য ও সহযোগিতার জন্য ধন্যবাদ।
-    </p>
-
-    <span>— Team Khazaana</span>
-
-</div>
 
 <style>
 #closedOverlay{
@@ -1109,36 +1117,134 @@ if(activeOrder){
     z-index:999999;
 }
 
-.closed-box{
-    max-width:450px;
-    padding:40px 30px;
-    text-align:center;
-    color:#fff;
+.challenge-box button{
+width:100%;
+padding:18px;
+margin-top:14px;
+border:none;
+border-radius:18px;
+font-weight:800;
+font-size:17px;
+cursor:pointer;
+transition:.3s;
 }
 
-.closed-icon{
-    font-size:60px;
-    margin-bottom:20px;
+.challenge-box button:first-of-type{
+background:linear-gradient(
+135deg,
+#ff9a1f,
+#ff6b00
+);
+color:white;
+
+box-shadow:
+0 8px 25px rgba(255,122,0,.45),
+0 0 20px rgba(255,122,0,.25);
+
+animation:pulseReward 1.5s infinite;
 }
 
-.closed-box h1{
-    color:#ff7a00;
-    font-size:32px;
-    margin-bottom:18px;
+.challenge-box button:first-of-type:hover{
+transform:translateY(-3px) scale(1.02);
 }
 
-.closed-box p{
-    color:#d1d5db;
-    font-size:17px;
-    line-height:1.8;
-    margin-bottom:20px;
+.later-btn{
+background:#1f1f1f;
+color:#fff;
+border:1px solid rgba(255,255,255,.08);
 }
 
-.closed-box span{
-    color:#ff7a00;
-    font-weight:600;
+.later-btn:hover{
+background:#2a2a2a;
 }
+
+@keyframes pulseReward{
+0%{transform:scale(1);}
+50%{transform:scale(1.04);}
+100%{transform:scale(1);}
+}
+
+#challengePopup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.88);
+display:none;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(8px);
+z-index:999999;
+}
+
+.challenge-box{
+width:90%;
+max-width:420px;
+background:linear-gradient(
+180deg,
+#1a1a1a,
+#111
+);
+padding:30px;
+border-radius:28px;
+text-align:center;
+color:white;
+border:1px solid rgba(255,122,0,.3);
+
+box-shadow:
+0 0 40px rgba(255,122,0,.25),
+0 20px 60px rgba(0,0,0,.5);
+
+animation:popupShow .4s ease;
+}
+
+.challenge-box h2{
+font-size:28px;
+margin-bottom:12px;
+color:#ffb347;
+}
+
+.challenge-box p{
+line-height:1.7;
+color:#ddd;
+margin-bottom:20px;
+}
+
+@keyframes popupShow{
+from{
+opacity:0;
+transform:translateY(30px) scale(.9);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
 </style>
+<div id="challengePopup">
+
+  <div class="challenge-box">
+
+    <h2>🏆 KHAZAANA QUIZ</h2>
+
+    <p>
+      Complete a quick challenge and win
+      a surprise discount coupon.
+    </p>
+
+   <button onclick="acceptChallenge()">
+🏆 Start Challenge & Win
+</button>
+
+<button onclick="skipChallenge()" class="later-btn">
+Maybe Later
+</button>
+
+
+  </div>
+
+
+</div>
+
 
 </body>
 </html>

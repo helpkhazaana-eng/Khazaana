@@ -347,12 +347,13 @@ const coupon = d.coupon || "None";
 
 let discountAmount = 0;
 
-if(coupon === "KHAZAANA5"){
-discountAmount = Math.round(subtotal * 0.05);
-}
+if(coupon !== "None"){
+    discountAmount =
+    (subtotal + delivery) - (d.total || 0);
 
-if(coupon === "CUPSNCRUMBSCAFE10"){
-discountAmount = Math.round(subtotal * 0.10);
+    if(discountAmount < 0){
+        discountAmount = 0;
+    }
 }
 
 html += `

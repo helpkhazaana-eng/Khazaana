@@ -359,7 +359,14 @@ Please verify your details before ordering
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-import { getFirestore, collection, addDoc }
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs
+}
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -376,6 +383,9 @@ const app = initializeApp(firebaseConfig);
 window.db = getFirestore(app);
 window.collection = collection;
 window.addDoc = addDoc;
+window.query = query;
+window.where = where;
+window.getDocs = getDocs;
 
 </script>
 
@@ -426,6 +436,7 @@ document.getElementById("address").value =
 savedAddress || "";
 
 let discount = 0;
+let discountType = "flat";
 let appliedCoupon = "";
 let originalDelivery = order.delivery;
 
@@ -465,8 +476,13 @@ ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
 
 ${discount > 0 ? `
 <div class="item" style="color:#25D366">
-<b>Discount (${discount}%)</b>
-<b>- ₹${Math.round((order.subtotal * discount)/100)}</b>
+<b>Quiz Discount</b>
+${
+discountType === "percent"
+? `<b>- ₹${Math.round((order.subtotal * discount)/100)}</b>`
+: `<b>- ₹${discount}</b>`
+}
+
 </div>
 ` : ""}
 
@@ -480,7 +496,7 @@ ${discount > 0 ? `
 }
 
 renderOrder();
-
+updateTotal();
 const couponList =
 document.getElementById("couponList");
 
@@ -613,7 +629,7 @@ msgBox.classList.remove("party");
 
 }
 
-function applyCoupon(){
+async function applyCoupon(){
 
 const code =
 document.getElementById("coupon")
@@ -630,75 +646,98 @@ order.delivery = originalDelivery;
 
 if(code === "KHAZAANA5"){
 
-if(order.subtotal >= 350){
+    if(order.subtotal >= 350){
 
-discount = 5;
-appliedCoupon = code;
+        discount = 5;
+discountType = "percent";
+        appliedCoupon = code;
 
-msgBox.innerText =
-"✅ KHAZAANA5 Applied — 5% OFF";
+        msgBox.innerText =
+        "✅ KHAZAANA5 Applied — 5% OFF";
 
-showCelebration();
+        showCelebration();
 
-}else{
+    }else{
 
-msgBox.innerText =
-"❌ Minimum order ₹350 required";
+        msgBox.innerText =
+        "❌ Minimum order ₹350 required";
 
-updateTotal();
-return;
-}
+        updateTotal();
+        return;
+    }
 
 }
 
 else if(code === "CUPSNCRUMBSCAFE10"){
 
-if(
-order.restaurant
-.toUpperCase()
-.includes("CUPS N CRUMBS")
-){
+    if(
+    order.restaurant
+    .toUpperCase()
+    .includes("CUPS N CRUMBS")
+    ){
 
-if(order.subtotal >= 400){
+        if(order.subtotal >= 400){
 
-discount = 10;
-appliedCoupon = code;
+            discount = 10;
+discountType = "percent";
+            appliedCoupon = code;
 
-msgBox.innerText =
-"✅ CUPSNCRUMBSCAFE10 Applied — 10% OFF";
+            msgBox.innerText =
+            "✅ CUPSNCRUMBSCAFE10 Applied — ₹10 %";
 
-showCelebration();
+            showCelebration();
 
-}else{
+        }else{
 
-msgBox.innerText =
-"❌ Minimum order ₹400 required";
+            msgBox.innerText =
+            "❌ Minimum order ₹400 required";
 
-updateTotal();
-return;
+            updateTotal();
+            return;
+        }
 
-}
+    }else{
 
-}else{
+        msgBox.innerText =
+        "❌ Only for Cups N Crumbs Cafe";
 
-msgBox.innerText =
-"❌ Only for Cups N Crumbs Cafe";
-
-updateTotal();
-return;
-
-}
+        updateTotal();
+        return;
+    }
 
 }
 
 else{
 
-msgBox.innerText =
-"❌ Invalid Coupon";
+    const couponQuery = window.query(
+    window.collection(window.db,"challengeCoupons"),
+    window.where("coupon","==",code),
+    window.where("used","==",false)
+);
 
-updateTotal();
-return;
+    const snap = await window.getDocs(couponQuery);
 
+    if(!snap.empty){
+
+        const data = snap.docs[0].data();
+
+        discount = data.discount;
+discountType = "flat";
+        appliedCoupon = code;
+
+        msgBox.innerText =
+        `✅ Quiz Coupon Applied - ₹${data.discount} OFF`;
+
+        showCelebration();
+
+    }else{
+
+        msgBox.innerText =
+        "❌ Invalid Coupon";
+
+        updateTotal();
+        return;
+    }
 }
 
 updateTotal();
@@ -707,23 +746,32 @@ updateTotal();
 
 function updateTotal(){
 
-let finalSubtotal =
-order.subtotal;
+    let finalSubtotal = order.subtotal;
 
-if(discount > 0){
+    if(discount > 0){
 
-finalSubtotal =
-order.subtotal -
-((order.subtotal * discount)/100);
+        if(discountType === "percent"){
 
-}
+            finalSubtotal =
+            order.subtotal -
+            ((order.subtotal * discount)/100);
 
-order.total =
+        }else{
+
+            finalSubtotal =
+            order.subtotal - discount;
+
+        }
+
+    }
+
+   order.total =
 Math.round(finalSubtotal + order.delivery);
 
 renderOrder();
 
 }
+
 
 async function finalOrder(){
 const name =
@@ -897,6 +945,7 @@ localStorage.removeItem(
 window.location.href =
 "track-order.html?id=" +
 docRef.id;
+
 
 }
 
