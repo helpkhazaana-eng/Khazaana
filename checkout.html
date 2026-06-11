@@ -912,8 +912,13 @@ const docRef = await window.addDoc(
     coupon:appliedCoupon || "None",
     payment:"COD",
     status:"Pending",
-    date:new Date().toISOString()
-  }
+    date:new Date().toISOString(),
+
+    feedbackSubmitted:false,
+    foodRating:0,
+    deliveryRating:0
+}
+
 );
 
 fetch("https://script.google.com/macros/s/AKfycbzJUhvTP1Fc7D0hP035sa4l5vqzjrX_7e9jFaeAc47kM9MyN7tlfuhB9HFOs6aEaWhV/exec", {
@@ -933,9 +938,18 @@ fetch("https://script.google.com/macros/s/AKfycbzJUhvTP1Fc7D0hP035sa4l5vqzjrX_7e
   })
 });
 
+
 localStorage.setItem(
   "activeOrder",
   docRef.id
+);
+
+localStorage.setItem("lastCustomerName", name);
+localStorage.setItem("lastAddress", address);
+localStorage.setItem("lastRestaurant", order.restaurant);
+localStorage.setItem(
+  "lastItems",
+  order.items.map(i => `${i.name} x${i.qty}`).join(", ")
 );
 
 localStorage.removeItem(

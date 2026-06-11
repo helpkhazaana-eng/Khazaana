@@ -392,6 +392,13 @@ if(d.status==="Delivered"){
 
 localStorage.removeItem("activeOrder");
 
+if(!localStorage.getItem("pendingFeedbackOrder")){
+localStorage.setItem(
+"pendingFeedbackOrder",
+orderId
+);
+}
+
 document.getElementById("celebrate").innerHTML = `
 <div class="confetti">🎉🎊✨</div>
 

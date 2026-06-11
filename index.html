@@ -10,6 +10,12 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("QRt9B91Mf6uBKYR5J");
+</script>
+
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 
@@ -31,6 +37,9 @@ OneSignalDeferred.push(async function(OneSignal) {
   });
 
 });
+
+
+
 
 </script>
   <meta charset="UTF-8">
@@ -55,6 +64,7 @@ OneSignalDeferred.push(async function(OneSignal) {
 
     gtag('js', new Date());
     gtag('config', 'G-X5NWHC8HNG');
+
   </script>
 
   <style>
@@ -402,6 +412,65 @@ OneSignalDeferred.push(async function(OneSignal) {
         visibility:hidden;
       }
     }
+
+.thank-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
+}
+
+.thank-box{
+  width:90%;
+  max-width:340px;
+  background:#111;
+  border:1px solid #ff9800;
+  border-radius:18px;
+  padding:28px;
+  text-align:center;
+  color:#fff;
+  animation:popupScale .25s ease;
+}
+
+.thank-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.thank-box h2{
+  color:#ffb347;
+  margin-bottom:10px;
+}
+
+.thank-box p{
+  opacity:.9;
+  margin-bottom:20px;
+}
+
+.thank-box button{
+  width:100%;
+  border:none;
+  padding:12px;
+  border-radius:10px;
+  background:#ff8c00;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+@keyframes popupScale{
+  from{
+    transform:scale(.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
 
   </style>
 </head>
@@ -999,7 +1068,7 @@ function acceptChallenge(){
   );
 
   window.location.href =
-"khazaana_challenge.html";
+"khazaana_challenge";
 
 }
 
@@ -1098,6 +1167,175 @@ function showChallengePopup(){
   ).style.display = "flex";
 
 }
+
+/* FEEDBACK */
+
+window.addEventListener("load",()=>{
+
+let foodRating = 0;
+let deliveryRating = 0;
+
+const pendingFeedbackOrder =
+localStorage.getItem(
+"pendingFeedbackOrder"
+);
+
+if(pendingFeedbackOrder){
+
+document.getElementById(
+"feedbackPopup"
+).style.display = "flex";
+
+}
+
+const laterBtn =
+document.getElementById(
+"laterFeedback"
+);
+
+if(laterBtn){
+
+laterBtn.onclick = function(){
+
+document.getElementById(
+"feedbackPopup"
+).style.display = "none";
+};
+}
+
+document.querySelectorAll(".food-star")
+.forEach(star=>{
+
+star.onclick = ()=>{
+
+foodRating =
+parseInt(star.dataset.rating);
+const commentBox =
+document.getElementById("commentSection");
+
+if(foodRating >= 4){
+commentBox.style.display = "block";
+}else{
+commentBox.style.display = "none";
+}
+
+document
+.querySelectorAll(".food-star")
+.forEach((s,index)=>{
+
+s.innerHTML =
+index < foodRating
+? "⭐"
+: "☆";
+
+});
+
+};
+
+});
+
+document.querySelectorAll(".delivery-star")
+.forEach(star=>{
+
+star.onclick = ()=>{
+
+deliveryRating =
+parseInt(star.dataset.rating);
+
+document
+.querySelectorAll(".delivery-star")
+.forEach((s,index)=>{
+
+s.innerHTML =
+index < deliveryRating
+? "⭐"
+: "☆";
+
+});
+
+};
+
+});
+
+document.getElementById(
+"submitFeedback"
+).onclick = function(){
+if(foodRating===0 || deliveryRating===0){
+
+alert(
+"Please rate food and delivery."
+);
+
+return;
+
+}
+
+const comment =
+document.getElementById(
+"feedbackComment"
+).value.trim();
+
+if(foodRating >= 4 && comment===""){
+alert("Please share your experience.");
+return;
+}
+
+localStorage.removeItem(
+"pendingFeedbackOrder"
+);
+
+document.getElementById("feedbackPopup")
+.style.display = "none";
+
+document.getElementById(
+"feedbackPopup"
+).style.display = "none";
+
+if(foodRating >= 4){
+
+document.querySelector(
+"#thankYouPopup h2"
+).innerHTML = "😊 Thank You!";
+
+document.querySelector(
+"#thankYouPopup p"
+).innerHTML =
+"We’re happy you enjoyed our service.";
+
+}else{
+
+document.querySelector(
+"#thankYouPopup h2"
+).innerHTML = "❤️ Thank You!";
+
+document.querySelector(
+"#thankYouPopup p"
+).innerHTML =
+"We hope to serve you better next time.";
+
+}
+
+document.getElementById(
+"thankYouPopup"
+).style.display = "flex";
+
+emailjs.send(
+"service_0x788xa",
+"template_zvt21ye",
+{
+customer_name: localStorage.getItem("lastCustomerName"),
+customer_address: localStorage.getItem("lastAddress"),
+restaurant_name: localStorage.getItem("lastRestaurant"),
+order_items: localStorage.getItem("lastItems"),
+food_rating: foodRating,
+delivery_rating: deliveryRating,
+customer_comment: comment
+});
+
+};
+
+});
+
 </script>
 
 <a href="https://wa.me/918695902696"
@@ -1245,6 +1483,152 @@ Maybe Later
 
 </div>
 
+<div id="feedbackPopup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+z-index:999999;
+justify-content:center;
+align-items:center;
+">
+
+<div style="
+width:90%;
+max-width:420px;
+background:#111;
+padding:25px;
+border-radius:24px;
+text-align:center;
+color:white;
+border:1px solid rgba(255,122,0,.3);
+">
+
+<h2 style="color:#ffb347;">
+🍽️ Rate Your Last Order
+</h2>
+
+<p style="margin:15px 0;">
+How was your experience?
+</p>
+
+<h3>Food Quality</h3>
+
+<div id="foodStars" style="
+font-size:34px;
+margin-top:10px;
+letter-spacing:4px;
+cursor:pointer;
+">
+<span class="food-star" data-rating="1">☆</span>
+<span class="food-star" data-rating="2">☆</span>
+<span class="food-star" data-rating="3">☆</span>
+<span class="food-star" data-rating="4">☆</span>
+<span class="food-star" data-rating="5">☆</span>
+</div>
+
+<h3 style="margin-top:20px;">
+Delivery Experience
+</h3>
+
+<div id="deliveryStars" style="
+font-size:34px;
+margin-top:10px;
+letter-spacing:4px;
+cursor:pointer;
+">
+<span class="delivery-star" data-rating="1">☆</span>
+<span class="delivery-star" data-rating="2">☆</span>
+<span class="delivery-star" data-rating="3">☆</span>
+<span class="delivery-star" data-rating="4">☆</span>
+<span class="delivery-star" data-rating="5">☆</span>
+</div>
+
+<div id="commentSection" style="display:none;margin-top:20px;">
+
+<h3>What did you enjoy most? *</h3>
+
+<textarea
+id="feedbackComment"
+placeholder="Share your experience..."
+style="
+width:100%;
+height:90px;
+padding:12px;
+border-radius:12px;
+border:none;
+margin-top:10px;
+resize:none;
+"></textarea>
+
+</div>
+
+<button
+id="submitFeedback"
+style="
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#ff7a00;
+color:white;
+font-weight:700;
+margin-bottom:10px;
+">
+Submit Review
+</button>
+
+<button
+id="laterFeedback"
+style="
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#222;
+color:white;
+">
+Remind Me Later
+</button>
+
+</div>
+
+</div>
+
+<div id="thankYouPopup" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+z-index:999999;
+justify-content:center;
+align-items:center;
+">
+  <div style="
+  background:#111;
+  color:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:320px;
+  border:1px solid #ff7a00;
+  ">
+    <h2 style="color:#ffb347;">❤️ Thank You!</h2>
+    <p>Your feedback has been submitted.</p>
+    <button onclick="document.getElementById('thankYouPopup').style.display='none'"
+    style="
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#ff7a00;
+    color:white;
+    ">
+      OK
+    </button>
+  </div>
+</div>
 
 </body>
 </html>
