@@ -139,7 +139,8 @@ getFirestore,
 collection,
 onSnapshot,
 doc,
-updateDoc
+updateDoc,
+increment
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -155,21 +156,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+onSnapshot(
+doc(db,"deliveryStats","rider1"),
+(snap)=>{
+
+const stats = snap.data();
+
+document.getElementById("completed").innerText =
+(stats?.trips || 0) + "/10";
+
+document.getElementById("earnings").innerText =
+"₹" + (stats?.earnings || 0);
+
+});
+
 const ordersBox =
 document.getElementById("orders");
 
-let completedToday = 0;
-let totalEarnings = 0;
-
-function updateStats(){
-
-document.getElementById("completed").innerText =
-completedToday;
-
-document.getElementById("earnings").innerText =
-"₹" + totalEarnings;
-
-}
 
 onSnapshot(
 collection(db,"orders"),
@@ -178,8 +181,6 @@ collection(db,"orders"),
 ordersBox.innerHTML = "";
 
 let activeFound = false;
-completedToday = 0;
-totalEarnings = 0;
 
 snapshot.forEach((orderDoc)=>{
 
@@ -187,21 +188,6 @@ const data = orderDoc.data();
 console.log("ORDER:", data);
 const id = orderDoc.id;
 
-if(data.status === "Delivered"){
-
-completedToday++;
-
-if(
-(data.restaurant || "")
-.toUpperCase()
-.includes("CUPS N CRUMBS")
-){
-totalEarnings += 15;
-}else{
-totalEarnings += 20;
-}
-
-}
 
 if(
 data.status !== "Accepted" &&
@@ -230,6 +216,18 @@ ${data.customer || "Customer"}
 
 <div class="info">
 💰 ₹${data.total || 0}
+</div>
+
+<div class="info">
+🍔 Items:
+<br>
+${
+(data.items || [])
+.map(item =>
+`${item.name} x ${item.qty}`
+)
+.join("<br>")
+}
 </div>
 
 <a class="call"
@@ -270,7 +268,6 @@ ordersBox.innerHTML =
 
 }
 
-updateStats();
 
 });
 
@@ -291,6 +288,14 @@ await updateDoc(
 doc(db,"orders",id),
 {
 status:"Delivered"
+}
+);
+
+await updateDoc(
+doc(db,"deliveryStats","rider1"),
+{
+trips: increment(1),
+earnings: increment(20)
 }
 );
 
