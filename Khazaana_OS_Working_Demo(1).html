@@ -105,84 +105,41 @@ margin-top:10px;
 overflow-wrap:break-word;
 }
 .page{animation:slide .4s ease}
-@keyframes slide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:768px){
 
-@media (max-width:768px){
+#menuBtn{
+display:flex;
+position:fixed;
+top:15px;
+left:15px;
+width:50px;
+height:50px;
+z-index:99999;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+color:#fff;
+font-size:28px;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
 
 .sidebar{
-position:fixed;
+left:-280px;
+width:260px;
+z-index:9998;
+transition:.35s;
+}
+
+.sidebar.open{
 left:0;
-top:0;
-bottom:0;
-width:70px;
-height:100vh;
-display:block;
-z-index:999;
-background:rgba(255,255,255,.03);
-backdrop-filter:blur(20px);
-border-right:1px solid rgba(255,255,255,.08);
-}
-
-.sidebar:hover{
-width:70px;
-}
-
-.nav{
-display:flex;
-justify-content:center;
-align-items:center;
-padding:0;
-margin:12px 6px;
-height:56px;
-font-size:22px;
-}
-
-.label{
-display:none;
-}
-
-.main{
-margin-left:70px;
-margin-bottom:0;
-padding:15px;
-}
-
-.grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.row{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:28px;
-}
-
-}
-
-.sidebar:hover{
-width:100%;
-}
-
-.nav{
-margin:0;
-padding:10px;
-flex-direction:column;
-font-size:20px;
-}
-
-.label{
-opacity:1;
-font-size:10px;
-margin-left:0;
-margin-top:4px;
 }
 
 .main{
 margin-left:0;
-margin-bottom:80px;
-padding:15px;
+padding-top:80px;
 }
 
 .grid{
@@ -201,19 +158,57 @@ font-size:32px;
 font-size:24px;
 }
 
-.accessGranted{
-font-size:clamp(38px,9vw,110px);
-letter-spacing:4px;
-text-align:center;
-width:100%;
+
+
 }
 
-.accessSub{
-font-size:clamp(12px,3vw,24px);
+
 }
 
-.r1,.r2,.r3{
+#menuBtn{
 display:none;
+}
+
+#menuBtn{
+display:none;
+}
+
+@media(max-width:768px){
+
+#menuBtn{
+display:flex;
+position:fixed;
+top:15px;
+left:15px;
+width:50px;
+height:50px;
+z-index:9999;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:28px;
+align-items:center;
+justify-content:center;
+}
+
+.sidebar{
+position:fixed;
+left:-280px;
+top:0;
+bottom:0;
+width:260px;
+z-index:9998;
+transition:.35s;
+}
+
+.sidebar.open{
+left:0;
+}
+
+.main{
+margin-left:0;
+padding-top:80px;
 }
 
 }
@@ -229,8 +224,8 @@ display:none;
 <div class="sub">FOUNDER COMMAND CENTER</div>
 <div class="status" id="status"></div>
 </div>
-
 <div id="app">
+<button id="menuBtn">☰</button>
 <div class="sidebar">
 <div class="nav active" onclick="loadPage('dashboard',this)">🏠<span class="label">Command Center</span></div>
 <div class="nav" onclick="loadPage('revenue',this)">💰<span class="label">Revenue Intelligence</span></div>
@@ -930,6 +925,16 @@ console.log(err);
 }
 
 }
+
+const menuBtn=document.getElementById("menuBtn");
+const sidebar=document.querySelector(".sidebar");
+
+menuBtn.addEventListener("click",()=>{
+
+sidebar.classList.toggle("open");
+
+});
+
 window.loadPage = loadPage;
 
 </script>
