@@ -717,20 +717,49 @@ else{
 
     const snap = await window.getDocs(couponQuery);
 
-    if(!snap.empty){
+   if(!snap.empty){
 
-        const data = snap.docs[0].data();
+    const data = snap.docs[0].data();
 
-        discount = data.discount;
-discountType = "flat";
-        appliedCoupon = code;
+    let minOrder = 0;
+
+    if(order.restaurant.includes("Cups N Crumbs")){
+        minOrder = 300;
+    }
+    else if(order.restaurant.includes("Khazaana Snacks")){
+        minOrder = 350;
+    }
+    else if(order.restaurant.includes("Khazaana Rasoi")){
+        minOrder = 350;
+    }
+    else if(order.restaurant.includes("Bondhu")){
+        minOrder = 400;
+    }
+    else if(order.restaurant.includes("Haji Biryani")){
+        minOrder = 500;
+    }
+
+    if(order.subtotal < minOrder){
 
         msgBox.innerText =
-        `✅ Quiz Coupon Applied - ₹${data.discount} OFF`;
+        `❌ Minimum order ₹${minOrder} required for this coupon`;
 
-        showCelebration();
+        updateTotal();
+        return;
+    }
 
-    }else{
+    discount = data.discount;
+    discountType = "flat";
+    appliedCoupon = code;
+
+    msgBox.innerText =
+    `✅ Quiz Coupon Applied - ₹${data.discount} OFF`;
+
+    showCelebration();
+
+}
+
+else{
 
         msgBox.innerText =
         "❌ Invalid Coupon";
