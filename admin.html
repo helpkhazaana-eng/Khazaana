@@ -429,8 +429,7 @@ import {
   collection,
   onSnapshot,
   doc,
-  updateDoc,
-  deleteDoc
+  updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -468,6 +467,9 @@ onSnapshot(
     snapshot.forEach((orderDoc)=>{
 
       const data = orderDoc.data();
+if(data.status === "Delivered"){
+   return;
+}
       const id = orderDoc.id;
 
       totalOrders++;
@@ -500,9 +502,17 @@ onSnapshot(
             ${data.customer || data.customerName || "Customer"}
           </div>
 
-          <div class="status pending">
-            ${data.status || "Pending"}
-          </div>
+         <div class="status ${
+data.status === "Accepted"
+? "accepted"
+: data.status === "Out For Delivery"
+? "out"
+: data.status === "Delivered"
+? "delivered"
+: "pending"
+}">
+${data.status || "Pending"}
+</div>
 
         </div>
 
@@ -543,11 +553,7 @@ onSnapshot(
           Delivered
           </button>
 
-          <button class="deleteBtn"
-          onclick="deleteOrder('${id}')">
-          Delete
-          </button>
-
+        
         </div>
 
       </div>
@@ -587,11 +593,6 @@ window.deliverOrder = async(id)=>{
   await updateDoc(doc(db,"orders",id),{
     status:"Delivered"
   });
-};
-
-window.deleteOrder = async(id)=>{
-  if(!confirm("Delete order?")) return;
-  await deleteDoc(doc(db,"orders",id));
 };
 
 </script>
