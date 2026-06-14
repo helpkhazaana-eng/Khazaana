@@ -27,6 +27,19 @@
     rel="stylesheet"
     href="css/restaurant.css?v=11">
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X5NWHC8HNG"></script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-X5NWHC8HNG');
+</script>
+
 </head>
 
 <body>
@@ -212,9 +225,10 @@ font-weight:700;
 
   <!-- Cups N Crumbs -->
 
-  <a
-    href="cups-n-crumbs-menu.html"
-    class="restaurant-card">
+ <a
+href="cups-n-crumbs-menu.html"
+class="restaurant-card"
+onclick="gtag('event','restaurant_opened',{restaurant:'Cups N Crumbs Café'})">
 
     <div class="restaurant-image">
 
@@ -253,8 +267,11 @@ font-weight:700;
   <!-- Hazi -->
 
   <a
-    href="hazi-biryani-menu.html"
-    class="restaurant-card">
+   <a
+href="hazi-biryani-menu.html"
+class="restaurant-card"
+
+onclick="gtag('event','restaurant_opened',{restaurant:'Kolkata Hazi Biryani'})">
 
     <div class="restaurant-image">
 
@@ -293,8 +310,10 @@ font-weight:700;
   <!-- Bondhu -->
 
   <a
-    href="bondhu-menu.html"
-    class="restaurant-card">
+  <a
+href="bondhu-menu.html"
+class="restaurant-card"
+onclick="gtag('event','restaurant_opened',{restaurant:'Bondhu Restaurant'})">
 
     <div class="restaurant-image">
 
@@ -333,8 +352,10 @@ font-weight:700;
   <!-- Snacks -->
 
   <a
-    href="snacks-corner-menu.html"
-    class="restaurant-card">
+    <a
+href="snacks-corner-menu.html"
+class="restaurant-card"
+onclick="gtag('event','restaurant_opened',{restaurant:'Khazaana Snacks Corner'})">
 
     <div class="restaurant-image">
 
@@ -373,8 +394,10 @@ font-weight:700;
   <!-- Rasoi -->
 
   <a
-    href="rasoi-menu.html"
-    class="restaurant-card">
+   <a
+href="rasoi-menu.html"
+class="restaurant-card"
+onclick="gtag('event','restaurant_opened',{restaurant:'Khazaana Rasoi'})">
 
     <div class="restaurant-image">
 
@@ -413,8 +436,10 @@ font-weight:700;
   <!-- Khazaana Cake Zone -->
 
   <a
-    href="khazaana-cake-zone-menu.html"
-    class="restaurant-card">
+    <a
+href="khazaana-cake-zone-menu.html"
+class="restaurant-card"
+onclick="gtag('event','restaurant_opened',{restaurant:'Khazaana Cake Zone'})">
 
     <div class="restaurant-image">
 
