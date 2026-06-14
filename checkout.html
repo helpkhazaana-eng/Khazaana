@@ -398,9 +398,11 @@ JSON.parse(
 localStorage.getItem("khazaanaOrder")
 );
 
-gtag('event','checkout_started',{
-restaurant:order.restaurant
-});
+if(typeof gtag === "function"){
+  gtag('event','checkout_started',{
+    restaurant:order.restaurant
+  });
+}
 
 if(!order){
 
@@ -989,11 +991,12 @@ localStorage.removeItem(
   "khazaanaOrder"
 );
 
-gtag('event','order_completed',{
-restaurant:order.restaurant,
-value:order.total
-});
-
+if(typeof gtag === "function"){
+  gtag('event','order_completed',{
+    restaurant:order.restaurant,
+    value:order.total
+  });
+}
 window.location.href =
 "track-order.html?id=" +
 docRef.id;
