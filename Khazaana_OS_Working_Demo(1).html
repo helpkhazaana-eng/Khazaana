@@ -230,6 +230,7 @@ text-shadow:
 <div class="nav" onclick="loadPage('orders',this)">📦<span class="label">Orders Network</span></div>
 <div class="nav" onclick="loadPage('customers',this)">👥<span class="label">Customer Pulse</span></div>
 <div class="nav" onclick="loadPage('ai',this)">🧠<span class="label">AI Insights</span></div>
+<div class="nav" onclick="loadPage('delivery',this)">🚚<span class="label">Delivery Control</span></div>
 </div>
 <div class="main"><div id="content"></div></div>
 </div>
@@ -242,7 +243,10 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -580,6 +584,72 @@ Customer Pulse
 loadAnalytics();
 
 }
+
+else if(page==='delivery'){
+
+content.innerHTML=`
+
+<div class="page">
+
+<h1 style="margin-bottom:20px">
+🚚 Delivery Control
+</h1>
+
+<div class="grid">
+
+<div class="card">
+<div>Delivery Earnings</div>
+<div class="num" id="deliveryEarnings">₹0</div>
+</div>
+
+<div class="card">
+<div>Completed Trips</div>
+<div class="num" id="deliveryTrips">0</div>
+</div>
+
+</div>
+
+<div class="panel" style="margin-top:20px">
+
+<h2>Manual Earnings Correction</h2>
+
+<input
+id="manualEarnings"
+type="number"
+placeholder="Enter Correct Earnings"
+style="
+width:100%;
+padding:15px;
+margin-top:15px;
+border-radius:12px;
+border:none;
+">
+
+<button
+onclick="updateDeliveryEarnings()"
+style="
+margin-top:15px;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#60a5fa;
+color:white;
+font-weight:600;
+cursor:pointer;
+">
+Update Earnings
+</button>
+
+</div>
+
+</div>
+
+`;
+
+loadDeliveryStats();
+
+}
+
 
 else if(page==='ai'){
 
@@ -985,6 +1055,43 @@ document.getElementById("ordersFeed").innerHTML =
 }
 
 }
+
+async function loadDeliveryStats(){
+
+const snap = await getDoc(
+doc(db,"deliveryStats","rider1")
+);
+
+if(!snap.exists()) return;
+
+const data = snap.data();
+
+document.getElementById("deliveryEarnings").innerText =
+"₹" + (data.earnings || 0);
+
+document.getElementById("deliveryTrips").innerText =
+data.trips || 0;
+
+}
+
+window.updateDeliveryEarnings = async ()=>{
+
+const amount = Number(
+document.getElementById("manualEarnings").value
+);
+
+await updateDoc(
+doc(db,"deliveryStats","rider1"),
+{
+earnings: amount
+}
+);
+
+alert("Earnings Updated");
+
+loadDeliveryStats();
+
+};
 
 async function loadDashboardOrders(){
 
