@@ -398,6 +398,10 @@ JSON.parse(
 localStorage.getItem("khazaanaOrder")
 );
 
+gtag('event','checkout_started',{
+restaurant:order.restaurant
+});
+
 if(!order){
 
 alert("No order found");
@@ -984,6 +988,11 @@ localStorage.setItem(
 localStorage.removeItem(
   "khazaanaOrder"
 );
+
+gtag('event','order_completed',{
+restaurant:order.restaurant,
+value:order.total
+});
 
 window.location.href =
 "track-order.html?id=" +

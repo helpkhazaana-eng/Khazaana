@@ -626,7 +626,19 @@ menu.innerHTML += html;
 
 renderMenu();
 
+gtag('event','menu_view',{
+restaurant:'Kolkata Hazi Biryani'
+});
+
 function updateQty(id,change){
+
+if(change > 0){
+
+gtag('event','add_to_cart',{
+restaurant:'Kolkata Hazi Biryani'
+});
+
+}
 
 cart[id].qty =
 Math.max(0, cart[id].qty + change);

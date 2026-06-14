@@ -661,11 +661,7 @@ const menuData = {
     ["Fusion Pizza",190]
   ],
 
-  "🍟 Fries": [
-    ["Salted Fries",50],
-    ["Peri Peri Fries",60]
-  ],
-
+ 
   "🍹 Mocktails": [
     ["Blue Lagoon",90],
     ["Virgin Mojito",90],
@@ -740,7 +736,19 @@ function renderMenu(){
 
 renderMenu();
 
+gtag('event','menu_view',{
+restaurant:'Cups N Crumbs Café'
+});
+
 function updateQty(id,change){
+
+if(change > 0){
+
+gtag('event','add_to_cart',{
+restaurant:'Cups N Crumbs Café'
+});
+
+}
 
   cart[id].qty =
     Math.max(0,cart[id].qty+change);

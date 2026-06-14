@@ -642,7 +642,19 @@ menu.innerHTML += html;
 
 renderMenu();
 
+gtag('event','menu_view',{
+restaurant:'Bondhu Restaurant'
+});
+
 function updateQty(id,change){
+
+if(change > 0){
+
+gtag('event','add_to_cart',{
+restaurant:'Bondhu Restaurant'
+});
+
+}
 
 if(isClosed()) return;
 
@@ -775,7 +787,7 @@ function isClosed(){
 const h =
 new Date().getHours();
 
-return(h >= 21 || h < 18);
+return(h >= 21 || h < 10);
 }
 
 function toggleCart(disable){
@@ -847,7 +859,7 @@ now.getDate()+1
 }
 
 openTime.setHours(
-18,0,0,0
+10,0,0,0
 );
 
 let diff =
