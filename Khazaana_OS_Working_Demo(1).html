@@ -14,6 +14,12 @@ body{background:#020617;color:#fff;overflow:hidden}
 font-size:clamp(28px,8vw,72px);
 max-width:95%;
 overflow:hidden;
+color:#fff;
+text-shadow:
+0 0 10px #60a5fa,
+0 0 25px #60a5fa,
+0 0 50px #60a5fa;
+animation:logoGlow 2s ease-in-out infinite alternate;
 }
 .sub{letter-spacing:5px;color:#94a3b8;z-index:2}
 .status{margin-top:30px;color:#60a5fa;height:40px;z-index:2;text-align:center}
@@ -22,7 +28,7 @@ position:absolute;
 left:50%;
 top:42%;
 transform:translate(-50%,-50%);
-font-size:110px;
+font-size:clamp(42px,14vw,110px);
 font-weight:900;
 letter-spacing:10px;
 color:#60a5fa;
@@ -85,9 +91,23 @@ pointer-events:none;
 #app{display:none;height:100vh}
 .sidebar{position:fixed;left:0;top:0;bottom:0;width:90px;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);overflow:hidden;transition:.4s;border-right:1px solid rgba(255,255,255,.08)}
 .sidebar:hover{width:280px}
-.nav{display:flex;align-items:center;padding:16px;margin:10px;border-radius:16px;cursor:pointer}
+.nav{
+display:flex;
+align-items:center;
+gap:12px;
+padding:16px;
+margin:10px;
+border-radius:16px;
+cursor:pointer;
+}
 .nav:hover,.active{background:rgba(96,165,250,.15)}
-.label{margin-left:12px;opacity:0;transition:.3s;white-space:nowrap}
+.label{
+margin-left:12px;
+opacity:1;
+white-space:nowrap;
+font-size:14px;
+display:inline-block;
+}
 .sidebar:hover .label{opacity:1}
 .main{margin-left:90px;padding:25px;height:100vh;overflow:auto}
 .hero h1{font-size:52px}
@@ -105,75 +125,39 @@ margin-top:10px;
 overflow-wrap:break-word;
 }
 .page{animation:slide .4s ease}
-@media(max-width:768px){
+
 
 #menuBtn{
-display:flex;
-position:fixed;
-top:15px;
-left:15px;
-width:50px;
-height:50px;
-z-index:99999;
-border:none;
-border-radius:12px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
-color:#fff;
-font-size:28px;
-align-items:center;
-justify-content:center;
-cursor:pointer;
+display:none;
 }
 
-.sidebar{
-left:-280px;
-width:260px;
-z-index:9998;
-transition:.35s;
+#menuBtn{
+display:none;
 }
 
-.sidebar.open{
-left:0;
-}
-
-.main{
-margin-left:0;
-padding-top:80px;
-}
+@media(max-width:768px){
 
 .grid{
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:1fr !important;
 }
 
 .row{
-grid-template-columns:1fr;
+grid-template-columns:1fr !important;
+}
+
+.card,
+.panel{
+width:100%;
 }
 
 .hero h1{
-font-size:32px;
+font-size:clamp(32px,8vw,52px);
 }
 
-.num{
-font-size:24px;
+.main{
+padding:80px 15px 15px 15px;
+overflow-x:hidden;
 }
-
-
-
-}
-
-
-}
-
-#menuBtn{
-display:none;
-}
-
-#menuBtn{
-display:none;
-}
-
-@media(max-width:768px){
 
 #menuBtn{
 display:flex;
@@ -198,7 +182,7 @@ left:-280px;
 top:0;
 bottom:0;
 width:260px;
-z-index:9998;
+z-index:10000;
 transition:.35s;
 }
 
@@ -211,7 +195,21 @@ margin-left:0;
 padding-top:80px;
 }
 
+@keyframes logoGlow{
+from{
+text-shadow:
+0 0 10px #60a5fa,
+0 0 25px #60a5fa;
 }
+to{
+text-shadow:
+0 0 20px #60a5fa,
+0 0 50px #60a5fa,
+0 0 80px #60a5fa;
+}
+
+}
+
 </style>
 </head>
 <body>
@@ -362,6 +360,9 @@ setTimeout(()=>{
 function loadPage(page,el){
 document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
 if(el) el.classList.add('active');
+if(window.innerWidth < 768){
+sidebar.classList.remove("open");
+}
 
 if(page==='dashboard'){
 
@@ -817,9 +818,7 @@ const data = doc.data();
 
 html += `
 <div class="item" style="
-display:flex;
-justify-content:space-between;
-align-items:center;
+display:block;
 padding:18px;
 margin-top:12px;
 ">
