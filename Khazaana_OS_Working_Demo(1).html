@@ -447,6 +447,11 @@ Customer Intelligence
 </div>
 
 <div class="item">
+🏆 Orders Completed:
+<span id="ordersCompleted">0</span>
+</div>
+
+<div class="item">
 📈 Conversion Rate:
 <span id="conversionRate">0%</span>
 </div>
@@ -650,6 +655,37 @@ try{
     console.log(doc.id, doc.data());
   });
 
+const analyticsSnap = await getDocs(
+  collection(db,"analytics")
+);
+
+let websiteVisitors = 0;
+let menuViews = 0;
+let addToCart = 0;
+let checkoutStarted = 0;
+let ordersCompleted = 0;
+
+analyticsSnap.forEach(doc => {
+
+  const analytics = doc.data();
+
+  websiteVisitors =
+  analytics.websiteVisitors || 0;
+
+  menuViews =
+  analytics.menuViews || 0;
+
+  addToCart =
+  analytics.addToCart || 0;
+
+  checkoutStarted =
+  analytics.checkoutStarted || 0;
+
+  ordersCompleted =
+  analytics.ordersCompleted || 0;
+
+});
+
   let revenueToday = 0;
   let ordersToday = 0;
   const customers = new Set();
@@ -798,6 +834,39 @@ document.getElementById("codOrders").innerText =
 codOrders;
 
 }
+
+if(document.getElementById("websiteVisitors")){
+
+  document.getElementById("websiteVisitors").innerText =
+  websiteVisitors;
+
+  document.getElementById("menuViews").innerText =
+  menuViews;
+
+  document.getElementById("addToCart").innerText =
+  addToCart;
+
+  document.getElementById("checkoutStarted").innerText =
+  checkoutStarted;
+
+document.getElementById("ordersCompleted").innerText =
+ordersCompleted;
+  const conversion =
+  menuViews > 0
+  ? Math.round((ordersCompleted / menuViews) * 100)
+  : 0;
+
+  document.getElementById("conversionRate").innerText =
+  conversion + "%";
+
+}
+const conversion =
+menuViews > 0
+? Math.round((ordersCompleted / menuViews) * 100)
+: 0;
+
+document.getElementById("conversionRate").innerText =
+conversion + "%";
 
 if(document.getElementById("aiCustomerInsight")){
 

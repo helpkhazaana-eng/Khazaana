@@ -665,5 +665,38 @@ document.getElementById(
 
 </script>
 
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  increment
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+ authDomain: "khazaana-7088c.firebaseapp.com",
+ projectId: "khazaana-7088c",
+ storageBucket: "khazaana-7088c.firebasestorage.app",
+ messagingSenderId: "988898941531",
+ appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+updateDoc(
+  doc(db,"analytics","stats"),
+  {
+    menuViews: increment(1)
+  }
+).catch(console.error);
+
+</script>
 </body>
 </html>
