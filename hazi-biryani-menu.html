@@ -615,6 +615,7 @@ onclick="vibrate(30);updateQty('${id}',1)">
 </div>
 
 </div>
+
 `;
 });
 
@@ -626,17 +627,21 @@ menu.innerHTML += html;
 
 renderMenu();
 
-gtag('event','menu_view',{
-restaurant:'Kolkata Hazi Biryani'
-});
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'Kolkata Hazi Biryani'
+  });
+}
 
 function updateQty(id,change){
 
 if(change > 0){
 
-gtag('event','add_to_cart',{
-restaurant:'Kolkata Hazi Biryani'
-});
+  if(typeof gtag === "function"){
+    gtag('event','add_to_cart',{
+      restaurant:'Kolkata Hazi Biryani'
+    });
+  }
 
 }
 

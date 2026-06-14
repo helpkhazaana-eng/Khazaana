@@ -540,21 +540,18 @@ function renderMenu(){
 
 renderMenu();
 
-if(change > 0){
-
-gtag('event','add_to_cart',{
-restaurant:'Khazaana Snacks Corner'
-});
-
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'Khazaana Rasoi'
+  });
 }
 
 /* BUTTON EVENTS */
 
 document.addEventListener("click",function(e){
 
-  if(e.target.classList.contains("minus-btn")){
 
-    if(isClosed()) return;
+  if(e.target.classList.contains("minus-btn")){
 
     updateQty(
       e.target.dataset.id,
@@ -564,13 +561,13 @@ document.addEventListener("click",function(e){
 
   if(e.target.classList.contains("plus-btn")){
 
-    if(isClosed()) return;
+ if(isClosed()) return;
 
-    updateQty(
-      e.target.dataset.id,
-      1
-    );
-  }
+  updateQty(
+    e.target.dataset.id,
+    1
+  );
+}
 
 });
 
@@ -578,16 +575,26 @@ document.addEventListener("click",function(e){
 
 function updateQty(item,change){
 
+  if(change > 0){
+
+    if(typeof gtag === "function"){
+      gtag('event','add_to_cart',{
+        restaurant:'Khazaana Rasoi'
+      });
+    }
+
+  }
+
   if(isClosed()) return;
 
   cart[item].qty =
   Math.max(
-  0,
-  cart[item].qty + change
+    0,
+    cart[item].qty + change
   );
 
   document.getElementById(
-  "q-"+item
+    "q-"+item
   ).innerText = cart[item].qty;
 
   updateTotals();

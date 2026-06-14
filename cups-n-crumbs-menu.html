@@ -736,17 +736,21 @@ function renderMenu(){
 
 renderMenu();
 
-gtag('event','menu_view',{
-restaurant:'Cups N Crumbs Café'
-});
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'Cups N Crumbs Café'
+  });
+}
 
 function updateQty(id,change){
 
 if(change > 0){
 
-gtag('event','add_to_cart',{
-restaurant:'Cups N Crumbs Café'
-});
+  if(typeof gtag === "function"){
+    gtag('event','add_to_cart',{
+      restaurant:'Cups N Crumbs Café'
+    });
+  }
 
 }
 

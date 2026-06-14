@@ -642,17 +642,21 @@ menu.innerHTML += html;
 
 renderMenu();
 
-gtag('event','menu_view',{
-restaurant:'Bondhu Restaurant'
-});
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'Bondhu Restaurant'
+  });
+}
 
 function updateQty(id,change){
 
 if(change > 0){
 
-gtag('event','add_to_cart',{
-restaurant:'Bondhu Restaurant'
-});
+  if(typeof gtag === "function"){
+    gtag('event','add_to_cart',{
+      restaurant:'Bondhu Restaurant'
+    });
+  }
 
 }
 

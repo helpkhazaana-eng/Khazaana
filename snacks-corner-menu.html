@@ -643,17 +643,21 @@ function renderMenu(){
 
 renderMenu();
 
-gtag('event','menu_view',{
-restaurant:'Khazaana Snacks Corner'
-});
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'Khazaana Snacks Corner'
+  });
+}
 
 function updateQty(id,change){
 
 if(change > 0){
 
-gtag('event','add_to_cart',{
-restaurant:'Khazaana Snacks Corner'
-});
+  if(typeof gtag === "function"){
+    gtag('event','add_to_cart',{
+      restaurant:'Khazaana Snacks Corner'
+    });
+  }
 
 }
 
