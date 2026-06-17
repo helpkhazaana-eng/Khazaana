@@ -448,6 +448,170 @@ body{
 
 /* ================= MOBILE ================= */
 
+/* PREMIUM COMBO SECTION */
+
+.combo-premium{
+  max-width:1200px;
+  margin:25px auto 45px;
+  padding:0 24px;
+}
+
+.combo-premium h3{
+  text-align:center;
+  margin-bottom:22px;
+  color:#ffb347;
+  font-size:28px;
+  font-weight:800;
+}
+
+.combo-grid{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.combo-card{
+  background:linear-gradient(
+    135deg,
+    rgba(255,122,0,.18),
+    rgba(255,84,0,.08)
+  );
+
+  border:1px solid rgba(255,179,71,.25);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:22px;
+
+  padding:22px;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+
+  transition:.3s ease;
+}
+
+.combo-card:hover{
+  transform:translateY(-6px);
+}
+
+.combo-name{
+  display:block;
+  font-size:18px;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.price-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+}
+
+.old-price{
+  color:rgba(255,255,255,.45);
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+  font-size:18px;
+  font-weight:600;
+}
+
+.offer-price{
+  color:#ffb347;
+  font-size:32px;
+  font-weight:900;
+}
+
+.discount{
+  display:inline-block;
+  margin-top:12px;
+
+  background:rgba(37,211,102,.15);
+  border:1px solid rgba(37,211,102,.35);
+
+  color:#25D366;
+
+  padding:6px 14px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+.combo-add-btn{
+  margin-top:14px;
+  width:100%;
+  padding:12px;
+
+  border:none;
+  border-radius:12px;
+
+  background:linear-gradient(
+    135deg,
+    #ff7a00,
+    #ff5400
+  );
+
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.5px;
+
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.combo-add-btn:hover{
+  transform:translateY(-2px);
+}
+
+.combo-controls{
+  margin-top:16px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:18px;
+}
+
+.combo-controls .btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:12px;
+
+  background:linear-gradient(
+    135deg,
+    #c56611,
+    #a85308
+  );
+
+  color:#fff;
+
+  font-size:20px;
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.combo-controls .qty{
+  min-width:20px;
+
+  text-align:center;
+
+  color:#fff;
+
+  font-size:18px;
+  font-weight:700;
+}
 @media(max-width:768px){
 
   .glass-navbar{
@@ -544,7 +708,154 @@ body{
 
   <p id="statusMsg"></p>
 
-</section>
+<div class="combo-premium">
+
+  <h3>🔥 Special Combo Deals</h3>
+<div class="combo-premium">
+
+
+<div class="combo-grid">
+
+  <!-- Cheese Toast + Tea -->
+  <div class="combo-card">
+    <span class="combo-name">☕ Cheese Toast + Tea</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹50</span>
+      <span class="offer-price">₹45</span>
+    </div>
+
+    <div class="discount">Save ₹5</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboTeaToast',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboTeaToast">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboTeaToast',1)">+</button>
+    </div>
+  </div>
+
+  <!-- Coffee + Chicken Patties -->
+  <div class="combo-card">
+    <span class="combo-name">☕ Coffee + Chicken Patties</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹75</span>
+      <span class="offer-price">₹70</span>
+    </div>
+
+    <div class="discount">Save ₹5</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboCoffeePatties',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboCoffeePatties">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboCoffeePatties',1)">+</button>
+    </div>
+  </div>
+
+  <!-- Tea + Veg Patties -->
+  <div class="combo-card">
+    <span class="combo-name">🥟 Tea + Veg Patties</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹60</span>
+      <span class="offer-price">₹55</span>
+    </div>
+
+    <div class="discount">Save ₹5</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboVegPatties',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboVegPatties">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboVegPatties',1)">+</button>
+    </div>
+  </div>
+
+  <!-- Chicken Burger + Cold Coffee -->
+  <div class="combo-card">
+    <span class="combo-name">🍔 Chicken Burger + Cold Coffee</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹180</span>
+      <span class="offer-price">₹165</span>
+    </div>
+
+    <div class="discount">Save ₹15</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboBurgerCoffee',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboBurgerCoffee">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboBurgerCoffee',1)">+</button>
+    </div>
+  </div>
+
+  <!-- Paneer Grill + Mocktail -->
+  <div class="combo-card">
+    <span class="combo-name">🥪 Paneer Grill + Mocktail</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹160</span>
+      <span class="offer-price">₹145</span>
+    </div>
+
+    <div class="discount">Save ₹15</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboPaneerMocktail',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboPaneerMocktail">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboPaneerMocktail',1)">+</button>
+    </div>
+  </div>
+
+  <!-- Chicken Grill + Mocktail -->
+  <div class="combo-card">
+    <span class="combo-name">🍗 Chicken Grill + Mocktail</span>
+
+    <div class="price-wrap">
+      <span class="old-price">₹180</span>
+      <span class="offer-price">₹170</span>
+    </div>
+
+    <div class="discount">Save ₹10</div>
+
+    <div class="controls combo-controls">
+      <button class="btn"
+        onclick="updateComboQty('comboChickenMocktail',-1)">−</button>
+
+      <span class="qty"
+        id="q-comboChickenMocktail">0</span>
+
+      <button class="btn"
+        onclick="updateComboQty('comboChickenMocktail',1)">+</button>
+    </div>
+  </div>
+
+</div>
+</div></section>
 
 <section class="menu" id="menu"></section>
 
@@ -677,6 +988,78 @@ const menuData = {
 
 const cart = {};
 
+const combos = {
+
+  comboTeaToast:{
+    name:"Cheese Toast + Tea",
+    price:45,
+    qty:0
+  },
+
+  comboCoffeePatties:{
+    name:"Coffee + Chicken Patties",
+    price:70,
+    qty:0
+  },
+
+  comboVegPatties:{
+    name:"Tea + Veg Patties",
+    price:55,
+    qty:0
+  },
+
+  comboBurgerCoffee:{
+    name:"Chicken Burger + Cold Coffee",
+    price:165,
+    qty:0
+  },
+
+  comboPaneerMocktail:{
+    name:"Paneer Grill + Mocktail",
+    price:145,
+    qty:0
+  },
+
+  comboChickenMocktail:{
+    name:"Chicken Grill + Mocktail",
+    price:170,
+    qty:0
+  }
+
+};
+
+
+function updateComboQty(id,change){
+
+  combos[id].qty =
+  Math.max(0, combos[id].qty + change);
+
+  document.getElementById(
+    "q-" + id
+  ).innerText =
+  combos[id].qty;
+
+  updateTotals();
+}
+
+function addCombo(name, price){
+
+  const id = "combo_" +
+    name.replace(/\s+/g,'');
+
+  if(!cart[id]){
+    cart[id] = {
+      name:name,
+      price:price,
+      qty:0
+    };
+  }
+
+  cart[id].qty++;
+
+  updateTotals();
+}
+
 function renderMenu(){
 
   const menu =
@@ -687,6 +1070,8 @@ function renderMenu(){
     let html =
     `<div class="section">
       <h2>${section}</h2>`;
+
+
 
     menuData[section].forEach(([name,price],i)=>{
 
