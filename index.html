@@ -1643,7 +1643,8 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
- apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+ apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",BODY
+
  authDomain: "khazaana-7088c.firebaseapp.com",
  projectId: "khazaana-7088c",
  storageBucket: "khazaana-7088c.firebasestorage.app",
@@ -1662,6 +1663,48 @@ updateDoc(
 ).catch(console.error);
 
 </script>
+
+<div id="closedOverlay">
+ <div class="closed-card">
+
+    <div class="closed-icon">🚫</div>
+
+    <h1>Closed Today</h1>
+
+    <p>
+        Due to operational reasons, we will be closed today.
+    </p>
+
+    <p class="bn-text">
+        অপারেশনাল কারণে আজ আমরা বন্ধ আছি।
+    </p>
+
+</div>
+
+<style>
+#closedOverlay{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  width:100vw !important;
+  height:100vh !important;
+  background:#000 !important;
+  z-index:999999999 !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+
+.closed-card{
+  background:#111;
+  color:#fff;
+  padding:30px;
+  border:2px solid #ff7a00;
+  border-radius:20px;
+  text-align:center;
+  max-width:400px;
+}
+</style>
 </body>
 </html>
 
