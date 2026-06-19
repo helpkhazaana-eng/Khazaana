@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -499,10 +499,23 @@ Revenue Intelligence
 
 </div>
 
+<div style="margin-top:30px">
+
+<h2 style="margin-bottom:20px">
+Restaurant Earnings
+</h2>
+
+<div id="restaurantCards" class="grid">
+Loading...
+</div>
+
+</div>
+
 </div>
 `;
 
 loadAnalytics();
+loadRestaurantCards();
 
 }
 
@@ -878,14 +891,6 @@ customers.size;
 document.getElementById("revAov").innerText =
 "₹" + aov;
 
-document.getElementById("summaryRevenue").innerText =
-"₹" + revenueToday;
-
-document.getElementById("summaryOrders").innerText =
-ordersToday;
-
-document.getElementById("summaryCustomers").innerText =
-customers.size;
 
 }
 
@@ -1137,8 +1142,110 @@ sidebar.classList.toggle("open");
 
 });
 
+async function loadRestaurantCards(){
+
+const restaurants = {
+"KOLKATA ARSALAN BIRYANI":{revenue:0,orders:0,paid:0,pending:0},
+"Kolkata Hazi Biryani":{revenue:0,orders:0,paid:0,pending:0},
+"Bondhu Hotel & Restaurant":{revenue:0,orders:0,paid:0,pending:0},
+"Khazaana Rasoi":{revenue:0,orders:0,paid:0,pending:0},
+"Khazaana Snacks Corner":{revenue:0,orders:0,paid:0,pending:0},
+"Khazaana Cake Zone":{revenue:0,orders:0,paid:0,pending:0},
+"Cups N Crumbs Café":{revenue:0,orders:0,paid:0,pending:0}
+};
+
+let html="";
+
+Object.entries(restaurants).forEach(([name,data])=>{
+
+html += `
+<div class="card">
+
+<h3>${name}</h3>
+
+<div style="margin-top:10px">
+Revenue ₹0
+</div>
+
+<div style="margin-top:5px">
+Orders 0
+</div>
+
+<div style="margin-top:5px">
+Paid ₹0
+</div>
+
+<div style="margin-top:5px">
+Pending ₹0
+</div>
+
+<button
+onclick="openRestaurantOrders('${name}')"
+style="
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#60a5fa;
+color:white;
+cursor:pointer;
+">
+View Orders
+</button>
+
+</div>
+`;
+});
+
+document.getElementById("restaurantCards").innerHTML = html;
+
+}
+
 window.loadPage = loadPage;
 
 </script>
+
+<div id="restaurantModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+z-index:99999;
+justify-content:center;
+align-items:center;
+">
+
+<div
+style="
+width:min(1000px,95%);
+max-height:90vh;
+overflow:auto;
+background:#081124;
+padding:25px;
+border-radius:20px;
+">
+
+<h2 id="modalRestaurantName"></h2>
+
+<button
+onclick="closeRestaurantModal()"
+style="
+margin-bottom:20px;
+padding:10px 15px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+">
+Close
+</button>
+
+<div id="restaurantOrders"></div>
+
+</div>
+
+</div>
 </body>
 </html>
