@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KOLKATA ARSALAN BIRYANI | Khazaana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon-180x180.png">
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",sans-serif;
+}
+
+/* ================= BODY ================= */
+
+body{
+
+  background:
+
+  linear-gradient(
+  180deg,
+  #0f0b08 0%,
+  #16110d 35%,
+  #1b140f 65%,
+  #120d09 100%
+  );
+
+  color:#fff;
+
+  overflow-x:hidden;
+
+  padding-bottom:140px;
+}
+
+/* ================= NAVBAR ================= */
+
+.glass-navbar{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+  rgba(10,10,10,.45);
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.06);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.18);
+}
+
+.nav{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:16px 24px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.logo{
+
+  font-size:24px;
+
+  font-weight:800;
+
+  color:#fff;
+
+  text-shadow:
+  0 0 18px rgba(255,122,0,.25);
+}
+
+.nav-links{
+
+  display:flex;
+
+  gap:28px;
+}
+
+.nav-links a{
+
+  position:relative;
+
+  text-decoration:none;
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-weight:500;
+
+  transition:.3s ease;
+}
+
+.nav-links a:hover{
+
+  color:#ff8c1a;
+}
+
+.nav-links a::after{
+
+  content:'';
+
+  position:absolute;
+
+  left:0;
+
+  bottom:-8px;
+
+  width:0;
+
+  height:2px;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after{
+
+  width:100%;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+  text-align:center;
+
+  padding:70px 20px 50px;
+
+  position:relative;
+}
+
+.hero::before{
+
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+
+  radial-gradient(
+  circle at top right,
+  rgba(255,122,0,.12),
+  transparent 30%
+  );
+
+  pointer-events:none;
+}
+
+.hero h1{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:58px;
+
+  font-weight:900;
+
+  letter-spacing:-2px;
+
+  margin-bottom:14px;
+
+  color:#fff;
+}
+
+.hero p{
+
+  position:relative;
+
+  z-index:2;
+
+  color:
+  rgba(255,255,255,.72);
+
+  font-size:17px;
+}
+
+#statusMsg{
+
+  margin-top:14px;
+
+  font-weight:700;
+
+  color:#ffb347;
+}
+
+/* ================= MENU ================= */
+
+.menu{
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:20px 24px 90px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:28px;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+
+  background:
+  rgba(255,255,255,.06);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:28px;
+
+  padding:24px;
+
+  box-shadow:
+  0 20px 45px rgba(0,0,0,.25);
+
+  transition:.35s ease;
+}
+
+.section:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 30px 65px rgba(0,0,0,.35);
+}
+
+.section h2{
+
+  font-size:22px;
+
+  margin-bottom:18px;
+
+  color:#ffb347;
+}
+
+/* ================= ITEM ================= */
+
+.item{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:14px 0;
+
+  border-bottom:
+  1px dashed rgba(255,255,255,.08);
+}
+
+.item:last-child{
+
+  border-bottom:none;
+}
+
+.item span{
+
+  color:#fff;
+
+  font-size:15px;
+
+  line-height:1.5;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+.btn{
+
+  width:30px;
+
+  height:30px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #ff7a00,
+  #ff5400
+  );
+
+  color:#fff;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+}
+
+.btn:hover{
+
+  transform:scale(1.08);
+}
+
+.qty{
+
+  min-width:22px;
+
+  text-align:center;
+
+  font-weight:700;
+
+  color:#fff;
+}
+
+/* ================= CART ================= */
+
+.cart-bar{
+
+  position:fixed;
+
+  bottom:0;
+
+  left:0;
+
+  width:100%;
+
+  background:
+  rgba(10,10,10,.92);
+
+  backdrop-filter:blur(18px);
+
+  border-top:
+  1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+  0 -10px 30px rgba(0,0,0,.35);
+
+  padding:16px 20px;
+
+  z-index:1000;
+}
+
+.cart-info{
+
+  font-size:15px;
+
+  margin-bottom:10px;
+
+  color:
+  rgba(255,255,255,.75);
+}
+
+.cart-info b{
+
+  color:#ffb347;
+}
+
+.order-btn{
+
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #25D366,
+  #1faa52
+  );
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.35s ease;
+}
+
+.order-btn:hover{
+
+  transform:
+  translateY(-3px);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .glass-navbar{
+
+    position:fixed;
+
+    width:100%;
+  }
+
+  .nav{
+
+    padding:14px 18px;
+  }
+
+  .nav-links{
+
+    gap:16px;
+  }
+
+  .hero{
+
+    padding:120px 20px 40px;
+  }
+
+  .hero h1{
+
+    font-size:40px;
+
+    line-height:1.1;
+  }
+
+  .hero p{
+
+    font-size:15px;
+  }
+
+  .menu{
+
+    grid-template-columns:1fr;
+
+    padding:20px 18px 90px;
+
+    gap:22px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="glass-navbar">
+
+<div class="nav">
+
+<div class="logo">
+Khazaana
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="restaurants.html">Restaurants</a>
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>
+KOLKATA ARSALAN BIRYANI
+</h1>
+
+<p>
+Biryani • Kolkata Style
+</p>
+
+<p id="statusMsg"></p>
+
+</section>
+
+<section class="menu" id="menu"></section>
+
+<div class="cart-bar">
+
+<div class="cart-info" id="cartInfo">
+Subtotal: ₹0 | Delivery: ₹0 | <b>Total: ₹0</b>
+</div>
+
+<button class="order-btn"
+onclick="goToCheckout()">
+
+Proceed to Checkout
+
+</button>
+
+</div>
+
+<script>
+
+const DELIVERY_FEE = 30;
+const MIN_ORDER_VALUE = 200;
+
+function vibrate(ms=30){
+if(navigator.vibrate)
+navigator.vibrate(ms);
+}
+
+const menuData = {
+
+"🍚 Main Course – Biryani":[
+
+["Chicken Biryani (Full)",135],
+["Chicken Biryani (Half)",115],
+["Aloo Biryani (Full)",100],
+["Aloo Biryani (Half)",70],
+["Special Chicken Biryani",190],
+["Extra Chicken (1 Piece)",70],
+["Extra Potato (1 Piece)",10]
+
+]
+
+};
+
+const cart = {};
+
+function renderMenu(){
+
+const menu =
+document.getElementById("menu");
+
+for(const section in menuData){
+
+let html =
+`<div class="section">
+
+<h2>${section}</h2>`;
+
+menuData[section].forEach(([name,price],i)=>{
+
+const id =
+section.replace(/\W/g,'') + i;
+
+cart[id] = {
+name,
+price,
+qty:0
+};
+
+html += `
+
+<div class="item">
+
+<span>
+${name} ₹${price}
+</span>
+
+<div class="controls">
+
+<button class="btn"
+onclick="vibrate(20);updateQty('${id}',-1)">
+−
+</button>
+
+<span class="qty"
+id="q-${id}">
+0
+</span>
+
+<button class="btn"
+onclick="vibrate(30);updateQty('${id}',1)">
++
+</button>
+
+</div>
+
+</div>
+
+`;
+});
+
+html += `</div>`;
+
+menu.innerHTML += html;
+}
+}
+
+renderMenu();
+
+if(typeof gtag === "function"){
+  gtag('event','menu_view',{
+    restaurant:'KOLKATA ARSALAN BIRYANI'
+  });
+}
+
+function updateQty(id,change){
+
+if(change > 0){
+
+  if(typeof gtag === "function"){
+    gtag('event','add_to_cart',{
+      restaurant:'KOLKATA ARSALAN BIRYANI'
+    });
+  }
+
+}
+
+cart[id].qty =
+Math.max(0, cart[id].qty + change);
+
+document.getElementById(
+"q-"+id
+).innerText = cart[id].qty;
+
+updateTotals();
+}
+
+function updateTotals(){
+
+let subtotal = 0;
+
+for(const i in cart){
+
+  subtotal += cart[i].qty * cart[i].price;
+
+}
+
+
+let delivery =
+subtotal >= 500
+? 0
+: (subtotal === 0 ? 0 : DELIVERY_FEE);
+
+let total =
+subtotal + delivery;
+
+document.getElementById(
+"cartInfo"
+).innerHTML =
+
+`Subtotal: ₹${subtotal}
+| Delivery:
+${delivery === 0 && subtotal > 0
+? "FREE"
+: "₹"+delivery}
+| <b>Total: ₹${total}</b>`;
+}
+
+function goToCheckout(){
+
+let subtotal = 0;
+let items = [];
+
+for(const i in cart){
+
+  if(cart[i].qty > 0 && cart[i].qty < 2){
+
+    alert("Minimum order quantity is 2 plates per item.");
+    return;
+
+  }
+
+}
+
+for(const i in cart){
+
+if(cart[i].qty > 0){
+
+const t =
+cart[i].qty * cart[i].price;
+
+subtotal += t;
+
+items.push({
+
+name:cart[i].name,
+qty:cart[i].qty,
+price:cart[i].price,
+total:t
+
+});
+}
+}
+
+if(subtotal < MIN_ORDER_VALUE){
+
+alert("Minimum order value is ₹200");
+return;
+}
+
+let delivery =
+subtotal >= 500
+? 0
+: (subtotal === 0 ? 0 : DELIVERY_FEE);
+
+const orderData = {
+
+restaurant:
+"KOLKATA ARSALAN BIRYANI",
+
+items,
+
+subtotal,
+
+delivery,
+
+total:
+subtotal + delivery
+
+};
+
+localStorage.setItem(
+"khazaanaOrder",
+JSON.stringify(orderData)
+);
+
+window.location.href =
+"checkout.html";
+}
+
+/* STATUS */
+
+function isClosed(){
+
+  const h =
+  new Date().getHours();
+
+  return (h >= 21 || h < 18);
+
+}
+
+function toggleCart(disable){
+
+const buttons =
+document.querySelectorAll("button");
+
+buttons.forEach(btn=>{
+
+if(btn.innerText==="+" ||
+btn.innerText==="−"){
+
+btn.disabled = disable;
+
+btn.style.opacity =
+disable ? "0.5" : "1";
+
+btn.style.cursor =
+disable ? "not-allowed"
+: "pointer";
+}
+});
+}
+
+function updateStatus(){
+
+const msg =
+document.getElementById(
+"statusMsg"
+);
+
+if(!isClosed()){
+
+msg.innerText =
+"🟢 Open Now";
+
+toggleCart(false);
+
+return;
+}
+
+let now = new Date();
+
+let openTime =
+new Date();
+
+if(now.getHours() >= 21){
+
+openTime.setDate(
+now.getDate()+1
+);
+}
+
+openTime.setHours(
+18,0,0,0
+);
+
+let diff =
+openTime - now;
+
+let h =
+Math.floor(diff/(1000*60*60));
+
+let m =
+Math.floor(
+(diff%(1000*60*60))
+/(1000*60)
+);
+
+let s =
+Math.floor(
+(diff%(1000*60))
+/1000
+);
+
+msg.innerText =
+`🔴 Opens in ${h}h ${m}m ${s}s`;
+
+toggleCart(true);
+}
+
+setInterval(updateStatus,1000);
+
+updateStatus();
+
+</script>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  increment
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+ authDomain: "khazaana-7088c.firebaseapp.com",
+ projectId: "khazaana-7088c",
+ storageBucket: "khazaana-7088c.firebasestorage.app",
+ messagingSenderId: "988898941531",
+ appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+};
+
+window.analyticsDb =
+getFirestore(
+  initializeApp(firebaseConfig,"haziAnalytics")
+);
+
+window.trackAddToCart = () =>
+updateDoc(
+  doc(window.analyticsDb,"analytics","stats"),
+  {
+    addToCart: increment(1)
+  }
+).catch(console.error);
+
+</script>
+</body>
+</html>
