@@ -472,10 +472,87 @@ OneSignalDeferred.push(async function(OneSignal) {
   }
 }
 
+#maintenance-overlay{
+    position:fixed;
+    inset:0;
+    background:#111;
+    z-index:999999999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.maintenance-box{
+    max-width:700px;
+    background:#1b1b1b;
+    padding:40px;
+    border-radius:20px;
+    color:#fff;
+    border:2px solid #ff7a00;
+    box-shadow:0 0 30px rgba(255,122,0,.3);
+}
+
+.maintenance-box h1,
+.maintenance-box h2{
+    color:#ff7a00;
+    margin-bottom:15px;
+}
+
+.maintenance-box p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+.phone{
+    font-size:26px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.phone a{
+    color:#25D366;
+    text-decoration:none;
+}
+
+.maintenance-box hr{
+    margin:30px 0;
+    border-color:#333;
+}
+
   </style>
 </head>
 
 <body>
+
+<div id="maintenance-overlay">
+  <div class="maintenance-box">
+    <h1>🚧 Website Under Maintenance</h1>
+
+    <p>
+      Our website is temporarily unavailable due to maintenance.
+    </p>
+
+    <p class="phone">
+      📞 Call: <a href="tel:8695902696">8695902696</a>
+    </p>
+
+    <hr>
+
+    <h2>🚧 ওয়েবসাইট রক্ষণাবেক্ষণের জন্য সাময়িকভাবে বন্ধ</h2>
+
+    <p>
+      আমাদের ওয়েবসাইট বর্তমানে রক্ষণাবেক্ষণের কাজের জন্য বন্ধ রয়েছে।
+    </p>
+
+    <p class="phone">
+      📞 কল করুন: <a href="tel:8695902696">8695902696</a>
+    </p>
+
+    <p>অর্ডার করতে আমাদের ফোন করুন।</p>
+  </div>
+</div>
 
 <!-- INTRO -->
 <div id="intro">
