@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <meta charset="UTF-8">
 <title>Checkout | Khazaana</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +62,7 @@ min-height:100vh;
 
     border-radius:50%;
 
-    background:linear-gradient(135deg,#ff9a1f,#ff6b00);
+    background:#25D366;
 
     display:flex;
     align-items:center;
@@ -345,8 +348,12 @@ style="margin-top:12px;font-size:14px;color:#25D366;text-align:center;font-weigh
 </div>
 
 <div class="slide-order">
-    <div class="slide-text">Slide to Place Order →</div>
-    <div id="sliderBtn">➜</div>
+   <div class="slide-text">
+  Slide to Order on WhatsApp →
+</div>
+    <div id="sliderBtn">
+  <i class="fa-brands fa-whatsapp"></i>
+</div>
 </div>
 
 <div class="note">
@@ -921,32 +928,6 @@ console.log(err);
 
 });
 
-try {
-
-const response = await emailjs.send(
-  "service_0x788xa",
-  "template_utyr3rw",
-  {
-    order_id: Date.now(),
-    restaurant_name: order.restaurant,
-    customer_name: name,
-    customer_phone: phone,
-    customer_address: address,
-coupon_used: appliedCoupon || "None",
-    order_items: order.items.map(i =>
-      `${i.name} x${i.qty} - ₹${i.total}`
-    ).join("\n"),
-    order_total: order.total
-  }
-);
-
-console.log("Email sent", response);
-
-} catch(err) {
-
-  console.error("EMAIL ERROR:", err);
-
-}
 
 const docRef = await window.addDoc(
 
@@ -1007,6 +988,32 @@ localStorage.removeItem(
   "khazaanaOrder"
 );
 
+const whatsappMessage = `
+🍽️ *NEW ORDER*
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+
+🏪 Restaurant: ${order.restaurant}
+
+📦 Items:
+${order.items.map(i =>
+`• ${i.name} x${i.qty} = ₹${i.total}`
+).join('\n')}
+
+💰 Total: ₹${order.total}
+
+📍 Address:
+${address}
+
+Order ID: ${docRef.id}
+`;
+
+window.open(
+`https://wa.me/918695902696?text=${encodeURIComponent(whatsappMessage)}`,
+"_blank"
+);
+
 if(typeof gtag === "function"){
   gtag('event','order_completed',{
     restaurant:order.restaurant,
@@ -1027,10 +1034,13 @@ try{
   console.error(err);
 
 }
+setTimeout(() => {
+
 window.location.href =
 "track-order.html?id=" +
 docRef.id;
 
+}, 3000);
 
 }
 
@@ -1125,17 +1135,14 @@ document.addEventListener("touchend",()=>{
     const current =
     parseInt(slider.style.left || 0);
 
-    if(current > max * 0.85){
+  if(current > max * 0.85){
 
-        slider.innerHTML = "✓";
-        slider.style.background = "#25D366";
+    slider.innerHTML = "✓";
+    slider.style.background = "#25D366";
 
-        finalOrder();
+    finalOrder();
 
-    }else{
-
-        slider.style.left = "5px";
-    }
+}
 
 });
 
