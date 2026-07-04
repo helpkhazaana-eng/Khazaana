@@ -953,23 +953,11 @@ const docRef = await window.addDoc(
 
 );
 
-fetch("https://script.google.com/macros/s/AKfycbzJUhvTP1Fc7D0hP035sa4l5vqzjrX_7e9jFaeAc47kM9MyN7tlfuhB9HFOs6aEaWhV/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    orderId: docRef.id,
-    name: name,
-    phone: phone,
-    items: order.items.map(i =>
-      `${i.name} x${i.qty}`
-    ).join(", "),
-    total: order.total,
-    status: "Pending"
-  })
-});
+try {
 
+} catch (e) {
+  console.log("Google Sheet skipped:", e);
+}
 
 localStorage.setItem(
   "activeOrder",
@@ -1009,10 +997,17 @@ ${address}
 Order ID: ${docRef.id}
 `;
 
-window.open(
-`https://wa.me/918695902696?text=${encodeURIComponent(whatsappMessage)}`,
-"_blank"
-);
+const waUrl =
+`https://wa.me/918695902696?text=${encodeURIComponent(whatsappMessage)}`;
+
+window.open(waUrl, "_blank");
+
+setTimeout(() => {
+    window.location.href = "track-order.html?id=" + docRef.id;
+}, 2000);
+
+return;
+
 
 if(typeof gtag === "function"){
   gtag('event','order_completed',{
