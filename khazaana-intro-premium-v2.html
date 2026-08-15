@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khazaana — Welcome</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#061813;
+  --bg2:#0b261e;
+  --green:#123d30;
+  --cream:#eee5d6;
+  --muted:rgba(238,229,214,.58);
+  --line:rgba(238,229,214,.13);
+  --gold:#c9b27d;
+}
+
+html,body{width:100%;min-height:100%}
+
+body{
+  min-height:100vh;
+  overflow:hidden;
+  color:var(--cream);
+  font-family:"DM Sans",sans-serif;
+  background:
+    radial-gradient(circle at 50% 15%,rgba(62,116,92,.28),transparent 34%),
+    radial-gradient(circle at 15% 85%,rgba(25,74,58,.22),transparent 35%),
+    linear-gradient(145deg,#04130f 0%,#09231c 52%,#061812 100%);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:linear-gradient(to bottom,black,transparent 82%);
+}
+
+.page{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:30px 22px;
+}
+
+/* subtle luxury glow */
+.glow{
+  position:absolute;
+  width:430px;
+  height:430px;
+  border-radius:50%;
+  background:rgba(74,127,101,.12);
+  filter:blur(75px);
+  top:8%;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+
+/* top branding */
+.top{
+  position:absolute;
+  top:28px;
+  left:28px;
+  right:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:4px;
+}
+
+.location{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+/* main */
+.content{
+  position:relative;
+  z-index:2;
+  width:min(760px,100%);
+  text-align:center;
+  animation:rise .9s ease both;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:20px;
+  color:var(--gold);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:3.5px;
+  text-transform:uppercase;
+}
+
+.eyebrow:before,
+.eyebrow:after{
+  content:"";
+  width:28px;
+  height:1px;
+  background:rgba(201,178,125,.45);
+}
+
+h1{
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(60px,13vw,120px);
+  line-height:.86;
+  font-weight:700;
+  letter-spacing:-4px;
+  color:var(--cream);
+}
+
+.tagline{
+  margin:25px auto 0;
+  max-width:500px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.tagline strong{
+  color:var(--cream);
+  font-weight:600;
+}
+
+
+
+.hindi-tagline{
+  margin-top:18px;
+  color:var(--cream);
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(18px,3.8vw,25px);
+  font-weight:600;
+  letter-spacing:.1px;
+}
+
+.powered{
+  margin-top:24px;
+  color:rgba(238,229,214,.43);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.powered strong{
+  color:rgba(238,229,214,.72);
+  font-weight:700;
+}
+
+/* premium CTA */
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:13px;
+  margin-top:38px;
+  padding:6px 8px 6px 22px;
+  min-width:190px;
+  height:60px;
+  border:1px solid rgba(238,229,214,.2);
+  border-radius:999px;
+  background:rgba(238,229,214,.065);
+  color:var(--cream);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 15px 40px rgba(0,0,0,.2);
+  backdrop-filter:blur(18px);
+  transition:.25s ease;
+}
+
+.cta:hover{
+  transform:translateY(-2px);
+  border-color:rgba(238,229,214,.38);
+  background:rgba(238,229,214,.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.1),
+    0 20px 48px rgba(0,0,0,.27);
+}
+
+.cta-arrow{
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--cream);
+  color:#0a251d;
+  font-size:20px;
+  transition:.25s ease;
+}
+
+.cta:hover .cta-arrow{
+  transform:translateX(2px);
+}
+
+/* bottom statement */
+.bottom{
+  position:absolute;
+  bottom:25px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:rgba(238,229,214,.38);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.bottom span{
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:var(--gold);
+  opacity:.7;
+}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:600px){
+  .page{padding:25px 18px}
+  .top{top:22px;left:20px;right:20px}
+  .location{display:none}
+  h1{letter-spacing:-3px}
+  .tagline{font-size:13px;max-width:340px}
+  .cta{margin-top:32px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="glow"></div>
+
+  <div class="top">
+    <div class="logo">KHAZAANA</div>
+    <div class="location">Your local food experience</div>
+  </div>
+
+  <main class="content">
+
+    <div class="eyebrow">
+      Welcome
+    </div>
+
+    <h1>Khazaana</h1>
+
+    <div class="hindi-tagline">
+      Khane ka Khazana, Ab Ghar Tak
+    </div>
+
+    <p class="tagline">
+      Discover the <strong>food you love</strong>, from the places
+      that make your neighbourhood special.
+    </p>
+
+    <div class="powered">
+      Powered by <strong>Cups N Crumbs Cafe</strong>
+    </div>
+
+    <a href="index.html" class="cta" aria-label="Get Started">
+      <span>Get Started</span>
+      <span class="cta-arrow">→</span>
+    </a>
+
+  </main>
+
+  <div class="bottom">
+    <span></span>
+    Local favourites · One place
+    <span></span>
+  </div>
+
+</div>
+
+</body>
+</html>

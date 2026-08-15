@@ -674,6 +674,356 @@ body{
 
 }
 
+
+/* =========================================================
+   KHAZAANA — CUPS N CRUMBS
+   PREMIUM MOSS × WHEAT MENU
+   ========================================================= */
+
+:root{
+  --moss:#2D3A2F;
+  --wheat:#D3C6B6;
+  --moss-soft:#354438;
+  --wheat-soft:#C8BAA9;
+}
+
+/* BASE */
+html,
+body{
+  background:var(--wheat)!important;
+  color:var(--moss)!important;
+  overflow-x:hidden!important;
+}
+
+/* NAVBAR */
+.glass-navbar{
+  background:rgba(45,58,47,.94)!important;
+  border-bottom:1px solid rgba(211,198,182,.18)!important;
+  box-shadow:0 12px 35px rgba(45,58,47,.16)!important;
+}
+
+.logo{
+  color:var(--wheat)!important;
+  text-shadow:none!important;
+}
+
+.nav-links a{
+  color:rgba(211,198,182,.72)!important;
+}
+
+.nav-links a:hover{
+  color:var(--wheat)!important;
+}
+
+.nav-links a::after{
+  background:var(--wheat)!important;
+}
+
+/* HERO */
+.hero{
+  background:var(--wheat)!important;
+  color:var(--moss)!important;
+  padding:75px 20px 55px!important;
+}
+
+.hero::before{
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(45,58,47,.08),
+      transparent 32%
+    )!important;
+}
+
+.hero h1{
+  color:var(--moss)!important;
+  letter-spacing:-2.5px!important;
+}
+
+.hero p{
+  color:rgba(45,58,47,.65)!important;
+}
+
+#statusMsg{
+  color:var(--moss)!important;
+}
+
+/* MENU AREA */
+.menu{
+  background:var(--wheat)!important;
+  padding:25px 24px 120px!important;
+}
+
+/* MENU CATEGORY CARDS */
+.section{
+  background:var(--moss)!important;
+  border:1px solid rgba(211,198,182,.14)!important;
+  border-radius:4px!important;
+  padding:26px!important;
+  box-shadow:0 18px 45px rgba(45,58,47,.14)!important;
+  backdrop-filter:none!important;
+}
+
+.section:hover{
+  transform:translateY(-4px)!important;
+  box-shadow:0 25px 55px rgba(45,58,47,.20)!important;
+}
+
+.section h2{
+  color:var(--wheat)!important;
+  font-family:Georgia,serif!important;
+  font-size:25px!important;
+  letter-spacing:-.3px!important;
+  border-bottom:1px solid rgba(211,198,182,.18)!important;
+  padding-bottom:15px!important;
+}
+
+/* ITEMS */
+.item{
+  border-bottom:1px solid rgba(211,198,182,.12)!important;
+  padding:16px 0!important;
+}
+
+.item span{
+  color:var(--wheat)!important;
+}
+
+.item span::first-letter{
+  color:var(--wheat)!important;
+}
+
+/* QUANTITY CONTROLS */
+.btn{
+  background:var(--wheat)!important;
+  color:var(--moss)!important;
+  border-radius:2px!important;
+  box-shadow:none!important;
+}
+
+.btn:hover{
+  background:var(--wheat-soft)!important;
+  color:var(--moss)!important;
+  transform:scale(1.05)!important;
+}
+
+.qty{
+  color:var(--wheat)!important;
+}
+
+/* COMBO SECTION */
+.combo-premium{
+  max-width:1200px!important;
+  margin:20px auto 50px!important;
+}
+
+.combo-premium h3{
+  color:var(--moss)!important;
+  font-family:Georgia,serif!important;
+  font-size:30px!important;
+  letter-spacing:-.5px!important;
+}
+
+/* COMBO CARDS = WHEAT/MOSS */
+.combo-grid{
+  gap:18px!important;
+}
+
+.combo-card{
+  background:var(--moss)!important;
+  border:1px solid rgba(211,198,182,.16)!important;
+  border-radius:4px!important;
+  box-shadow:0 18px 40px rgba(45,58,47,.14)!important;
+  backdrop-filter:none!important;
+}
+
+.combo-card:hover{
+  transform:translateY(-5px)!important;
+  box-shadow:0 25px 55px rgba(45,58,47,.20)!important;
+}
+
+.combo-name{
+  color:var(--wheat)!important;
+}
+
+.old-price{
+  color:rgba(211,198,182,.42)!important;
+}
+
+.offer-price{
+  color:var(--wheat)!important;
+}
+
+.discount{
+  background:rgba(211,198,182,.08)!important;
+  border:1px solid rgba(211,198,182,.18)!important;
+  color:var(--wheat)!important;
+}
+
+.combo-controls .btn{
+  background:var(--wheat)!important;
+  color:var(--moss)!important;
+}
+
+/* CART */
+.cart-bar{
+  background:rgba(45,58,47,.97)!important;
+  border-top:1px solid rgba(211,198,182,.18)!important;
+  box-shadow:0 -12px 35px rgba(45,58,47,.20)!important;
+}
+
+.cart-info{
+  color:rgba(211,198,182,.72)!important;
+}
+
+.cart-info b{
+  color:var(--wheat)!important;
+}
+
+.order-btn{
+  background:var(--wheat)!important;
+  color:var(--moss)!important;
+  border-radius:3px!important;
+  box-shadow:none!important;
+}
+
+.order-btn:hover{
+  background:var(--wheat-soft)!important;
+  transform:translateY(-2px)!important;
+}
+
+.note{
+  color:rgba(211,198,182,.45)!important;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .glass-navbar{
+    background:rgba(45,58,47,.96)!important;
+  }
+
+  .hero{
+    padding:110px 18px 40px!important;
+  }
+
+  .hero h1{
+    font-size:40px!important;
+    line-height:1.05!important;
+  }
+
+  .menu{
+    grid-template-columns:1fr!important;
+    padding:18px 14px 120px!important;
+    gap:16px!important;
+  }
+
+  .section{
+    padding:20px!important;
+  }
+
+  .combo-premium{
+    padding:0 14px!important;
+  }
+
+  .combo-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .combo-card{
+    padding:20px!important;
+  }
+}
+
+
+/* ================= CHECKOUT SAVINGS POPUP ================= */
+.checkout-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(15,20,17,.62);
+  backdrop-filter:blur(10px);
+}
+.checkout-overlay.show{display:flex}
+.checkout-popup{
+  width:min(430px,100%);
+  padding:28px;
+  background:var(--moss,#2D3A2F);
+  color:var(--wheat,#D3C6B6);
+  border:1px solid rgba(211,198,182,.20);
+  border-radius:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.42);
+  animation:checkoutPopupIn .22s ease-out;
+}
+@keyframes checkoutPopupIn{
+  from{opacity:0;transform:translateY(12px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.checkout-popup h3{
+  margin:0 0 7px;
+  font-family:Georgia,serif;
+  font-size:27px;
+  color:var(--wheat,#D3C6B6);
+}
+.checkout-popup-sub{
+  margin-bottom:20px;
+  color:rgba(211,198,182,.68);
+  font-size:13px;
+}
+.checkout-save{
+  padding:15px;
+  margin:10px 0;
+  border:1px solid rgba(211,198,182,.13);
+  border-radius:13px;
+  background:rgba(211,198,182,.055);
+}
+.checkout-save .save-title{
+  font-weight:800;
+  font-size:15px;
+}
+.checkout-save .save-detail{
+  margin-top:5px;
+  font-size:13px;
+  color:rgba(211,198,182,.67);
+}
+.checkout-save.unlocked{
+  border-color:rgba(211,198,182,.28);
+  background:rgba(211,198,182,.10);
+}
+.checkout-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+.checkout-actions button{
+  min-height:48px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+  font-size:14px;
+}
+.checkout-add-more{
+  border:1px solid rgba(211,198,182,.25);
+  background:transparent;
+  color:var(--wheat,#D3C6B6);
+}
+.checkout-continue{
+  border:0;
+  background:var(--wheat,#D3C6B6);
+  color:var(--moss,#2D3A2F);
+}
+.checkout-actions button:hover{
+  transform:translateY(-1px);
+}
+@media(max-width:480px){
+  .checkout-popup{padding:23px}
+  .checkout-actions{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 
@@ -878,6 +1228,32 @@ body{
 
 </div>
 
+
+<!-- CHECKOUT SAVINGS DECISION -->
+<div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckoutPopup(event)">
+  <div class="checkout-popup" role="dialog" aria-modal="true" aria-labelledby="checkoutPopupTitle">
+    <h3 id="checkoutPopupTitle">Before you checkout…</h3>
+    <div class="checkout-popup-sub">
+      You can still add a little more and unlock extra savings.
+    </div>
+
+    <div class="checkout-save" id="freeDeliverySave">
+      <div class="save-title" id="freeDeliveryTitle">🚚 Add more for FREE DELIVERY</div>
+      <div class="save-detail" id="freeDeliveryDetail"></div>
+    </div>
+
+    <div class="checkout-save" id="couponSave">
+      <div class="save-title" id="couponTitle">🎁 Add more for KHAZAANA5</div>
+      <div class="save-detail" id="couponDetail"></div>
+    </div>
+
+    <div class="checkout-actions">
+      <button class="checkout-add-more" onclick="addMoreFromPopup()">＋ Add More</button>
+      <button class="checkout-continue" onclick="continueToCheckout()">Continue to Checkout →</button>
+    </div>
+  </div>
+</div>
+
 <script>
 
 const DELIVERY=30,
@@ -929,7 +1305,8 @@ const menuData = {
 
  "🍩 Desserts": [
     ["Donut",60],
-["Choco mousse",60]
+["Choco mousse",60],
+["Choco Excess",70]
   ],
 
   "🍔 Burgers": [
@@ -1185,93 +1562,144 @@ function updateTotals(){
 }
 
 
-function goToCheckout(){
-
-  const selectedItems = [];
-
+function getCurrentSubtotal(){
   let subtotal = 0;
 
   for(const id in cart){
-
-    if(cart[id].qty > 0){
-
-      selectedItems.push({
-
-        name: cart[id].name,
-
-        qty: cart[id].qty,
-
-        total:
-        cart[id].price * cart[id].qty
-
-      });
-
-      subtotal +=
-      cart[id].price * cart[id].qty;
-    }
+    subtotal += cart[id].qty * cart[id].price;
   }
 
-  if(selectedItems.length === 0){
+  return subtotal;
+}
 
-    alert("Please add items first");
+function openCheckoutPopup(){
+  const subtotal = getCurrentSubtotal();
 
+  /* Cups N Crumbs: FREE DELIVERY above ₹250 */
+  const freeDeliveryThreshold = 250;
+
+  /* Common Khazaana coupon: KHAZAANA5 at ₹350 for 5% OFF */
+  const couponThreshold = 350;
+
+  const freeBox = document.getElementById("freeDeliverySave");
+  const freeTitle = document.getElementById("freeDeliveryTitle");
+  const freeDetail = document.getElementById("freeDeliveryDetail");
+
+  const couponBox = document.getElementById("couponSave");
+  const couponTitle = document.getElementById("couponTitle");
+  const couponDetail = document.getElementById("couponDetail");
+
+  /* FREE DELIVERY */
+  if(subtotal >= freeDeliveryThreshold){
+    freeBox.classList.add("unlocked");
+    freeTitle.innerText = "✓ FREE DELIVERY UNLOCKED";
+    freeDetail.innerText =
+      "Your Cups N Crumbs order already qualifies for free delivery.";
+  }else{
+    freeBox.classList.remove("unlocked");
+
+    const need = freeDeliveryThreshold - subtotal;
+
+    freeTitle.innerText =
+      "🚚 Add ₹" + need + " more for FREE DELIVERY";
+
+    freeDetail.innerText =
+      "Free delivery starts at ₹250.";
+  }
+
+  /* KHAZAANA5 */
+  if(subtotal >= couponThreshold){
+    couponBox.classList.add("unlocked");
+    couponTitle.innerText = "✓ KHAZAANA5 UNLOCKED";
+    couponDetail.innerText =
+      "Apply KHAZAANA5 in checkout for 5% OFF.";
+  }else{
+    couponBox.classList.remove("unlocked");
+
+    const need = couponThreshold - subtotal;
+
+    couponTitle.innerText =
+      "🎁 Add ₹" + need + " more for KHAZAANA5";
+
+    couponDetail.innerText =
+      "Reach ₹350 to unlock 5% OFF.";
+  }
+
+  document.getElementById("checkoutOverlay").classList.add("show");
+}
+
+function closeCheckoutPopup(event){
+  if(
+    event &&
+    event.target !== document.getElementById("checkoutOverlay")
+  ){
     return;
   }
 
-if(subtotal < 100){
-
-  alert("Minimum order is ₹100");
-
-  return;
+  document.getElementById("checkoutOverlay").classList.remove("show");
 }
 
-  const delivery =
-  subtotal >= FREE_DELIVERY_ABOVE
-  ? 0
-  : DELIVERY;
+function addMoreFromPopup(){
+  /* Stay on the SAME Cups N Crumbs menu with the cart untouched. */
+  document.getElementById("checkoutOverlay").classList.remove("show");
+}
 
-  const total =
-  subtotal + delivery;
+function continueToCheckout(){
+  const selectedItems = [];
+  let subtotal = 0;
+
+  for(const id in cart){
+    if(cart[id].qty > 0){
+      selectedItems.push({
+        name: cart[id].name,
+        qty: cart[id].qty,
+        total: cart[id].price * cart[id].qty
+      });
+
+      subtotal += cart[id].price * cart[id].qty;
+    }
+  }
+
+  /* Cups N Crumbs: ₹250 = free delivery */
+  const delivery = subtotal >= 250 ? 0 : DELIVERY;
+  const total = subtotal + delivery;
 
   const order = {
-
-    restaurant:
-    "Cups N Crumbs Café",
-
-    items:selectedItems,
-
-    subtotal:subtotal,
-
-    delivery:delivery,
-
-    total:total
+    restaurant: "Cups N Crumbs Café",
+    items: selectedItems,
+    subtotal: subtotal,
+    delivery: delivery,
+    total: total
   };
 
-  /* REMOVE OLD ORDER */
-
-  localStorage.removeItem(
-    "khazaanaOrder"
-  );
-
-  /* SAVE NEW ORDER */
-
+  localStorage.removeItem("khazaanaOrder");
   localStorage.setItem(
-
     "khazaanaOrder",
-
     JSON.stringify(order)
-
   );
 
-  window.location.href =
-  "checkout.html";
+  window.location.href = "checkout.html";
+}
 
-}function isClosed(){
+function goToCheckout(){
+  const subtotal = getCurrentSubtotal();
 
-  const h =
-    new Date().getHours();
+  if(subtotal <= 0){
+    alert("Please add items first");
+    return;
+  }
 
-  return(h>=21 || h<18);
+  if(subtotal < 100){
+    alert("Minimum order is ₹100");
+    return;
+  }
+
+  /* Show the savings decision BEFORE entering checkout. */
+  openCheckoutPopup();
+}
+
+function isClosed(){
+  return false;
 }
 
 
@@ -1314,47 +1742,14 @@ function toggleCart(disable){
 }
 
 function updateStatus(){
+  const msg=document.getElementById("statusMsg");
 
-  const msg =
-    document.getElementById("statusMsg");
-
- if(!isClosed()){
-
-  msg.innerText =
-    "🟢 Open Now";
-
-  toggleCart(false);
-
-  return;
-}
-
-  let now = new Date();
-
-  let open = new Date();
-
-  if(now.getHours()>=21){
-
-    open.setDate(now.getDate()+1);
+  if(msg){
+    msg.innerText="🟢 Open Now";
   }
 
-  open.setHours(18,0,0,0);
-
-  let diff = open-now;
-
-  let h =
-    Math.floor(diff/3600000);
-
-  let m =
-    Math.floor((diff%3600000)/60000);
-
-  let s =
-    Math.floor((diff%60000)/1000);
-
-  msg.innerText =
-    msg.innerText =
-`🔴 Opens in ${h}h ${m}m ${s}s`;
-
-toggleCart(true);
+  /* Restaurant is always available — no closed-state/countdown. */
+  toggleCart(false);
 }
 
 setInterval(updateStatus,1000);

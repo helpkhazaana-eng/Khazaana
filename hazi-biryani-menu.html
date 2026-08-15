@@ -10,428 +10,302 @@
 
 <style>
 
-/* ================= RESET ================= */
+/* =========================================================
+   KHAZAANA × KOLKATA HAZI BIRYANI
+   PREMIUM MOSS × WHEAT EDITORIAL THEME
+   Visual styling only — menu/order logic preserved.
+   ========================================================= */
+
+:root{
+  --moss:#2D3A2F;
+  --wheat:#D3C6B6;
+  --wheat-light:#E2D8CB;
+  --moss-soft:#3A493B;
+  --line:rgba(45,58,47,.16);
+  --white:#F8F5EF;
+}
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Segoe UI",sans-serif;
+  font-family:"Segoe UI",Arial,sans-serif;
 }
 
-/* ================= BODY ================= */
+html{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
 
 body{
-
-  background:
-
-  linear-gradient(
-  180deg,
-  #0f0b08 0%,
-  #16110d 35%,
-  #1b140f 65%,
-  #120d09 100%
-  );
-
-  color:#fff;
-
+  width:100%;
+  max-width:100%;
+  min-width:0;
   overflow-x:hidden;
-
-  padding-bottom:140px;
+  background:var(--wheat);
+  color:var(--moss);
+  padding-bottom:145px;
 }
 
 /* ================= NAVBAR ================= */
 
 .glass-navbar{
-
   position:sticky;
-
   top:0;
-
   z-index:1000;
-
-  background:
-  rgba(10,10,10,.45);
-
+  width:100%;
+  background:rgba(45,58,47,.94);
   backdrop-filter:blur(18px);
-
-  border-bottom:
-  1px solid rgba(255,255,255,.06);
-
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.18);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(211,198,182,.18);
+  box-shadow:0 12px 35px rgba(45,58,47,.15);
 }
 
 .nav{
-
   max-width:1200px;
-
   margin:auto;
-
   padding:16px 24px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 }
 
 .logo{
-
+  font-family:Georgia,"Times New Roman",serif;
   font-size:24px;
-
-  font-weight:800;
-
-  color:#fff;
-
-  text-shadow:
-  0 0 18px rgba(255,122,0,.25);
+  font-weight:600;
+  letter-spacing:.5px;
+  color:var(--wheat-light);
+  text-shadow:none;
 }
 
 .nav-links{
-
   display:flex;
-
-  gap:28px;
+  gap:30px;
 }
 
 .nav-links a{
-
   position:relative;
-
   text-decoration:none;
-
-  color:
-  rgba(255,255,255,.72);
-
-  font-weight:500;
-
+  color:rgba(226,216,203,.72);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.5px;
   transition:.3s ease;
 }
 
 .nav-links a:hover{
-
-  color:#ff8c1a;
+  color:var(--wheat-light);
 }
 
 .nav-links a::after{
-
-  content:'';
-
+  content:"";
   position:absolute;
-
   left:0;
-
   bottom:-8px;
-
   width:0;
-
-  height:2px;
-
-  border-radius:999px;
-
-  background:
-  linear-gradient(
-  90deg,
-  #ff7a00,
-  #ff5400
-  );
-
+  height:1px;
+  border-radius:0;
+  background:var(--wheat-light);
   transition:.35s ease;
 }
 
 .nav-links a:hover::after{
-
   width:100%;
 }
 
 /* ================= HERO ================= */
 
 .hero{
-
   text-align:center;
-
-  padding:70px 20px 50px;
-
+  padding:78px 20px 62px;
   position:relative;
+  background:var(--wheat);
+  color:var(--moss);
+  overflow:hidden;
 }
 
 .hero::before{
-
-  content:'';
-
+  content:"";
   position:absolute;
-
   inset:0;
-
-  background:
-
-  radial-gradient(
-  circle at top right,
-  rgba(255,122,0,.12),
-  transparent 30%
-  );
-
+  background:none;
   pointer-events:none;
 }
 
 .hero h1{
-
   position:relative;
-
   z-index:2;
-
-  font-size:58px;
-
-  font-weight:900;
-
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(42px,6vw,70px);
+  font-weight:400;
   letter-spacing:-2px;
-
-  margin-bottom:14px;
-
-  color:#fff;
+  line-height:1;
+  margin-bottom:18px;
+  color:var(--moss);
 }
 
 .hero p{
-
   position:relative;
-
   z-index:2;
-
-  color:
-  rgba(255,255,255,.72);
-
-  font-size:17px;
+  color:rgba(45,58,47,.62);
+  font-size:15px;
+  letter-spacing:1.5px;
 }
 
 #statusMsg{
-
-  margin-top:14px;
-
+  margin-top:16px;
   font-weight:700;
-
-  color:#ffb347;
+  font-size:13px;
+  color:var(--moss);
 }
 
 /* ================= MENU ================= */
 
 .menu{
-
-  max-width:1100px;
-
+  max-width:1200px;
   margin:auto;
-
-  padding:20px 24px 90px;
-
+  padding:25px 24px 90px;
   display:grid;
-
-  grid-template-columns:
-  repeat(auto-fit,minmax(320px,1fr));
-
-  gap:28px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:22px;
+  background:var(--wheat);
 }
 
 /* ================= SECTION ================= */
 
 .section{
-
-  background:
-  rgba(255,255,255,.06);
-
-  border:
-  1px solid rgba(255,255,255,.08);
-
-  backdrop-filter:blur(18px);
-
-  border-radius:28px;
-
-  padding:24px;
-
-  box-shadow:
-  0 20px 45px rgba(0,0,0,.25);
-
-  transition:.35s ease;
+  background:var(--moss);
+  border:1px solid rgba(211,198,182,.14);
+  backdrop-filter:none;
+  border-radius:0;
+  padding:28px;
+  box-shadow:0 18px 45px rgba(45,58,47,.12);
+  transition:.3s ease;
 }
 
 .section:hover{
-
-  transform:
-  translateY(-8px);
-
-  box-shadow:
-  0 30px 65px rgba(0,0,0,.35);
+  transform:translateY(-4px);
+  box-shadow:0 25px 55px rgba(45,58,47,.17);
 }
 
 .section h2{
-
-  font-size:22px;
-
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:24px;
+  font-weight:400;
+  letter-spacing:.2px;
   margin-bottom:18px;
-
-  color:#ffb347;
+  color:var(--wheat-light);
 }
 
 /* ================= ITEM ================= */
 
 .item{
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  padding:14px 0;
-
-  border-bottom:
-  1px dashed rgba(255,255,255,.08);
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid rgba(211,198,182,.14);
 }
 
 .item:last-child{
-
   border-bottom:none;
 }
 
 .item span{
-
-  color:#fff;
-
-  font-size:15px;
-
+  color:rgba(226,216,203,.9);
+  font-size:14px;
   line-height:1.5;
 }
 
 /* ================= CONTROLS ================= */
 
 .controls{
-
   display:flex;
-
   align-items:center;
-
   gap:8px;
+  flex-shrink:0;
 }
 
 .btn{
-
-  width:30px;
-
-  height:30px;
-
+  width:32px;
+  height:32px;
   border:none;
-
-  border-radius:10px;
-
-  background:
-  linear-gradient(
-  135deg,
-  #ff7a00,
-  #ff5400
-  );
-
-  color:#fff;
-
+  border-radius:50%;
+  background:var(--wheat-light);
+  color:var(--moss);
   font-size:18px;
-
   font-weight:700;
-
   cursor:pointer;
-
-  transition:.3s ease;
+  transition:.25s ease;
 }
 
 .btn:hover{
-
   transform:scale(1.08);
+  background:#EFE8DE;
 }
 
 .qty{
-
-  min-width:22px;
-
+  min-width:24px;
   text-align:center;
-
   font-weight:700;
-
-  color:#fff;
+  color:var(--wheat-light);
 }
 
 /* ================= CART ================= */
 
 .cart-bar{
-
   position:fixed;
-
   bottom:0;
-
   left:0;
-
   width:100%;
-
-  background:
-  rgba(10,10,10,.92);
-
+  background:rgba(45,58,47,.97);
   backdrop-filter:blur(18px);
-
-  border-top:
-  1px solid rgba(255,255,255,.08);
-
-  box-shadow:
-  0 -10px 30px rgba(0,0,0,.35);
-
+  -webkit-backdrop-filter:blur(18px);
+  border-top:1px solid rgba(211,198,182,.18);
+  box-shadow:0 -12px 35px rgba(45,58,47,.2);
   padding:16px 20px;
-
   z-index:1000;
 }
 
 .cart-info{
-
-  font-size:15px;
-
+  font-size:14px;
   margin-bottom:10px;
-
-  color:
-  rgba(255,255,255,.75);
+  color:rgba(226,216,203,.7);
+  text-align:center;
 }
 
 .cart-info b{
-
-  color:#ffb347;
+  color:var(--wheat-light);
 }
 
 .order-btn{
-
   width:100%;
-
   padding:15px;
-
   border:none;
-
-  border-radius:14px;
-
-  background:
-  linear-gradient(
-  135deg,
-  #25D366,
-  #1faa52
-  );
-
-  color:#fff;
-
-  font-size:16px;
-
+  border-radius:2px;
+  background:var(--wheat-light);
+  color:var(--moss);
+  font-size:15px;
   font-weight:800;
-
+  letter-spacing:.5px;
   cursor:pointer;
-
-  transition:.35s ease;
+  transition:.3s ease;
 }
 
 .order-btn:hover{
+  transform:translateY(-2px);
+  background:#EFE8DE;
+}
 
-  transform:
-  translateY(-3px);
+.note{
+  font-size:11px;
+  color:rgba(226,216,203,.48);
+  text-align:center;
+  margin-top:8px;
 }
 
 /* ================= MOBILE ================= */
@@ -439,48 +313,140 @@ body{
 @media(max-width:768px){
 
   .glass-navbar{
-
     position:fixed;
-
     width:100%;
   }
 
   .nav{
-
     padding:14px 18px;
   }
 
-  .nav-links{
+  .logo{
+    font-size:20px;
+  }
 
+  .nav-links{
     gap:16px;
   }
 
-  .hero{
+  .nav-links a{
+    font-size:11px;
+  }
 
-    padding:120px 20px 40px;
+  .hero{
+    padding:112px 20px 42px;
   }
 
   .hero h1{
-
     font-size:40px;
-
-    line-height:1.1;
+    line-height:1.05;
   }
 
   .hero p{
-
-    font-size:15px;
+    font-size:13px;
   }
 
   .menu{
-
     grid-template-columns:1fr;
-
-    padding:20px 18px 90px;
-
-    gap:22px;
+    padding:20px 16px 90px;
+    gap:16px;
   }
 
+  .section{
+    padding:20px;
+  }
+
+  .section h2{
+    font-size:21px;
+  }
+
+  .item span{
+    font-size:13px;
+  }
+
+  .btn{
+    width:30px;
+    height:30px;
+  }
+
+}
+
+/* ================= HORIZONTAL STABILITY ================= */
+
+img,svg,video,iframe,canvas{
+  max-width:100%;
+}
+
+section,header,main,footer,nav,
+.menu,.section,.item,.cart-bar{
+  min-width:0;
+  max-width:100%;
+}
+
+@media(max-width:768px){
+  html,body{
+    width:100%;
+    max-width:100vw;
+    overflow-x:hidden !important;
+  }
+
+  .menu{
+    width:100%;
+    max-width:100%;
+  }
+}
+
+
+/* ================= CHECKOUT SAVINGS POPUP ================= */
+.checkout-overlay{
+  position:fixed;inset:0;z-index:9999;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(45,58,47,.58);backdrop-filter:blur(10px);
+}
+.checkout-overlay.show{display:flex}
+.checkout-popup{
+  width:min(430px,100%);padding:28px;
+  background:var(--moss);color:var(--wheat-light);
+  border:1px solid rgba(211,198,182,.22);
+  border-radius:16px;box-shadow:0 30px 90px rgba(45,58,47,.35);
+}
+.checkout-popup h3{
+  margin:0 0 7px;font-family:Georgia,"Times New Roman",serif;
+  font-size:27px;font-weight:400;color:var(--wheat-light);
+}
+.checkout-popup-sub{
+  margin-bottom:20px;color:rgba(226,216,203,.65);font-size:13px;
+}
+.checkout-save{
+  padding:15px;margin:10px 0;
+  border:1px solid rgba(211,198,182,.13);border-radius:12px;
+  background:rgba(211,198,182,.055);
+}
+.checkout-save.unlocked{
+  border-color:rgba(211,198,182,.30);
+  background:rgba(211,198,182,.10);
+}
+.checkout-save .save-title{font-weight:800;font-size:15px}
+.checkout-save .save-detail{
+  margin-top:5px;font-size:12px;color:rgba(226,216,203,.62);
+}
+.checkout-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;
+}
+.checkout-actions button{
+  min-height:48px;border-radius:10px;font-weight:800;
+  cursor:pointer;font-size:13px;
+}
+.checkout-add-more{
+  border:1px solid rgba(211,198,182,.28);
+  background:transparent;color:var(--wheat-light);
+}
+.checkout-continue{
+  border:0;background:var(--wheat-light);color:var(--moss);
+}
+@media(max-width:480px){
+  .checkout-popup{padding:23px}
+  .checkout-actions{grid-template-columns:1fr}
 }
 
 </style>
@@ -534,6 +500,30 @@ Proceed to Checkout
 
 </button>
 
+</div>
+
+
+<!-- CHECKOUT SAVINGS DECISION -->
+<div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckoutPopup(event)">
+  <div class="checkout-popup" role="dialog" aria-modal="true">
+    <h3>Before you checkout…</h3>
+    <div class="checkout-popup-sub">Your Hazi order can still unlock extra savings.</div>
+
+    <div class="checkout-save" id="freeDeliverySave">
+      <div class="save-title" id="freeDeliveryTitle"></div>
+      <div class="save-detail" id="freeDeliveryDetail"></div>
+    </div>
+
+    <div class="checkout-save" id="couponSave">
+      <div class="save-title" id="couponTitle"></div>
+      <div class="save-detail" id="couponDetail"></div>
+    </div>
+
+    <div class="checkout-actions">
+      <button class="checkout-add-more" onclick="addMoreFromPopup()">＋ Add More</button>
+      <button class="checkout-continue" onclick="continueToCheckout()">Continue to Checkout →</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -685,157 +675,138 @@ ${delivery === 0 && subtotal > 0
 | <b>Total: ₹${total}</b>`;
 }
 
+function getCurrentSubtotal(){
+  let subtotal = 0;
+
+  for(const id in cart){
+    subtotal += cart[id].qty * cart[id].price;
+  }
+
+  return subtotal;
+}
+
+function openCheckoutPopup(){
+  const subtotal = getCurrentSubtotal();
+
+  /* Kolkata Hazi Biryani: FREE DELIVERY at ₹500 */
+  const freeDeliveryThreshold = 500;
+
+  /* Common Khazaana coupon: KHAZAANA5 at ₹350 for 5% OFF */
+  const couponThreshold = 350;
+
+  const freeBox = document.getElementById("freeDeliverySave");
+  const freeTitle = document.getElementById("freeDeliveryTitle");
+  const freeDetail = document.getElementById("freeDeliveryDetail");
+  const couponBox = document.getElementById("couponSave");
+  const couponTitle = document.getElementById("couponTitle");
+  const couponDetail = document.getElementById("couponDetail");
+
+  if(subtotal >= freeDeliveryThreshold){
+    freeBox.classList.add("unlocked");
+    freeTitle.innerText = "✓ FREE DELIVERY UNLOCKED";
+    freeDetail.innerText = "Your Hazi order already qualifies for free delivery.";
+  }else{
+    freeBox.classList.remove("unlocked");
+    freeTitle.innerText =
+      "🚚 Add ₹" + (freeDeliveryThreshold - subtotal) + " more for FREE DELIVERY";
+    freeDetail.innerText = "Free delivery starts at ₹500.";
+  }
+
+  if(subtotal >= couponThreshold){
+    couponBox.classList.add("unlocked");
+    couponTitle.innerText = "✓ KHAZAANA5 UNLOCKED";
+    couponDetail.innerText = "Apply KHAZAANA5 in checkout for 5% OFF.";
+  }else{
+    couponBox.classList.remove("unlocked");
+    couponTitle.innerText =
+      "🎁 Add ₹" + (couponThreshold - subtotal) + " more for KHAZAANA5";
+    couponDetail.innerText = "Reach ₹350 to unlock 5% OFF.";
+  }
+
+  document.getElementById("checkoutOverlay").classList.add("show");
+}
+
+function closeCheckoutPopup(event){
+  if(event && event.target !== document.getElementById("checkoutOverlay")) return;
+  document.getElementById("checkoutOverlay").classList.remove("show");
+}
+
+function addMoreFromPopup(){
+  /* Stay on the same Kolkata Hazi Biryani menu. */
+  document.getElementById("checkoutOverlay").classList.remove("show");
+}
+
+function continueToCheckout(){
+  const selectedItems = [];
+  let subtotal = 0;
+
+  for(const id in cart){
+    if(cart[id].qty > 0){
+      const itemTotal = cart[id].qty * cart[id].price;
+
+      selectedItems.push({
+        name: cart[id].name,
+        qty: cart[id].qty,
+        price: cart[id].price,
+        total: itemTotal
+      });
+
+      subtotal += itemTotal;
+    }
+  }
+
+  const delivery = subtotal >= 500 ? 0 : (subtotal === 0 ? 0 : DELIVERY_FEE);
+
+  const orderData = {
+    restaurant: "Kolkata Hazi Biryani",
+    items: selectedItems,
+    subtotal: subtotal,
+    delivery: delivery,
+    total: subtotal + delivery
+  };
+
+  localStorage.setItem("khazaanaOrder", JSON.stringify(orderData));
+  window.location.href = "checkout.html";
+}
+
 function goToCheckout(){
+  const subtotal = getCurrentSubtotal();
 
-let subtotal = 0;
-let items = [];
+  if(subtotal < MIN_ORDER_VALUE){
+    alert("Minimum order value is ₹200");
+    return;
+  }
 
-for(const i in cart){
-
-if(cart[i].qty > 0){
-
-const t =
-cart[i].qty * cart[i].price;
-
-subtotal += t;
-
-items.push({
-
-name:cart[i].name,
-qty:cart[i].qty,
-price:cart[i].price,
-total:t
-
-});
-}
+  /* Show the savings decision before entering checkout. */
+  openCheckoutPopup();
 }
 
-if(subtotal < MIN_ORDER_VALUE){
-
-alert("Minimum order value is ₹200");
-return;
-}
-
-let delivery =
-subtotal >= 500
-? 0
-: (subtotal === 0 ? 0 : DELIVERY_FEE);
-
-const orderData = {
-
-restaurant:
-"Kolkata Hazi Biryani",
-
-items,
-
-subtotal,
-
-delivery,
-
-total:
-subtotal + delivery
-
-};
-
-localStorage.setItem(
-"khazaanaOrder",
-JSON.stringify(orderData)
-);
-
-window.location.href =
-"checkout.html";
-}
-
-/* STATUS */
-
+/* STATUS — always open */
 function isClosed(){
-
-const h =
-new Date().getHours();
-
-return (h >= 21 || h < 18);
+  return false;
 }
 
 function toggleCart(disable){
+  const buttons = document.querySelectorAll("button");
 
-const buttons =
-document.querySelectorAll("button");
-
-buttons.forEach(btn=>{
-
-if(btn.innerText==="+" ||
-btn.innerText==="−"){
-
-btn.disabled = disable;
-
-btn.style.opacity =
-disable ? "0.5" : "1";
-
-btn.style.cursor =
-disable ? "not-allowed"
-: "pointer";
-}
-});
+  buttons.forEach(btn=>{
+    if(btn.innerText === "+" || btn.innerText === "−"){
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.cursor = "pointer";
+    }
+  });
 }
 
 function updateStatus(){
+  const msg = document.getElementById("statusMsg");
 
-const msg =
-document.getElementById(
-"statusMsg"
-);
+  if(msg){
+    msg.innerText = "🟢 Open Now";
+  }
 
-if(!isClosed()){
-
-msg.innerText =
-"🟢 Open Now";
-
-toggleCart(false);
-
-return;
+  toggleCart(false);
 }
-
-let now = new Date();
-
-let openTime =
-new Date();
-
-if(now.getHours() >= 21){
-
-openTime.setDate(
-now.getDate()+1
-);
-}
-
-openTime.setHours(
-18,0,0,0
-);
-
-let diff =
-openTime - now;
-
-let h =
-Math.floor(diff/(1000*60*60));
-
-let m =
-Math.floor(
-(diff%(1000*60*60))
-/(1000*60)
-);
-
-let s =
-Math.floor(
-(diff%(1000*60))
-/1000
-);
-
-msg.innerText =
-`🔴 Opens in ${h}h ${m}m ${s}s`;
-
-toggleCart(true);
-}
-
-setInterval(updateStatus,1000);
 
 updateStatus();
 

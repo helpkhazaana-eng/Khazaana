@@ -3,59 +3,68 @@
 
 <head>
 
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script>
-emailjs.init("QRt9B91Mf6uBKYR5J");
-</script>
-
-<script>
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-
-OneSignalDeferred.push(async function(OneSignal) {
-
-  await OneSignal.init({
-    appId: "ad150f45-99ca-48ef-a29a-8b9d337990ff",
-
-    notifyButton: {
-      enable: true,
-    },
-
-    promptOptions: {
-      slidedown: {
-        enabled: true,
-      },
-    },
-
-  });
-
-});
-
-
-
-
-</script>
   <meta charset="UTF-8">
-  <title>Khazaana | Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Khazaana | Local Food Delivery</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon-180x180.png">
 
-  <link rel="stylesheet" href="css/home.css">
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="css/home.css?v=200">
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <!-- FONT AWESOME -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <!-- EMAILJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    emailjs.init("QRt9B91Mf6uBKYR5");
+  </script>
+
+  <!-- ONESIGNAL -->
+  <script
+    src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+    defer>
+  </script>
+
+  <script>
+
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+    OneSignalDeferred.push(async function(OneSignal) {
+
+      await OneSignal.init({
+
+        appId: "ad150f45-99ca-48ef-a29e-8b9d337990ff",
+
+        notifyButton: {
+          enable: true
+        },
+
+        promptOptions: {
+          slidedown: {
+            enabled: true
+          }
+        }
+
+      });
+
+    });
+
+  </script>
+
+  <!-- GOOGLE ANALYTICS -->
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5NWHC8HNG"></script>
 
   <script>
+
     window.dataLayer = window.dataLayer || [];
 
     function gtag(){
@@ -63,662 +72,473 @@ OneSignalDeferred.push(async function(OneSignal) {
     }
 
     gtag('js', new Date());
+
     gtag('config', 'G-X5NWHC8HNG');
 
   </script>
 
-  <style>
-    .review-slider{
-      overflow:hidden;
-      max-width:360px;
-      margin:0 auto;
-      touch-action:pan-y;
-    }
-
-    .review-track{
-      display:flex;
-      transition:transform 0.5s ease;
-    }
-
-    .review-slide{
-      min-width:100%;
-      padding:10px;
-    }
-
-    .review-slide img{
-      width:100%;
-      border-radius:18px;
-      box-shadow:0 10px 25px rgba(0,0,0,.15);
-      display:block;
-    }
-
-.whatsapp-float{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    width:65px;
-    height:65px;
-    background:#25D366;
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    font-size:34px;
-    z-index:99999;
-
-    box-shadow:
-    0 0 15px #25D366,
-    0 0 30px #25D366,
-    0 0 45px #25D366;
-
-    animation:
-    pulseGlow 2s infinite,
-    floatMove 3s ease-in-out infinite;
-}
-
-.whatsapp-float:hover{
-    transform:scale(1.15);
-}
-
-@keyframes pulseGlow{
-    0%{
-        box-shadow:
-        0 0 10px #25D366,
-        0 0 20px #25D366;
-    }
-    50%{
-        box-shadow:
-        0 0 25px #25D366,
-        0 0 50px #25D366,
-        0 0 75px #25D366;
-    }
-    100%{
-        box-shadow:
-        0 0 10px #25D366,
-        0 0 20px #25D366;
-    }
-}
-
-@keyframes floatMove{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-10px);
-    }
-}
-
-/* Ripple Effect */
-.whatsapp-float::before{
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    border:2px solid #25D366;
-    animation:ripple 2s infinite;
-}
-
-@keyframes ripple{
-    0%{
-        transform:scale(1);
-        opacity:1;
-    }
-    100%{
-        transform:scale(1.8);
-        opacity:0;
-    }
-}
-
-    .review-dots{
-      display:flex;
-      justify-content:center;
-      margin-top:14px;
-      gap:8px;
-    }
-
-    .review-dots .dot{
-      width:10px;
-      height:10px;
-      background:#d1d5db;
-      border-radius:50%;
-      cursor:pointer;
-    }
-
-    .review-dots .dot.active{
-      background:#ff7a00;
-    }
-
-    #intro{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:radial-gradient(circle,#000,#111);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction:column;
-      z-index:10000;
-      padding:20px;
-      text-align:center;
-    }
-
-    .brand{
-      font-family:'Orbitron';
-      font-size:clamp(32px,10vw,60px);
-      color:transparent;
-      -webkit-text-stroke:2px #ff7a00;
-      text-shadow:0 0 20px #ff7a00;
-      letter-spacing:4px;
-      opacity:0;
-      animation:reveal 2s ease forwards;
-    }
-
-    .tagline{
-      font-family:'Orbitron';
-      font-size:clamp(12px,3.5vw,14px);
-      color:#aaa;
-      margin-top:10px;
-      opacity:0;
-      animation:fadeTag 1s ease forwards 1.5s;
-      line-height:1.5;
-    }
-
-
-.status-card{
-  background:#111;
-  border:1px solid rgba(255,122,0,.25);
-  border-radius:20px;
-  padding:25px;
-  color:#fff;
-}
-
-.status-step{
-  padding:15px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  opacity:.4;
-}
-
-.status-step.active{
-  opacity:1;
-  color:#ff7a00;
-  font-weight:700;
-}
-
-.progress-line{
-  width:100%;
-  height:8px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:20px;
-}
-
-#progressBar{
-  width:0%;
-  height:100%;
-  background:#ff7a00;
-  transition:width .8s ease;
-}
-
-.status-step.active{
-  opacity:1;
-  color:#ff7a00;
-  font-weight:700;
-  animation:stepPulse .6s ease;
-}
-
-@keyframes stepPulse{
-  0%{transform:scale(0.95);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
-}
-.prep-animation{
-  width:24px;
-  height:24px;
-  border:3px solid #ff7a00;
-  border-top-color:transparent;
-  border-radius:50%;
-  margin-top:8px;
-  animation:spin 1s linear infinite;
-}
-
-.live-order-status{
-  padding:20px;
-}
-
-@keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-
-    .powered{
-      display:block;
-      margin-top:6px;
-      font-size:clamp(10px,3vw,12px);
-      color:#ff7a00;
-      text-shadow:0 0 10px #ff7a00;
-    }
-.welcome-user{
-  margin-bottom:30px;
-  opacity:0;
-  transform:translateY(-25px);
-  animation:fadeWelcome 1.2s ease forwards;
-}
-
-.welcome-user h2{
-  color:#fff;
-  font-size:clamp(22px,5vw,34px);
-  margin-bottom:8px;
-  font-family:'Orbitron';
-  text-shadow:0 0 12px rgba(255,255,255,0.2);
-}
-
-.welcome-user p{
-  color:#aaa;
-  font-size:14px;
-  letter-spacing:1px;
-}
-
-@keyframes fadeWelcome{
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-}
-    #pizzaPopup{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.9);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      z-index:9999;
-      opacity:0;
-      visibility:hidden;
-      transition:0.4s ease;
-      padding:15px;
-    }
-
-    #pizzaPopup.show{
-      opacity:1;
-      visibility:visible;
-    }
-
-    .popup-content{
-      position:relative;
-      width:100%;
-      max-width:420px;
-    }
-
-    #pizzaPopup img{
-      width:100%;
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 0 25px rgba(255,122,0,0.5);
-    }
-
-    #closePopup{
-      position:absolute;
-      top:-10px;
-      right:-10px;
-      background:#ff7a00;
-      color:#fff;
-      font-size:18px;
-      width:32px;
-      height:32px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      box-shadow:0 0 10px rgba(255,122,0,0.7);
-    }
-
-    @keyframes reveal{
-      0%{
-        opacity:0;
-        transform:scale(0.3);
-      }
-
-      100%{
-        opacity:1;
-        transform:scale(1);
-      }
-    }
-
-    @keyframes fadeTag{
-      to{
-        opacity:1;
-      }
-    }
-
-    .fade-out{
-      animation:fadeOut 0.8s forwards;
-    }
-
-    @keyframes fadeOut{
-      to{
-        opacity:0;
-        visibility:hidden;
-      }
-    }
-
-.thank-popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999999;
-}
-
-.thank-box{
-  width:90%;
-  max-width:340px;
-  background:#111;
-  border:1px solid #ff9800;
-  border-radius:18px;
-  padding:28px;
-  text-align:center;
-  color:#fff;
-  animation:popupScale .25s ease;
-}
-
-.thank-icon{
-  font-size:42px;
-  margin-bottom:10px;
-}
-
-.thank-box h2{
-  color:#ffb347;
-  margin-bottom:10px;
-}
-
-.thank-box p{
-  opacity:.9;
-  margin-bottom:20px;
-}
-
-.thank-box button{
-  width:100%;
-  border:none;
-  padding:12px;
-  border-radius:10px;
-  background:#ff8c00;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-}
-
-@keyframes popupScale{
-  from{
-    transform:scale(.8);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-#maintenance-overlay{
-    position:fixed;
-    inset:0;
-    background:#111;
-    z-index:999999999;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
-
-.maintenance-box{
-    max-width:700px;
-    background:#1b1b1b;
-    padding:40px;
-    border-radius:20px;
-    color:#fff;
-    border:2px solid #ff7a00;
-    box-shadow:0 0 30px rgba(255,122,0,.3);
-}
-
-.maintenance-box h1,
-.maintenance-box h2{
-    color:#ff7a00;
-    margin-bottom:15px;
-}
-
-.maintenance-box p{
-    font-size:18px;
-    line-height:1.7;
-}
-
-.phone{
-    font-size:26px;
-    font-weight:bold;
-    margin:20px 0;
-}
-
-.phone a{
-    color:#25D366;
-    text-decoration:none;
-}
-
-.maintenance-box hr{
-    margin:30px 0;
-    border-color:#333;
-}
-
-  </style>
 </head>
+
 
 <body>
 
 
-<!-- INTRO -->
-<div id="intro">
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
-  <div class="welcome-user"
-       id="welcomeUser">
-  </div>
+<header class="site-header">
 
-  <h1 class="brand">
-    KHAZAANA
-  </h1>
+  <div class="nav-left">
 
-  <p class="tagline">
-    Aurangabad Food Delivery<br>
+    <a
+      href="index.html"
+      class="nav-logo">
 
-    <span class="powered">
-      Powered by Cups N Crumbs Cafe
-    </span>
-
-  </p>
-
-</div>
-
-<header class="glass-navbar">
-
-  <div class="nav-container">
-
-    <div class="logo">
       Khazaana
-    </div>
 
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="restaurants.html">Restaurants</a>
-    </nav>
+    </a>
 
   </div>
 
-<!-- SAVED LOCATION -->
 
-<div class="saved-location-bar" id="savedLocationBar">
+  <nav class="main-nav">
 
-  <div class="saved-location-left">
+    <a
+      href="index.html"
+      class="active">
+      Home
+    </a>
 
-    <div class="location-icon">
-      📍
-    </div>
+    <a href="about.html">
+      About
+    </a>
 
-    <div>
+    <a href="restaurants.html">
+      Restaurants
+    </a>
 
-      <div class="saved-city">
-        Aurangabad
+  </nav>
+
+
+  <div class="nav-right">
+
+    <div
+      class="saved-location-bar"
+      id="savedLocationBar">
+
+      <div class="location-symbol">
+        <i class="fa-solid fa-location-dot"></i>
       </div>
 
-      <div class="saved-address-home"
-           id="savedAddressHome">
+      <div class="location-text">
+
+        <span class="location-city">
+          Aurangabad
+        </span>
+
+        <span
+          class="saved-address-home"
+          id="savedAddressHome">
+        </span>
+
       </div>
 
     </div>
 
   </div>
-
-</div>
 
 </header>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
 <section class="hero">
+
+  <!-- CINEMATIC BACKGROUND -->
+
+  <div class="hero-image">
+
+    <img
+      src="images/khazaana-hero.png"
+      alt="Khazaana food collection">
+
+  </div>
 
   <div class="hero-overlay"></div>
 
+  <div class="hero-glow"></div>
+
+
+  <!-- HERO CONTENT -->
+
   <div class="hero-content">
 
-    <span class="badge">
-      📍 Serving Aurangabad
-    </span>
+    <div class="hero-eyebrow">
 
-    <h2>
-      Delicious Food,<br>
-      Delivered Fast
-    </h2>
+      <span></span>
 
-    <p>
-      Fresh, hot & hygienic food delivered to your doorstep.
+      A LOCAL FOOD EXPERIENCE
+
+      <span></span>
+
+    </div>
+
+
+    <h1>
+
+      Discover
+
+      <br>
+
+      the
+
+      <em>food</em>
+
+      <br>
+
+      treasures
+
+      <br>
+
+      around
+
+      <br>
+
+      you.
+
+    </h1>
+
+
+    <p class="hero-description">
+
+      Local favourites.
+      Beautiful food.
+      One place to discover them.
+
     </p>
 
-   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
 
-  <a href="restaurants.html" class="btn">
-    Order Now
-  </a>
+    <div class="hero-actions">
 
-  <a href="#"
-     id="trackOrderBtn"
-     class="btn"
-     style="display:none;">
-     📦 Track My Order
-  </a>
+      <a
+        href="restaurants.html"
+        class="gold-button">
 
-</div>
+        Explore Khazaana
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+
+      <a
+        href="#"
+        id="trackOrderBtn"
+        class="track-link"
+        style="display:none;">
+
+        Track My Order
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
 
   </div>
 
-</section>
 
-<!-- LIVE ORDER STATUS -->
+  <!-- HERO SIDE LABEL -->
 
-<section id="liveOrderStatus" class="live-order-status" style="display:none;">
+  <div class="hero-location">
 
-  <div class="status-card">
+    <span class="location-dot"></span>
 
-    <h2>🍽️ Your Order Status</h2>
-<div class="progress-line">
-  <div id="progressBar"></div>
-</div>
+    <div>
 
-    <div id="statusContent">
+      <strong>
+        AURANGABAD
+      </strong>
 
-      <div class="status-step">
-  ✅ Order Confirmed
-</div>
+      <small>
+        Murshidabad, West Bengal
+      </small>
 
-      <div class="status-step">
-        🍳 Preparing Your Order
-        <div class="prep-animation"></div>
-      </div>
+    </div>
 
-      <div class="status-step">
-        🛵 Out For Delivery
-      </div>
+  </div>
 
-      <div class="status-step">
-        🎉 Delivered
-      </div>
 
+  <!-- HERO BOTTOM -->
+
+  <div class="hero-bottom">
+
+    <div class="hero-number">
+      01
+    </div>
+
+    <div class="hero-line"></div>
+
+    <div class="hero-label">
+      DISCOVER LOCAL
     </div>
 
   </div>
 
 </section>
 
+<!-- =========================================================
+     FOOD CATEGORIES
+========================================================= -->
 
-<!-- NEW ARRIVALS -->
+<section class="food-categories">
+
+  <div class="categories-heading">
+
+    <div class="section-eyebrow">
+      EXPLORE BY CATEGORY
+    </div>
+
+    <h2>
+      What are you <em>craving?</em>
+    </h2>
+
+  </div>
+
+
+  <div class="categories-scroll">
+
+
+   <a href="restaurants.html?category=biryani" class="category-item">
+
+    <div class="category-image">
+        <img
+            src="images/category-biryani.png"
+            alt="Biryani"
+        >
+    </div>
+
+    <span>Biryani</span>
+
+</a>
+
+    <!-- MEALS -->
+<a href="restaurants.html?category=meals" class="category-item">
+    <div class="category-image">
+        <img
+            src="images/category-meals.png"
+            alt="Meals"
+        >
+    </div>
+    <span>Meals</span>
+</a>
+
+     <!-- NORTH INDIAN -->
+    <a href="restaurants.html?category=north-indian" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-north-indian.png"
+                alt="North Indian"
+            >
+        </div>
+        <span>North Indian</span>
+    </a>
+
+
+<!-- SOUTH INDIAN -->
+    <a href="restaurants.html?category=south-indian" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-south-indian.png"
+                alt="South Indian"
+            >
+        </div>
+        <span>South Indian</span>
+    </a>
+
+
+
+   <!-- PIZZA -->
+    <a href="restaurants.html?category=pizza" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-pizza.png"
+                alt="Pizza"
+            >
+        </div>
+        <span>Pizza</span>
+    </a>
+
+
+    <!-- BURGER -->
+    <a href="restaurants.html?category=burger" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-Burger.png"
+                alt="Burger"
+            >
+        </div>
+        <span>Burger</span>
+    </a>
+
+    <!-- CHINESE -->
+    <a href="restaurants.html?category=chinese" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-chinese.png"
+                alt="Chinese"
+            >
+        </div>
+        <span>Chinese</span>
+    </a>
+
+
+
+   <!-- TEA / COFFEE -->
+    <a href="restaurants.html?category=tea-coffee" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-Tea N Coffee.png"
+                alt="Tea & Coffee"
+            >
+        </div>
+        <span>Tea / Coffee</span>
+    </a>
+
+
+
+   <!-- CAKE -->
+    <a href="restaurants.html?category=cake" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-cake.png"
+                alt="Cake"
+            >
+        </div>
+        <span>Cake</span>
+    </a>
+
+       <!-- DESSERTS -->
+    <a href="restaurants.html?category=desserts" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-desserts.png"
+                alt="Desserts"
+            >
+        </div>
+        <span>Desserts</span>
+    </a>
+
+
+   <!-- MILKSHAKES -->
+    <a href="restaurants.html?category=milkshakes" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-milkshakes.png"
+                alt="Milkshakes"
+            >
+        </div>
+        <span>Milkshakes</span>
+    </a>
+
+       <!-- SNACKS -->
+    <a href="restaurants.html?category=snacks" class="category-item">
+        <div class="category-image">
+            <img
+                src="images/category-snacks.png"
+                alt="Snacks"
+            >
+        </div>
+        <span>Snacks</span>
+    </a>
+
+
+
+
+  </div>
+
+</section>
+
+
+
+
+<!-- =========================================================
+     NEW ARRIVALS
+========================================================= -->
 
 <section class="new-arrivals">
 
   <div class="section-title">
 
+    <div class="section-eyebrow">
+      JUST ARRIVED
+    </div>
+
     <h2>
-      🔥 New Arrivals
+      New <em>cravings.</em>
     </h2>
 
     <p>
-      Fresh cravings just dropped at Khazaana
+      Fresh favourites just dropped at Khazaana.
     </p>
 
   </div>
 
+
+  <!-- ALL 3 CARDS MUST BE INSIDE THIS -->
   <div class="arrival-grid">
 
-    <!-- ITEM 1 -->
 
+    <!-- IDLI -->
     <div class="arrival-card">
 
-      <div class="arrival-badge green-badge">
-        Freshly Added
-      </div>
+      <div class="arrival-image">
 
-      <img
-        src="images/melted-choco-bliss.png"
-        alt="IDLI">
+        <span class="arrival-badge">
+          Freshly Added
+        </span>
+
+        <img
+          src="images/melted-choco-bliss.png"
+          alt="Idli"
+        >
+
+      </div>
 
       <div class="arrival-content">
 
-        <h3>
-          IDLI
-        </h3>
+        <div>
 
-        <p>
-           Soft & fluffy steamed idlis served with peanut chutney
-        </p>
+          <span class="arrival-category">
+            SOUTH INDIAN
+          </span>
+
+          <h3>IDLI</h3>
+
+          <p>
+            Soft & fluffy steamed idlis
+            served with peanut chutney.
+          </p>
+
+        </div>
 
         <div class="bottom-row">
 
-          <span class="price">
-            ₹35
-          </span>
+          <span class="price">₹35</span>
 
           <a
             href="cups-n-crumbs-menu.html#love-at-first-bite"
             class="view-btn">
-
-            View →
-
+            View
+            <i class="fa-solid fa-arrow-right"></i>
           </a>
 
         </div>
@@ -728,42 +548,177 @@ OneSignalDeferred.push(async function(OneSignal) {
     </div>
 
 
+    <!-- CHOCO MOUSSE -->
+    <div class="arrival-card">
 
+      <div class="arrival-image">
+
+        <span class="arrival-badge">
+          Freshly Added
+        </span>
+
+        <img
+          src="images/choco-mousse.png"
+          alt="Choco Mousse"
+        >
+
+      </div>
+
+      <div class="arrival-content">
+
+        <div>
+
+          <span class="arrival-category">
+            DESSERT
+          </span>
+
+          <h3>CHOCO MOUSSE</h3>
+
+          <p>
+            Rich, creamy chocolate mousse
+            with a smooth chocolate finish.
+          </p>
+
+        </div>
+
+        <div class="bottom-row">
+
+          <span class="price">₹60</span>
+
+          <a
+            href="cups-n-crumbs-menu.html#love-at-first-bite"
+            class="view-btn">
+            View
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CHOCO EXCESS -->
+    <div class="arrival-card">
+
+      <div class="arrival-image">
+
+        <span class="arrival-badge">
+          Freshly Added
+        </span>
+
+        <img
+          src="images/choco-excess.png"
+          alt="Choco Excess"
+        >
+
+      </div>
+
+      <div class="arrival-content">
+
+        <div>
+
+          <span class="arrival-category">
+            DESSERT
+          </span>
+
+          <h3>CHOCO EXCESS</h3>
+
+          <p>
+            Rich, decadent chocolate dessert
+            made for serious chocolate lovers.
+          </p>
+
+        </div>
+
+        <div class="bottom-row">
+
+          <span class="price">₹70</span>
+
+          <a
+            href="cups-n-crumbs-menu.html#love-at-first-bite"
+            class="view-btn">
+            View
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 </section>
 
- <!-- POPULAR RESTAURANTS -->
+
+<!-- =========================================================
+     POPULAR RESTAURANTS
+========================================================= -->
 
 <section class="restaurants">
 
-  <h2 class="restaurant-title">
-    Popular Restaurants
-  </h2>
+  <div class="section-title">
+
+    <div class="section-eyebrow">
+      ON KHAZAANA
+    </div>
+
+    <h2>
+      Popular <em>restaurants.</em>
+    </h2>
+
+    <p>
+      Local places our customers love.
+    </p>
+
+  </div>
+
 
   <div class="restaurant-grid">
 
-    <!-- BURGER -->
 
-    <a href="cups-n-crumbs-menu.html"
-       class="restaurant-card">
+    <!-- CUPS N CRUMBS -->
 
-      <img src="images/cupsncrumbs.png"
-           alt="Cups N Crumbs Cafe">
+    <a
+      href="cups-n-crumbs-menu.html"
+      class="restaurant-card">
+
+      <div class="restaurant-image">
+
+        <img
+          src="images/cupsncrumbs.png"
+          alt="Cups N Crumbs Cafe">
+
+      </div>
 
       <div class="restaurant-info">
 
-        <h3>
-          Cups N Crumbs Cafe
-        </h3>
+        <div>
 
-        <p>
-           Café • Snacks • Beverages
-        </p>
+          <span class="restaurant-category">
+            CAFÉ
+          </span>
+
+          <h3>
+            Cups N Crumbs Cafe
+          </h3>
+
+          <p>
+            Café • Snacks • Beverages
+          </p>
+
+        </div>
+
 
         <div class="restaurant-meta">
 
           <span>
-            ⭐ 4.8
+            <i class="fa-solid fa-star"></i>
+            4.8
           </span>
 
           <span>
@@ -776,28 +731,46 @@ OneSignalDeferred.push(async function(OneSignal) {
 
     </a>
 
-    <!-- PIZZA -->
 
-    <a href="hazi-biryani-menu.html"
-       class="restaurant-card">
 
-      <img src="images/hazi.png"
-           alt="Kolkata Hazi Biryani">
+    <!-- HAZI -->
+
+    <a
+      href="hazi-biryani-menu.html"
+      class="restaurant-card">
+
+      <div class="restaurant-image">
+
+        <img
+          src="images/hazi.png"
+          alt="Kolkata Hazi Biryani">
+
+      </div>
 
       <div class="restaurant-info">
 
-        <h3>
-          Kolkata Hazi Biryani
-        </h3>
+        <div>
 
-        <p>
-         Biryani • Kolkata Style
-        </p>
+          <span class="restaurant-category">
+            BIRYANI
+          </span>
+
+          <h3>
+            Kolkata Hazi Biryani
+          </h3>
+
+          <p>
+            Biryani • Kolkata Style
+          </p>
+
+        </div>
+
 
         <div class="restaurant-meta">
 
           <span>
-            ⭐ 4.7
+            <i class="fa-solid fa-star"></i>
+            4.7
           </span>
 
           <span>
@@ -810,28 +783,46 @@ OneSignalDeferred.push(async function(OneSignal) {
 
     </a>
 
-    <!-- BIRYANI -->
 
-    <a href="bondhu-menu.html"
-       class="restaurant-card">
 
-      <img src="images/bondhu.png"
-           alt="Bondhu Restaurant">
+    <!-- BONDHU -->
+
+    <a
+      href="bondhu-menu.html"
+      class="restaurant-card">
+
+      <div class="restaurant-image">
+
+        <img
+          src="images/bondhu.png"
+          alt="Bondhu Restaurant">
+
+      </div>
 
       <div class="restaurant-info">
 
-        <h3>
-          Bondhu Restaurant
-        </h3>
+        <div>
 
-        <p>
-          Indian • Chinese
-        </p>
+          <span class="restaurant-category">
+            RESTAURANT
+          </span>
+
+          <h3>
+            Bondhu Restaurant
+          </h3>
+
+          <p>
+            Indian • Chinese
+          </p>
+
+        </div>
+
 
         <div class="restaurant-meta">
 
           <span>
-            ⭐ 4.9
+            <i class="fa-solid fa-star"></i>
+            4.9
           </span>
 
           <span>
@@ -848,239 +839,398 @@ OneSignalDeferred.push(async function(OneSignal) {
 
 </section>
 
-<!-- CUSTOMER REVIEWS -->
+
+
+<!-- =========================================================
+     CUSTOMER REVIEWS
+========================================================= -->
+
 <section class="reviews">
 
-  <h2 class="reviews-title">
-    ⭐ Customer Reviews
-  </h2>
+  <div class="section-title">
+
+    <div class="section-eyebrow">
+      FROM OUR CUSTOMERS
+    </div>
+
+    <h2>
+      Loved by <em>locals.</em>
+    </h2>
+
+  </div>
+
 
   <div class="review-slider">
 
-    <div class="review-track" id="reviewTrack">
+    <div
+      class="review-track"
+      id="reviewTrack">
+
 
       <div class="review-slide">
-        <img src="images/review1.png"
-             alt="Review 1">
+
+        <img
+          src="images/review1.png"
+          alt="Customer review">
+
       </div>
 
-      <div class="review-slide">
-        <img src="images/review2.png"
-             alt="Review 2">
-      </div>
 
       <div class="review-slide">
-        <img src="images/review3.png"
-             alt="Review 3">
+
+        <img
+          src="images/review2.png"
+          alt="Customer review">
+
       </div>
+
+
+      <div class="review-slide">
+
+        <img
+          src="images/review3.png"
+          alt="Customer review">
+
+      </div>
+
 
     </div>
 
   </div>
 
+
   <div class="review-dots">
+
     <span class="dot active"></span>
     <span class="dot"></span>
     <span class="dot"></span>
+
   </div>
 
 </section>
 
-<!-- CONTACT -->
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
 <section class="contact-section">
 
-  <h2 class="contact-title">
-    Contact Us
-  </h2>
+  <div class="section-title">
+
+    <div class="section-eyebrow">
+      GET IN TOUCH
+    </div>
+
+    <h2>
+      We're <em>here.</em>
+    </h2>
+
+  </div>
+
 
   <div class="contact-card">
 
+
     <div class="contact-row">
+
 
       <div class="contact-box">
 
-        <span>📞</span>
+        <span class="contact-icon">
+          <i class="fa-solid fa-phone"></i>
+        </span>
 
         <div>
-          <strong>+91 86959 02696</strong>
+
+          <strong>
+            +91 86959 02696
+          </strong>
 
           <p>
             Delivery & Restaurant Registration
           </p>
+
         </div>
 
       </div>
 
+
+
       <div class="contact-box">
 
-        <span>✉️</span>
+        <span class="contact-icon">
+          <i class="fa-solid fa-envelope"></i>
+        </span>
 
         <div>
-          <strong>helpkhazaana@gmail.com</strong>
+
+          <strong>
+            helpkhazaana@gmail.com
+          </strong>
 
           <p>
             Support & Queries
           </p>
+
         </div>
 
       </div>
 
+
     </div>
+
 
     <div class="contact-box">
 
-      <span>📍</span>
+      <span class="contact-icon">
+        <i class="fa-solid fa-location-dot"></i>
+      </span>
 
       <p>
-        College More, near DNC College,<br>
-        Aurangabad, Suti,<br>
+
+        College More, near DNC College,
+        <br>
+
+        Aurangabad, Suti,
+        <br>
+
         West Bengal – 742201
+
       </p>
 
     </div>
 
+
   </div>
 
 </section>
 
-<!-- SOCIAL -->
+
+
+<!-- =========================================================
+     SOCIAL
+========================================================= -->
+
 <section class="social-section">
 
-  <h2 class="social-title">
-    Connect With Us
-  </h2>
+  <div class="section-title">
+
+    <div class="section-eyebrow">
+      FOLLOW THE JOURNEY
+    </div>
+
+    <h2>
+      Connect with <em>Khazaana.</em>
+    </h2>
+
+  </div>
+
 
   <div class="social-links">
 
-    <a href="https://www.instagram.com/cups_n_crumbs_cafe"
-       target="_blank"
-       class="social-card instagram">
 
-      <img src="images/instagram.png"
-           alt="Instagram">
+    <a
+      href="https://www.instagram.com/cups_n_crumbs_cafe"
+      target="_blank"
+      class="social-card instagram">
 
-      Instagram
+      <img
+        src="images/instagram.png"
+        alt="Instagram">
+
+      <span>
+        Instagram
+      </span>
+
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+    </a>
+
+
+
+    <a
+      href="https://www.linkedin.com/in/md-askin-ali-8a068a204"
+      target="_blank"
+      class="social-card linkedin">
+
+      <img
+        src="images/linkedin.png"
+        alt="LinkedIn">
+
+      <span>
+        LinkedIn
+      </span>
+
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
     </a>
 
-    <a href="https://www.linkedin.com/in/md-askin-ali-8a068a204"
-       target="_blank"
-       class="social-card linkedin">
-
-      <img src="images/linkedin.png"
-           alt="LinkedIn">
-
-      LinkedIn
-
-    </a>
 
   </div>
 
 </section>
 
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
 <footer class="footer">
-  © 2026 Khazaana. All rights reserved.
+
+  <div class="footer-logo">
+    Khazaana
+  </div>
+
+  <p>
+    A local food experience.
+  </p>
+
+  <div class="footer-copy">
+    © 2026 Khazaana. All rights reserved.
+  </div>
+
 </footer>
 
+
 <div class="footer-credit">
-    Designed & Developed by <strong>MD ASKIN ALI</strong>
+
+  Designed & Developed by
+  <strong>MD ASKIN ALI</strong>
+
 </div>
+
+
+
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
+
+<a
+  href="https://wa.me/918695902696"
+  class="whatsapp-float"
+  target="_blank"
+  aria-label="Chat on WhatsApp">
+
+  <i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+========================================================= -->
 
 <script>
 
-const intro =
-document.getElementById("intro");
 
-if(!sessionStorage.getItem("kh_intro_seen")){
-
-  sessionStorage.setItem(
-    "kh_intro_seen",
-    "true"
-  );
-
-  setTimeout(() => {
-    intro.classList.add("fade-out");
-  }, 3000);
-
-setTimeout(() => {
-
-  intro.remove();
-
-  showChallengePopup();
-
-}, 3800);
-
-}else{
-
-  intro.remove();
-
-}
-
-function acceptChallenge(){
-
-  localStorage.setItem(
-    "challenge_seen",
-    "true"
-  );
-
-  window.location.href =
-"khazaana_challenge";
-
-}
-
-function skipChallenge(){
-
-  localStorage.setItem(
-    "challenge_seen",
-    "true"
-  );
-
-  document.getElementById(
-    "challengePopup"
-  ).style.display = "none";
-
-}
-
-
-
-/* SAVED LOCATION */
+/* =========================================================
+   SAVED LOCATION
+========================================================= */
 
 const savedAddress =
-  localStorage.getItem("kh_address");
+  localStorage.getItem(
+    "kh_address"
+  );
 
-if(savedAddress){
 
-  document.getElementById(
-    "savedLocationBar"
-  ).style.display = "block";
+if (savedAddress) {
 
-  document.getElementById(
-    "savedAddressHome"
-  ).innerText = savedAddress;
+  const locationBar =
+    document.getElementById(
+      "savedLocationBar"
+    );
+
+
+  const address =
+    document.getElementById(
+      "savedAddressHome"
+    );
+
+
+  if (locationBar) {
+
+    locationBar.style.display =
+      "flex";
+
+  }
+
+
+  if (address) {
+
+    address.innerText =
+      savedAddress;
+
+  }
 
 }
-  window.addEventListener("load", function(){
-gtag('event', 'homepage_visit');
+
+
+
+/* =========================================================
+   REVIEW SLIDER
+========================================================= */
+
+window.addEventListener(
+  "load",
+  function() {
+
+
+    gtag(
+      "event",
+      "homepage_visit"
+    );
+
+
     const track =
-      document.getElementById("reviewTrack");
+      document.getElementById(
+        "reviewTrack"
+      );
+
 
     const dots =
-      document.querySelectorAll(".dot");
+      document.querySelectorAll(
+        ".dot"
+      );
+
+
+    if (!track || !dots.length) {
+
+      return;
+
+    }
+
 
     let currentSlide = 0;
 
-    function updateSlider(){
+
+    function updateSlider() {
 
       track.style.transform =
         `translateX(-${currentSlide * 100}%)`;
 
-      dots.forEach(dot =>
-        dot.classList.remove("active")
-      );
 
-      dots[currentSlide]
-        .classList.add("active");
+      dots.forEach(dot => {
+
+        dot.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      if (dots[currentSlide]) {
+
+        dots[currentSlide]
+          .classList.add("active");
+
+      }
+
     }
+
 
     setInterval(() => {
 
@@ -1091,542 +1241,127 @@ gtag('event', 'homepage_visit');
 
     }, 3000);
 
-  });
+
+  }
+);
+
+
+
+/* =========================================================
+   ACTIVE ORDER
+========================================================= */
 
 const activeOrder =
-localStorage.getItem("activeOrder");
-
-if(activeOrder){
-
-  const btn =
-  document.getElementById(
-    "trackOrderBtn"
+  localStorage.getItem(
+    "activeOrder"
   );
 
-  btn.style.display =
-  "inline-flex";
 
-  btn.href =
-  "track-order.html?id=" +
-  activeOrder;
+if (activeOrder) {
 
-}
+  const btn =
+    document.getElementById(
+      "trackOrderBtn"
+    );
 
-function showChallengePopup(){
 
-  if(localStorage.getItem("challenge_seen")){
-    return;
+  if (btn) {
+
+    btn.style.display =
+      "inline-flex";
+
+
+    btn.href =
+      "track-order.html?id=" +
+      activeOrder;
+
   }
 
-  document.getElementById(
-    "challengePopup"
-  ).style.display = "flex";
-
 }
 
-/* FEEDBACK */
 
-window.addEventListener("load",()=>{
-
-let foodRating = 0;
-let deliveryRating = 0;
-
-const pendingFeedbackOrder =
-localStorage.getItem(
-"pendingFeedbackOrder"
-);
-
-if(pendingFeedbackOrder){
-
-document.getElementById(
-"feedbackPopup"
-).style.display = "flex";
-
-}
-
-const laterBtn =
-document.getElementById(
-"laterFeedback"
-);
-
-if(laterBtn){
-
-laterBtn.onclick = function(){
-
-document.getElementById(
-"feedbackPopup"
-).style.display = "none";
-};
-}
-
-document.querySelectorAll(".food-star")
-.forEach(star=>{
-
-star.onclick = ()=>{
-
-foodRating =
-parseInt(star.dataset.rating);
-const commentBox =
-document.getElementById("commentSection");
-
-if(foodRating >= 4){
-commentBox.style.display = "block";
-}else{
-commentBox.style.display = "none";
-}
-
-document
-.querySelectorAll(".food-star")
-.forEach((s,index)=>{
-
-s.innerHTML =
-index < foodRating
-? "⭐"
-: "☆";
-
-});
-
-};
-
-});
-
-document.querySelectorAll(".delivery-star")
-.forEach(star=>{
-
-star.onclick = ()=>{
-
-deliveryRating =
-parseInt(star.dataset.rating);
-
-document
-.querySelectorAll(".delivery-star")
-.forEach((s,index)=>{
-
-s.innerHTML =
-index < deliveryRating
-? "⭐"
-: "☆";
-
-});
-
-};
-
-});
-
-document.getElementById(
-"submitFeedback"
-).onclick = function(){
-if(foodRating===0 || deliveryRating===0){
-
-alert(
-"Please rate food and delivery."
-);
-
-return;
-
-}
-
-const comment =
-document.getElementById(
-"feedbackComment"
-).value.trim();
-
-if(foodRating >= 4 && comment===""){
-alert("Please share your experience.");
-return;
-}
-
-localStorage.removeItem(
-"pendingFeedbackOrder"
-);
-
-document.getElementById("feedbackPopup")
-.style.display = "none";
-
-document.getElementById(
-"feedbackPopup"
-).style.display = "none";
-
-if(foodRating >= 4){
-
-document.querySelector(
-"#thankYouPopup h2"
-).innerHTML = "😊 Thank You!";
-
-document.querySelector(
-"#thankYouPopup p"
-).innerHTML =
-"We’re happy you enjoyed our service.";
-
-}else{
-
-document.querySelector(
-"#thankYouPopup h2"
-).innerHTML = "❤️ Thank You!";
-
-document.querySelector(
-"#thankYouPopup p"
-).innerHTML =
-"We hope to serve you better next time.";
-
-}
-
-document.getElementById(
-"thankYouPopup"
-).style.display = "flex";
-
-emailjs.send(
-"service_0x788xa",
-"template_zvt21ye",
-{
-customer_name: localStorage.getItem("lastCustomerName"),
-customer_address: localStorage.getItem("lastAddress"),
-restaurant_name: localStorage.getItem("lastRestaurant"),
-order_items: localStorage.getItem("lastItems"),
-food_rating: foodRating,
-delivery_rating: deliveryRating,
-customer_comment: comment
-});
-
-};
-
-});
 
 </script>
 
-<a href="https://wa.me/918695902696"
-   class="whatsapp-float"
-   target="_blank">
-   <i class="fa-brands fa-whatsapp"></i>
-</a>
-
-<style>
-#closedOverlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.97);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-}
-
-.challenge-box button{
-width:100%;
-padding:18px;
-margin-top:14px;
-border:none;
-border-radius:18px;
-font-weight:800;
-font-size:17px;
-cursor:pointer;
-transition:.3s;
-}
-
-.challenge-box button:first-of-type{
-background:linear-gradient(
-135deg,
-#ff9a1f,
-#ff6b00
-);
-color:white;
-
-box-shadow:
-0 8px 25px rgba(255,122,0,.45),
-0 0 20px rgba(255,122,0,.25);
-
-animation:pulseReward 1.5s infinite;
-}
-
-.challenge-box button:first-of-type:hover{
-transform:translateY(-3px) scale(1.02);
-}
-
-.later-btn{
-background:#1f1f1f;
-color:#fff;
-border:1px solid rgba(255,255,255,.08);
-}
-
-.later-btn:hover{
-background:#2a2a2a;
-}
-
-@keyframes pulseReward{
-0%{transform:scale(1);}
-50%{transform:scale(1.04);}
-100%{transform:scale(1);}
-}
-
-#challengePopup{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.88);
-display:none;
-justify-content:center;
-align-items:center;
-backdrop-filter:blur(8px);
-z-index:999999;
-}
-
-.challenge-box{
-width:90%;
-max-width:420px;
-background:linear-gradient(
-180deg,
-#1a1a1a,
-#111
-);
-padding:30px;
-border-radius:28px;
-text-align:center;
-color:white;
-border:1px solid rgba(255,122,0,.3);
-
-box-shadow:
-0 0 40px rgba(255,122,0,.25),
-0 20px 60px rgba(0,0,0,.5);
-
-animation:popupShow .4s ease;
-}
-
-.challenge-box h2{
-font-size:28px;
-margin-bottom:12px;
-color:#ffb347;
-}
-
-.challenge-box p{
-line-height:1.7;
-color:#ddd;
-margin-bottom:20px;
-}
-
-@keyframes popupShow{
-from{
-opacity:0;
-transform:translateY(30px) scale(.9);
-}
-to{
-opacity:1;
-transform:translateY(0) scale(1);
-}
-}
-
-</style>
-<div id="challengePopup">
-
-  <div class="challenge-box">
-
-    <h2>🏆 KHAZAANA QUIZ</h2>
-
-    <p>
-      Complete a quick challenge and win
-      a surprise discount coupon.
-    </p>
-
-   <button onclick="acceptChallenge()">
-🏆 Start Challenge & Win
-</button>
-
-<button onclick="skipChallenge()" class="later-btn">
-Maybe Later
-</button>
 
 
-  </div>
+<!-- =========================================================
+     FIREBASE ANALYTICS
+========================================================= -->
 
-
-</div>
-
-<div id="feedbackPopup" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-z-index:999999;
-justify-content:center;
-align-items:center;
-">
-
-<div style="
-width:90%;
-max-width:420px;
-background:#111;
-padding:25px;
-border-radius:24px;
-text-align:center;
-color:white;
-border:1px solid rgba(255,122,0,.3);
-">
-
-<h2 style="color:#ffb347;">
-🍽️ Rate Your Last Order
-</h2>
-
-<p style="margin:15px 0;">
-How was your experience?
-</p>
-
-<h3>Food Quality</h3>
-
-<div id="foodStars" style="
-font-size:34px;
-margin-top:10px;
-letter-spacing:4px;
-cursor:pointer;
-">
-<span class="food-star" data-rating="1">☆</span>
-<span class="food-star" data-rating="2">☆</span>
-<span class="food-star" data-rating="3">☆</span>
-<span class="food-star" data-rating="4">☆</span>
-<span class="food-star" data-rating="5">☆</span>
-</div>
-
-<h3 style="margin-top:20px;">
-Delivery Experience
-</h3>
-
-<div id="deliveryStars" style="
-font-size:34px;
-margin-top:10px;
-letter-spacing:4px;
-cursor:pointer;
-">
-<span class="delivery-star" data-rating="1">☆</span>
-<span class="delivery-star" data-rating="2">☆</span>
-<span class="delivery-star" data-rating="3">☆</span>
-<span class="delivery-star" data-rating="4">☆</span>
-<span class="delivery-star" data-rating="5">☆</span>
-</div>
-
-<div id="commentSection" style="display:none;margin-top:20px;">
-
-<h3>What did you enjoy most? *</h3>
-
-<textarea
-id="feedbackComment"
-placeholder="Share your experience..."
-style="
-width:100%;
-height:90px;
-padding:12px;
-border-radius:12px;
-border:none;
-margin-top:10px;
-resize:none;
-"></textarea>
-
-</div>
-
-<button
-id="submitFeedback"
-style="
-width:100%;
-padding:14px;
-border:none;
-border-radius:14px;
-background:#ff7a00;
-color:white;
-font-weight:700;
-margin-bottom:10px;
-">
-Submit Review
-</button>
-
-<button
-id="laterFeedback"
-style="
-width:100%;
-padding:14px;
-border:none;
-border-radius:14px;
-background:#222;
-color:white;
-">
-Remind Me Later
-</button>
-
-</div>
-
-</div>
-
-<div id="thankYouPopup" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.8);
-z-index:999999;
-justify-content:center;
-align-items:center;
-">
-  <div style="
-  background:#111;
-  color:white;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  width:90%;
-  max-width:320px;
-  border:1px solid #ff7a00;
-  ">
-    <h2 style="color:#ffb347;">❤️ Thank You!</h2>
-    <p>Your feedback has been submitted.</p>
-    <button onclick="document.getElementById('thankYouPopup').style.display='none'"
-    style="
-    margin-top:15px;
-    padding:12px 25px;
-    border:none;
-    border-radius:10px;
-    background:#ff7a00;
-    color:white;
-    ">
-      OK
-    </button>
-  </div>
-</div>
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-  getFirestore,
-  doc,
-  updateDoc,
-  increment
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-const firebaseConfig = {
- apiKey: "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",BODY
-
- authDomain: "khazaana-7088c.firebaseapp.com",
- projectId: "khazaana-7088c",
- storageBucket: "khazaana-7088c.firebasestorage.app",
- messagingSenderId: "988898941531",
- appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-updateDoc(
-  doc(db,"analytics","stats"),
-  {
-    websiteVisitors: increment(1)
+  import {
+    initializeApp
   }
-).catch(console.error);
+  from
+  "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+  import {
+    getFirestore,
+    doc,
+    updateDoc,
+    increment
+  }
+  from
+  "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+
+    apiKey:
+      "AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
+
+    authDomain:
+      "khazaana-7088c.firebaseapp.com",
+
+    projectId:
+      "khazaana-7088c",
+
+    storageBucket:
+      "khazaana-7088c.firebasestorage.app",
+
+    messagingSenderId:
+      "988898941531",
+
+    appId:
+      "1:988898941531:web:851a3d3db24c85e9fa3d7e"
+
+  };
+
+
+  const app =
+    initializeApp(
+      firebaseConfig
+    );
+
+
+  const db =
+    getFirestore(app);
+
+
+  updateDoc(
+
+    doc(
+      db,
+      "analytics",
+      "stats"
+    ),
+
+    {
+
+      websiteVisitors:
+        increment(1)
+
+    }
+
+  ).catch(console.error);
+
 
 </script>
 
-</style>
 
-</script>
 </body>
+
 </html>
-
-
-
-
-
