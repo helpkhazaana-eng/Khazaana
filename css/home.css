@@ -1,1230 +1,5885 @@
-/* ================= RESET ================= */
+/* =========================================================
+   KHAZAANA — PREMIUM HOME
+   FOREST GREEN × ANTIQUE GOLD
+========================================================= */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Segoe UI",system-ui,sans-serif;
+
+/* =========================================================
+   FONTS
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+  --forest-950: #2D3A2F !important;
+  --forest-900: #2D3A2F !important;
+  --forest-850: #2D3A2F !important;
+  --forest-800: #2D3A2F !important;
+  --forest-700: #2D3A2F !important;
+
+  --gold: #2D3A2F !important;
+  --gold-light: #2D3A2F !important;
+  --gold-soft: #2D3A2F !important;
+  --gold-dark: #2D3A2F !important;
+
+  --cream: #2D3A2F !important;
+  --cream-soft: #2D3A2F !important;
+  --muted: rgba(211,198,182,.62) !important;
+
+  --white: #2D3A2F !important;
+
+  --border:
+    rgba(45,58,47,.22) !important;
+
+  --gold-glow:
+    rgba(45,58,47,.14) !important;
+
+  --black:
+    #2D3A2F !important;
+
 }
 
-/* ================= BODY ================= */
 
-body{
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 75% 15%,
+      rgba(45,58,47,.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 75%,
+      rgba(45,58,47,.045),
+      transparent 25%
+    ),
+    var(--forest-950);
+
+  color: var(--cream);
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  overflow-x: hidden;
+
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: var(--gold);
+  color: var(--forest-950);
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+#intro {
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
 
   background:
 
-  linear-gradient(
-  180deg,
-  #0f0b08 0%,
-  #16110d 35%,
-  #1b140f 65%,
-  #120d09 100%
+    radial-gradient(
+      circle at center,
+      #2D3A2F 0%,
+      #2D3A2F 45%,
+      #2D3A2F 100%
+    );
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  z-index: 100000;
+
+  padding: 20px;
+
+  text-align: center;
+
+}
+
+.intro-brand {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(58px, 11vw, 120px);
+
+  font-weight: 600;
+
+  letter-spacing: -2px;
+
+  color: var(--gold-light);
+
+  text-shadow:
+    0 0 25px rgba(45,58,47,.22),
+    0 0 70px rgba(45,58,47,.08);
+
+  opacity: 0;
+
+  animation:
+    introReveal 1.5s
+    cubic-bezier(.16,1,.3,1)
+    forwards;
+
+}
+
+.intro-line {
+
+  width: 0;
+
+  height: 1px;
+
+  margin-top: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
+
+  animation:
+    introLine 1s
+    ease
+    forwards
+    1s;
+
+}
+
+.intro-tagline {
+
+  margin-top: 18px;
+
+  color: var(--cream-soft);
+
+  font-size: 10px;
+
+  letter-spacing: 5px;
+
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  animation:
+    introTag 1s
+    ease
+    forwards
+    1.4s;
+
+}
+
+.intro-tagline span {
+
+  display: block;
+
+  margin-top: 12px;
+
+  color: var(--gold);
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+}
+
+.fade-out {
+
+  animation:
+    fadeOut .8s
+    ease
+    forwards;
+
+}
+
+@keyframes introReveal {
+
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(.94);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+@keyframes introLine {
+
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 130px;
+  }
+
+}
+
+@keyframes introTag {
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes fadeOut {
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+}
+
+
+/* =========================================================
+   NAVBAR — PREMIUM GLASS
+========================================================= */
+
+.site-header {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  height: 90px;
+
+  padding:
+    0
+    clamp(25px, 5vw, 75px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 1000;
+
+  /* transparent forest-green glass */
+  background:
+    rgba(11, 33, 24, .38);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(125%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(125%);
+
+  /* subtle luxury glass edge */
+  border-bottom:
+    1px solid
+    rgba(211,198,182,.12);
+
+  box-shadow:
+    0 8px 30px
+    rgba(0, 0, 0, .16),
+
+    inset 0 1px 0
+    rgba(211,198,182,.045);
+
+  isolation: isolate;
+
+}
+
+/* soft highlight across the top of the glass */
+.site-header::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(211,198,182,.035),
+      transparent 55%
+    );
+
+}
+
+/* keep navbar content above glass highlight */
+.site-header > * {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+.nav-left {
+  flex: 1;
+}
+
+.nav-logo {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 31px;
+
+  font-weight: 600;
+
+  color: var(--gold-light);
+
+  letter-spacing: -.8px;
+
+  text-shadow:
+    0 0 18px
+    rgba(45,58,47,.22);
+
+  transition:
+    color .3s ease,
+    transform .3s ease;
+
+}
+
+.nav-logo:hover {
+  color: var(--cream);
+}
+
+.main-nav {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: clamp(25px, 4vw, 55px);
+
+}
+
+.main-nav a {
+
+  position: relative;
+
+  color:
+    rgba(211,198,182,.62);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+
+  transition:
+    color .3s ease;
+
+}
+
+.main-nav a::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -10px;
+
+  width: 0;
+
+  height: 1px;
+
+  background: var(--gold);
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    width .3s ease;
+
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+
+  color: var(--cream);
+
+}
+
+.main-nav a.active::after {
+
+  width: 18px;
+
+}
+
+.nav-right {
+
+  flex: 1;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+}
+
+.saved-location-bar {
+
+  display: none;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid
+    rgba(45,58,47,.2);
+
+  border-radius: 30px;
+
+  background:
+    rgba(45,58,47,.5);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+.location-symbol {
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(45,58,47,.3);
+
+  border-radius: 50%;
+
+  color: var(--gold);
+
+  font-size: 10px;
+
+}
+
+.location-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1px;
+
+}
+
+.location-city {
+
+  color: var(--cream);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+}
+
+.saved-address-home {
+
+  max-width: 110px;
+
+  color: var(--muted);
+
+  font-size: 8px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+  position: relative;
+
+  min-height: 100vh;
+
+  height: 900px;
+
+  max-height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  background:
+    var(--forest-950);
+
+}
+
+
+/* HERO IMAGE */
+
+.hero-image {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+}
+
+.hero-image img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position:
+    center center;
+
+  opacity: .72;
+
+  filter:
+    saturate(.7)
+    contrast(1.05)
+    brightness(.65);
+
+  transform:
+    scale(1.04);
+
+}
+
+
+/* LEFT DARKNESS */
+
+.hero-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(45,58,47,.98) 0%,
+      rgba(45,58,47,.91) 27%,
+      rgba(45,58,47,.64) 50%,
+      rgba(45,58,47,.18) 78%,
+      rgba(45,58,47,.55) 100%
+    ),
+
+    linear-gradient(
+      0deg,
+      rgba(45,58,47,.95) 0%,
+      transparent 28%,
+      rgba(45,58,47,.25) 100%
+    );
+
+}
+
+
+/* GOLD ATMOSPHERE */
+
+.hero-glow {
+
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  right: 5%;
+  top: 10%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(45,58,47,.075),
+      transparent 65%
+    );
+
+  filter:
+    blur(15px);
+
+  z-index: 1;
+
+  pointer-events: none;
+
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(
+    700px,
+    90%
   );
 
-  color:#fff;
+  margin-left:
+    clamp(7%, 13vw, 18%);
 
-  overflow-x:hidden;
+  padding-top: 55px;
+
 }
 
-/* ================= BACKGROUND BLOBS ================= */
+.hero-eyebrow {
 
-.bg-blobs{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  overflow:hidden;
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--gold);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 27px;
+
 }
 
-.blob{
-  position:absolute;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  filter:blur(90px);
-  opacity:.18;
-  animation:blobMove 18s infinite ease-in-out;
+.hero-eyebrow span {
+
+  display: block;
+
+  width: 28px;
+
+  height: 1px;
+
+  background: var(--gold);
+
+  opacity: .65;
+
 }
 
-.blob-1{
-  background:#ff7a00;
-  top:-120px;
-  left:-120px;
+.hero-content h1 {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(68px, 8vw, 124px);
+
+  font-weight: 500;
+
+  line-height: .77;
+
+  letter-spacing:
+    -4px;
+
+  color: var(--cream);
+
+  max-width: 650px;
+
 }
 
-.blob-2{
-  background:#ffb703;
-  bottom:-120px;
-  right:-120px;
-  animation-delay:6s;
+.hero-content h1 em {
+
+  color: var(--gold-light);
+
+  font-style: italic;
+
+  font-weight: 500;
+
 }
 
-.blob-3{
-  background:#ff4d6d;
-  top:45%;
-  left:60%;
-  animation-delay:12s;
+.hero-description {
+
+  max-width: 430px;
+
+  margin-top: 38px;
+
+  color:
+    rgba(211,198,182,.63);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 19px;
+
+  line-height: 1.45;
+
 }
 
-@keyframes blobMove{
+.hero-actions {
 
-  0%{
-    transform:translate(0,0) scale(1);
-  }
+  display: flex;
 
-  50%{
-    transform:translate(40px,-30px) scale(1.1);
-  }
+  align-items: center;
 
-  100%{
-    transform:translate(0,0) scale(1);
-  }
+  gap: 28px;
+
+  margin-top: 35px;
+
 }
 
-/* ================= NAVBAR ================= */
+.gold-button {
 
-.glass-navbar{
+  display: inline-flex;
 
-  position:sticky;
+  align-items: center;
 
-  top:0;
+  gap: 22px;
 
-  z-index:1000;
+  padding:
+    14px 0;
 
-  background:
-  rgba(10,10,10,.45);
-
-  backdrop-filter:blur(18px);
+  color: var(--gold-light);
 
   border-bottom:
-  1px solid rgba(255,255,255,.06);
+    1px solid
+    rgba(45,58,47,.65);
 
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.18);
+  font-size: 9px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+
+  transition:
+    color .3s ease,
+    gap .3s ease;
+
 }
 
-.nav-container{
+.gold-button span {
 
-  max-width:1200px;
+  font-size: 18px;
 
-  margin:auto;
+  line-height: 0;
 
-  padding:16px 24px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
 }
 
-.logo{
+.gold-button:hover {
 
-  font-size:24px;
+  color: var(--cream);
 
-  font-weight:800;
+  gap: 30px;
 
-  color:#fff;
-
-  text-shadow:
-  0 0 18px rgba(255,122,0,.25);
 }
 
-.nav-links{
+.track-link {
 
-  display:flex;
+  display: inline-flex;
 
-  gap:28px;
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--cream-soft);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
 }
 
-.nav-links a{
-
-  text-decoration:none;
-
-  font-size:15px;
-
-  color:
-  rgba(255,255,255,.72);
-
-  font-weight:500;
-
-  transition:.3s ease;
+.track-link:hover {
+  color: var(--gold);
 }
 
-.nav-links a.active,
-.nav-links a:hover{
 
-  color:#ff8c1a;
+/* HERO LOCATION */
+
+.hero-location {
+
+  position: absolute;
+
+  z-index: 5;
+
+  top: 125px;
+
+  right:
+    clamp(30px, 6vw, 90px);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
 }
 
-/* ================= HERO ================= */
+.location-dot {
 
-.hero{
-
-  position:relative;
-
-  min-height:72vh;
-
-  display:flex;
-
-  align-items:flex-end;
-
-  padding:120px 24px 60px;
-
-  overflow:hidden;
-
-  background:
-
-  linear-gradient(
-  to top,
-  rgba(0,0,0,.92),
-  rgba(0,0,0,.58),
-  rgba(0,0,0,.18)
-  ),
-
-  url('../images/food-hero.png');
-
-  background-size:cover;
-
-  background-position:center center;
-
-  background-repeat:no-repeat;
-}
-
-.hero::after{
-
-  content:'';
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-
-  radial-gradient(
-  circle at top right,
-  rgba(255,122,0,.18),
-  transparent 28%
-  ),
-
-  radial-gradient(
-  circle at bottom left,
-  rgba(255,180,80,.10),
-  transparent 30%
-  );
-}
-
-.hero-overlay{
-  position:absolute;
-  inset:0;
-}
-
-.hero-content{
-
-  position:relative;
-
-  z-index:2;
-
-  max-width:560px;
-}
-
-.badge{
-
-  display:inline-block;
-
-  padding:10px 18px;
-
-  background:
-  rgba(255,255,255,.08);
+  width: 28px;
+  height: 28px;
 
   border:
-  1px solid rgba(255,255,255,.12);
+    1px solid
+    rgba(45,58,47,.4);
 
-  backdrop-filter:blur(12px);
+  border-radius: 50%;
 
-  border-radius:999px;
+  position: relative;
 
-  color:#fff;
-
-  font-size:13px;
-
-  margin-bottom:24px;
 }
 
-.hero h2{
+.location-dot::after {
 
-  font-size:clamp(48px,10vw,78px);
+  content: "";
 
-  line-height:1.02;
+  position: absolute;
 
-  letter-spacing:-3px;
+  width: 5px;
+  height: 5px;
 
-  font-weight:900;
+  background: var(--gold);
 
-  color:#fff;
+  border-radius: 50%;
 
-  margin-bottom:18px;
-
-  text-shadow:
-  0 8px 30px rgba(0,0,0,.4);
-}
-
-.hero p{
-
-  color:
-  rgba(255,255,255,.78);
-
-  font-size:16px;
-
-  line-height:1.9;
-
-  margin-bottom:28px;
-}
-
-/* ================= BUTTON ================= */
-
-.btn{
-
-  display:inline-block;
-
-  padding:14px 34px;
-
-  border-radius:999px;
-
-  background:
-  linear-gradient(
-  135deg,
-  #ff7a00,
-  #ff5400
-  );
-
-  color:#fff;
-
-  text-decoration:none;
-
-  font-weight:700;
-
-  box-shadow:
-  0 14px 40px rgba(255,122,0,.35);
-
-  transition:.35s ease;
-}
-
-.btn:hover{
+  top: 50%;
+  left: 50%;
 
   transform:
-  translateY(-4px);
+    translate(-50%,-50%);
 
   box-shadow:
-  0 24px 60px rgba(255,122,0,.42);
+    0 0 12px
+    rgba(45,58,47,.7);
+
 }
 
-/* ================= POPULAR RESTAURANTS ================= */
+.hero-location strong {
 
-.restaurants{
+  display: block;
 
-  padding:70px 24px 90px;
+  color: var(--cream);
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+}
+
+.hero-location small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 8px;
+
+}
+
+
+/* HERO BOTTOM */
+
+.hero-bottom {
+
+  position: absolute;
+
+  z-index: 5;
+
+  left:
+    clamp(7%, 13vw, 18%);
+
+  bottom: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.hero-number {
+
+  color: var(--gold);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 17px;
+
+}
+
+.hero-line {
+
+  width: 70px;
+
+  height: 1px;
+
+  background:
+    rgba(45,58,47,.45);
+
+}
+
+.hero-label {
+
+  color:
+    rgba(211,198,182,.45);
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+}
+
+
+/* =========================================================
+   SECTION COMMON
+========================================================= */
+
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section {
+
+  position: relative;
+
+  padding:
+    clamp(90px, 10vw, 150px)
+    clamp(20px, 7vw, 110px);
+
+  background:
+    var(--forest-950);
+
+}
+
+.section-heading,
+.section-title {
+
+  max-width: 760px;
+
+  margin-bottom: 55px;
+
+}
+
+.section-eyebrow {
+
+  margin-bottom: 15px;
+
+  color: var(--gold);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 5px;
+
+  text-transform: uppercase;
+
+}
+
+.section-heading h2,
+.section-title h2 {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(48px, 6vw, 82px);
+
+  font-weight: 500;
+
+  line-height: .95;
+
+  letter-spacing: -2px;
+
+  color: var(--cream);
+
+}
+
+.section-heading h2 em,
+.section-title h2 em {
+
+  color: var(--gold-light);
+
+  font-style: italic;
+
+}
+
+.section-heading p,
+.section-title p {
+
+  margin-top: 18px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   DISCOVERY
+========================================================= */
+
+.discovery-section {
 
   background:
 
-  linear-gradient(
-  to bottom,
-  #16110d,
-  #1b140f,
-  #120d09
-  );
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(45,58,47,.035),
+      transparent 30%
+    ),
 
-  position:relative;
+    var(--forest-900);
+
 }
 
-.restaurants::before{
+.discovery-grid {
 
-  content:'';
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-
-  radial-gradient(
-  circle at top right,
-  rgba(255,122,0,.12),
-  transparent 35%
-  ),
-
-  radial-gradient(
-  circle at bottom left,
-  rgba(255,180,80,.08),
-  transparent 30%
-  );
-
-  pointer-events:none;
-}
-
-.restaurant-title{
-
-  position:relative;
-
-  z-index:2;
-
-  font-size:44px;
-
-  font-weight:800;
-
-  margin-bottom:40px;
-
-  color:#fff;
-
-  text-align:center;
-
-  letter-spacing:-1px;
-}
-
-.restaurant-grid{
-
-  position:relative;
-
-  z-index:2;
-
-  max-width:1350px;
-
-  margin:auto;
-
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(320px,1fr));
+    repeat(2, minmax(0,1fr));
 
-  gap:28px;
+  gap: 22px;
+
+  max-width: 1400px;
+
 }
 
-.restaurant-card{
+.discovery-card {
 
-  background:
-  rgba(255,255,255,.96);
+  position: relative;
 
-  backdrop-filter:blur(14px);
+  min-height: 430px;
 
-  border-radius:30px;
-
-  overflow:hidden;
-
-  text-decoration:none;
-
-  transition:.4s ease;
-
-  box-shadow:
-  0 15px 40px rgba(0,0,0,.25);
-}
-
-.restaurant-card:hover{
-
-  transform:
-  translateY(-8px);
-
-  box-shadow:
-  0 25px 55px rgba(0,0,0,.35);
-}
-
-.restaurant-card img{
-
-  width:100%;
-
-  height:240px;
-
-  object-fit:cover;
-
-  display:block;
-
-  transition:.5s ease;
-}
-
-.restaurant-card:hover img{
-
-  transform:scale(1.06);
-}
-
-.restaurant-info{
-
-  padding:24px;
-}
-
-.restaurant-info h3{
-
-  color:#111;
-
-  font-size:24px;
-
-  margin-bottom:10px;
-}
-
-.restaurant-info p{
-
-  color:#777;
-
-  margin-bottom:18px;
-
-  line-height:1.6;
-}
-
-.restaurant-meta{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  color:#555;
-
-  font-size:15px;
-}
-
-/* ================= REVIEWS ================= */
-
-.reviews{
-
-  padding:90px 20px;
-
-  text-align:center;
-
-  background:
-  linear-gradient(
-  to bottom,
-  #120d09,
-  #16110d
-  );
-}
-
-.reviews-title{
-
-  font-size:32px;
-
-  margin-bottom:40px;
-
-  color:#fff;
-}
-
-/* ================= CONTACT ================= */
-
-.contact-section{
-
-  padding:80px 20px;
-
-  background:
-  linear-gradient(
-  to bottom,
-  #16110d,
-  #120d09
-  );
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-}
-
-.contact-title{
-
-  font-size:32px;
-
-  margin-bottom:40px;
-
-  color:#fff;
-}
-
-.contact-card{
-
-  width:100%;
-
-  max-width:900px;
-
-  background:
-  rgba(255,255,255,.08);
+  overflow: hidden;
 
   border:
-  1px solid rgba(255,255,255,.08);
-
-  backdrop-filter:blur(18px);
-
-  border-radius:30px;
-
-  padding:30px;
-
-  box-shadow:
-  0 20px 50px rgba(0,0,0,.25);
-}
-
-.contact-row{
-
-  display:flex;
-
-  gap:30px;
-
-  flex-wrap:wrap;
-
-  margin-bottom:20px;
-}
-
-.contact-box{
-
-  flex:1;
-
-  display:flex;
-
-  gap:12px;
-}
-
-.contact-box p{
-
-  color:
-  rgba(255,255,255,.72);
-}
-
-/* ================= SOCIAL ================= */
-
-.social-section{
-
-  padding:70px 20px;
+    1px solid
+    rgba(45,58,47,.18);
 
   background:
-  linear-gradient(
-  to bottom,
-  #120d09,
-  #0d0907
-  );
+    var(--forest-800);
 
-  text-align:center;
+  transition:
+    transform .5s
+    cubic-bezier(.16,1,.3,1),
+    border-color .4s ease;
+
 }
 
-.social-title{
-
-  font-size:32px;
-
-  margin-bottom:40px;
-
-  color:#fff;
-}
-
-.social-links{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:30px;
-
-  flex-wrap:wrap;
-}
-
-.social-card{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-  padding:18px 34px;
-
-  border-radius:16px;
-
-  font-size:16px;
-
-  font-weight:600;
-
-  text-decoration:none;
-
-  color:#fff;
-
-  box-shadow:
-  0 18px 40px rgba(0,0,0,.15);
-
-  transition:.3s ease;
-}
-
-.social-card:hover{
+.discovery-card:hover {
 
   transform:
-  translateY(-8px);
+    translateY(-8px);
+
+  border-color:
+    rgba(45,58,47,.55);
+
 }
 
-.social-card img{
+.card-image {
 
-  width:22px;
+  position: absolute;
 
-  height:22px;
+  inset: 0;
 
-  object-fit:contain;
 }
 
-.social-card.instagram{
+.card-image img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: .72;
+
+  transition:
+    transform .8s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+.discovery-card:hover
+.card-image img {
+
+  transform: scale(1.06);
+
+}
+
+.card-overlay {
+
+  position: absolute;
+
+  inset: 0;
 
   background:
-  linear-gradient(
-  135deg,
-  #f58529,
-  #dd2a7b,
-  #8134af
-  );
+
+    linear-gradient(
+      90deg,
+      rgba(45,58,47,.96) 0%,
+      rgba(45,58,47,.77) 42%,
+      rgba(45,58,47,.15) 100%
+    ),
+
+    linear-gradient(
+      0deg,
+      rgba(45,58,47,.82),
+      transparent 60%
+    );
+
 }
 
-.social-card.linkedin{
+.card-content {
 
-  background:
-  linear-gradient(
-  135deg,
-  #0a66c2,
-  #004182
-  );
+  position: relative;
+
+  z-index: 3;
+
+  padding: 42px;
+
+  max-width: 390px;
+
 }
 
-/* ================= FOOTER ================= */
+.card-number {
 
-.footer{
+  color: var(--gold);
 
-  background:#0d0907;
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+}
+
+.card-content h3 {
+
+  margin-top: 45px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  color: var(--cream);
+
+  font-size:
+    clamp(43px, 5vw, 70px);
+
+  line-height: .83;
+
+  font-weight: 500;
+
+  letter-spacing: -1px;
+
+}
+
+.card-content p {
+
+  margin-top: 25px;
+
+  max-width: 280px;
 
   color:
-  rgba(255,255,255,.55);
+    rgba(211,198,182,.64);
 
-  text-align:center;
+  font-size: 12px;
 
-  padding:20px;
+  line-height: 1.7;
+
+}
+
+.card-link {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 28px;
+
+  color: var(--gold-light);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+}
+
+.card-link i {
+
+  font-size: 11px;
+
+  transition:
+    transform .3s ease;
+
+}
+
+.discovery-card:hover
+.card-link i {
+
+  transform:
+    translateX(5px);
+
+}
+
+
+/* =========================================================
+   NEW ARRIVALS
+========================================================= */
+
+.new-arrivals {
+
+  background:
+    var(--forest-950);
+
+}
+
+.arrival-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+
+  gap: 22px;
+
+  max-width: 1300px;
+
+}
+
+.arrival-card {
+
+  overflow: hidden;
+
+  background:
+    var(--forest-800);
+
+  border:
+    1px solid
+    rgba(45,58,47,.15);
+
+  transition:
+    transform .4s ease,
+    border-color .4s ease;
+
+}
+
+.arrival-card:hover {
+
+  transform:
+    translateY(-6px);
+
+  border-color:
+    rgba(45,58,47,.4);
+
+}
+
+.arrival-image {
+
+  position: relative;
+
+  height: 300px;
+
+  overflow: hidden;
+
+  background:
+    var(--forest-700);
+
+}
+
+.arrival-image img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform .7s ease;
+
+}
+
+.arrival-card:hover
+.arrival-image img {
+
+  transform: scale(1.05);
+
+}
+
+.arrival-badge {
+
+  position: absolute;
+
+  z-index: 2;
+
+  top: 16px;
+  left: 16px;
+
+  padding:
+    7px 11px;
+
+  color: var(--forest-950);
+
+  background:
+    var(--gold-light);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+}
+
+.arrival-content {
+
+  min-height: 215px;
+
+  padding: 28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+}
+
+.arrival-category,
+.restaurant-category {
+
+  color: var(--gold);
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+}
+
+.arrival-content h3 {
+
+  margin-top: 8px;
+
+  color: var(--cream);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 34px;
+
+  font-weight: 600;
+
+}
+
+.arrival-content p {
+
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.65;
+
+}
+
+.bottom-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 20px;
 
   border-top:
-  1px solid rgba(255,255,255,.05);
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-  .glass-navbar{
-
-    position:fixed;
-
-    width:100%;
-
-    top:0;
-
-    left:0;
-  }
-
-  .nav-container{
-
-    padding:14px 18px;
-  }
-
-  .nav-links{
-
-    gap:16px;
-  }
-
-  .hero{
-
-    min-height:78vh;
-
-    padding:110px 20px 45px;
-
-    background-position:center top;
-  }
-
-  .hero h2{
-
-    font-size:42px;
-
-    line-height:1.08;
-
-    letter-spacing:-2px;
-  }
-
-  .hero p{
-
-    font-size:15px;
-  }
-
-  .restaurant-title,
-  .contact-title,
-  .social-title,
-  .reviews-title{
-
-    font-size:34px;
-  }
-
-  .restaurant-grid{
-
-    grid-template-columns:1fr;
-
-    gap:22px;
-  }
-
-  .restaurant-card img{
-
-    height:220px;
-  }
-
-  .restaurant-info{
-
-    padding:20px;
-  }
-
-  .restaurant-info h3{
-
-    font-size:22px;
-  }
-
-  .contact-row{
-
-    flex-direction:column;
-  }
-
-  .social-links{
-
-    gap:18px;
-  }
+    1px solid
+    rgba(211,198,182,.07);
 
 }
 
-/* ================= NEW ARRIVALS LUXURY DARK ================= */
+.price {
 
-.new-arrivals{
+  color: var(--gold-light);
 
-  padding:90px 24px;
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 28px;
+
+  font-weight: 600;
+
+}
+
+.view-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--cream-soft);
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+}
+
+.view-btn:hover {
+
+  color: var(--gold-light);
+
+}
+
+
+/* =========================================================
+   RESTAURANTS
+========================================================= */
+
+.restaurants {
 
   background:
+    var(--forest-900);
 
-  linear-gradient(
-  to bottom,
-  #16110d,
-  #1b140f,
-  #120d09
-  );
-
-  position:relative;
-
-  overflow:hidden;
 }
 
-.new-arrivals::before{
+.restaurant-grid {
 
-  content:'';
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-
-  radial-gradient(
-  circle at top right,
-  rgba(255,122,0,.10),
-  transparent 35%
-  ),
-
-  radial-gradient(
-  circle at bottom left,
-  rgba(255,180,80,.08),
-  transparent 30%
-  );
-
-  pointer-events:none;
-}
-
-.section-title{
-
-  position:relative;
-
-  z-index:2;
-
-  text-align:center;
-
-  margin-bottom:55px;
-}
-
-.section-title h2{
-
-  font-size:48px;
-
-  font-weight:900;
-
-  color:#fff;
-
-  margin-bottom:12px;
-
-  letter-spacing:-1px;
-}
-
-.section-title p{
-
-  color:rgba(255,255,255,.65);
-
-  font-size:18px;
-}
-
-/* GRID */
-
-.arrival-grid{
-
-  position:relative;
-
-  z-index:2;
-
-  display:grid;
+  display: grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(320px,1fr));
+    repeat(3, minmax(0,1fr));
 
-  gap:30px;
+  gap: 22px;
 
-  max-width:1400px;
+  max-width: 1400px;
 
-  margin:auto;
 }
 
-/* CARD */
+.restaurant-card {
 
-.arrival-card{
+  overflow: hidden;
 
   background:
-  rgba(255,255,255,.97);
+    var(--forest-850);
 
-  border-radius:30px;
+  border:
+    1px solid
+    rgba(45,58,47,.13);
 
-  overflow:hidden;
+  transition:
+    transform .4s ease,
+    border-color .4s ease;
 
-  position:relative;
-
-  transition:.4s ease;
-
-  box-shadow:
-  0 18px 45px rgba(0,0,0,.25);
 }
 
-.arrival-card:hover{
+.restaurant-card:hover {
 
   transform:
-  translateY(-8px);
+    translateY(-7px);
+
+  border-color:
+    rgba(45,58,47,.4);
+
+}
+
+.restaurant-image {
+
+  height: 260px;
+
+  overflow: hidden;
+
+}
+
+.restaurant-image img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform .7s ease;
+
+}
+
+.restaurant-card:hover
+.restaurant-image img {
+
+  transform:
+    scale(1.06);
+
+}
+
+.restaurant-info {
+
+  min-height: 175px;
+
+  padding: 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+}
+
+.restaurant-info h3 {
+
+  margin-top: 7px;
+
+  color: var(--cream);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 30px;
+
+  font-weight: 600;
+
+}
+
+.restaurant-info p {
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+}
+
+.restaurant-meta {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  padding-top: 17px;
+
+  border-top:
+    1px solid
+    rgba(211,198,182,.07);
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+}
+
+.restaurant-meta span:first-child {
+
+  color: var(--gold-light);
+
+}
+
+.restaurant-meta i {
+
+  margin-right: 4px;
+
+}
+
+
+/* =========================================================
+   REVIEWS
+========================================================= */
+
+.reviews {
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(45,58,47,.045),
+      transparent 40%
+    ),
+    var(--forest-950);
+
+}
+
+.reviews .section-title {
+
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.review-slider {
+
+  overflow: hidden;
+
+  width: min(
+    420px,
+    90vw
+  );
+
+  margin: 0 auto;
+
+  touch-action: pan-y;
+
+}
+
+.review-track {
+
+  display: flex;
+
+  transition:
+    transform .5s
+    ease;
+
+}
+
+.review-slide {
+
+  min-width: 100%;
+
+  padding: 10px;
+
+}
+
+.review-slide img {
+
+  display: block;
+
+  width: 100%;
+
+  border:
+    1px solid
+    rgba(45,58,47,.2);
+
+  border-radius: 3px;
 
   box-shadow:
-  0 25px 60px rgba(0,0,0,.35);
+    0 25px 70px
+    rgba(0,0,0,.4);
+
 }
+
+.review-dots {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 20px;
+
+}
+
+.review-dots .dot {
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(211,198,182,.2);
+
+  cursor: pointer;
+
+  transition:
+    all .3s ease;
+
+}
+
+.review-dots .dot.active {
+
+  width: 22px;
+
+  border-radius: 10px;
+
+  background:
+    var(--gold);
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+
+  background:
+    var(--forest-900);
+
+}
+
+.contact-card {
+
+  max-width: 1100px;
+
+  padding: 35px;
+
+  border:
+    1px solid
+    rgba(45,58,47,.18);
+
+  background:
+    rgba(45,58,47,.55);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+.contact-row {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+
+}
+
+.contact-box {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 17px;
+
+  color: var(--cream);
+
+}
+
+.contact-icon {
+
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(45,58,47,.3);
+
+  color: var(--gold);
+
+  font-size: 12px;
+
+}
+
+.contact-box strong {
+
+  display: block;
+
+  color: var(--cream);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 22px;
+
+  font-weight: 600;
+
+}
+
+.contact-box p {
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.social-section {
+
+  text-align: center;
+
+}
+
+.social-section .section-title {
+
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.social-links {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+
+}
+
+.social-card {
+
+  min-width: 220px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    16px 20px;
+
+  border:
+    1px solid
+    rgba(45,58,47,.16);
+
+  background:
+    rgba(45,58,47,.45);
+
+  color: var(--cream);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  transition:
+    border-color .3s ease,
+    transform .3s ease;
+
+}
+
+.social-card img {
+
+  width: 24px;
+  height: 24px;
+
+  object-fit: contain;
+
+}
+
+.social-card i {
+
+  margin-left: auto;
+
+  color: var(--gold);
+
+  font-size: 9px;
+
+}
+
+.social-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(45,58,47,.5);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+  padding:
+    65px 20px 30px;
+
+  text-align: center;
+
+  background:
+    #2D3A2F;
+
+  border-top:
+    1px solid
+    rgba(45,58,47,.1);
+
+}
+
+.footer-logo {
+
+  color: var(--gold-light);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 42px;
+
+  font-weight: 600;
+
+}
+
+.footer p {
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 16px;
+
+  font-style: italic;
+
+}
+
+.footer-copy {
+
+  margin-top: 35px;
+
+  color:
+    rgba(211,198,182,.28);
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+}
+
+.footer-credit {
+
+  padding:
+    12px 20px;
+
+  text-align: center;
+
+  background:
+    #2D3A2F;
+
+  color:
+    rgba(211,198,182,.25);
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+}
+
+.footer-credit strong {
+
+  color:
+    rgba(45,58,47,.55);
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+.whatsapp-float {
+
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    #25D366;
+
+  color: #fff;
+
+  font-size: 27px;
+
+  z-index: 99999;
+
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.4);
+
+  transition:
+    transform .3s ease;
+
+}
+
+.whatsapp-float:hover {
+
+  transform:
+    scale(1.1);
+
+}
+
+
+/* =========================================================
+   CHALLENGE POPUP
+========================================================= */
+
+#challengePopup {
+
+  position: fixed;
+
+  inset: 0;
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background:
+    rgba(2,8,6,.9);
+
+  backdrop-filter:
+    blur(12px);
+
+  z-index: 999999;
+
+}
+
+.challenge-box {
+
+  width: min(
+    420px,
+    92vw
+  );
+
+  padding: 40px 30px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #2D3A2F,
+      #2D3A2F
+    );
+
+  border:
+    1px solid
+    rgba(45,58,47,.35);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.55);
+
+  animation:
+    popupShow .4s
+    cubic-bezier(.16,1,.3,1);
+
+}
+
+.popup-icon {
+
+  font-size: 40px;
+
+  margin-bottom: 10px;
+
+}
+
+.challenge-box h2 {
+
+  color: var(--gold-light);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 36px;
+
+  font-weight: 600;
+
+}
+
+.challenge-box p {
+
+  margin:
+    10px auto 25px;
+
+  max-width: 300px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+}
+
+.challenge-box button {
+
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 10px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  transition:
+    transform .3s ease;
+
+}
+
+.challenge-box button:first-of-type {
+
+  color: var(--forest-950);
+
+  background:
+    var(--gold-light);
+
+}
+
+.challenge-box button:first-of-type:hover {
+
+  transform:
+    translateY(-2px);
+
+}
+
+.later-btn {
+
+  color: var(--cream-soft);
+
+  background:
+    rgba(211,198,182,.05);
+
+  border:
+    1px solid
+    rgba(211,198,182,.08) !important;
+
+}
+
+@keyframes popupShow {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(.95);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+/* =========================================================
+   FEEDBACK POPUP
+========================================================= */
+
+.feedback-popup {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(2,8,6,.9);
+
+  backdrop-filter:
+    blur(10px);
+
+  z-index: 999999;
+
+}
+
+.feedback-box {
+
+  width: min(
+    420px,
+    92vw
+  );
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 30px;
+
+  background:
+    #2D3A2F;
+
+  color: var(--cream);
+
+  border:
+    1px solid
+    rgba(45,58,47,.3);
+
+}
+
+.feedback-box h2 {
+
+  color: var(--gold-light);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 30px;
+
+}
+
+.feedback-box > p {
+
+  margin:
+    8px 0 22px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+}
+
+.feedback-box h3 {
+
+  margin-top: 17px;
+
+  color: var(--cream-soft);
+
+  font-size: 10px;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+}
+
+.rating-stars {
+
+  margin-top: 8px;
+
+  color: var(--gold-light);
+
+  font-size: 31px;
+
+  letter-spacing: 4px;
+
+  cursor: pointer;
+
+}
+
+.comment-section {
+
+  display: none;
+
+  margin-top: 18px;
+
+}
+
+.comment-section textarea {
+
+  width: 100%;
+
+  height: 90px;
+
+  padding: 12px;
+
+  margin-top: 8px;
+
+  resize: none;
+
+  outline: none;
+
+  border:
+    1px solid
+    rgba(45,58,47,.15);
+
+  background:
+    rgba(0,0,0,.2);
+
+  color: var(--cream);
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  font-size: 11px;
+
+}
+
+.feedback-submit,
+.feedback-later {
+
+  width: 100%;
+
+  padding: 14px;
+
+  margin-top: 15px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+}
+
+.feedback-submit {
+
+  background:
+    var(--gold-light);
+
+  color:
+    var(--forest-950);
+
+}
+
+.feedback-later {
+
+  margin-top: 8px;
+
+  background:
+    rgba(211,198,182,.05);
+
+  color:
+    var(--cream-soft);
+
+}
+
+
+/* =========================================================
+   THANK YOU
+========================================================= */
+
+.thank-popup {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(2,8,6,.88);
+
+  backdrop-filter:
+    blur(10px);
+
+  z-index: 999999;
+
+}
+
+.thank-box {
+
+  width: min(
+    320px,
+    90vw
+  );
+
+  padding: 35px 25px;
+
+  text-align: center;
+
+  background:
+    #2D3A2F;
+
+  border:
+    1px solid
+    rgba(45,58,47,.35);
+
+}
+
+.thank-icon {
+
+  font-size: 38px;
+
+}
+
+.thank-box h2 {
+
+  margin-top: 10px;
+
+  color: var(--gold-light);
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 34px;
+
+}
+
+.thank-box p {
+
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+}
+
+.thank-box button {
+
+  margin-top: 20px;
+
+  padding:
+    11px 28px;
+
+  border: none;
+
+  background:
+    var(--gold-light);
+
+  color:
+    var(--forest-950);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+
+  width: 7px;
+
+}
+
+::-webkit-scrollbar-track {
+
+  background:
+    var(--forest-950);
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  background:
+    var(--gold-dark);
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    var(--gold);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+
+  .site-header {
+
+    height: 78px;
+
+    padding:
+      0 25px;
+
+  }
+
+
+  .nav-logo {
+
+    font-size: 27px;
+
+  }
+
+
+  .main-nav {
+
+    gap: 18px;
+
+  }
+
+
+  .main-nav a {
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+  }
+
+
+  .nav-right {
+
+    display: none;
+
+  }
+
+
+  .hero {
+
+    height: 850px;
+
+  }
+
+
+  .hero-content {
+
+    margin-left:
+      8%;
+
+  }
+
+
+  .hero-content h1 {
+
+    font-size:
+      clamp(62px, 10vw, 95px);
+
+  }
+
+
+  .hero-location {
+
+    right: 30px;
+
+  }
+
+
+  .discovery-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .arrival-grid,
+  .restaurant-grid {
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+
+  .contact-row {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+
+  body {
+
+    font-size: 14px;
+
+  }
+
+
+  .site-header {
+
+    position: absolute;
+
+    height: 70px;
+
+    padding:
+      0 20px;
+
+    background:
+      rgba(11, 33, 24, .42);
+
+    backdrop-filter:
+      blur(18px)
+      saturate(120%);
+
+    -webkit-backdrop-filter:
+      blur(18px)
+      saturate(120%);
+
+    border-bottom:
+      1px solid
+      rgba(211,198,182,.11);
+
+  }
+
+
+  .nav-logo {
+
+    font-size: 26px;
+
+  }
+
+
+  .main-nav {
+
+    gap: 13px;
+
+  }
+
+
+  .main-nav a {
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+  }
+
+
+  .main-nav a:nth-child(2) {
+
+    display: none;
+
+  }
+
+
+  .hero {
+
+    min-height: 760px;
+
+    height: 100svh;
+
+    max-height: none;
+
+    align-items: flex-end;
+
+  }
+
+
+  .hero-image img {
+
+    object-position:
+      65% center;
+
+    opacity: .58;
+
+  }
+
+
+  .hero-overlay {
+
+    background:
+
+      linear-gradient(
+        180deg,
+        rgba(45,58,47,.5) 0%,
+        rgba(45,58,47,.25) 25%,
+        rgba(45,58,47,.82) 55%,
+        rgba(45,58,47,1) 100%
+      );
+
+  }
+
+
+  .hero-content {
+
+    width: 90%;
+
+    margin:
+      0 auto;
+
+    padding:
+      0 0 105px;
+
+  }
+
+
+  .hero-eyebrow {
+
+    margin-bottom: 20px;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+  }
+
+
+  .hero-eyebrow span {
+
+    width: 18px;
+
+  }
+
+
+  .hero-content h1 {
+
+    font-size:
+      clamp(58px, 17vw, 82px);
+
+    line-height: .79;
+
+    letter-spacing:
+      -2.5px;
+
+  }
+
+
+  .hero-description {
+
+    max-width: 300px;
+
+    margin-top: 25px;
+
+    font-size: 16px;
+
+  }
+
+
+  .hero-actions {
+
+    margin-top: 25px;
+
+  }
+
+
+  .gold-button {
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+  }
+
+
+  .hero-location {
+
+    top: 88px;
+
+    right: 20px;
+
+  }
+
+
+  .hero-location strong {
+
+    font-size: 7px;
+
+  }
+
+
+  .hero-location small {
+
+    font-size: 7px;
+
+  }
+
+
+  .hero-bottom {
+
+    left: 5%;
+
+    bottom: 25px;
+
+  }
+
+
+  .hero-label {
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+  }
+
+
+  .hero-line {
+
+    width: 45px;
+
+  }
+
+
+  .discovery-section,
+  .new-arrivals,
+  .restaurants,
+  .reviews,
+  .contact-section,
+  .social-section {
+
+    padding:
+      80px 20px;
+
+  }
+
+
+  .section-heading,
+  .section-title {
+
+    margin-bottom: 35px;
+
+  }
+
+
+  .section-heading h2,
+  .section-title h2 {
+
+    font-size:
+      clamp(43px, 14vw, 65px);
+
+  }
+
+
+  .section-heading p,
+  .section-title p {
+
+    font-size: 11px;
+
+  }
+
+
+  .discovery-card {
+
+    min-height: 390px;
+
+  }
+
+
+  .card-content {
+
+    padding: 30px;
+
+  }
+
+
+  .card-content h3 {
+
+    margin-top: 40px;
+
+    font-size: 50px;
+
+  }
+
+
+  .card-content p {
+
+    max-width: 230px;
+
+    font-size: 11px;
+
+  }
+
+
+  .arrival-grid,
+  .restaurant-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .arrival-image {
+
+    height: 280px;
+
+  }
+
+
+  .restaurant-image {
+
+    height: 250px;
+
+  }
+
+
+  .restaurant-info h3 {
+
+    font-size: 28px;
+
+  }
+
+
+  .contact-card {
+
+    padding: 25px 20px;
+
+  }
+
+
+  .contact-box strong {
+
+    font-size: 19px;
+
+  }
+
+
+  .social-links {
+
+    flex-direction: column;
+
+  }
+
+
+  .social-card {
+
+    width: 100%;
+
+  }
+
+
+  .whatsapp-float {
+
+    width: 52px;
+    height: 52px;
+
+    right: 17px;
+    bottom: 17px;
+
+    font-size: 24px;
+
+  }
+
+
+  .intro-brand {
+
+    font-size:
+      clamp(55px, 18vw, 90px);
+
+  }
+
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+
+  .main-nav {
+
+    gap: 9px;
+
+  }
+
+
+  .main-nav a {
+
+    font-size: 6px;
+
+  }
+
+
+  .hero-content h1 {
+
+    font-size: 55px;
+
+  }
+
+
+  .hero-description {
+
+    font-size: 14px;
+
+  }
+
+
+  .card-content h3 {
+
+    font-size: 45px;
+
+  }
+
+}
+
+/* =========================================================
+   HERO — FINAL DESKTOP POLISH
+========================================================= */
+
+@media (min-width: 901px) {
+
+  .hero-content {
+    margin-left: clamp(10%, 15vw, 20%);
+  }
+
+  .hero-content h1 {
+    font-size: clamp(62px, 7vw, 108px);
+  }
+
+  .hero-image img {
+    opacity: .82;
+    filter:
+      saturate(.78)
+      contrast(1.05)
+      brightness(.78);
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(45,58,47,.96) 0%,
+        rgba(45,58,47,.82) 25%,
+        rgba(45,58,47,.48) 48%,
+        rgba(45,58,47,.12) 78%,
+        rgba(45,58,47,.42) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(45,58,47,.82) 0%,
+        transparent 42%,
+        rgba(45,58,47,.18) 100%
+      );
+  }
+
+}
+
+/* =========================================================
+   FOOD CATEGORY STRIP
+========================================================= */
+
+.food-categories {
+
+  padding:
+    65px
+    clamp(20px, 6vw, 90px)
+    75px;
+
+  background:
+    var(--forest-950);
+
+  border-top:
+    1px solid
+    rgba(45,58,47,.06);
+
+  border-bottom:
+    1px solid
+    rgba(45,58,47,.08);
+
+}
+
+.categories-heading {
+
+  margin-bottom: 35px;
+
+}
+
+.categories-heading h2 {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(38px, 4vw, 58px);
+
+  font-weight: 500;
+
+  line-height: .95;
+
+  letter-spacing: -1.5px;
+
+  color:
+    var(--cream);
+
+}
+
+.categories-heading h2 em {
+
+  color:
+    var(--gold-light);
+
+  font-style: italic;
+
+}
+
+
+/* HORIZONTAL ROW */
+
+.categories-scroll {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: clamp(28px, 3vw, 48px);
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  padding:
+    5px 5px 18px;
+
+  scrollbar-width: none;
+
+  scroll-behavior: smooth;
+
+}
+
+.categories-scroll::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+
+/* CATEGORY */
+
+.category-item {
+
+  flex:
+    0 0 auto;
+
+  width:
+    clamp(95px, 8vw, 125px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 13px;
+
+  text-align: center;
+
+}
+
 
 /* IMAGE */
 
-.arrival-card img{
+.category-image {
 
-  width:100%;
+  width:
+    clamp(88px, 7vw, 112px);
 
-  height:260px;
+  height:
+    clamp(88px, 7vw, 112px);
 
-  object-fit:cover;
+  border-radius: 50%;
 
-  object-position:center center;
+  overflow: hidden;
 
-  display:block;
-}
+  display: flex;
 
-/* CONTENT */
+  align-items: center;
 
-.arrival-content{
-
-  padding:24px;
-}
-
-.arrival-content h3{
-
-  font-size:28px;
-
-  line-height:1.2;
-
-  margin-bottom:14px;
-
-  color:#111;
-
-  font-weight:900;
-}
-
-.arrival-content p{
-
-  color:#666;
-
-  font-size:16px;
-
-  line-height:1.8;
-
-  margin-bottom:26px;
-}
-
-/* PRICE ROW */
-
-.bottom-row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-}
-
-.price{
-
-  font-size:36px;
-
-  font-weight:900;
-
-  color:#3e9500;
-}
-
-/* BUTTON */
-
-.bottom-row button{
-
-  border:none;
+  justify-content: center;
 
   background:
-  linear-gradient(
-  135deg,
-  #ff9800,
-  #ff6f00
-  );
+    radial-gradient(
+      circle,
+      #19372c,
+      #0c211a
+    );
 
-  color:#fff;
-
-  padding:16px 30px;
-
-  border-radius:18px;
-
-  font-size:22px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.3s ease;
+  border:
+    1px solid
+    rgba(45,58,47,.20);
 
   box-shadow:
-  0 10px 25px rgba(255,122,0,.28);
+    0 10px 35px
+    rgba(0,0,0,.28);
+
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
+
 }
 
-.bottom-row button:hover{
+.category-image img {
 
-  transform:scale(1.06);
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform .45s ease;
+
 }
 
-/* BADGES */
 
-.arrival-badge{
+/* HOVER */
 
-  position:absolute;
+.category-item:hover
+.category-image {
 
-  top:18px;
+  transform:
+    translateY(-6px);
 
-  left:18px;
-
-  z-index:5;
-
-  padding:10px 20px;
-
-  border-radius:999px;
-
-  color:#fff;
-
-  font-size:14px;
-
-  font-weight:700;
+  border-color:
+    rgba(45,58,47,.65);
 
   box-shadow:
-  0 10px 20px rgba(0,0,0,.18);
+    0 15px 40px
+    rgba(45,58,47,.10);
+
 }
 
-.green-badge{
+.category-item:hover
+.category-image img {
 
-  background:#3e9500;
+  transform:
+    scale(1.08);
+
 }
 
-.orange-badge{
 
-  background:#ff9800;
+/* LABEL */
+
+.category-item span {
+
+  color:
+    rgba(211,198,182,.72);
+
+  font-size:
+    11px;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    .2px;
+
+  white-space:
+    nowrap;
+
+  transition:
+    color .3s ease;
+
 }
+
+.category-item:hover span {
+
+  color:
+    var(--gold-light);
+
+}
+
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media (max-width: 600px) {
 
-  .new-arrivals{
+  .food-categories {
 
-    padding:70px 18px;
+    padding:
+      55px
+      0
+      55px;
+
   }
 
-  .section-title h2{
+  .categories-heading {
 
-    font-size:36px;
+    padding:
+      0 20px;
+
+    margin-bottom:
+      28px;
+
   }
 
-  .section-title p{
+  .categories-heading h2 {
 
-    font-size:15px;
+    font-size:
+      42px;
+
   }
 
-  .arrival-grid{
+  .categories-scroll {
 
-    gap:22px;
+    gap:
+      24px;
+
+    padding:
+      5px 20px 15px;
+
   }
 
-  .arrival-card img{
+  .category-item {
 
-    height:240px;
+    width:
+      82px;
+
   }
 
-  .arrival-content{
+  .category-image {
 
-    padding:20px;
+    width:
+      76px;
+
+    height:
+      76px;
+
   }
 
-  .arrival-content h3{
+  .category-item span {
 
-    font-size:24px;
-  }
+    font-size:
+      10px;
 
-  .arrival-content p{
-
-    font-size:15px;
-  }
-
-  .bottom-row button{
-
-    padding:14px 24px;
-
-    font-size:20px;
   }
 
 }
 
-.saved-location-bar{
-  width:92%;
-  max-width:1200px;
-  margin:18px auto 0;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(18px);
-  border-radius:22px;
-  padding:14px 18px;
-  display:none;
-  position:relative;
-  z-index:5;
+/* ================= CATEGORY ROW ================= */
+
+.categories {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 28px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 5px 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
-.saved-location-left{
-  display:flex;
-  align-items:flex-start;
-  gap:14px;
+.categories::-webkit-scrollbar {
+    display: none;
 }
 
-.location-icon{
-  font-size:26px;
-  line-height:1;
+.category-item {
+    flex: 0 0 125px !important;
+    width: 125px !important;
+    min-width: 125px !important;
+    text-decoration: none;
 }
 
-.saved-city{
-  font-size:24px;
-  font-weight:800;
-  color:#fff;
-  line-height:1;
+.category-image {
+    width: 115px;
+    height: 115px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.saved-address-home{
-  margin-top:6px;
-  color:#d6d6d6;
-  font-size:14px;
-  line-height:1.5;
-  word-break:break-word;
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-/* FIX LINK COLORS */
-
-.arrival-card a,
-.arrival-card a:visited,
-.arrival-card a:hover{
-
-  text-decoration:none !important;
-
-  color:inherit !important;
+.category-item span {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* FIX TITLE */
+/* =========================================================
+   KHAZAANA — FINAL CUPS N CRUMBS SINGLE-COLOR THEME
+   ONE FOREST GREEN + WARM WHITE
+   Layout/functionality intentionally preserved.
+========================================================= */
 
-.arrival-content h3{
+:root {
+  --forest-950: #2D3A2F !important;
+  --forest-900: #2D3A2F !important;
+  --forest-850: #2D3A2F !important;
+  --forest-800: #2D3A2F !important;
+  --forest-700: #2D3A2F !important;
 
-  color:#111 !important;
+  --gold: #2D3A2F !important;
+  --gold-light: #2D3A2F !important;
+  --gold-soft: #2D3A2F !important;
+  --gold-dark: #2D3A2F !important;
 
-  text-decoration:none !important;
+  --cream: #2D3A2F !important;
+  --cream-soft: #2D3A2F !important;
+  --muted: rgba(211,198,182,.62) !important;
+
+  --white: #2D3A2F !important;
+
+  --border: rgba(45,58,47,.22) !important;
+  --gold-glow: rgba(45,58,47,.14) !important;
+
+  --black: #2D3A2F !important;
 }
 
-/* FIX DESCRIPTION */
 
-.arrival-content p{
+/* =========================
+   ONE BACKGROUND EVERYWHERE
+========================= */
 
-  color:#666 !important;
-
-  text-decoration:none !important;
+html,
+body,
+#intro,
+.site-header,
+.hero,
+.food-categories,
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section {
+  background: #123B27 !important;
+  color: #F7F1E3 !important;
 }
 
-/* FIX PRICE */
 
-.price{
+/* =========================
+   NAVBAR
+========================= */
 
-  color:#3e9500 !important;
-
-  text-decoration:none !important;
+.site-header {
+  background: #123B27 !important;
+  border-bottom: 1px solid rgba(247,241,227,.14) !important;
 }
 
-/* VIEW BUTTON */
-
-.view-btn{
-
-  text-decoration:none !important;
-
-  color:#ff8c1a !important;
-
-  font-weight:700;
+.nav-logo,
+.site-header .brand {
+  color: #F7F1E3 !important;
+  text-shadow: none !important;
 }
 
-/* VIEW BUTTON FIX */
+.main-nav a {
+  color: rgba(247,241,227,.72) !important;
+}
 
-.view-btn{
+.main-nav a:hover,
+.main-nav a.active {
+  color: #F7F1E3 !important;
+}
 
-  display:inline-flex;
+.main-nav a::after {
+  background: #F7F1E3 !important;
+}
 
-  align-items:center;
 
-  justify-content:center;
+/* =========================
+   LOCATION
+========================= */
 
-  padding:12px 22px;
+.saved-location-bar {
+  background: rgba(247,241,227,.05) !important;
+  border-color: rgba(247,241,227,.16) !important;
+}
 
-  border-radius:14px;
+.location-symbol {
+  border-color: rgba(247,241,227,.30) !important;
+  color: #F7F1E3 !important;
+}
 
+.location-city,
+.hero-location strong {
+  color: #F7F1E3 !important;
+}
+
+.saved-address-home,
+.hero-location small {
+  color: rgba(247,241,227,.58) !important;
+}
+
+
+/* =========================
+   HERO — IMAGE MUST STAY VISIBLE
+========================= */
+
+.hero {
+  background: #123B27 !important;
+}
+
+.hero-image {
+  opacity: 1 !important;
+}
+
+.hero-image img {
+  opacity: .82 !important;
+  filter:
+    saturate(.82)
+    contrast(1.03)
+    brightness(.88) !important;
+}
+
+/* Same green overlay, but NOT an opaque dark wash */
+.hero-overlay {
   background:
-  linear-gradient(
-  135deg,
-  #ff9800,
-  #ff6f00
-  );
+    linear-gradient(
+      90deg,
+      rgba(18,59,39,.64) 0%,
+      rgba(18,59,39,.42) 32%,
+      rgba(18,59,39,.20) 65%,
+      rgba(18,59,39,.34) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(18,59,39,.48) 0%,
+      rgba(18,59,39,.10) 45%,
+      rgba(18,59,39,.22) 100%
+    ) !important;
+}
 
-  color:#fff !important;
+.hero-glow {
+  background:
+    radial-gradient(
+      circle,
+      rgba(247,241,227,.08),
+      transparent 65%
+    ) !important;
+}
 
-  font-size:16px;
+.hero-eyebrow,
+.hero-eyebrow span,
+.hero-number,
+.hero-label {
+  color: #F7F1E3 !important;
+}
 
-  font-weight:700;
+.hero-eyebrow span {
+  background: #F7F1E3 !important;
+}
 
-  text-decoration:none !important;
+.hero-content h1,
+.hero-content h1 em {
+  color: #F7F1E3 !important;
+}
+
+.hero-description {
+  color: rgba(247,241,227,.72) !important;
+}
+
+.gold-button {
+  color: #F7F1E3 !important;
+  border-bottom-color: rgba(247,241,227,.55) !important;
+}
+
+.gold-button:hover,
+.track-link:hover {
+  color: #F7F1E3 !important;
+}
+
+.track-link {
+  color: rgba(247,241,227,.72) !important;
+}
+
+.location-dot {
+  border-color: rgba(247,241,227,.45) !important;
+}
+
+.location-dot::after {
+  background: #F7F1E3 !important;
+  box-shadow: 0 0 12px rgba(247,241,227,.55) !important;
+}
+
+.hero-line {
+  background: rgba(247,241,227,.45) !important;
+}
+
+
+/* =========================
+   CRAVING
+========================= */
+
+.food-categories {
+  background: #123B27 !important;
+  border-top-color: rgba(247,241,227,.10) !important;
+  border-bottom-color: rgba(247,241,227,.10) !important;
+}
+
+.categories-heading h2,
+.categories-heading h2 em,
+.section-eyebrow {
+  color: #F7F1E3 !important;
+}
+
+.category-item,
+.category-item span {
+  color: #F7F1E3 !important;
+}
+
+.category-image {
+  border-color: rgba(247,241,227,.30) !important;
+}
+
+
+/* =========================
+   ALL CONTENT SECTIONS
+========================= */
+
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section {
+  background: #123B27 !important;
+  color: #F7F1E3 !important;
+}
+
+
+/* =========================
+   NEW ARRIVALS
+========================= */
+
+.new-arrivals .section-label,
+.new-arrivals .eyebrow,
+.new-arrivals h1,
+.new-arrivals h2,
+.new-arrivals h3,
+.new-arrivals em {
+  color: #F7F1E3 !important;
+}
+
+.new-arrivals p {
+  color: rgba(247,241,227,.68) !important;
+}
+
+
+/* =========================
+   CARDS
+   Still green — only slightly
+   transparent so the page feels
+   premium without changing color.
+========================= */
+
+.arrival-card,
+.restaurant-card,
+.card,
+.contact-card,
+.contact-box,
+.social-card {
+  background: rgba(247,241,227,.045) !important;
+  border-color: rgba(247,241,227,.14) !important;
+  color: #F7F1E3 !important;
+}
+
+.arrival-card h3,
+.arrival-card .price,
+.restaurant-info h3,
+.contact-box strong {
+  color: #F7F1E3 !important;
+}
+
+.arrival-card p,
+.restaurant-info p,
+.restaurant-meta,
+.contact-box p {
+  color: rgba(247,241,227,.62) !important;
+}
+
+.restaurant-meta {
+  border-top-color: rgba(247,241,227,.10) !important;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.view-btn,
+.social-card:hover {
+  background: #F7F1E3 !important;
+  color: #123B27 !important;
+}
+
+.view-btn:hover {
+  background: #FFF9EF !important;
+  color: #123B27 !important;
+}
+
+
+/* =========================
+   REVIEWS
+========================= */
+
+.reviews-title,
+.reviews h2,
+.reviews h3 {
+  color: #F7F1E3 !important;
+}
+
+.review-dots .dot {
+  background: rgba(247,241,227,.28) !important;
+}
+
+.review-dots .dot.active {
+  background: #F7F1E3 !important;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-title,
+.contact-section h2,
+.contact-section h3 {
+  color: #F7F1E3 !important;
+}
+
+.contact-card {
+  box-shadow: 0 18px 45px rgba(0,0,0,.12) !important;
+}
+
+
+/* =========================
+   SOCIAL
+========================= */
+
+.social-title {
+  color: #F7F1E3 !important;
+}
+
+.social-card {
+  color: #F7F1E3 !important;
+}
+
+.social-card:hover {
+  color: #123B27 !important;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer,
+.footer-credit {
+  background: #123B27 !important;
+  color: rgba(247,241,227,.58) !important;
+  border-top-color: rgba(247,241,227,.10) !important;
+}
+
+.footer-credit strong {
+  color: #F7F1E3 !important;
+}
+
+
+/* =========================
+   POPUPS / MODALS
+========================= */
+
+.popup-content,
+.thank-box,
+.challenge-box,
+.maintenance-box {
+  background: #123B27 !important;
+  color: #F7F1E3 !important;
+  border-color: rgba(247,241,227,.16) !important;
+}
+
+.popup-content h1,
+.popup-content h2,
+.popup-content h3,
+.thank-box h1,
+.thank-box h2,
+.challenge-box h1,
+.challenge-box h2,
+.maintenance-box h1,
+.maintenance-box h2 {
+  color: #F7F1E3 !important;
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp-float {
+  border: 2px solid #F7F1E3 !important;
+}
+
+
+/* =========================
+   MOBILE — SAME THEME
+========================= */
+
+@media (max-width: 768px) {
+
+  html,
+  body,
+  .site-header,
+  .hero,
+  .food-categories,
+  .discovery-section,
+  .new-arrivals,
+  .restaurants,
+  .reviews,
+  .contact-section,
+  .social-section,
+  .footer,
+  .footer-credit {
+    background: #123B27 !important;
+  }
+
+  .hero-image img {
+    opacity: .82 !important;
+    filter:
+      saturate(.82)
+      contrast(1.03)
+      brightness(.88) !important;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(18,59,39,.34) 0%,
+        rgba(18,59,39,.38) 50%,
+        rgba(18,59,39,.54) 100%
+      ) !important;
+  }
+
+  .hero-content h1,
+  .hero-content h1 em {
+    color: #F7F1E3 !important;
+  }
+
+  .categories-heading h2,
+  .categories-heading h2 em {
+    color: #F7F1E3 !important;
+  }
+}
+
+
+/* =========================================================
+   KHAZAANA — FINAL PREMIUM DARK GREEN × WARM WHITE
+   ONE GREEN ONLY. NO GOLD. NO ORANGE. NO BEIGE BLOCKS.
+========================================================= */
+
+:root {
+  --premium-green: #123B27;
+  --premium-white: #F7F1E3;
+  --premium-white-soft: rgba(247,241,227,.72);
+  --premium-white-muted: rgba(247,241,227,.58);
+  --premium-border: rgba(247,241,227,.14);
+}
+
+/* ONE COLOR ACROSS THE ENTIRE PAGE */
+html,
+body,
+#intro,
+.site-header,
+.hero,
+.food-categories,
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section,
+.footer,
+.footer-credit {
+  background: var(--premium-green) !important;
+  color: var(--premium-white) !important;
+}
+
+/* NAVBAR */
+.site-header {
+  background: var(--premium-green) !important;
+  border-bottom: 1px solid var(--premium-border) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,.16) !important;
+}
+
+.site-header .brand,
+.nav-logo {
+  color: var(--premium-white) !important;
+  text-shadow: none !important;
+}
+
+.main-nav a {
+  color: var(--premium-white-muted) !important;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--premium-white) !important;
+}
+
+.main-nav a::after {
+  background: var(--premium-white) !important;
+}
+
+/* HERO — KEEP FOOD PHOTO CLEAR */
+.hero {
+  background: var(--premium-green) !important;
+}
+
+.hero-image,
+.hero-image img {
+  opacity: 1 !important;
+}
+
+.hero-image img {
+  filter: saturate(.78) contrast(1.04) brightness(.86) !important;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18,59,39,.58) 0%,
+      rgba(18,59,39,.38) 42%,
+      rgba(18,59,39,.22) 100%
+    ) !important;
+}
+
+.hero-content h1,
+.hero-content h1 em,
+.hero-eyebrow,
+.hero-number,
+.hero-label,
+.hero-location strong {
+  color: var(--premium-white) !important;
+}
+
+.hero-description,
+.hero-location small,
+.track-link {
+  color: var(--premium-white-soft) !important;
+}
+
+.hero-eyebrow span,
+.hero-line {
+  background: var(--premium-white) !important;
+}
+
+.hero-link,
+.track-link:hover {
+  background: var(--premium-white) !important;
+  color: var(--premium-green) !important;
+}
+
+/* CRAVING */
+.food-categories {
+  background: var(--premium-green) !important;
+  border-top: 1px solid var(--premium-border) !important;
+  border-bottom: 1px solid var(--premium-border) !important;
+}
+
+.food-categories h1,
+.food-categories h2,
+.food-categories h2 em,
+.food-categories .section-label,
+.food-categories .eyebrow,
+.category-item,
+.category-item span {
+  color: var(--premium-white) !important;
+}
+
+.category-image {
+  border-color: rgba(247,241,227,.28) !important;
+}
+
+/* ALL SECTIONS */
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section {
+  background: var(--premium-green) !important;
+}
+
+/* HEADINGS */
+.new-arrivals h1,
+.new-arrivals h2,
+.new-arrivals h3,
+.new-arrivals .section-title,
+.new-arrivals .section-label,
+.new-arrivals .eyebrow,
+.restaurant-title,
+.reviews-title,
+.contact-title,
+.social-title {
+  color: var(--premium-white) !important;
+}
+
+.new-arrivals p,
+.restaurant-info p,
+.restaurant-meta,
+.contact-box p {
+  color: var(--premium-white-muted) !important;
+}
+
+/* PREMIUM GLASS-LIKE CARDS — SAME GREEN FAMILY */
+.arrival-card,
+.restaurant-card,
+.card,
+.contact-card {
+  background: rgba(247,241,227,.045) !important;
+  border: 1px solid var(--premium-border) !important;
+  color: var(--premium-white) !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.18) !important;
+}
+
+.arrival-card:hover,
+.restaurant-card:hover,
+.card:hover {
+  background: rgba(247,241,227,.065) !important;
+  border-color: rgba(247,241,227,.22) !important;
+}
+
+.arrival-card h3,
+.arrival-card .price,
+.restaurant-info h3,
+.contact-box strong {
+  color: var(--premium-white) !important;
+}
+
+.restaurant-meta {
+  border-top-color: var(--premium-border) !important;
+}
+
+/* BUTTONS */
+.view-btn,
+.hero-link {
+  background: var(--premium-white) !important;
+  color: var(--premium-green) !important;
+  border: 1px solid var(--premium-white) !important;
+}
+
+.view-btn:hover,
+.hero-link:hover {
+  background: #fffaf0 !important;
+  color: var(--premium-green) !important;
+}
+
+/* REVIEWS */
+.review-dots .dot {
+  background: rgba(247,241,227,.25) !important;
+}
+
+.review-dots .dot.active {
+  background: var(--premium-white) !important;
+}
+
+/* CONTACT */
+.contact-box {
+  background: rgba(247,241,227,.035) !important;
+  border: 1px solid rgba(247,241,227,.10) !important;
+}
+
+/* SOCIAL */
+.social-card {
+  background: rgba(247,241,227,.045) !important;
+  border: 1px solid var(--premium-border) !important;
+  color: var(--premium-white) !important;
+}
+
+.social-card:hover {
+  background: var(--premium-white) !important;
+  color: var(--premium-green) !important;
+}
+
+/* FOOTER */
+.footer,
+.footer-credit {
+  background: var(--premium-green) !important;
+  color: var(--premium-white-muted) !important;
+  border-top: 1px solid var(--premium-border) !important;
+}
+
+.footer-credit strong {
+  color: var(--premium-white) !important;
+}
+
+/* LOCATION */
+.saved-location-bar {
+  background: rgba(247,241,227,.04) !important;
+  border-color: var(--premium-border) !important;
+}
+
+.saved-city,
+.location-icon {
+  color: var(--premium-white) !important;
+}
+
+.saved-address-home {
+  color: var(--premium-white-muted) !important;
+}
+
+/* MOBILE: SAME SINGLE GREEN */
+@media (max-width: 768px) {
+  html,
+  body,
+  .site-header,
+  .hero,
+  .food-categories,
+  .discovery-section,
+  .new-arrivals,
+  .restaurants,
+  .reviews,
+  .contact-section,
+  .social-section,
+  .footer,
+  .footer-credit {
+    background: var(--premium-green) !important;
+  }
+
+  .hero-image img {
+    opacity: 1 !important;
+    filter: saturate(.78) contrast(1.04) brightness(.86) !important;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(18,59,39,.30) 0%,
+        rgba(18,59,39,.38) 55%,
+        rgba(18,59,39,.54) 100%
+      ) !important;
+  }
+}
+
+
+/* =========================================================
+   KHAZAANA — LUXURY DARK GREEN × IVORY × CHAMPAGNE
+   Inspired by the supplied luxury color reference.
+   No orange. No bright yellow. No cold white.
+========================================================= */
+
+:root {
+  --lux-green: #2D3A2F;
+  --lux-green-2: #102C20;
+  --lux-ivory: #2D3A2F;
+  --lux-ivory-soft: #2D3A2F;
+  --lux-champagne: #2D3A2F;
+  --lux-champagne-soft: rgba(45,58,47,.35);
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+html,
+body {
+  background: var(--lux-green) !important;
+  color: var(--lux-ivory) !important;
+}
+
+::selection {
+  background: var(--lux-champagne) !important;
+  color: var(--lux-green) !important;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.site-header {
+  background: var(--lux-green) !important;
+  background-image: none !important;
+  border-bottom: 1px solid rgba(45,58,47,.20) !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,.24) !important;
+}
+
+.site-header .brand,
+.nav-logo {
+  color: var(--lux-ivory) !important;
+  text-shadow: none !important;
+}
+
+.main-nav a {
+  color: rgba(211,198,182,.66) !important;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--lux-ivory) !important;
+}
+
+.main-nav a::after {
+  background: var(--lux-champagne) !important;
+}
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.saved-location-bar {
+  background: rgba(211,198,182,.035) !important;
+  border: 1px solid rgba(45,58,47,.22) !important;
+  box-shadow: inset 0 1px 0 rgba(211,198,182,.04) !important;
+}
+
+.saved-city,
+.location-icon,
+.hero-location strong {
+  color: var(--lux-ivory) !important;
+}
+
+.saved-address-home,
+.hero-location small {
+  color: rgba(211,198,182,.58) !important;
+}
+
+.location-symbol {
+  border-color: rgba(45,58,47,.55) !important;
+  color: var(--lux-champagne) !important;
+}
+
+/* =========================================================
+   HERO — CINEMATIC LUXURY
+========================================================= */
+
+.hero {
+  background: var(--lux-green) !important;
+}
+
+.hero-image {
+  background: var(--lux-green) !important;
+}
+
+.hero-image img {
+  opacity: .82 !important;
+  filter:
+    saturate(.70)
+    contrast(1.08)
+    brightness(.72) !important;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(11,33,24,.72) 0%,
+      rgba(11,33,24,.48) 45%,
+      rgba(11,33,24,.25) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(11,33,24,.62) 0%,
+      rgba(11,33,24,.12) 52%,
+      rgba(11,33,24,.30) 100%
+    ) !important;
+}
+
+.hero-content h1,
+.hero-content h1 em {
+  color: var(--lux-ivory) !important;
+}
+
+.hero-eyebrow,
+.hero-number,
+.hero-label {
+  color: var(--lux-champagne) !important;
+}
+
+.hero-eyebrow span,
+.hero-line {
+  background: var(--lux-champagne) !important;
+}
+
+.hero-description {
+  color: rgba(211,198,182,.68) !important;
+}
+
+.hero-link {
+  background: var(--lux-ivory) !important;
+  color: var(--lux-green) !important;
+  border: 1px solid var(--lux-ivory) !important;
+}
+
+.hero-link:hover {
+  background: var(--lux-champagne) !important;
+  border-color: var(--lux-champagne) !important;
+}
+
+.location-dot {
+  border-color: rgba(45,58,47,.55) !important;
+}
+
+.location-dot::after {
+  background: var(--lux-champagne) !important;
+  box-shadow: 0 0 16px rgba(45,58,47,.38) !important;
+}
+
+/* =========================================================
+   CRAVING — SAME LUXURY GREEN
+========================================================= */
+
+.food-categories {
+  background: var(--lux-green) !important;
+  color: var(--lux-ivory) !important;
+  border-top: 1px solid rgba(45,58,47,.12) !important;
+  border-bottom: 1px solid rgba(45,58,47,.12) !important;
+}
+
+.food-categories h1,
+.food-categories h2,
+.food-categories h2 em,
+.food-categories .section-label,
+.food-categories .eyebrow {
+  color: var(--lux-ivory) !important;
+}
+
+.category-item,
+.category-item span {
+  color: rgba(211,198,182,.76) !important;
+}
+
+.category-item:hover span {
+  color: var(--lux-ivory) !important;
+}
+
+.category-image {
+  border-color: rgba(45,58,47,.35) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.22) !important;
+}
+
+/* =========================================================
+   NEW ARRIVALS
+========================================================= */
+
+.new-arrivals,
+.discovery-section,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section {
+  background: var(--lux-green) !important;
+  color: var(--lux-ivory) !important;
+}
+
+.new-arrivals h1,
+.new-arrivals h2,
+.new-arrivals h3,
+.new-arrivals .section-title,
+.new-arrivals .section-label,
+.new-arrivals .eyebrow,
+.restaurant-title,
+.reviews-title,
+.contact-title,
+.social-title {
+  color: var(--lux-ivory) !important;
+}
+
+.new-arrivals .section-label,
+.new-arrivals .eyebrow {
+  color: var(--lux-champagne) !important;
+}
+
+.new-arrivals p,
+.restaurant-info p,
+.restaurant-meta,
+.contact-box p {
+  color: rgba(211,198,182,.58) !important;
+}
+
+/* =========================================================
+   PREMIUM CARDS
+========================================================= */
+
+.arrival-card,
+.restaurant-card,
+.card,
+.contact-card,
+.contact-box,
+.social-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(211,198,182,.055),
+      rgba(211,198,182,.025)
+    ) !important;
+
+  border: 1px solid rgba(45,58,47,.20) !important;
 
   box-shadow:
-  0 10px 25px rgba(255,122,0,.28);
+    0 20px 55px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(211,198,182,.035) !important;
 
-  transition:.3s ease;
+  color: var(--lux-ivory) !important;
 }
 
-.view-btn:hover{
+.arrival-card:hover,
+.restaurant-card:hover,
+.card:hover,
+.social-card:hover {
+  border-color: rgba(45,58,47,.42) !important;
+  transform: translateY(-4px);
+}
 
-  transform:scale(1.05);
+.arrival-card h3,
+.arrival-card .price,
+.restaurant-info h3,
+.contact-box strong {
+  color: var(--lux-ivory) !important;
+}
+
+.restaurant-meta {
+  border-top: 1px solid rgba(45,58,47,.13) !important;
+}
+
+/* =========================================================
+   BUTTONS — IVORY + CHAMPAGNE
+========================================================= */
+
+.view-btn {
+  background: transparent !important;
+  color: var(--lux-ivory) !important;
+  border: 1px solid rgba(45,58,47,.55) !important;
+}
+
+.view-btn:hover {
+  background: var(--lux-champagne) !important;
+  color: var(--lux-green) !important;
+  border-color: var(--lux-champagne) !important;
+}
+
+/* =========================================================
+   REVIEWS
+========================================================= */
+
+.review-slider {
+  background: rgba(211,198,182,.035) !important;
+  border: 1px solid rgba(45,58,47,.17) !important;
+}
+
+.review-dots .dot {
+  background: rgba(45,58,47,.25) !important;
+}
+
+.review-dots .dot.active {
+  background: var(--lux-champagne) !important;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-box {
+  background: rgba(211,198,182,.025) !important;
+}
+
+.contact-box strong {
+  color: var(--lux-ivory) !important;
+}
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.social-card {
+  color: var(--lux-ivory) !important;
+}
+
+.social-card:hover {
+  background: var(--lux-ivory) !important;
+  color: var(--lux-green) !important;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer,
+.footer-credit,
+footer {
+  background: var(--lux-green) !important;
+  color: rgba(211,198,182,.52) !important;
+  border-top: 1px solid rgba(45,58,47,.14) !important;
+}
+
+.footer-credit strong {
+  color: var(--lux-ivory) !important;
+}
+
+/* =========================================================
+   WHATSAPP / FLOATING ACTION
+========================================================= */
+
+.whatsapp-float {
+  border: 2px solid var(--lux-ivory) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.30) !important;
+}
+
+/* =========================================================
+   MOBILE — KEEP THE SAME LUXURY PALETTE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  html,
+  body,
+  .site-header,
+  .hero,
+  .food-categories,
+  .discovery-section,
+  .new-arrivals,
+  .restaurants,
+  .reviews,
+  .contact-section,
+  .social-section,
+  .footer,
+  footer {
+    background: var(--lux-green) !important;
+  }
+
+  .hero-image img {
+    opacity: .78 !important;
+    filter:
+      saturate(.68)
+      contrast(1.06)
+      brightness(.72) !important;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(11,33,24,.28) 0%,
+        rgba(11,33,24,.40) 50%,
+        rgba(11,33,24,.68) 100%
+      ) !important;
+  }
+
+  .hero-content h1,
+  .hero-content h1 em {
+    color: var(--lux-ivory) !important;
+  }
+
+  .hero-eyebrow {
+    color: var(--lux-champagne) !important;
+  }
+}
+
+
+/* =========================================================
+   KHAZAANA — COFFEE × WHEAT
+   EXACT TWO-COLOR BRAND THEME
+   Coffee : #2D3A2F
+   Wheat  : #D3C6B6
+   ========================================================= */
+
+:root {
+  --coffee: #2D3A2F !important;
+  --wheat: #D3C6B6 !important;
+
+  --forest-950: #2D3A2F !important;
+  --forest-900: #2D3A2F !important;
+  --forest-850: #2D3A2F !important;
+  --forest-800: #2D3A2F !important;
+  --forest-700: #2D3A2F !important;
+
+  --gold: #D3C6B6 !important;
+  --gold-light: #D3C6B6 !important;
+  --gold-soft: #D3C6B6 !important;
+  --gold-dark: #D3C6B6 !important;
+
+  --cream: #D3C6B6 !important;
+  --cream-soft: #D3C6B6 !important;
+  --white: #D3C6B6 !important;
+  --black: #2D3A2F !important;
+
+  --muted: rgba(211,198,182,.68) !important;
+  --border: rgba(211,198,182,.20) !important;
+  --gold-glow: rgba(211,198,182,.12) !important;
+}
+
+/* FOUNDATION */
+body {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+.hero,
+.discovery-section,
+.new-arrivals,
+.restaurants,
+.reviews,
+.contact-section,
+.social-section,
+.food-categories {
+  background-color: #2D3A2F !important;
+}
+
+/* NAVBAR — coffee glass */
+.site-header {
+  background: rgba(45,58,47,.88) !important;
+  border-bottom: 1px solid rgba(211,198,182,.18) !important;
+  box-shadow:
+    0 8px 30px rgba(24,31,25,.18),
+    inset 0 1px 0 rgba(211,198,182,.06) !important;
+  backdrop-filter: blur(20px) saturate(115%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(115%) !important;
+}
+
+.site-header::before {
+  background: linear-gradient(
+    180deg,
+    rgba(211,198,182,.05),
+    transparent 65%
+  ) !important;
+}
+
+.nav-logo,
+.main-nav a,
+.nav-logo:hover,
+.main-nav a:hover,
+.main-nav a.active {
+  color: #D3C6B6 !important;
+}
+
+.main-nav a::after {
+  background: #D3C6B6 !important;
+}
+
+/* HERO */
+.hero {
+  background: #2D3A2F !important;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(45,58,47,.97) 0%,
+      rgba(45,58,47,.84) 28%,
+      rgba(45,58,47,.48) 55%,
+      rgba(45,58,47,.16) 80%,
+      rgba(45,58,47,.42) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(45,58,47,.90) 0%,
+      transparent 44%,
+      rgba(45,58,47,.20) 100%
+    ) !important;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    circle,
+    rgba(211,198,182,.11),
+    transparent 65%
+  ) !important;
+}
+
+.hero-content h1,
+.hero-content h1 em,
+.hero-description,
+.hero-eyebrow,
+.hero-location strong,
+.hero-location small,
+.hero-number,
+.hero-label,
+.track-link {
+  color: #D3C6B6 !important;
+}
+
+.location-dot {
+  border-color: rgba(211,198,182,.42) !important;
+}
+
+.location-dot::after {
+  background: #D3C6B6 !important;
+  box-shadow: 0 0 12px rgba(211,198,182,.50) !important;
+}
+
+/* WHEAT CTA */
+.gold-button {
+  color: #2D3A2F !important;
+  background: #D3C6B6 !important;
+  border: 0 !important;
+  padding: 14px 22px !important;
+}
+
+.gold-button:hover {
+  color: #2D3A2F !important;
+  background: #E0D5C7 !important;
+}
+
+/* DARK COFFEE FEATURE CARDS */
+.discovery-card,
+.arrival-card,
+.restaurant-card,
+.contact-card,
+.social-card {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.16) !important;
+}
+
+.discovery-card .card-content h3,
+.discovery-card .card-content p,
+.discovery-card .card-link,
+.discovery-card .card-number,
+.arrival-content h3,
+.arrival-content p,
+.restaurant-info h3,
+.restaurant-info p,
+.contact-box,
+.contact-box strong,
+.contact-box p,
+.social-card,
+.price,
+.view-btn,
+.restaurant-meta {
+  color: #D3C6B6 !important;
+}
+
+.arrival-category,
+.restaurant-category,
+.social-card i {
+  color: #D3C6B6 !important;
+}
+
+.bottom-row,
+.restaurant-meta {
+  border-color: rgba(211,198,182,.11) !important;
+}
+
+.arrival-badge {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+.contact-icon {
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.25) !important;
+}
+
+.social-card {
+  background: rgba(45,58,47,.62) !important;
+  border-color: rgba(211,198,182,.16) !important;
+}
+
+/* FOOTER */
+.footer,
+.footer-credit {
+  background: #2D3A2F !important;
+  border-color: rgba(211,198,182,.10) !important;
+}
+
+.footer-logo,
+.footer p,
+.footer-credit strong {
+  color: #D3C6B6 !important;
+}
+
+.footer-copy,
+.footer-credit {
+  color: rgba(211,198,182,.48) !important;
+}
+
+/* POPUPS */
+#challengePopup,
+.feedback-popup,
+.thank-popup {
+  background: rgba(45,58,47,.90) !important;
+}
+
+.challenge-box,
+.feedback-box,
+.thank-box {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.22) !important;
+}
+
+.challenge-box h2,
+.challenge-box p,
+.feedback-box h2,
+.feedback-box > p,
+.feedback-box h3,
+.thank-box h2,
+.thank-box p {
+  color: #D3C6B6 !important;
+}
+
+.challenge-box button:first-of-type,
+.feedback-submit,
+.thank-box button {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+.later-btn,
+.feedback-later {
+  background: rgba(211,198,182,.07) !important;
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.12) !important;
+}
+
+.comment-section textarea {
+  background: rgba(211,198,182,.05) !important;
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.15) !important;
+}
+
+/* WHATSAPP — brand two-color treatment */
+.whatsapp-float {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar-track {
+  background: #2D3A2F !important;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  background: #D3C6B6 !important;
+}
+
+/* INTRO */
+#intro {
+  background:
+    radial-gradient(
+      circle at center,
+      #2D3A2F 0%,
+      #2D3A2F 70%,
+      #6F563D 100%
+    ) !important;
+}
+
+.intro-brand,
+.intro-tagline,
+.intro-tagline span {
+  color: #D3C6B6 !important;
+}
+
+.intro-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #D3C6B6,
+    transparent
+  ) !important;
+}
+
+
+/* =========================================================
+   KHAZAANA — TRUE COFFEE × WHEAT TWO-TONE BACKGROUND
+   The BACKGROUNDS themselves alternate between the two colors.
+   ========================================================= */
+
+/* Global base */
+html,
+body {
+  background: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   COFFEE BACKGROUND BLOCKS
+   --------------------------------------------------------- */
+.hero,
+.discovery-section,
+.restaurants,
+.reviews,
+.footer,
+.footer-credit {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   WHEAT BACKGROUND BLOCKS
+   --------------------------------------------------------- */
+.new-arrivals,
+.food-categories,
+.contact-section,
+.social-section {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+/* ---------------------------------------------------------
+   HERO — SOLID COFFEE BACKGROUND
+   Keep the photography, but do NOT turn it into another color.
+   --------------------------------------------------------- */
+.hero {
+  background-color: #2D3A2F !important;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(45,58,47,.94) 0%,
+      rgba(45,58,47,.72) 38%,
+      rgba(45,58,47,.22) 72%,
+      rgba(45,58,47,.48) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(45,58,47,.78) 0%,
+      transparent 45%
+    ) !important;
+}
+
+/* ---------------------------------------------------------
+   WHEAT SECTIONS — COFFEE TYPOGRAPHY
+   --------------------------------------------------------- */
+.new-arrivals,
+.food-categories,
+.contact-section,
+.social-section {
+  color: #2D3A2F !important;
+}
+
+.new-arrivals h1,
+.new-arrivals h2,
+.new-arrivals h3,
+.new-arrivals p,
+.new-arrivals span,
+.new-arrivals a,
+.food-categories h1,
+.food-categories h2,
+.food-categories h3,
+.food-categories p,
+.food-categories span,
+.food-categories a,
+.contact-section h1,
+.contact-section h2,
+.contact-section h3,
+.contact-section p,
+.contact-section span,
+.contact-section a,
+.social-section h1,
+.social-section h2,
+.social-section h3,
+.social-section p,
+.social-section span,
+.social-section a {
+  color: #2D3A2F !important;
+}
+
+.new-arrivals .section-eyebrow,
+.food-categories .section-eyebrow,
+.contact-section .section-eyebrow,
+.social-section .section-eyebrow {
+  color: #2D3A2F !important;
+}
+
+.new-arrivals .section-heading h2 em,
+.food-categories .section-heading h2 em,
+.contact-section .section-heading h2 em,
+.social-section .section-heading h2 em {
+  color: #2D3A2F !important;
+}
+
+/* ---------------------------------------------------------
+   COFFEE SECTIONS — WHEAT TYPOGRAPHY
+   --------------------------------------------------------- */
+.discovery-section,
+.restaurants,
+.reviews,
+.footer {
+  color: #D3C6B6 !important;
+}
+
+.discovery-section h1,
+.discovery-section h2,
+.discovery-section h3,
+.discovery-section p,
+.discovery-section span,
+.discovery-section a,
+.restaurants h1,
+.restaurants h2,
+.restaurants h3,
+.restaurants p,
+.restaurants span,
+.restaurants a,
+.reviews h1,
+.reviews h2,
+.reviews h3,
+.reviews p,
+.reviews span,
+.reviews a,
+.footer h1,
+.footer h2,
+.footer h3,
+.footer p,
+.footer span,
+.footer a {
+  color: #D3C6B6 !important;
+}
+
+.discovery-section .section-eyebrow,
+.restaurants .section-eyebrow,
+.reviews .section-eyebrow {
+  color: #D3C6B6 !important;
+}
+
+.discovery-section .section-heading h2 em,
+.restaurants .section-heading h2 em,
+.reviews .section-heading h2 em {
+  color: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   CARDS FOLLOW THE SECTION THEY LIVE IN
+   No random third background color.
+   --------------------------------------------------------- */
+
+/* Cards inside Wheat sections = Coffee */
+.new-arrivals .arrival-card,
+.food-categories .category-card,
+.contact-section .contact-card,
+.social-section .social-card {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border: 1px solid rgba(211,198,182,.18) !important;
+}
+
+.new-arrivals .arrival-card *,
+.food-categories .category-card *,
+.contact-section .contact-card *,
+.social-section .social-card * {
+  color: #D3C6B6 !important;
+}
+
+/* Cards inside Coffee sections = Wheat */
+.discovery-section .discovery-card,
+.restaurants .restaurant-card,
+.reviews .review-card {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  border: 1px solid rgba(45,58,47,.18) !important;
+}
+
+.discovery-section .discovery-card *,
+.restaurants .restaurant-card *,
+.reviews .review-card * {
+  color: #2D3A2F !important;
+}
+
+/* ---------------------------------------------------------
+   NAVBAR — COFFEE GLASS
+   --------------------------------------------------------- */
+.site-header {
+  background: rgba(45,58,47,.88) !important;
+  border-bottom: 1px solid rgba(211,198,182,.18) !important;
+}
+
+.nav-logo,
+.main-nav a,
+.main-nav a:hover,
+.main-nav a.active {
+  color: #D3C6B6 !important;
+}
+
+.main-nav a::after {
+  background: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   BUTTONS — ALWAYS THE OPPOSITE COLOR OF THEIR SECTION
+   --------------------------------------------------------- */
+.hero .gold-button,
+.discovery-section .gold-button,
+.restaurants .gold-button,
+.reviews .gold-button {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+.new-arrivals .gold-button,
+.food-categories .gold-button,
+.contact-section .gold-button,
+.social-section .gold-button {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   INTRO — COFFEE
+   --------------------------------------------------------- */
+#intro {
+  background: #2D3A2F !important;
+}
+
+.intro-brand,
+.intro-tagline,
+.intro-tagline span {
+  color: #D3C6B6 !important;
+}
+
+.intro-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #D3C6B6,
+    transparent
+  ) !important;
+}
+
+/* ---------------------------------------------------------
+   POPUPS — WHEAT PANEL / COFFEE OVERLAY
+   --------------------------------------------------------- */
+#challengePopup,
+.feedback-popup,
+.thank-popup {
+  background: rgba(45,58,47,.88) !important;
+}
+
+.challenge-box,
+.feedback-box,
+.thank-box {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  border: 1px solid rgba(45,58,47,.20) !important;
+}
+
+.challenge-box *,
+.feedback-box *,
+.thank-box * {
+  color: #2D3A2F !important;
+}
+
+.challenge-box button:first-of-type,
+.feedback-submit,
+.thank-box button {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+/* ---------------------------------------------------------
+   SCROLLBAR — THE SAME TWO COLORS
+   --------------------------------------------------------- */
+::-webkit-scrollbar-track {
+  background: #D3C6B6 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2D3A2F !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2D3A2F !important;
+}
+
+
+/* =========================================================
+   KHAZAANA — MOSS × WHEAT
+   TWO-TONE BACKGROUND THEME
+   Moss  : #2D3A2F
+   Wheat : #D3C6B6
+   ========================================================= */
+
+:root {
+  --moss: #2D3A2F !important;
+  --wheat: #D3C6B6 !important;
+
+  --forest-950: #2D3A2F !important;
+  --forest-900: #2D3A2F !important;
+  --forest-850: #2D3A2F !important;
+  --forest-800: #2D3A2F !important;
+  --forest-700: #2D3A2F !important;
+
+  --gold: #D3C6B6 !important;
+  --gold-light: #D3C6B6 !important;
+  --gold-soft: #D3C6B6 !important;
+  --gold-dark: #D3C6B6 !important;
+
+  --cream: #D3C6B6 !important;
+  --cream-soft: #D3C6B6 !important;
+  --white: #D3C6B6 !important;
+  --black: #2D3A2F !important;
+}
+
+/* TRUE TWO-COLOR BACKGROUND SYSTEM */
+html,
+body {
+  background: #D3C6B6 !important;
+}
+
+/* MOSS BACKGROUND SECTIONS */
+.hero,
+.discovery-section,
+.restaurants,
+.reviews,
+.footer,
+.footer-credit {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+/* WHEAT BACKGROUND SECTIONS */
+.new-arrivals,
+.food-categories,
+.contact-section,
+.social-section {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+/* NAVBAR — MOSS GLASS */
+.site-header {
+  background: rgba(45,58,47,.90) !important;
+  border-bottom: 1px solid rgba(211,198,182,.18) !important;
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(211,198,182,.06) !important;
+}
+
+.nav-logo,
+.main-nav a,
+.main-nav a:hover,
+.main-nav a.active {
+  color: #D3C6B6 !important;
+}
+
+.main-nav a::after {
+  background: #D3C6B6 !important;
+}
+
+/* HERO — MOSS */
+.hero {
+  background-color: #2D3A2F !important;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(45,58,47,.97) 0%,
+      rgba(45,58,47,.82) 30%,
+      rgba(45,58,47,.42) 58%,
+      rgba(45,58,47,.12) 82%,
+      rgba(45,58,47,.36) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(45,58,47,.86) 0%,
+      transparent 44%
+    ) !important;
+}
+
+.hero-content h1,
+.hero-content h1 em,
+.hero-description,
+.hero-eyebrow,
+.hero-location strong,
+.hero-location small,
+.hero-number,
+.hero-label,
+.track-link {
+  color: #D3C6B6 !important;
+}
+
+.location-dot {
+  border-color: rgba(211,198,182,.42) !important;
+}
+
+.location-dot::after {
+  background: #D3C6B6 !important;
+  box-shadow: 0 0 12px rgba(211,198,182,.48) !important;
+}
+
+/* OPPOSITE-COLOR CARDS */
+.new-arrivals .arrival-card,
+.food-categories .category-card,
+.contact-section .contact-card,
+.social-section .social-card {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border-color: rgba(211,198,182,.18) !important;
+}
+
+.new-arrivals .arrival-card *,
+.food-categories .category-card *,
+.contact-section .contact-card *,
+.social-section .social-card * {
+  color: #D3C6B6 !important;
+}
+
+.discovery-section .discovery-card,
+.restaurants .restaurant-card,
+.reviews .review-card {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  border-color: rgba(45,58,47,.18) !important;
+}
+
+.discovery-section .discovery-card *,
+.restaurants .restaurant-card *,
+.reviews .review-card * {
+  color: #2D3A2F !important;
+}
+
+/* BUTTONS */
+.hero .gold-button,
+.discovery-section .gold-button,
+.restaurants .gold-button,
+.reviews .gold-button {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  border: 0 !important;
+}
+
+.new-arrivals .gold-button,
+.food-categories .gold-button,
+.contact-section .gold-button,
+.social-section .gold-button {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border: 0 !important;
+}
+
+/* INTRO */
+#intro {
+  background: #2D3A2F !important;
+}
+
+.intro-brand,
+.intro-tagline,
+.intro-tagline span {
+  color: #D3C6B6 !important;
+}
+
+.intro-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #D3C6B6,
+    transparent
+  ) !important;
+}
+
+/* POPUPS */
+#challengePopup,
+.feedback-popup,
+.thank-popup {
+  background: rgba(45,58,47,.90) !important;
+}
+
+.challenge-box,
+.feedback-box,
+.thank-box {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  border-color: rgba(45,58,47,.18) !important;
+}
+
+.challenge-box *,
+.feedback-box *,
+.thank-box * {
+  color: #2D3A2F !important;
+}
+
+.challenge-box button:first-of-type,
+.feedback-submit,
+.thank-box button {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+.later-btn,
+.feedback-later {
+  background: rgba(45,58,47,.08) !important;
+  color: #2D3A2F !important;
+  border-color: rgba(45,58,47,.12) !important;
+}
+
+/* FOOTER */
+.footer,
+.footer-credit {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+}
+
+.footer-logo,
+.footer p,
+.footer-credit strong {
+  color: #D3C6B6 !important;
+}
+
+.footer-copy,
+.footer-credit {
+  color: rgba(211,198,182,.52) !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar-track {
+  background: #D3C6B6 !important;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  background: #2D3A2F !important;
+}
+
+
+/* =========================================================
+   FINAL FIX — NEW ARRIVALS WHEAT SECTION
+   Keep the entire section visually consistent.
+   ========================================================= */
+
+/* Wheat is the full-width section background */
+.new-arrivals {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+  position: relative;
+}
+
+/* Remove any old green/dark atmospheric layer */
+.new-arrivals::before,
+.new-arrivals::after {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Heading: BOTH words must be Moss.
+   Do not leave the italic word white. */
+.new-arrivals .section-heading h2,
+.new-arrivals .section-heading h2 em,
+.new-arrivals .section-title h2,
+.new-arrivals .section-title h2 em,
+.new-arrivals h1,
+.new-arrivals h2,
+.new-arrivals h3 {
+  color: #2D3A2F !important;
+  text-shadow: none !important;
+}
+
+/* Eyebrow + description */
+.new-arrivals .section-eyebrow,
+.new-arrivals .section-label,
+.new-arrivals .eyebrow,
+.new-arrivals p {
+  color: rgba(45,58,47,.72) !important;
+}
+
+/* Premium spacing */
+.new-arrivals .section-heading,
+.new-arrivals .section-title {
+  margin-bottom: 48px !important;
+}
+
+/* Cards become Moss blocks against Wheat */
+.new-arrivals .arrival-card {
+  background: #2D3A2F !important;
+  color: #D3C6B6 !important;
+  border: 1px solid rgba(45,58,47,.18) !important;
+  box-shadow: 0 18px 45px rgba(45,58,47,.16) !important;
+}
+
+/* Card text */
+.new-arrivals .arrival-card h3,
+.new-arrivals .arrival-card p,
+.new-arrivals .arrival-card span,
+.new-arrivals .arrival-card a,
+.new-arrivals .arrival-card .price,
+.new-arrivals .arrival-card .arrival-category {
+  color: #D3C6B6 !important;
+}
+
+/* Small labels should not become a random white rectangle */
+.new-arrivals .arrival-card .arrival-badge {
+  background: #D3C6B6 !important;
+  color: #2D3A2F !important;
+}
+
+/* Image area */
+.new-arrivals .arrival-card img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Make the section extend cleanly across the viewport */
+.new-arrivals {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Mobile: keep the title balanced */
+@media (max-width: 600px) {
+  .new-arrivals .section-heading h2,
+  .new-arrivals .section-title h2 {
+    font-size: clamp(46px, 12vw, 64px) !important;
+    line-height: .92 !important;
+    letter-spacing: -1.8px !important;
+  }
+
+  .new-arrivals .section-heading,
+  .new-arrivals .section-title {
+    margin-bottom: 36px !important;
+  }
+}
+
+/* =========================================================
+   FINAL — NEW ARRIVALS
+   ALL 3 CARDS VISIBLE TOGETHER ON MOBILE
+   ========================================================= */
+
+.new-arrivals {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+}
+
+.new-arrivals .arrival-grid {
+    display: grid !important;
+
+    /* ALWAYS 3 COLUMNS */
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    width: 100% !important;
+    max-width: 1400px !important;
+
+    gap: 16px !important;
+    margin: 0 auto !important;
+
+    overflow: visible !important;
+}
+
+.new-arrivals .arrival-card {
+    display: flex !important;
+    flex-direction: column !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+}
+
+/* IMAGE */
+.new-arrivals .arrival-image {
+    width: 100% !important;
+    height: 260px !important;
+
+    overflow: hidden !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: #2D3A2F !important;
+}
+
+.new-arrivals .arrival-image img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    display: block !important;
+}
+
+
+/* CONTENT */
+.new-arrivals .arrival-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+
+    padding: 22px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+.new-arrivals .arrival-card h3 {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+.new-arrivals .arrival-card p {
+    overflow: hidden !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .new-arrivals {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    .new-arrivals .arrival-grid {
+        display: grid !important;
+
+        /* THIS IS THE IMPORTANT PART */
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr)) !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        gap: 5px !important;
+
+        padding: 0 8px !important;
+
+        box-sizing: border-box !important;
+    }
+
+    .new-arrivals .arrival-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+
+        margin: 0 !important;
+    }
+
+    /* SMALLER IMAGE SO ALL 3 FIT */
+    .new-arrivals .arrival-image {
+        width: 100% !important;
+        height: 115px !important;
+
+        aspect-ratio: auto !important;
+    }
+
+    .new-arrivals .arrival-image img {
+        width: 100% !important;
+        height: 100% !important;
+
+        object-fit: contain !important;
+    }
+
+    /* SMALL CONTENT */
+    .new-arrivals .arrival-content {
+        padding: 8px !important;
+        min-height: 115px !important;
+    }
+
+    .new-arrivals .arrival-category {
+        font-size: 6px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .new-arrivals .arrival-card h3 {
+        font-size: 11px !important;
+        line-height: 1.05 !important;
+
+        margin: 5px 0 !important;
+    }
+
+    .new-arrivals .arrival-card p {
+        font-size: 6.5px !important;
+        line-height: 1.3 !important;
+
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 2 !important;
+
+        overflow: hidden !important;
+    }
+
+    .new-arrivals .arrival-card .bottom-row {
+        margin-top: 6px !important;
+        padding-top: 6px !important;
+    }
+
+    .new-arrivals .arrival-card .price {
+        font-size: 12px !important;
+    }
+
+    .new-arrivals .arrival-card .view-btn {
+        font-size: 6px !important;
+        letter-spacing: .8px !important;
+    }
+
+    .new-arrivals .arrival-badge {
+        font-size: 4.5px !important;
+        padding: 4px 5px !important;
+        letter-spacing: .7px !important;
+    }
 }
