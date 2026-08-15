@@ -44,7 +44,7 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
 .payment small{display:block;color:var(--muted);margin-top:3px}
 .slide-order{position:relative;width:100%;height:64px;border-radius:36px;margin-top:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);overflow:hidden;user-select:none}
 .slide-text{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;letter-spacing:.3px}
-#sliderBtn{touch-action:none;-webkit-user-select:none;user-select:none;position:absolute;left:5px;top:5px;width:54px;height:54px;border-radius:50%;background:#fff;color:#0b3d2e;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:.1s}
+#sliderBtn{position:absolute;left:5px;top:5px;width:54px;height:54px;border-radius:50%;background:#fff;color:#0b3d2e;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:.1s}
 .note{text-align:center;font-size:12px;color:#9fb0aa;margin-top:11px}
 .confetti{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:60px;z-index:9999;animation:blast 1.2s ease forwards;pointer-events:none}
 @keyframes blast{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-200%) scale(1.8)}}
@@ -55,238 +55,31 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
 .rec-card{padding:12px;border:1px solid rgba(255,255,255,.10);border-radius:16px;background:rgba(255,255,255,.045)}
 .rec-name{font-weight:800;font-size:14px;line-height:1.25}
 .rec-price{margin-top:5px;font-size:13px;color:#c9d8d2}
+.rec-remove{
+  width:100%;
+  margin-top:7px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:rgba(0,0,0,.10);
+  color:#eee5d6;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.rec-remove:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.25);
+}
+
 .rec-add{width:100%;margin-top:10px;padding:9px;border:1px solid rgba(255,255,255,.18);border-radius:11px;background:#fff;color:#0b3d2e;font-weight:800;cursor:pointer}
 .rec-added{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.25)}
 @media(max-width:420px){.recommendations{grid-template-columns:1fr}}
 
 @media(max-width:600px){body{padding:12px}.card{padding:21px;border-radius:22px}h2{font-size:26px}}
-
-
 </style>
 
-
-<style>
-#couponList{
-  display:block !important;
-  width:100%;
-}
-.coupon-card{
-  display:block !important;
-  cursor:pointer;
-  margin-bottom:12px;
-  padding:15px;
-  border:1px solid rgba(211,198,182,.16);
-  border-radius:12px;
-  background:rgba(211,198,182,.055);
-}
-.coupon-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.coupon-code{
-  font-weight:800;
-  letter-spacing:.3px;
-}
-.coupon-desc{
-  margin-top:7px;
-  font-size:12px;
-  opacity:.68;
-}
-</style>
-
-<style>
-.coupon-list{display:block!important;margin-bottom:12px}
-.coupon-card{
-  display:block!important;
-  padding:14px 15px;
-  margin:0 0 10px;
-  border:1px solid rgba(211,198,182,.18);
-  border-radius:12px;
-  background:rgba(211,198,182,.06);
-  cursor:pointer;
-}
-.coupon-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.coupon-code{font-weight:800}
-.coupon-desc{margin-top:5px;font-size:12px;opacity:.68}
-</style>
-
-<style>
-#couponList{display:block!important;width:100%}
-.coupon-card{display:block!important;padding:14px 15px;margin:0 0 10px;border:1px solid rgba(211,198,182,.18);border-radius:12px;background:rgba(211,198,182,.06);cursor:pointer}
-.coupon-top{display:flex;justify-content:space-between;align-items:center}
-.coupon-code{font-weight:800}
-.coupon-desc{margin-top:5px;font-size:12px;opacity:.68}
-</style>
-
-<style>
-#couponList{display:block!important;width:100%}
-#couponList .coupon-card{
-  display:block;
-  width:100%;
-  padding:14px 15px;
-  margin:0 0 10px;
-  border:1px solid rgba(211,198,182,.18);
-  border-radius:12px;
-  background:rgba(211,198,182,.06);
-  cursor:pointer;
-}
-#couponList .coupon-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-#couponList .coupon-code{font-weight:800}
-#couponList .coupon-desc{margin-top:5px;font-size:12px;opacity:.68}
-</style>
-
-
-
-
-
-<style>
-/* ================= PREMIUM WHATSAPP ORDER BUTTON ================= */
-.place-order-wrap{
-  width:100%;
-  padding:2px 0;
-}
-
-.whatsapp-order-btn{
-  position:relative;
-  width:100%;
-  height:64px;
-  padding:5px 8px 5px 6px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:14px;
-  border:1px solid rgba(226,216,203,.22);
-  border-radius:18px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(226,216,203,.095),
-      rgba(226,216,203,.035)
-    );
-  color:var(--wheat-light);
-  font-family:inherit;
-  font-size:15px;
-  font-weight:800;
-  letter-spacing:.1px;
-  cursor:pointer;
-  overflow:hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.07),
-    0 10px 28px rgba(0,0,0,.13);
-  transition:
-    transform .18s ease,
-    border-color .18s ease,
-    background .18s ease,
-    box-shadow .18s ease;
-}
-
-.whatsapp-order-btn::before{
-  content:"";
-  position:absolute;
-  inset:1px;
-  border-radius:17px;
-  background:linear-gradient(
-    110deg,
-    rgba(255,255,255,.035),
-    transparent 45%,
-    rgba(255,255,255,.025)
-  );
-  pointer-events:none;
-}
-
-.whatsapp-order-btn:hover{
-  border-color:rgba(226,216,203,.38);
-  background:
-    linear-gradient(
-      135deg,
-      rgba(226,216,203,.13),
-      rgba(226,216,203,.045)
-    );
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 14px 34px rgba(0,0,0,.18);
-  transform:translateY(-1px);
-}
-
-.whatsapp-order-btn:active{
-  transform:translateY(0) scale(.992);
-}
-
-.whatsapp-order-icon{
-  position:relative;
-  z-index:1;
-  flex:0 0 52px;
-  width:52px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:15px;
-  background:#25D366;
-  color:#fff;
-  font-size:27px;
-  box-shadow:
-    0 5px 14px rgba(37,211,102,.20),
-    inset 0 1px 1px rgba(255,255,255,.25);
-}
-
-.whatsapp-order-text{
-  position:relative;
-  z-index:1;
-  flex:1;
-  text-align:left;
-  line-height:1.15;
-}
-
-.whatsapp-order-text::after{
-  content:"Secure • Cash on Delivery";
-  display:block;
-  margin-top:5px;
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:.25px;
-  color:rgba(226,216,203,.48);
-}
-
-.whatsapp-order-arrow{
-  position:relative;
-  z-index:1;
-  width:36px;
-  height:36px;
-  margin-right:5px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(226,216,203,.18);
-  border-radius:50%;
-  color:var(--wheat-light);
-  font-size:17px;
-  background:rgba(226,216,203,.055);
-}
-
-@media(max-width:480px){
-  .whatsapp-order-btn{
-    height:62px;
-    gap:12px;
-    border-radius:17px;
-  }
-  .whatsapp-order-icon{
-    flex-basis:50px;
-    width:50px;
-    height:50px;
-  }
-}
-</style>
 </head>
 <body>
 <div class="card">
@@ -310,52 +103,14 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
   </div>
 
   <div class="section-title">03 · Offers</div>
-
-<div class="section">
-
-  <div id="couponList" class="coupon-list">
-
-    <div class="coupon-card" onclick="selectCoupon('KHAZAANA5')">
-      <div class="coupon-top">
-        <div class="coupon-code">KHAZAANA5</div>
-        <div>🎉</div>
-      </div>
-      <div class="coupon-desc">
-        5% OFF on orders above ₹350
-      </div>
-    </div>
-
-    <div id="cncCouponCard"
-         class="coupon-card"
-         onclick="selectCoupon('CUPSNCRUMBSCAFE10')">
-      <div class="coupon-top">
-        <div class="coupon-code">CUPSNCRUMBSCAFE10</div>
-        <div>☕</div>
-      </div>
-      <div class="coupon-desc">
-        10% OFF above ₹400 · Cups N Crumbs only
-      </div>
-    </div>
-
+  <div class="section">
+    <div id="couponList"></div>
+    <input id="coupon" placeholder="Enter coupon code">
+    <button class="apply" onclick="applyCoupon()">Apply Coupon</button>
+    <div id="couponMessage" class="coupon-msg"></div>
   </div>
 
-  <input
-    id="coupon"
-    autocomplete="off"
-    autocorrect="off"
-    autocapitalize="off"
-    spellcheck="false"
-    placeholder="Enter coupon code">
-
-  <button class="apply" onclick="applyCoupon()">
-    Apply Coupon
-  </button>
-
-  <div id="couponMessage" class="coupon-msg"></div>
-
-</div>
-
-<div class="section-title">04 · Payment</div>
+  <div class="section-title">04 · Payment</div>
   <div class="section">
     <div class="payment">
       <div class="payment-dot"></div>
@@ -365,13 +120,12 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
 
   <div class="section-title">05 · Place Order</div>
   <div class="section">
-    <div class="place-order-wrap">
-  <button type="button" id="whatsappOrderBtn" class="whatsapp-order-btn" onclick="finalOrder()">
-    <span class="whatsapp-order-icon"><i class="fa-brands fa-whatsapp"></i></span>
-    <span class="whatsapp-order-text">Place Order on WhatsApp</span>
-    <span class="whatsapp-order-arrow">→</span>
-  </button>
-</div>
+    <div class="slide-order">
+      <div class="slide-text">Slide to Place Order →</div>
+      <div id="sliderBtn"><i class="fa-brands fa-whatsapp"></i></div>
+    </div>
+    <div class="note">Please verify your details before ordering</div>
+  </div>
 </div>
 <script type="module">
 
@@ -381,6 +135,9 @@ import {
   getFirestore,
   collection,
   addDoc,
+  query,
+  where,
+  getDocs,
   doc,
   updateDoc,
   increment
@@ -407,8 +164,11 @@ updateDoc(
   }
 ).catch(console.error);
 
-window.addDoc = addDoc;
 window.collection = collection;
+window.addDoc = addDoc;
+window.query = query;
+window.where = where;
+window.getDocs = getDocs;
 
 /* ADD THESE 3 LINES */
 window.doc = doc;
@@ -419,12 +179,51 @@ window.increment = increment;
 
 const PHONE = "918695902696";
 
-const order =
-JSON.parse(
-localStorage.getItem("khazaanaOrder")
+let order = null;
+
+try {
+  order = JSON.parse(localStorage.getItem("khazaanaOrder") || "null");
+} catch (e) {
+  console.error("Could not read khazaanaOrder:", e);
+}
+
+if (!order) {
+  alert("No order found");
+  window.location.href = "index.html";
+  throw new Error("No khazaanaOrder found");
+}
+
+/* Normalize the cart so checkout never crashes if items were saved
+   as an array OR as a JSON string. */
+if (typeof order.items === "string") {
+  try {
+    order.items = JSON.parse(order.items);
+  } catch (e) {
+    order.items = [];
+  }
+}
+
+if (!Array.isArray(order.items)) {
+  order.items = [];
+}
+
+order.items = order.items.map(i => ({
+  name: String(i?.name || "Item"),
+  qty: Number(i?.qty || 1),
+  price: Number(i?.price || i?.unitPrice || 0),
+  total: Number(i?.total ?? ((Number(i?.price || i?.unitPrice || 0)) * Number(i?.qty || 1)))
+}));
+
+/* Always calculate subtotal from the actual items shown in checkout. */
+order.subtotal = order.items.reduce(
+  (sum, i) => sum + Number(i.total || 0), 0
 );
+
+order.total = Math.round(
+  order.subtotal + Number(order.delivery || 0)
+);
+
 window.order = order;
-loadCoupons();
 
 if(typeof gtag === "function"){
   gtag('event','checkout_started',{
@@ -443,6 +242,7 @@ document.getElementById(
 "restaurantName"
 ).innerText =
 order.restaurant;
+
 const savedName =
 localStorage.getItem("kh_name");
 
@@ -480,6 +280,15 @@ function renderOrder(){
 
 box.innerHTML = "";
 
+if(!Array.isArray(order.items) || order.items.length === 0){
+  box.innerHTML = `
+    <div class="item">
+      <span><b>No items in this order</b></span>
+      <span>₹0</span>
+    </div>
+  `;
+}
+
 order.items.forEach(i=>{
 
 box.innerHTML += `
@@ -509,10 +318,13 @@ ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
 
 ${discount > 0 ? `
 <div class="item" style="color:#25D366">
-<b>Discount</b>
-<b>- ₹${discountType === "percent"
-  ? Math.round((order.subtotal * discount)/100)
-  : discount}</b>
+<b>Quiz Discount</b>
+${
+discountType === "percent"
+? `<b>- ₹${Math.round((order.subtotal * discount)/100)}</b>`
+: `<b>- ₹${discount}</b>`
+}
+
 </div>
 ` : ""}
 
@@ -525,29 +337,100 @@ ${discount > 0 ? `
 
 }
 
-syncDeliveryCharge();
-renderOrder();
-updateTotal();
+/* Initial delivery/total calculation is intentionally delayed until
+   restaurant-specific delivery rules are defined below. */
 const couponList =
 document.getElementById("couponList");
 
 function loadCoupons(){
 
-  const card=document.getElementById("cncCouponCard");
-  if(!card) return;
+let html = "";
 
-  const restaurant =
-    String(order && order.restaurant ? order.restaurant : "")
-      .toUpperCase()
-      .replace(/[^A-Z0-9]/g,"");
+html += `
+<div
+class="coupon-card"
+onclick="selectCoupon('KHAZAANA5')">
 
-  /* CUPSNCRUMBSCAFE10 is visible ONLY for Cups N Crumbs. */
-  card.style.display =
-    restaurant.includes("CUPSNCRUMBS")
-      ? "block"
-      : "none";
+<div class="coupon-top">
+
+<div class="coupon-code">
+KHAZAANA5
+</div>
+
+<div>
+🎉
+</div>
+
+</div>
+
+<div class="coupon-desc">
+5% OFF on orders above ₹350
+</div>
+
+</div>
+`;
+
+if(
+order.restaurant
+.toUpperCase()
+.includes("CUPS N CRUMBS")
+){
+
+html += `
+<div
+class="coupon-card"
+onclick="selectCoupon('CUPSNCRUMBSCAFE10')">
+
+<div class="coupon-top">
+
+<div class="coupon-code">
+CUPSNCRUMBSCAFE10
+</div>
+
+<div>
+☕
+</div>
+
+</div>
+
+<div class="coupon-desc">
+10% OFF above ₹400
+</div>
+
+</div>
+`;
+
+}else{
+
+html += `
+<div
+class="coupon-card disabled-coupon">
+
+<div class="coupon-top">
+
+<div class="coupon-code">
+CUPSNCRUMBSCAFE10
+</div>
+
+<div>
+🔒
+</div>
+
+</div>
+
+<div class="coupon-desc">
+10% OFF only for Cups N Crumbs Cafe
+</div>
+
+</div>
+`;
 }
 
+couponList.innerHTML = html;
+
+}
+
+loadCoupons();
 
 function selectCoupon(code){
 
@@ -590,89 +473,148 @@ msgBox.classList.remove("party");
 
 async function applyCoupon(){
 
-  const code =
-    document.getElementById("coupon")
-      .value
-      .trim()
-      .toUpperCase();
+const code =
+document.getElementById("coupon")
+.value
+.trim()
+.toUpperCase();
 
-  const msgBox = document.getElementById("couponMessage");
+const msgBox =
+document.getElementById("couponMessage");
 
-  discount = 0;
-  appliedCoupon = "";
+discount = 0;
+appliedCoupon = "";
+order.delivery = originalDelivery;
 
-  /* Always restore the restaurant-specific delivery charge first. */
-  syncDeliveryCharge();
-
-  if(code === "KHAZAANA5"){
+if(code === "KHAZAANA5"){
 
     if(order.subtotal >= 350){
 
-      discount = 5;
-      discountType = "percent";
-      appliedCoupon = code;
+        discount = 5;
+discountType = "percent";
+        appliedCoupon = code;
 
-      msgBox.innerText =
+        msgBox.innerText =
         "✅ KHAZAANA5 Applied — 5% OFF";
 
-      showCelebration();
+        showCelebration();
 
     }else{
 
-      msgBox.innerText =
+        msgBox.innerText =
         "❌ Minimum order ₹350 required";
 
-      updateTotal();
-      return;
+        updateTotal();
+        return;
     }
 
-  }else if(code === "CUPSNCRUMBSCAFE10"){
+}
 
-    /* STRICT: this coupon works only for Cups N Crumbs Café. */
+else if(code === "CUPSNCRUMBSCAFE10"){
+
     if(
-      !String(order.restaurant || "")
-        .toUpperCase()
-        .includes("CUPS N CRUMBS")
+    order.restaurant
+    .toUpperCase()
+    .includes("CUPS N CRUMBS")
     ){
 
-      msgBox.innerText =
-        "❌ This coupon is only valid at Cups N Crumbs Café";
+        if(order.subtotal >= 400){
 
-      updateTotal();
-      return;
-    }
+            discount = 10;
+discountType = "percent";
+            appliedCoupon = code;
 
-    if(order.subtotal >= 400){
+            msgBox.innerText =
+            "✅ CUPSNCRUMBSCAFE10 Applied — ₹10 %";
 
-      discount = 10;
-      discountType = "percent";
-      appliedCoupon = code;
+            showCelebration();
 
-      msgBox.innerText =
-        "☕ CUPSNCRUMBSCAFE10 Applied — 10% OFF";
+        }else{
 
-      showCelebration();
+            msgBox.innerText =
+            "❌ Minimum order ₹400 required";
+
+            updateTotal();
+            return;
+        }
 
     }else{
 
-      msgBox.innerText =
-        "❌ Minimum order ₹400 required";
+        msgBox.innerText =
+        "❌ Only for Cups N Crumbs Cafe";
 
-      updateTotal();
-      return;
+        updateTotal();
+        return;
     }
 
-  }else{
+}
+
+else{
+
+    const couponQuery = window.query(
+    window.collection(window.db,"challengeCoupons"),
+    window.where("coupon","==",code),
+    window.where("used","==",false)
+);
+
+    const snap = await window.getDocs(couponQuery);
+
+   if(!snap.empty){
+
+    const data = snap.docs[0].data();
+
+    let minOrder = 0;
+
+    if(order.restaurant.includes("Cups N Crumbs")){
+        minOrder = 300;
+    }
+    else if(order.restaurant.includes("Khazaana Snacks")){
+        minOrder = 350;
+    }
+    else if(order.restaurant.includes("Khazaana Rasoi")){
+        minOrder = 350;
+    }
+    else if(order.restaurant.includes("Bondhu")){
+        minOrder = 400;
+    }
+    else if(order.restaurant.includes("Haji Biryani")){
+        minOrder = 500;
+    }
+
+    if(order.subtotal < minOrder){
+
+        msgBox.innerText =
+        `❌ Minimum order ₹${minOrder} required for this coupon`;
+
+        updateTotal();
+        return;
+    }
+
+    discount = data.discount;
+    discountType = "flat";
+    appliedCoupon = code;
 
     msgBox.innerText =
-      "❌ Invalid coupon code";
+    `✅ Quiz Coupon Applied - ₹${data.discount} OFF`;
 
-    updateTotal();
-    return;
-  }
+    showCelebration();
 
-  updateTotal();
 }
+
+else{
+
+        msgBox.innerText =
+        "❌ Invalid Coupon";
+
+        updateTotal();
+        return;
+    }
+}
+
+updateTotal();
+
+}
+
 function updateTotal(){
 
     syncDeliveryCharge();
@@ -705,77 +647,152 @@ renderOrder();
 
 
 async function finalOrder(){
+const name =
+document.getElementById("name")
+.value.trim();
 
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
+const phone =
+document.getElementById("phone")
+.value.trim();
 
-  if(!name || !phone || !address){
-    alert("Please enter all details");
-    return;
-  }
+const address =
+document.getElementById("address")
+.value.trim();
 
-  if(!/^\d{10}$/.test(phone)){
-    alert("Please enter valid mobile number");
-    return;
-  }
+if(!name || !phone || !address){
 
-  /*
-    Open a WhatsApp tab immediately from the customer's click.
-    This prevents the browser from blocking the WhatsApp tab later.
-  */
-  let waWindow = null;
+alert("Please enter all details");
 
-  try{
-    waWindow = window.open("about:blank","_blank");
-  }catch(e){
-    console.warn("WhatsApp tab blocked:",e);
-  }
+return;
 
-  try{
+}
 
-    if(!window.addDoc || !window.collection || !window.db){
-      throw new Error("Firebase order system is not ready.");
-    }
+if(phone.length !== 10){
 
-    /* Create the REAL Firestore order first.
-       The Firestore document ID becomes the tracking ID. */
-    const docRef = await window.addDoc(
-      window.collection(window.db,"orders"),
-      {
-        customer:name,
-        phone:phone,
-        address:address,
-        items:order.items,
-        subtotal:Number(order.subtotal)||0,
-        delivery:Number(order.delivery)||0,
-        total:Number(order.total)||0,
-        restaurant:order.restaurant,
-        coupon:appliedCoupon || "None",
-        payment:"COD",
-        status:"Pending",
-        date:new Date().toISOString(),
-        feedbackSubmitted:false,
-        foodRating:0,
-        deliveryRating:0
-      }
-    );
+alert("Please enter valid mobile number");
 
-    const orderId = docRef.id;
+return;
 
-    localStorage.setItem("activeOrder",orderId);
-    localStorage.setItem("kh_name",name);
-    localStorage.setItem("kh_phone",phone);
-    localStorage.setItem("kh_address",address);
-    localStorage.setItem("lastCustomerName",name);
-    localStorage.setItem("lastAddress",address);
-    localStorage.setItem("lastRestaurant",order.restaurant);
-    localStorage.setItem(
-      "lastItems",
-      order.items.map(i=>`${i.name} x${i.qty}`).join(", ")
-    );
+}
 
-    const whatsappMessage = `🍽️ *NEW ORDER*
+/* SAVE USER */
+
+localStorage.setItem(
+"kh_name",
+name
+);
+
+localStorage.setItem(
+"kh_phone",
+phone
+);
+
+localStorage.setItem(
+"kh_address",
+address
+);
+
+/* SEND ORDER TO BACKEND */
+
+fetch(
+"https://khazaana-bozo.onrender.com/place-order",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+customer:name,
+
+phone:phone,
+
+address:address,
+
+items:order.items,
+
+subtotal:order.subtotal,
+
+delivery:order.delivery,
+
+total:order.total,
+
+payment:"COD",
+
+restaurant:order.restaurant,
+
+coupon:appliedCoupon || "None"
+
+})
+
+}
+
+)
+.then(res=>res.json())
+.then(data=>{
+
+console.log(data);
+
+})
+.catch(err=>{
+
+console.log(err);
+
+});
+
+
+const docRef = await window.addDoc(
+
+  window.collection(window.db,"orders"),
+  {
+    customer:name,
+    phone:phone,
+    address:address,
+    items:order.items,
+    subtotal:order.subtotal,
+    delivery:order.delivery,
+    total:order.total,
+    restaurant:order.restaurant,
+    coupon:appliedCoupon || "None",
+    payment:"COD",
+    status:"Pending",
+    date:new Date().toISOString(),
+
+    feedbackSubmitted:false,
+    foodRating:0,
+    deliveryRating:0
+}
+
+);
+
+try {
+
+} catch (e) {
+  console.log("Google Sheet skipped:", e);
+}
+
+localStorage.setItem(
+  "activeOrder",
+  docRef.id
+);
+
+localStorage.setItem("lastCustomerName", name);
+localStorage.setItem("lastAddress", address);
+localStorage.setItem("lastRestaurant", order.restaurant);
+localStorage.setItem(
+  "lastItems",
+  order.items.map(i => `${i.name} x${i.qty}`).join(", ")
+);
+
+localStorage.removeItem(
+  "khazaanaOrder"
+);
+
+const whatsappMessage = `
+🍽️ *NEW ORDER*
 
 👤 Name: ${name}
 📞 Phone: ${phone}
@@ -785,55 +802,359 @@ async function finalOrder(){
 📦 Items:
 ${order.items.map(i =>
 `• ${i.name} x${i.qty} = ₹${i.total}`
-).join("\n")}
+).join('\n')}
 
-💰 Subtotal: ₹${order.subtotal}
-🚚 Delivery: ${order.delivery === 0 ? "FREE" : "₹" + order.delivery}
-${appliedCoupon ? `🎟️ Coupon: ${appliedCoupon}\n` : ""}💵 *Total: ₹${order.total}*
+💰 Total: ₹${order.total}
 
 📍 Address:
 ${address}
 
-Order ID: ${orderId}`;
+Order ID: ${docRef.id}
+`;
 
-    const waUrl =
-      "https://wa.me/" +
-      PHONE +
-      "?text=" +
-      encodeURIComponent(whatsappMessage);
+const waUrl =
+`https://wa.me/918695902696?text=${encodeURIComponent(whatsappMessage)}`;
 
-    /* Put the completed order into the WhatsApp tab. */
-    if(waWindow && !waWindow.closed){
-      waWindow.location.href = waUrl;
-    }else{
-      /* If popup was blocked, try opening it once more. */
-      window.open(waUrl,"_blank");
-    }
+window.open(waUrl, "_blank");
 
-    localStorage.removeItem("khazaanaOrder");
+setTimeout(() => {
+    window.location.href = "track-order.html?id=" + docRef.id;
+}, 2000);
 
-    /*
-      THIS is the important part:
-      after the order is successfully created, open tracking page
-      using the REAL Firestore document ID.
-    */
-    window.location.href =
-      "track-order.html?id=" +
-      encodeURIComponent(orderId);
+return;
 
-  }catch(error){
 
-    console.error("ORDER CREATION FAILED:",error);
-
-    if(waWindow && !waWindow.closed){
-      waWindow.close();
-    }
-
-    alert(
-      "We couldn't create your order. Please try again."
-    );
-  }
+if(typeof gtag === "function"){
+  gtag('event','order_completed',{
+    restaurant:order.restaurant,
+    value:order.total
+  });
 }
+try{
+
+  await window.updateDoc(
+    window.doc(window.db,"analytics","stats"),
+    {
+      ordersCompleted: window.increment(1)
+    }
+  );
+
+}catch(err){
+
+  console.error(err);
+
+}
+setTimeout(() => {
+
+window.location.href =
+"track-order.html?id=" +
+docRef.id;
+
+}, 3000);
+
+}
+
+const slider =
+document.getElementById("sliderBtn");
+
+const container =
+document.querySelector(".slide-order");
+
+let dragging = false;
+
+slider.addEventListener("mousedown", () => {
+    dragging = true;
+});
+
+document.addEventListener("mousemove", (e) => {
+
+    if (!dragging) return;
+
+    const rect = container.getBoundingClientRect();
+
+    let x = e.clientX - rect.left - 27;
+
+    const max = rect.width - 60;
+
+    if (x < 0) x = 0;
+    if (x > max) x = max;
+
+    slider.style.left = x + "px";
+});
+
+document.addEventListener("mouseup", () => {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    const rect = container.getBoundingClientRect();
+
+    const max = rect.width - 60;
+
+    const current =
+    parseInt(slider.style.left || 0);
+
+    if (current > max * 0.85) {
+
+        slider.innerHTML = "✓";
+        slider.style.background = "#25D366";
+
+        finalOrder();
+
+    } else {
+
+        slider.style.left = "5px";
+
+    }
+
+});
+
+slider.addEventListener("touchstart",()=>{
+    dragging=true;
+});
+
+document.addEventListener("touchmove",(e)=>{
+
+    if(!dragging) return;
+
+    const rect = container.getBoundingClientRect();
+
+    let x =
+    e.touches[0].clientX -
+    rect.left - 27;
+
+    const max = rect.width - 60;
+
+    if(x < 0) x = 0;
+    if(x > max) x = max;
+
+    slider.style.left = x + "px";
+});
+
+document.addEventListener("touchend",()=>{
+
+    if(!dragging) return;
+
+    dragging=false;
+
+    const rect = container.getBoundingClientRect();
+
+    const max = rect.width - 60;
+
+    const current =
+    parseInt(slider.style.left || 0);
+
+  if(current > max * 0.85){
+
+    slider.innerHTML = "✓";
+    slider.style.background = "#25D366";
+
+    finalOrder();
+
+}
+
+});
+
+</script>
+<script>
+/* SAME-RESTAURANT QUICK ADD */
+const RESTAURANT_MENUS = {
+  "CUPS N CRUMBS CAFÉ": [
+    ["Cheese Pizza",120],
+    ["Cold Coffee",40],
+    ["Burger with Cheese",100],
+    ["Paneer Patties",30]
+  ],
+
+  "KHAZAANA SNACKS CORNER": [
+    ["Egg Chow Mein (Half)",25],["Egg Chow Mein (Full)",50],
+    ["Egg Roll",35],["Chicken Pakora (1 pc)",30],
+    ["Chicken Pakora (8 pcs)",60],["Chicken Lollipop",40],
+    ["Chicken Stick",45],["Chicken Leg",65],
+    ["Veg Momo (6 pcs)",30],["Chicken Momo (6 pcs)",55]
+  ],
+
+  "KHAZAANA RASOI": [
+    ["Veg Thali",65],["Chicken Thali",160],["Fish Thali",130],
+    ["Mutton Thali",260],["Roti Meal Chicken",110],
+    ["Roti Meal Mutton",210],["Chicken (2 pcs)",85],
+    ["Mutton (2 pcs)",190],["Fish (per piece)",50],
+    ["Extra Rice",10],["Roti",7],["Egg Tadka (Half)",45],
+    ["Egg Tadka (Full)",80],["Plain Tadka (Half)",45],
+    ["Plain Tadka (Full)",75]
+  ],
+
+  "KOLKATA HAZI BIRYANI": [
+    ["Chicken Biryani (Full)",120],["Chicken Biryani (Half)",90],
+    ["Aloo Biryani (Full)",80],["Aloo Biryani (Half)",70],
+    ["Special Chicken Biryani",170],["Chicken Extra Pieces",50],
+    ["Aloo Extra Pieces",5]
+  ],
+
+  "BONDHU RESTAURANT": [
+    ["Chicken Curry",200],["Chicken Dopiaza",250],
+    ["Chicken Kolhapuri",250],["Chicken Masala",250],
+    ["Chicken Handi",275],["Chicken Tikka Masala",340],
+    ["Chili Chicken",215],["Chicken Varta",215],
+    ["Veg Thali",75],["Veg Thali (Basmati)",140],
+    ["Fish Thali",100],["Chicken Thali",190],["Egg Thali",90],
+    ["Mutton Thali",275],["Green Salad",75],["Chana Masala",125],
+    ["Chana Paneer",225],["Paneer Butter Masala",215],
+    ["Chili Paneer",215],["Mix Veg",125],["Daal Fry",125],
+    ["Aloo Dum",125],["Kadhai Paneer",215],["Plain Tadka",75],
+    ["Egg Butter Tadka",90],["Egg Tadka",80],
+    ["Mutton Butter Tadka",250],["Chicken Butter Tadka",165],
+    ["Chicken Fry",115],["Boiled Chana",100],["Rice Chicken",275],
+    ["Chicken Kurkure",275],["Chicken Tandoori Masala (2 Pc)",450],
+    ["Chicken Butter Masala",225],["Chicken Biryani",125],
+    ["Chicken Biryani (Special)",165],["Mutton Biryani",215],
+    ["Chicken Fried Rice",175],["Veg Fried Rice",150],
+    ["Mix Fried Rice",215],["Egg Fried Rice",165],
+    ["Egg Biryani",115],["Veg Biryani",125]
+  ]
+};
+
+function getSameRestaurantMenu(){
+  const restaurant = String(order.restaurant || "").toUpperCase();
+  const key = Object.keys(RESTAURANT_MENUS).find(k => restaurant.includes(k));
+  return key ? RESTAURANT_MENUS[key] : [];
+}
+
+function recalculateCheckoutOrder(){
+  order.subtotal = order.items.reduce(
+    (sum,i) => sum + Number(i.total || 0),0
+  );
+
+  localStorage.setItem("khazaanaOrder",JSON.stringify(order));
+
+  updateTotal();
+  renderOrder();
+  renderCheckoutRecommendations();
+  updateSavingsMessage();
+}
+
+function addCheckoutItem(name,price){
+  const existing = order.items.find(i =>
+    String(i.name).toLowerCase() === String(name).toLowerCase()
+  );
+
+  if(existing){
+    existing.qty = Number(existing.qty || 0) + 1;
+    existing.total = Number(existing.qty) * Number(existing.price || price);
+  }else{
+    order.items.push({
+      name:name,
+      qty:1,
+      price:Number(price),
+      total:Number(price)
+    });
+  }
+
+  recalculateCheckoutOrder();
+}
+
+function removeCheckoutItem(name){
+  const existing = order.items.find(i =>
+    String(i.name).toLowerCase() === String(name).toLowerCase()
+  );
+
+  if(!existing) return;
+
+  existing.qty = Number(existing.qty || 0) - 1;
+
+  if(existing.qty <= 0){
+    order.items = order.items.filter(i =>
+      String(i.name).toLowerCase() !== String(name).toLowerCase()
+    );
+  }else{
+    existing.total =
+      Number(existing.qty) * Number(existing.price || 0);
+  }
+
+  recalculateCheckoutOrder();
+}
+
+function renderCheckoutRecommendations(){
+  const box=document.getElementById("recommendationBox");
+  if(!box) return;
+
+  const menu=getSameRestaurantMenu();
+
+  if(!menu.length){
+    box.innerHTML="";
+    return;
+  }
+
+  /* Keep added items visible so they can be removed again. */
+  const available=menu.slice(0,4);
+
+  if(!available.length){
+    box.innerHTML="";
+    return;
+  }
+
+  box.innerHTML=`
+    <div class="section-title" style="margin-top:18px">
+      Add More From ${order.restaurant}
+    </div>
+
+    <div style="font-size:13px;color:#b8c7c1;margin-bottom:10px">
+      Add directly to your current order
+    </div>
+
+    <div class="recommendations">
+      ${available.map(x=>`
+        <div class="rec-card">
+          <div class="rec-name">${x[0]}</div>
+          <div class="rec-price">₹${x[1]}</div>
+          <button class="rec-add"
+            onclick='addCheckoutItem(${JSON.stringify(x[0])},${Number(x[1])})'>
+            + Add
+          </button>
+
+          <button class="rec-remove"
+            onclick='removeCheckoutItem(${JSON.stringify(x[0])})'>
+            − Remove
+          </button>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+window.addEventListener("load",()=>{
+  setTimeout(renderCheckoutRecommendations,100);
+  setTimeout(updateSavingsMessage,150);
+});
+
+setInterval(()=>{
+  renderCheckoutRecommendations();
+  updateSavingsMessage();
+},700);
+</script>
+
+<script>
+/* ================= RESTAURANT-SPECIFIC CHECKOUT LOGIC ================= */
+const KHAZAANA5_THRESHOLD = 350;
+
+function getFreeDeliveryThreshold(restaurantName){
+  const name = String(restaurantName || "").toUpperCase();
+
+  if(name.includes("CUPS N CRUMBS")) return 250;
+  if(name.includes("ARSALAN")) return 500;
+  if(name.includes("HAZI") || name.includes("KOLKATA HAZI")) return 500;
+  if(name.includes("BONDHU")) return 450;
+  if(name.includes("SNACKS CORNER")) return 250;
+  if(name.includes("KHAZAANA RASOI")) return 300;
+  if(name.includes("CAKE ZONE") || name.includes("CAKEZONE")) return 350;
+
+  /* Safe fallback only if a restaurant has not been configured yet. */
+  return 250;
+}
+
+const FREE_DELIVERY_THRESHOLD =
+  getFreeDeliveryThreshold(order.restaurant);
 
 /*
   IMPORTANT:
