@@ -1,27 +1,22 @@
-KHAZAANA CUSTOMER ORDER NOTIFICATIONS — CORRECTED
+KHAZAANA CUSTOMER NOTIFICATION FIX
 
-1. GitHub customer site:
-   Replace track-order.html with this version.
-   Replace firebase-messaging-sw.js with this version.
-   Keep both files in the same customer-site folder as track-order.html.
+Upload/replace these 3 files in the SITE GitHub repository:
+1. track-order.html
+2. firebase-messaging-sw.js
+3. server.js
 
-2. Backend / Render:
-   Replace server.js with this version in the GitHub repo connected to Render.
-   Render should auto-deploy after the commit.
+Then commit the changes.
 
-3. Render Environment:
-   Keep FIREBASE_SERVICE_ACCOUNT unchanged.
-   Add CUSTOMER_TRACKING_BASE_URL=https://helpkhazaana-eng.github.io/CNC-MENU
-   if this is the exact public customer site URL.
+Android Chrome:
+- Open the Track Order page.
+- Tap "Enable Order Updates".
+- Tap Allow.
 
-4. Android Chrome:
-   Open the Track Order page from HTTPS.
-   If notification permission is not already granted, the page shows
-   "Enable Order Updates". Tap it and choose Allow.
+iPhone Safari:
+- Open Khazaana from the Home Screen app.
+- Tap "Enable Order Updates".
+- Tap Allow.
+- iPhone Web Push requires a supported iOS version and Home Screen web app.
 
-5. Test:
-   Customer opens Track Order and enables notifications.
-   Admin clicks Accept -> Out For Delivery -> Delivered.
-   The customer's Android Chrome should receive the corresponding push notifications.
-
-6. Laptop notifications are not required for this setup.
+Do not upload the service worker or server.js to a different folder.
+firebase-messaging-sw.js must be in the same directory as track-order.html.
