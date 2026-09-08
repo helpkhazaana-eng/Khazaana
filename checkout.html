@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Checkout | Khazaana</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init("QRt9B91Mf6uBKYR5J");</script>
 
@@ -42,9 +41,27 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
 .payment{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.045)}
 .payment-dot{width:10px;height:10px;border-radius:50%;background:#fff}
 .payment small{display:block;color:var(--muted);margin-top:3px}
-.slide-order{position:relative;width:100%;height:64px;border-radius:36px;margin-top:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);overflow:hidden;user-select:none}
-.slide-text{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;letter-spacing:.3px}
-#sliderBtn{position:absolute;left:5px;top:5px;width:54px;height:54px;border-radius:50%;background:#fff;color:#0b3d2e;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:.1s}
+.place-order-btn{
+  width:100%;
+  height:64px;
+  margin-top:24px;
+  border:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ffffff,#e8f0ec);
+  color:#0b3d2e;
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:.4px;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.9);
+  transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease;
+}
+.place-order-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.place-order-btn:active{transform:translateY(0) scale(.99)}
+.place-order-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
 .note{text-align:center;font-size:12px;color:#9fb0aa;margin-top:11px}
 .confetti{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:60px;z-index:9999;animation:blast 1.2s ease forwards;pointer-events:none}
 @keyframes blast{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-200%) scale(1.8)}}
@@ -120,10 +137,9 @@ input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,2
 
   <div class="section-title">05 · Place Order</div>
   <div class="section">
-    <div class="slide-order">
-      <div class="slide-text">Slide to Place Order →</div>
-      <div id="sliderBtn"><i class="fa-brands fa-whatsapp"></i></div>
-    </div>
+    <button class="place-order-btn" id="placeOrderBtn" onclick="finalOrder()">
+      Place Order&nbsp;&nbsp;→
+    </button>
     <div class="note">Please verify your details before ordering</div>
   </div>
 </div>
@@ -176,8 +192,6 @@ window.updateDoc = updateDoc;
 window.increment = increment;
 
 </script><script>
-
-const PHONE = "918695902696";
 
 let order = null;
 
@@ -646,7 +660,18 @@ renderOrder();
 }
 
 
+/* Place order directly through backend + Firestore. */
+let placingOrder = false;
+
 async function finalOrder(){
+  if(placingOrder) return;
+
+  placingOrder = true;
+  const placeBtn = document.getElementById("placeOrderBtn");
+  if(placeBtn){
+    placeBtn.disabled = true;
+    placeBtn.innerHTML = "Placing Order&nbsp;&nbsp;✓";
+  }
 const name =
 document.getElementById("name")
 .value.trim();
@@ -662,7 +687,11 @@ document.getElementById("address")
 if(!name || !phone || !address){
 
 alert("Please enter all details");
-
+placingOrder = false;
+if(placeBtn){
+  placeBtn.disabled = false;
+  placeBtn.innerHTML = "Place Order&nbsp;&nbsp;→";
+}
 return;
 
 }
@@ -670,7 +699,11 @@ return;
 if(phone.length !== 10){
 
 alert("Please enter valid mobile number");
-
+placingOrder = false;
+if(placeBtn){
+  placeBtn.disabled = false;
+  placeBtn.innerHTML = "Place Order&nbsp;&nbsp;→";
+}
 return;
 
 }
@@ -791,32 +824,6 @@ localStorage.removeItem(
   "khazaanaOrder"
 );
 
-const whatsappMessage = `
-🍽️ *NEW ORDER*
-
-👤 Name: ${name}
-📞 Phone: ${phone}
-
-🏪 Restaurant: ${order.restaurant}
-
-📦 Items:
-${order.items.map(i =>
-`• ${i.name} x${i.qty} = ₹${i.total}`
-).join('\n')}
-
-💰 Total: ₹${order.total}
-
-📍 Address:
-${address}
-
-Order ID: ${docRef.id}
-`;
-
-const waUrl =
-`https://wa.me/918695902696?text=${encodeURIComponent(whatsappMessage)}`;
-
-window.open(waUrl, "_blank");
-
 setTimeout(() => {
     window.location.href = "track-order.html?id=" + docRef.id;
 }, 2000);
@@ -853,108 +860,6 @@ docRef.id;
 }, 3000);
 
 }
-
-const slider =
-document.getElementById("sliderBtn");
-
-const container =
-document.querySelector(".slide-order");
-
-let dragging = false;
-
-slider.addEventListener("mousedown", () => {
-    dragging = true;
-});
-
-document.addEventListener("mousemove", (e) => {
-
-    if (!dragging) return;
-
-    const rect = container.getBoundingClientRect();
-
-    let x = e.clientX - rect.left - 27;
-
-    const max = rect.width - 60;
-
-    if (x < 0) x = 0;
-    if (x > max) x = max;
-
-    slider.style.left = x + "px";
-});
-
-document.addEventListener("mouseup", () => {
-
-    if (!dragging) return;
-
-    dragging = false;
-
-    const rect = container.getBoundingClientRect();
-
-    const max = rect.width - 60;
-
-    const current =
-    parseInt(slider.style.left || 0);
-
-    if (current > max * 0.85) {
-
-        slider.innerHTML = "✓";
-        slider.style.background = "#25D366";
-
-        finalOrder();
-
-    } else {
-
-        slider.style.left = "5px";
-
-    }
-
-});
-
-slider.addEventListener("touchstart",()=>{
-    dragging=true;
-});
-
-document.addEventListener("touchmove",(e)=>{
-
-    if(!dragging) return;
-
-    const rect = container.getBoundingClientRect();
-
-    let x =
-    e.touches[0].clientX -
-    rect.left - 27;
-
-    const max = rect.width - 60;
-
-    if(x < 0) x = 0;
-    if(x > max) x = max;
-
-    slider.style.left = x + "px";
-});
-
-document.addEventListener("touchend",()=>{
-
-    if(!dragging) return;
-
-    dragging=false;
-
-    const rect = container.getBoundingClientRect();
-
-    const max = rect.width - 60;
-
-    const current =
-    parseInt(slider.style.left || 0);
-
-  if(current > max * 0.85){
-
-    slider.innerHTML = "✓";
-    slider.style.background = "#25D366";
-
-    finalOrder();
-
-}
-
-});
 
 </script>
 <script>
