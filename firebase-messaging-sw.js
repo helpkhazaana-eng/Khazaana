@@ -10,24 +10,8 @@ firebase.initializeApp({
   appId: "1:988898941531:web:851a3d3db24c85e9fa3d7e"
 });
 
+// Firebase Messaging needs this worker to be active for FCM token registration.
+// Background notification messages are displayed automatically by FCM when the
+// page is not in the foreground, so we intentionally do not call
+// showNotification() here (that would risk duplicate notifications).
 const messaging = firebase.messaging();
-
-messaging.onBackgroundMessage((payload) => {
-  const title = payload.notification?.title || "Khazaana Order Update";
-  const options = {
-    body: payload.notification?.body || "Your order status has changed.",
-    data: { link: payload.data?.link || "./track-order.html" }
-  };
-  self.registration.showNotification(title, options);
-});
-
-self.addEventListener("notificationclick", (event) => {
-  event.notification.close();
-  const link = event.notification?.data?.link || "./track-order.html";
-  event.waitUntil(clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
-    for (const client of clientList) {
-      if ("focus" in client) { client.navigate(link); return client.focus(); }
-    }
-    if (clients.openWindow) return clients.openWindow(link);
-  }));
-});
