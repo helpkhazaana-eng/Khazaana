@@ -744,6 +744,13 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+import {
+  getMessaging,
+  getToken,
+  onMessage,
+  isSupported
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-messaging.js";
+
 const firebaseConfig={
   apiKey:"AIzaSyB_UipI_NKsbMWrmqCh26t_L7lBbRRw3GE",
   authDomain:"khazaana-7088c.firebaseapp.com",
@@ -755,6 +762,8 @@ const firebaseConfig={
 
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
+const VAPID_PUBLIC_KEY = "BCsYG8ccnAT3Qz0oSQdYXWHv4Rr9RUBWwAx-ZPzzFiXVXRtLbMuvieytyegKuEcXF1wK1Jd47uLyZ9yI-dpWd1M";
+const BACKEND_URL = "https://khazaana-bozo.onrender.com";
 
 const orderId =
   new URLSearchParams(location.search).get("id");
@@ -806,6 +815,37 @@ function statusDotColor(status){
     dot.style.boxShadow="0 0 13px rgba(242,185,75,.55)";
   }
 }
+
+async function enableCustomerNotifications() {
+  try {
+    if (!orderId || !window.isSecureContext || !("Notification" in window) || !("serviceWorker" in navigator)) return;
+    if (!(await isSupported())) return;
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") return;
+
+    const registration = await navigator.serviceWorker.register("./firebase-messaging-sw.js");
+    const messaging = getMessaging(app);
+    const token = await getToken(messaging, { vapidKey: VAPID_PUBLIC_KEY, serviceWorkerRegistration: registration });
+    if (!token) return;
+
+    await fetch(`${BACKEND_URL}/register-customer-device`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, token, platform: navigator.platform || "unknown", userAgent: navigator.userAgent })
+    });
+
+    onMessage(messaging, (payload) => {
+      const title = payload.notification?.title || "Khazaana Order Update";
+      const body = payload.notification?.body || "Your order status has changed.";
+      if (Notification.permission === "granted") new Notification(title, { body });
+    });
+  } catch (error) {
+    console.warn("Customer notification setup skipped:", error);
+  }
+}
+
+enableCustomerNotifications();
 
 onSnapshot(
   doc(db,"orders",orderId),

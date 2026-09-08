@@ -1,0 +1,16 @@
+KHazaana customer notification package
+
+FILES
+- index.html = Admin Panel with customer status notification calls
+- track-order.html = Customer tracking page with push notification registration
+- firebase-messaging-sw.js = Firebase background notification service worker
+- server.js = Backend with customer registration + status notification endpoints
+
+DEPLOYMENT
+1. Replace your live Admin Panel with index.html.
+2. Replace your live track-order.html with track-order.html.
+3. Upload firebase-messaging-sw.js beside track-order.html on the customer HTTPS site.
+4. Deploy server.js to Render.
+5. In Render, keep FIREBASE_SERVICE_ACCOUNT and add: CUSTOMER_TRACKING_BASE_URL=https://helpkhazaana-eng.github.io/CNC-MENU
+6. Customer must open the tracking page over HTTPS and allow notifications. They do not need to keep the site open after permission is granted.
+7. Admin status buttons now call /notify-customer-status after updating Firestore.

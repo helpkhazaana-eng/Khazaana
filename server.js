@@ -815,6 +815,103 @@ app.post(
 );
 
 
+
+/* =====================================================
+   CUSTOMER STATUS NOTIFICATIONS
+===================================================== */
+
+async function sendCustomerStatusNotification(orderId, status) {
+  if (!initFirebaseAdmin()) {
+    return { success: false, reason: "Firebase Admin is not configured" };
+  }
+
+  const allowed = ["Accepted", "Out For Delivery", "Delivered"];
+  if (!allowed.includes(status)) {
+    return { success: false, reason: "Status is not notification-enabled" };
+  }
+
+  try {
+    const snap = await adminDb.collection("orders").doc(String(orderId)).get();
+    if (!snap.exists) return { success: false, reason: "Order not found" };
+
+    const order = snap.data();
+    const token = order.customerFcmToken;
+    if (!token || order.customerNotificationsEnabled === false) {
+      return { success: false, reason: "Customer has no registered notification token" };
+    }
+
+    const messages = {
+      "Accepted": { title: "✓ Order Accepted", body: "Your Khazaana order is being prepared." },
+      "Out For Delivery": { title: "🛵 Order On The Way", body: "Your Khazaana order is out for delivery." },
+      "Delivered": { title: "✓ Order Delivered", body: "Your Khazaana order has been delivered. Enjoy!" }
+    };
+
+    const m = messages[status];
+    const base = process.env.CUSTOMER_TRACKING_BASE_URL || "https://helpkhazaana-eng.github.io/CNC-MENU";
+    const link = `${base.replace(/\/$/, "")}/track-order.html?id=${encodeURIComponent(orderId)}`;
+
+    try {
+      await adminMessaging.send({
+        token,
+        notification: { title: m.title, body: m.body },
+        data: { orderId: String(orderId), status, link },
+        webpush: {
+          fcmOptions: { link }
+        }
+      });
+      return { success: true };
+    } catch (error) {
+      const code = error?.code || "";
+      if (code.includes("registration-token-not-registered") || code.includes("invalid-registration-token")) {
+        await adminDb.collection("orders").doc(String(orderId)).update({
+          customerFcmToken: null,
+          customerNotificationsEnabled: false
+        }).catch(() => {});
+      }
+      console.error("Customer FCM error:", error.message);
+      return { success: false, reason: error.message };
+    }
+  } catch (error) {
+    console.error("Customer status notification error:", error.message);
+    return { success: false, reason: error.message };
+  }
+}
+
+app.post("/register-customer-device", async (req, res) => {
+  try {
+    if (!initFirebaseAdmin()) return res.status(503).json({ success: false, error: "Firebase Admin unavailable" });
+    const { orderId, token, platform, userAgent } = req.body || {};
+    if (!orderId || !token) return res.status(400).json({ success: false, error: "orderId and token are required" });
+
+    const ref = adminDb.collection("orders").doc(String(orderId));
+    const snap = await ref.get();
+    if (!snap.exists) return res.status(404).json({ success: false, error: "Order not found" });
+
+    await ref.set({
+      customerFcmToken: token,
+      customerNotificationsEnabled: true,
+      customerNotificationLastSeen: new Date().toISOString()
+    }, { merge: true });
+
+    await adminDb.collection("customerDevices").doc(encodeURIComponent(token)).set({
+      token, orderId: String(orderId), platform: platform || "unknown", userAgent: userAgent || "unknown",
+      enabled: true, lastSeen: new Date().toISOString()
+    }, { merge: true });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Customer device registration error:", error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.post("/notify-customer-status", async (req, res) => {
+  const { orderId, status } = req.body || {};
+  if (!orderId || !status) return res.status(400).json({ success: false, error: "orderId and status are required" });
+  const result = await sendCustomerStatusNotification(orderId, status);
+  res.status(result.success ? 200 : 200).json(result);
+});
+
 /* =====================================================
    START SERVER
 ===================================================== */
